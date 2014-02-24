@@ -108,17 +108,17 @@ static GuessScene *instanceOfGuessScene;
 	return instanceOfGuessScene;
 }
 
-+ (CCScene *)scene {
++ (CCScene *)sceneWithPuzzleNum:(int)puzzleNum {
     CCScene *scene = [CCScene node];
     
-    GuessScene *layer = [GuessScene node];
+    GuessScene *layer = [[[GuessScene alloc] initWithPuzzleNum:puzzleNum] autorelease];
     
     [scene addChild:layer];
     
     return scene;
 }
 
-- (id)init {
+- (id)initWithPuzzleNum:(int)puzzleNum {
     if (self = [super init]) {
         instanceOfGuessScene = self;
         
@@ -132,20 +132,45 @@ static GuessScene *instanceOfGuessScene;
         //初始位置设定
         [self setInitalPosition];
         
-        //全部的分数
+        
+        //分配内存
+        _blockArray = [[NSMutableArray alloc] init];
+        _wordArray = [[NSMutableArray alloc] init];
+        _blankArray = [[NSMutableArray alloc] init];
+        
+        //全部的分数,应该从本地读取
         self.totalScore = 500;
         
-        //本张图片的分数
+        //本张图片的分数，应该从本地读取
         self.currPuzzleScore = 0;
         
         //是否允许触摸
         _blockTouchLocked = NO;
         _wordTouchLocked = NO;
         
-        //分配内存
-        _blockArray = [[NSMutableArray alloc] init];
-        _wordArray = [[NSMutableArray alloc] init];
-        _blankArray = [[NSMutableArray alloc] init];
+        //照片背后的框
+        CCSprite *backBoraderSprite = [CCSprite spriteWithSpriteFrameName:@"outSide.png"];
+        backBoraderSprite.anchorPoint = ccp(0.5, 0.5);
+        backBoraderSprite.position = _FPSet.pictrue;
+        [self addChild:backBoraderSprite z:ZORDER_PICTRUE];
+        
+        //道具初始状态
+        self.currRecivedStatus = RecivedStatusNormal;
+        
+        //道具
+        [self setItemMenu];
+        
+        //NavBar
+        _navBar = [GPNavBar node];
+        [self addChild:_navBar z:ZORDER_NAV_BAR];
+        [_navBar setTotalLabelScore:self.totalScore];
+        if (IS_KAYAC) {
+            [_navBar setTipsLabelStr:self.currPuzzle.Hiragana];
+        }
+        
+        [self startPuzzleWithLevelNum:puzzleNum];
+        
+        /*
         
         //获得PuzzleClass
         GPDatabase *gpdb = [[GPDatabase alloc] init];
@@ -157,19 +182,10 @@ static GuessScene *instanceOfGuessScene;
         [gpdb close];
         [gpdb release];
         
-//        CGSize screenSize = [[CCDirector sharedDirector] winSize];
-        
-        self.currRecivedStatus = RecivedStatusNormal;
+        //答案字符串
         self.answerStr = self.currPuzzle.answer;
         
-        //照片背后的框
-        CCSprite *backBoraderSprite = [CCSprite spriteWithSpriteFrameName:@"outSide.png"];
-        backBoraderSprite.anchorPoint = ccp(0.5, 0.5);
-        backBoraderSprite.position = _FPSet.pictrue;
-        [self addChild:backBoraderSprite z:ZORDER_PICTRUE];
-        
-        
-        //背景图片
+        //设置图片
         [self resetPictrue];
         
         //block
@@ -192,21 +208,52 @@ static GuessScene *instanceOfGuessScene;
             [self.wordArray addObject:word];
             
         }
-        
-        //NavBar
-        _navBar = [GPNavBar node];
-        [self addChild:_navBar z:ZORDER_NAV_BAR];
-        [_navBar setTotalLabelScore:self.totalScore];
-        if (IS_KAYAC) {
-            [_navBar setTipsLabelStr:self.currPuzzle.Hiragana];
-        }
-        
-        //道具
-        [self setItemMenu];
+         
+         */
         
     }
     
     return self;
+}
+
+- (void)startPuzzleWithLevelNum:(int)levelNum {
+    
+    //获得PuzzleClass
+    GPDatabase *gpdb = [[GPDatabase alloc] init];
+    [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
+    _picSequenceArray = [gpdb PuzzleSequenceIsOutOfOrder:NO groupName:PuzzleGroupALL];
+    self.currPuzzleIndex = levelNum;
+    int indexOfPic = [[self.picSequenceArray objectAtIndex:self.currPuzzleIndex] integerValue];
+    self.currPuzzle = [gpdb puzzlesWithGroup:PuzzleGroupMovies indexOfPic:indexOfPic];
+    [gpdb close];
+    [gpdb release];
+    
+    //答案字符串
+    self.answerStr = self.currPuzzle.answer;
+    
+    //设置图片
+    [self resetPictrue];
+    
+    //block
+    iBlock *block = nil;
+    _totalSquareNum = 49;
+    for (int i = 0; i < _totalSquareNum; i++) {
+        block = [iBlock blockWithStatus:BlockStatusNormal squareIndex:i squareNum:_totalSquareNum parentNode:self];
+        [self.blockArray addObject:block];
+        
+    }
+    
+    //WordBlank
+    [self resetWordBlankArray];
+    
+    
+    //Word
+    Word *word = nil;
+    for (int i = 0; i < NUM_OF_WORD_SELECTED; i++) {
+        word = [Word wordWithStatus:WordStatusNormal word:[self.currPuzzle.wordMixes substringWithRange:NSMakeRange(i, 1)] squareIndex:i parentNode:self];
+        [self.wordArray addObject:word];
+        
+    }
 }
 
 - (void)setInitalPosition {

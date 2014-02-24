@@ -9,6 +9,7 @@
 #import "StartLayer.h"
 //#import "EggsScene.h"
 #import "GuessScene.h"
+#import "MapScene.h"
 
 @interface StartLayer() {
     CCSprite *_logoSprite;
@@ -161,8 +162,10 @@
 - (void)transToNext {
     
     //跳转
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionSlideInR transitionWithDuration:0.5 scene:[GuessScene scene]]];
-//    [[CCDirector sharedDirector] replaceScene:[CCTransitionSlideInR transitionWithDuration:0.5 scene:[WhoScene scene]]];
+//    [[CCDirector sharedDirector] replaceScene:[CCTransitionSlideInR transitionWithDuration:0.5 scene:[GuessScene scene]]];
+    
+    [[CCDirector sharedDirector] replaceScene:
+	 [CCTransitionFade transitionWithDuration:0.5f scene:[MapScene scene]]];
 }
 
 - (void)onExit {

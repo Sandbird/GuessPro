@@ -58,7 +58,7 @@ typedef enum {
     
     RecivedStatusNormal,//初始化的正常状态下
     RecivedStatusSmall,//道具变小的状态
-    RecivedStatusBomb,//道具被炸飞的状态
+    RecivedStatusBomb,//道具透明的状态
     RecivedStatusFlying,//道具飞机略过的状态
     
 }RecivedStatus;

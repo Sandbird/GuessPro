@@ -16,9 +16,12 @@
     BOOL _isTouchHandled;
 }
 
-+ (CCScene *)scene;
+//+ (CCScene *)scene;
++ (CCScene *)sceneWithPuzzleNum:(int)puzzleNum;
 
 + (GuessScene *)sharedGuessScene;
+
+//- (void)startPuzzleWithLevelNum:(int)levelNum;
 
 - (void)playBounsAnimation;
 
