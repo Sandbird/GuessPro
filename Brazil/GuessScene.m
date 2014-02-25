@@ -739,7 +739,10 @@ static GuessScene *instanceOfGuessScene;
         [_navBar playScoreAnimationWithExtraScore:self.currPuzzleScore totalScore:self.totalScore];
         self.totalScore += self.currPuzzleScore;
         self.currPuzzleScore = 0;
+        
     }
+    
+    [[GameManager sharedGameManager] setScoreForCurrentActiveLevel:self.currPuzzleScore];
 }
 
 - (void)blocksFlyToScoreAndDisappear {
@@ -899,22 +902,22 @@ static GuessScene *instanceOfGuessScene;
     
     _lastTouchLocation = [GuessScene locationFromTouch:touch];
     
-    iBlock *currBlock = nil;
+//    iBlock *currBlock = nil;
     BOOL isTouchBlock = NO;
     for (iBlock *block in self.blockArray) {
         if (CGRectContainsPoint([block blockSpriteBoundingBox], _lastTouchLocation)) {
             isTouchBlock = YES;
-            currBlock = block;
+//            currBlock = block;
             break;
         }
     }
     
-    Word *currWord = nil;
+//    Word *currWord = nil;
     BOOL isTouchWord = NO;
     for (Word *word in self.wordArray) {
         if (CGRectContainsPoint([word.wordSprite boundingBox], _lastTouchLocation)) {
             isTouchWord = YES;
-            currWord = word;
+//            currWord = word;
             break;
         }
     }
@@ -928,7 +931,63 @@ static GuessScene *instanceOfGuessScene;
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusFlying];
     }
     
-    if (_isTouchHandled) {
+    
+    return _isTouchHandled;
+    
+}
+
+/*
+ -(void) ccTouchMoved:(UITouch*)touch withEvent:(UIEvent *)event {
+ 
+ CGPoint currentTouchLocation = [GuessScene locationFromTouch:touch];
+ 
+ // Take the difference of the current to the last touch location.
+ CGPoint moveTo = ccpSub(_lastTouchLocation, currentTouchLocation);
+ // Then reverse it since the goal is not to give the impression of moving the camera over the background,
+ // but to touch and move the background.
+ moveTo = ccpMult(moveTo, -1);
+ 
+ _lastTouchLocation = currentTouchLocation;
+ 
+ // Adjust the layer's position accordingly, this will change the position of all nodes it contains too.
+ //	fruitSprite.position = ccpAdd(fruitSprite.position, moveTo);
+ }
+ 
+*/
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    
+    CGPoint endPoint = [GuessScene locationFromTouch:touch];
+    
+    iBlock *currBlock = nil;
+    BOOL isTouchBlock = NO;
+    for (iBlock *block in self.blockArray) {
+        if (CGRectContainsPoint([block blockSpriteBoundingBox], _lastTouchLocation) && CGRectContainsPoint([block blockSpriteBoundingBox], endPoint)) {
+            isTouchBlock = YES;
+            currBlock = block;
+            break;
+        }
+    }
+    
+    Word *currWord = nil;
+    BOOL isTouchWord = NO;
+    for (Word *word in self.wordArray) {
+        if (CGRectContainsPoint([word.wordSprite boundingBox], _lastTouchLocation) && CGRectContainsPoint([word.wordSprite boundingBox], endPoint)) {
+            isTouchWord = YES;
+            currWord = word;
+            break;
+        }
+    }
+    
+//    if (isTouchBlock || isTouchWord) {
+//        _isTouchHandled = YES;
+//    } else {
+//        [self makeSelectedBlockNormal];
+//        [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusSmall];
+//        [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusBomb];
+//        [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusFlying];
+//    }
+    
+    if (isTouchBlock || isTouchWord) {
         if (isTouchBlock && !_blockTouchLocked) {
             if (![currBlock isBlockGone]) {
                 switch (self.currRecivedStatus) {
@@ -946,7 +1005,7 @@ static GuessScene *instanceOfGuessScene;
                             [currBlock makeBlock:BlockStatusSmall];
                             [self smallItemPressed];
                             [self totalScoreMinusScore:ItemSmallMinusScore];
-
+                            
                         }
                         
                         break;
@@ -1001,25 +1060,14 @@ static GuessScene *instanceOfGuessScene;
                 currBlank.fillWord = nil;
             }
             
+            //To check next blank of waiting input
             int countIndex = 0;
-            BOOL isIn = YES;
             for (WordBlank *blank in self.blankArray) {
-                if (!blank.fillWord && isIn) {
+                if (!blank.fillWord) {
                     self.currBlankIndex = countIndex;
-//                    isIn = NO;
-                    
-                    
-                    //执行动画
-//                    CCRotateTo *rotate = [CCRotateTo actionWithDuration:1.0 angle:180];
-//                    CCRepeatForever *repeat = [CCRepeatForever actionWithAction:rotate];
-//                    repeat.tag = CCActionWordBlankRotateEffectTag;
-//                    [blank.blankSprite runAction:repeat];
-                    
                     break;
                 }
-//                else {
-//                    [blank.blankSprite stopActionByTag:CCActionWordBlankRotateEffectTag];
-//                }
+
                 countIndex++;
             }
             
@@ -1060,38 +1108,17 @@ static GuessScene *instanceOfGuessScene;
         
     }
     
-    return _isTouchHandled;
-    
-}
-
-/*
- -(void) ccTouchMoved:(UITouch*)touch withEvent:(UIEvent *)event {
- 
- CGPoint currentTouchLocation = [GuessScene locationFromTouch:touch];
- 
- // Take the difference of the current to the last touch location.
- CGPoint moveTo = ccpSub(_lastTouchLocation, currentTouchLocation);
- // Then reverse it since the goal is not to give the impression of moving the camera over the background,
- // but to touch and move the background.
- moveTo = ccpMult(moveTo, -1);
- 
- _lastTouchLocation = currentTouchLocation;
- 
- // Adjust the layer's position accordingly, this will change the position of all nodes it contains too.
- //	fruitSprite.position = ccpAdd(fruitSprite.position, moveTo);
- }
- 
- - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
- //    _isTouchHandled = NO;
- 
- // Move the game layer back to its designated position.
- //	CCMoveTo* move = [CCMoveTo actionWithDuration:0.1 position:_defaultPosition];
- //	CCEaseIn* ease = [CCEaseIn actionWithAction:move rate:0.5f];
- 
- //	[fruitSprite runAction:ease];
+    /*
+    if (CGRectContainsPoint(_startSprite.boundingBox, _lastTouchLocation)){
+        _startSprite.scale = 1.0;
+        
+        if (CGRectContainsPoint(_startSprite.boundingBox, endPoint)) {
+            [self transToNext];
+        }
+    }
+     */
  
  }
- */
 
 - (void)onExit {
     [[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
