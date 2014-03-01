@@ -19,16 +19,35 @@
 
 #define ZORDER_WORD_SELECTED    2
 #define ZORDER_PICTRUE          2
+
 #define ZORDER_BLOCK            3
 #define ZORDER_NAV_BAR          3
 
 #define ZORDER_ITEM_FLY         4
 
+#define IS_KAYAC                YES
 
-#define IS_KAYAC                NO
+#define PS_TOTAL_SCORE      @"totalScore"
+#define PS_CONTINUE_LEVEL   @"continueLevel"
+#define PS_IS_NEED_RESTORE_SCENE     @"isNeedRestoreScene"
 
 
-
+#define PS_ID_KEY           @"idKey"
+#define PS_PIC_NAME         @"picName"
+//#define PS_ANSWER_CN        @"answerCN"
+//#define PS_ANSWER_JA        @"answerJA"
+//#define PS_ANSWER_EN        @"answerEN"
+#define PS_GROUP_NAME       @"groupName"
+#define PS_WORD_NUM         @"wordNum"
+#define PS_ANSWER           @"answer"
+#define PS_WORD_MIXES       @"wordMixes"
+#define PS_TIP              @"tip"
+#define PS_IS_BUY_TIP       @"isBuyTip"
+//#define PS_SELECTED_WORDS   @"selectedWords"
+//#define PS_SELECTED_BLANK   @"selectedBlank"
+#define PS_USE_ITEM_GONE    @"useItemGone"
+#define PS_USE_ITEM_SMALL   @"useItemSmall"
+#define PS_USE_ITEM_TRANS   @"useItemTrans"
 
 //题目类别
 typedef enum {

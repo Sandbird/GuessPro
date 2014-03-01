@@ -133,11 +133,11 @@
 }
 
 - (BOOL)isBlockSmall {
-    return (self.currBlockStatus == BlockStatusSmall);
+    return (self.currBlockStatus == BlockStatusSmall || self.blockSprite.scale < self.blockScaleInital);
 }
 
 - (BOOL)isBlockBomb {
-    return (self.currBlockStatus == BlockStatusBomb);
+    return (self.currBlockStatus == BlockStatusBomb || self.blockSprite.opacity < 255);
 }
 
 - (BOOL)isBlockHadItemEffect {

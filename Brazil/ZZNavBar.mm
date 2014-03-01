@@ -109,7 +109,7 @@
             break;
             
         case KayacSceneWhoTag:
-            nextScene = [GuessScene scene];
+//            nextScene = [GuessScene scene];
             break;
             
         case KayacSceneGuessProTag:
@@ -175,7 +175,7 @@
             break;
             
         case KayacSceneSmileTag:
-            prevScene = [GuessScene scene];
+//            prevScene = [GuessScene scene];
             break;
             
         case KayacSceneFinalTag:

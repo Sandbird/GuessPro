@@ -402,18 +402,22 @@
     
     return stars;
 }
-- (BOOL)hasSpecialItemForLevelIndex:(int)index {
+
+
+- (BOOL)hasPassMarkForLevelIndex:(int)index {
     NSDictionary *level = [self levelWithIndex:index];
-    BOOL specialItem = [[level objectForKey:@"SpecialItem"] boolValue];
-    return specialItem;
+    BOOL PassMark = [[level objectForKey:@"SpecialItem"] boolValue];
+    return PassMark;
 }
-- (void)setSpecialItem:(BOOL)specialItem forLevelIndex:(int)index {
+- (void)setPassMark:(BOOL)PassMark forLevelIndex:(int)index {
     NSMutableDictionary *level = [self levelWithIndex:index];
-    [level setValue:[NSNumber numberWithBool:specialItem] forKey:@"SpecialItem"];
+    [level setValue:[NSNumber numberWithBool:PassMark] forKey:@"SpecialItem"];
 }
 
-- (void)setSpecialItemForCurrentActiveLevel:(BOOL)specialItem {
-    [self setSpecialItem:specialItem forLevelIndex:self.currentActiveLevelIndex];
+- (void)setPassMarkForCurrentActiveLevel:(BOOL)PassMark {
+    [self setPassMark:PassMark forLevelIndex:self.currentActiveLevelIndex];
+    
+    [self saveGameState];
 }
 
 

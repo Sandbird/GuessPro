@@ -73,9 +73,14 @@ typedef enum GameManagerControls {
 - (int) scoreForLevelIndex:(int)index;
 - (int) scoreForCurrentActiveLevel;
 
-- (BOOL)hasSpecialItemForLevelIndex:(int)index;
-- (void)setSpecialItemForCurrentActiveLevel:(BOOL)specialItem;
-- (void)setSpecialItem:(BOOL)specialItem forLevelIndex:(int)index;
+
+- (BOOL)hasPassMarkForLevelIndex:(int)index;
+- (void)setPassMark:(BOOL)PassMark forLevelIndex:(int)index;
+- (void)setPassMarkForCurrentActiveLevel:(BOOL)PassMark;
+
+//- (BOOL)hasSpecialItemForLevelIndex:(int)index;
+//- (void)setSpecialItemForCurrentActiveLevel:(BOOL)specialItem;
+//- (void)setSpecialItem:(BOOL)specialItem forLevelIndex:(int)index;
 
 - (NSDictionary *)levelWithKey:(NSString *)key value:(id)value;
 

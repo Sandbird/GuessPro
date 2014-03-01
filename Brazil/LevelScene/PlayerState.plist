@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>idKey</key>
+	<integer>0</integer>
+	<key>picName</key>
+	<string></string>
+	<key>groupName</key>
+	<string></string>
+	<key>wordNum</key>
+	<integer>0</integer>
+	<key>answer</key>
+	<string></string>
+	<key>wordMixes</key>
+	<string></string>
+	<key>useItemGone</key>
+	<array/>
+	<key>useItemSmall</key>
+	<array/>
+	<key>useItemTrans</key>
+	<array/>
+</dict>
+</plist>

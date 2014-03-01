@@ -26,9 +26,6 @@ typedef struct FixedPostion {
     CGPoint pictrue;
 }FixedPostionSet;
 
-
-
-
 //item的状态
 typedef enum {
     ItemEffectSmall,
@@ -82,6 +79,8 @@ typedef enum {
 @property (assign)int totalScore;
 @property (assign)int currPuzzleScore;
 
+@property (assign)BOOL isNeedRestoreScene;
+
 @end
 
 @implementation GuessScene
@@ -108,17 +107,17 @@ static GuessScene *instanceOfGuessScene;
 	return instanceOfGuessScene;
 }
 
-+ (CCScene *)sceneWithPuzzleNum:(int)puzzleNum {
++ (CCScene *)sceneWithPuzzleNum:(int)levelNum {
     CCScene *scene = [CCScene node];
     
-    GuessScene *layer = [[[GuessScene alloc] initWithPuzzleNum:puzzleNum] autorelease];
+    GuessScene *layer = [[[GuessScene alloc] initWithPuzzleNum:levelNum] autorelease];
     
     [scene addChild:layer];
     
     return scene;
 }
 
-- (id)initWithPuzzleNum:(int)puzzleNum {
+- (id)initWithPuzzleNum:(int)levelNum {
     if (self = [super init]) {
         instanceOfGuessScene = self;
         
@@ -138,8 +137,7 @@ static GuessScene *instanceOfGuessScene;
         _wordArray = [[NSMutableArray alloc] init];
         _blankArray = [[NSMutableArray alloc] init];
         
-        //全部的分数,应该从本地读取
-        self.totalScore = 500;
+        self.isNeedRestoreScene = YES;
         
         //本张图片的分数，应该从本地读取
         self.currPuzzleScore = 0;
@@ -161,59 +159,144 @@ static GuessScene *instanceOfGuessScene;
         [self setItemMenu];
         
         //NavBar
-        _navBar = [GPNavBar node];
+        _navBar = [[[GPNavBar alloc] initWithIsFromPlaying:YES] autorelease];
         [self addChild:_navBar z:ZORDER_NAV_BAR];
-        [_navBar setTotalLabelScore:self.totalScore];
-        if (IS_KAYAC) {
-            [_navBar setTipsLabelStr:self.currPuzzle.Hiragana];
+//        if (IS_KAYAC) {
+//            [_navBar setTipsLabelStr:self.currPuzzle.Hiragana];
+//        }
+        
+        NSInteger continueLevelNum = [_navBar continueLevel];
+        BOOL isNeedRestore = [_navBar isNeedRestoreScene];
+        
+        if (levelNum == continueLevelNum) {
+            if (isNeedRestore) {
+                [self loadContinuePuzzleWithLevelNum:levelNum];
+            } else {
+                [self startPuzzleWithLevelNum:levelNum];
+            }
+        } else {
+            [self startPuzzleWithLevelNum:levelNum];
         }
-        
-        [self startPuzzleWithLevelNum:puzzleNum];
-        
-        /*
-        
-        //获得PuzzleClass
-        GPDatabase *gpdb = [[GPDatabase alloc] init];
-        [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
-        _picSequenceArray = [gpdb PuzzleSequenceIsOutOfOrder:NO groupName:PuzzleGroupALL];
-        self.currPuzzleIndex = 0;
-        int indexOfPic = [[self.picSequenceArray objectAtIndex:self.currPuzzleIndex] integerValue];
-        self.currPuzzle = [gpdb puzzlesWithGroup:PuzzleGroupMovies indexOfPic:indexOfPic];
-        [gpdb close];
-        [gpdb release];
-        
-        //答案字符串
-        self.answerStr = self.currPuzzle.answer;
-        
-        //设置图片
-        [self resetPictrue];
-        
-        //block
-        iBlock *block = nil;
-        _totalSquareNum = 49;
-        for (int i = 0; i < _totalSquareNum; i++) {
-            block = [iBlock blockWithStatus:BlockStatusNormal squareIndex:i squareNum:_totalSquareNum parentNode:self];
-            [self.blockArray addObject:block];
-            
-        }
-        
-        //WordBlank
-        [self resetWordBlankArray];
-        
-        
-        //Word
-        Word *word = nil;
-        for (int i = 0; i < NUM_OF_WORD_SELECTED; i++) {
-            word = [Word wordWithStatus:WordStatusNormal word:[self.currPuzzle.wordMixes substringWithRange:NSMakeRange(i, 1)] squareIndex:i parentNode:self];
-            [self.wordArray addObject:word];
-            
-        }
-         
-         */
-        
     }
     
     return self;
+}
+
+- (void)loadContinuePuzzleWithLevelNum:(int)levelNum {
+    NSString *gameDataFileName = @"PlayerState";
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask ,YES );
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *settingsPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", gameDataFileName]];
+    
+	NSMutableDictionary *playerState = [[[NSMutableDictionary alloc] initWithContentsOfFile:settingsPath] autorelease];
+    
+    NSString *picName = [playerState objectForKey:PS_PIC_NAME];
+    NSString *answerCN = [playerState objectForKey:PS_ANSWER];
+//    NSString *answerJA = [playerState objectForKey:PS_ANSWER_JA];
+//    NSString *answerEN = [playerState objectForKey:PS_ANSWER_EN];
+    NSString *groupName = [playerState objectForKey:PS_GROUP_NAME];
+    NSInteger wordNum = [[playerState objectForKey:PS_WORD_NUM] integerValue];
+    NSString *wordMixes = [playerState objectForKey:PS_WORD_MIXES];
+    
+    
+    //获得PuzzleClass
+    GPDatabase *gpdb = [[GPDatabase alloc] init];
+    [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
+    _picSequenceArray = [gpdb PuzzleSequenceIsOutOfOrder:NO groupName:PuzzleGroupALL];
+    self.currPuzzleIndex = levelNum;
+    int indexOfPic = [[self.picSequenceArray objectAtIndex:self.currPuzzleIndex] integerValue];
+    PuzzleClass * pc = [PuzzleClass puzzleWithIdKey:indexOfPic picName:picName answerCN:answerCN JA:nil EN:nil groupName:groupName wordNum:wordNum];
+    pc.wordMixes = wordMixes;
+    self.currPuzzle = pc;
+    [gpdb close];
+    [gpdb release];
+    
+    //设置blank和picture和block
+    [self setBlankAndBlockAndPictrue];
+    
+    //还原现场
+    //useItemArray
+    NSArray *useItemGoneArray = [playerState objectForKey:PS_USE_ITEM_GONE];
+    NSArray *useItemSmallArray = [playerState objectForKey:PS_USE_ITEM_SMALL];
+    NSArray *useItemBombArray = [playerState objectForKey:PS_USE_ITEM_TRANS];
+    
+    for (NSNumber *numberGone in useItemGoneArray) {
+        NSInteger goneIndex = [numberGone integerValue];
+        iBlock *currBlock = [self.blockArray objectAtIndex:goneIndex];
+        [currBlock makeBlock:BlockStatusGone];
+    }
+    
+    for (NSNumber *numberSmall in useItemSmallArray) {
+        NSInteger smallIndex = [numberSmall integerValue];
+        iBlock *currBlock = [self.blockArray objectAtIndex:smallIndex];
+        [currBlock makeBlock:BlockStatusSmall];
+    }
+    
+    for (NSNumber *numberBomb in useItemBombArray) {
+        NSInteger bombIndex = [numberBomb integerValue];
+        iBlock *currBlock = [self.blockArray objectAtIndex:bombIndex];
+        [currBlock makeBlock:BlockStatusBomb];
+    }
+    
+}
+
+- (void)saveScene {
+    
+    //如果此关已经打过，则不必要保存现场
+    if (self.currPuzzleIndex < [_navBar continueLevel]) {
+        return;
+    }
+    
+    [_navBar setContinueLevel:self.currPuzzleIndex isNeedRestoreScene:self.isNeedRestoreScene];
+    
+    //如果不需要保存现场
+    if (!self.isNeedRestoreScene) {
+        return;
+    }
+    
+    NSString *gameDataFileName = @"PlayerState";
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask ,YES );
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *settingsPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", gameDataFileName]];
+    
+	NSMutableDictionary *playerState = [[[NSMutableDictionary alloc] init] autorelease];
+    
+    [playerState setObject:[NSNumber numberWithInt:self.currPuzzleIndex] forKey:PS_CONTINUE_LEVEL];
+    [playerState setObject:[NSNumber numberWithInt:self.currPuzzle.idKey] forKey:PS_ID_KEY];
+    [playerState setObject:self.currPuzzle.picName forKey:PS_PIC_NAME];
+    [playerState setObject:self.currPuzzle.answer forKey:PS_ANSWER];
+    [playerState setObject:self.currPuzzle.groupName forKey:PS_GROUP_NAME];
+    [playerState setObject:[NSNumber numberWithInt:self.currPuzzle.wordNum] forKey:PS_WORD_NUM];
+    [playerState setObject:self.currPuzzle.wordMixes forKey:PS_WORD_MIXES];
+    NSMutableArray *useItemGoneArray = [NSMutableArray array];
+    NSMutableArray *useItemSmallArray = [NSMutableArray array];
+    NSMutableArray *useItemBombArray = [NSMutableArray array];
+    
+    for (iBlock *block in self.blockArray) {
+        if ([block isBlockGone]) {
+            [useItemGoneArray addObject:[NSNumber numberWithInt:block.squareIndex]];
+        }
+        
+        if ([block isBlockSmall]) {
+            [useItemSmallArray addObject:[NSNumber numberWithInt:block.squareIndex]];
+        }
+        
+        if ([block isBlockBomb]) {
+            [useItemBombArray addObject:[NSNumber numberWithInt:block.squareIndex]];
+        }
+    }
+    
+    [playerState setObject:useItemGoneArray forKey:PS_USE_ITEM_GONE];
+    [playerState setObject:useItemSmallArray forKey:PS_USE_ITEM_SMALL];
+    [playerState setObject:useItemBombArray forKey:PS_USE_ITEM_TRANS];
+    
+    //保存起来
+    if(![playerState writeToFile:settingsPath atomically:YES]) {
+        CCLOG(@"error savePlayerState");
+    }
+    
 }
 
 - (void)startPuzzleWithLevelNum:(int)levelNum {
@@ -227,6 +310,12 @@ static GuessScene *instanceOfGuessScene;
     self.currPuzzle = [gpdb puzzlesWithGroup:PuzzleGroupMovies indexOfPic:indexOfPic];
     [gpdb close];
     [gpdb release];
+    
+    //设置blank和picture和block
+    [self setBlankAndBlockAndPictrue];
+}
+
+- (void)setBlankAndBlockAndPictrue {
     
     //答案字符串
     self.answerStr = self.currPuzzle.answer;
@@ -245,7 +334,6 @@ static GuessScene *instanceOfGuessScene;
     
     //WordBlank
     [self resetWordBlankArray];
-    
     
     //Word
     Word *word = nil;
@@ -610,16 +698,11 @@ static GuessScene *instanceOfGuessScene;
 
 #pragma mark - Calculate Score
 - (BOOL)canMinusScore:(int)minusScore {
-    if (self.totalScore >= minusScore) {
+    if ([_navBar scores] >= minusScore) {
         return YES;
     }
     
     return NO;
-}
-
-- (void)totalScoreMinusScore:(int)minusScore {
-    self.totalScore -= minusScore;
-    [_navBar setTotalLabelScore:self.totalScore];
 }
 
 - (NSMutableArray *)rowBounsArray {
@@ -736,13 +819,21 @@ static GuessScene *instanceOfGuessScene;
     
     //只有大于零才播放积分动画
     if (self.currPuzzleScore > 0) {
-        [_navBar playScoreAnimationWithExtraScore:self.currPuzzleScore totalScore:self.totalScore];
-        self.totalScore += self.currPuzzleScore;
-        self.currPuzzleScore = 0;
+        if ((self.currPuzzleIndex - 1)/*因为此时的currPuzzleIndex已经是下一个puzzle的Index了，所以需要-1*/ < [_navBar continueLevel]) {
+            [_navBar playScoreAnimationNoPlusExtraScore:self.currPuzzleScore];
+//            [_navBar changeTotalScore:self.currPuzzleScore];
+        } else {
+            [_navBar playScoreAnimationWithExtraScore:self.currPuzzleScore];
+            [_navBar changeTotalScore:self.currPuzzleScore];
+        }
         
+        
+        self.currPuzzleScore = 0;
     }
     
+    //过关之后，保存分数
     [[GameManager sharedGameManager] setScoreForCurrentActiveLevel:self.currPuzzleScore];
+    [[GameManager sharedGameManager] setPassMarkForCurrentActiveLevel:YES];
 }
 
 - (void)blocksFlyToScoreAndDisappear {
@@ -785,7 +876,8 @@ static GuessScene *instanceOfGuessScene;
 }
 
 - (void)changeToNextPuzzle {
-    self.currPuzzleIndex++;
+    
+//    self.currPuzzleIndex++;
     self.currRecivedStatus = RecivedStatusNormal;
     
     //获得下一个PuzzleClass
@@ -833,11 +925,14 @@ static GuessScene *instanceOfGuessScene;
     [self successLayerIsAppear:NO];
     
     //把分数直接调整为最新的
-    [_navBar stopAnimationAndSetScore:self.totalScore];
+    [_navBar stopAnimationAndRefreshScore];
     
     if (IS_KAYAC) {
         [_navBar setTipsLabelStr:self.currPuzzle.Hiragana];
     }
+    
+    //是否需要保存现场
+    self.isNeedRestoreScene = YES;
 }
 
 - (void)resetPictrue {
@@ -978,15 +1073,6 @@ static GuessScene *instanceOfGuessScene;
         }
     }
     
-//    if (isTouchBlock || isTouchWord) {
-//        _isTouchHandled = YES;
-//    } else {
-//        [self makeSelectedBlockNormal];
-//        [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusSmall];
-//        [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusBomb];
-//        [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusFlying];
-//    }
-    
     if (isTouchBlock || isTouchWord) {
         if (isTouchBlock && !_blockTouchLocked) {
             if (![currBlock isBlockGone]) {
@@ -1004,7 +1090,9 @@ static GuessScene *instanceOfGuessScene;
                         if (![currBlock isBlockHadItemEffect]) {
                             [currBlock makeBlock:BlockStatusSmall];
                             [self smallItemPressed];
-                            [self totalScoreMinusScore:ItemSmallMinusScore];
+
+                            [_navBar changeTotalScore:(-1 * ItemSmallMinusScore)];
+                            [_navBar refreshTotalScore];
                             
                         }
                         
@@ -1014,14 +1102,18 @@ static GuessScene *instanceOfGuessScene;
                         if (![currBlock isBlockHadItemEffect]) {
                             [currBlock makeBlock:BlockStatusBomb];
                             [self bombItemPressed];
-                            [self totalScoreMinusScore:ItemBombMinusScore];
+
+                            [_navBar changeTotalScore:(-1 * ItemBombMinusScore)];
+                            [_navBar refreshTotalScore];
                         }
                         break;
                         
                     case RecivedStatusFlying:
                         [self blockMetFly];
                         [self flyItemPressed];
-                        [self totalScoreMinusScore:ItemFlyingMinusScore];
+
+                        [_navBar changeTotalScore:(-1 * ItemFlyingMinusScore)];
+                        [_navBar refreshTotalScore];
                         break;
                         
                     default:
@@ -1082,6 +1174,9 @@ static GuessScene *instanceOfGuessScene;
                 if ([customAnswer isEqualToString:self.answerStr]) {
                     NSLog(@"Win");
                     
+                    self.currPuzzleIndex++;
+                    self.isNeedRestoreScene = NO;
+                    
                     [self makeSelectedBlockNormal];
                     
                     //显示成功板
@@ -1107,20 +1202,11 @@ static GuessScene *instanceOfGuessScene;
         }
         
     }
-    
-    /*
-    if (CGRectContainsPoint(_startSprite.boundingBox, _lastTouchLocation)){
-        _startSprite.scale = 1.0;
-        
-        if (CGRectContainsPoint(_startSprite.boundingBox, endPoint)) {
-            [self transToNext];
-        }
-    }
-     */
- 
  }
 
 - (void)onExit {
+    [super onExit];
+    
     [[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
 }
 

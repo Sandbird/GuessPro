@@ -102,8 +102,6 @@
             [_nextSprite runAction:[CCScaleTo actionWithDuration:0.1 scale:1.1]];
             _isBeginTouched = YES;
         }
-        
-        
     }
     
     return _isTouchHandled;

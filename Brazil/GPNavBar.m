@@ -8,6 +8,8 @@
 
 #import "GPNavBar.h"
 //#import "SmileScene.h"
+#import "MapScene.h"
+#import "GuessScene.h"
 
 //判断设备是IPHONE还是IPAD
 #define IPAD_DEVICE [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
@@ -26,11 +28,12 @@
     CCSprite *_kayacSprite;
 }
 
+@property (assign) int totalScore;
+@property (assign) BOOL isPlaying;
+
 @end
 
 @implementation GPNavBar
-
-@synthesize isEnglish = _isEnglish;
 
 - (void)dealloc {
     
@@ -38,15 +41,15 @@
     [super dealloc];
 }
 
-- (id)init {
+- (id)initWithIsFromPlaying:(BOOL)isPlaying {
     
     if (self = [super init]) {
+        self.isPlaying = isPlaying;
         
         CGSize size = [[CCDirector sharedDirector] winSize];
         
-        _isEnglish = YES;
-        
         CCSpriteFrameCache *frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+        [frameCache addSpriteFramesWithFile:@"GPNavBar-ipad.plist"];
         CCSpriteFrame *frame;
         
         CGPoint homePoint, helpPoint, titleSpritePoint, titleLabelUpPoint, titleLabelDownPoint;
@@ -111,7 +114,9 @@
         mainMenu.position = ccp(0, 0);
         [self addChild:mainMenu];
         
-        
+        //显示分数
+        self.totalScore = [self loadPlayerStatusTotalScore];
+        [self refreshTotalScore];
     }
     
     return self;
@@ -119,27 +124,70 @@
 }
 
 - (void)popToMenu {
-//    [[CCDirector sharedDirector] replaceScene:[CCTransitionSlideInR transitionWithDuration:0.5 scene:[SmileScene scene]]];
+    
+    if (self.isPlaying) {
+        [[GuessScene sharedGuessScene] saveScene];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionSlideInL transitionWithDuration:0.5 scene:[MapScene scene]]];
+    } else {
+   
+    }
+    
+    
+}
+
+- (int)scores {
+    return _totalScore;
 }
 
 - (void)setTipsLabelStr:(NSString *)str {
     [_tipsLabel setString:str];
 }
 
-- (void)setTotalLabelScore:(int)score {
-    [_totalScoreLabel setString:[NSString stringWithFormat:@"x %d", score]];
+- (void)refreshTotalScore {
+     [_totalScoreLabel setString:[NSString stringWithFormat:@"x %d", self.totalScore]];
 }
 
-- (void)stopAnimationAndSetScore:(int)totalScore {
+- (void)changeTotalScore:(int)changeScore {
+    self.totalScore += changeScore;
+//    [self refreshTotalScore];
+    
+    //每次变更score的时候都保存
+    [self savePlayerStatusTotalScore];
+}
+
+- (void)stopAnimationAndRefreshScore {
     [_totalScoreLabel stopActionByTag:ACTION_UP_SCORE_TAG];
-    [_totalScoreLabel setString:[NSString stringWithFormat:@"x %d", totalScore]];
+    [self refreshTotalScore];
 }
 
-- (void)playScoreAnimationWithExtraScore:(int)extraScore totalScore:(int)score {
+- (void)playScoreAnimationNoPlusExtraScore:(int)extraScore {
+    
+    NSMutableArray *actions = [NSMutableArray array];
+    //    NSMutableArray *kayacActions = [NSMutableArray array];
+    for (int i = self.totalScore + 1; i <= self.totalScore + extraScore; i++) {
+        CCScaleTo *big = [CCScaleTo actionWithDuration:0.02 scale:1.1];
+        CCScaleTo *normal = [CCScaleTo actionWithDuration:0.01 scale:1.0];
+        CCCallBlock *changeWord = [CCCallBlock actionWithBlock:^{
+            [_totalScoreLabel setString:[NSString stringWithFormat:@"x %d", self.totalScore]];
+        }];
+        CCSequence *seq = [CCSequence actions:changeWord, big, normal, nil];
+        [actions addObject:seq];
+        
+    }
+    
+    CCSequence *seqs = [CCSequence actionsWithArray:actions];
+    CCSequence *seq2 = [CCSequence actionOne:[CCDelayTime actionWithDuration:1.0] two:seqs];
+    seq2.tag = ACTION_UP_SCORE_TAG;
+    [_totalScoreLabel runAction:seq2];
+    
+    //    [self changeTotalScore:extraScore];
+}
+
+- (void)playScoreAnimationWithExtraScore:(int)extraScore {
     
     NSMutableArray *actions = [NSMutableArray array];
 //    NSMutableArray *kayacActions = [NSMutableArray array];
-    for (int i = score + 1; i <= score + extraScore; i++) {
+    for (int i = self.totalScore + 1; i <= self.totalScore + extraScore; i++) {
         CCScaleTo *big = [CCScaleTo actionWithDuration:0.02 scale:1.1];
         CCScaleTo *normal = [CCScaleTo actionWithDuration:0.01 scale:1.0];
         CCCallBlock *changeWord = [CCCallBlock actionWithBlock:^{
@@ -148,11 +196,6 @@
         CCSequence *seq = [CCSequence actions:changeWord, big, normal, nil];
         [actions addObject:seq];
         
-        
-//        CCScaleTo *big2 = [CCScaleTo actionWithDuration:0.02 scale:1.1];
-//        CCScaleTo *normal2 = [CCScaleTo actionWithDuration:0.01 scale:1.0];
-//        CCSequence *seq2 = [CCSequence actions:big2, normal2, nil];
-//        [kayacActions addObject:seq2];
     }
     
     CCSequence *seqs = [CCSequence actionsWithArray:actions];
@@ -160,11 +203,51 @@
     seq2.tag = ACTION_UP_SCORE_TAG;
     [_totalScoreLabel runAction:seq2];
     
-//    CCSequence *kseqs = [CCSequence actionsWithArray:kayacActions];
-//    CCSequence *kseq2 = [CCSequence actionOne:[CCDelayTime actionWithDuration:1.0] two:kseqs];
-//    kseq2.tag = ACTION_UP_SCORE_TAG;
-//    [_kayacSprite runAction:kseq2];
+//    [self changeTotalScore:extraScore];
 }
+
+- (void)savePlayerStatusTotalScore {
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:[NSNumber numberWithInteger:self.totalScore] forKey:PS_TOTAL_SCORE];
+    if (![userDefaults synchronize]) {
+        CCLOG(@"error saveGameState");
+    }
+}
+
+- (NSInteger)loadPlayerStatusTotalScore {
+
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger score = [[userDefaults objectForKey:PS_TOTAL_SCORE] integerValue];
+    
+    return score;
+}
+
+- (NSInteger)continueLevel {
+    NSNumber *levelNumber = [[NSUserDefaults standardUserDefaults] objectForKey:PS_CONTINUE_LEVEL];
+    if (levelNumber == nil) {
+        levelNumber = [NSNumber numberWithInteger:0];
+    }
+    
+    return levelNumber.integerValue;
+}
+
+- (BOOL)isNeedRestoreScene {
+    NSNumber *isNeed = [[NSUserDefaults standardUserDefaults] objectForKey:PS_IS_NEED_RESTORE_SCENE];
+    
+    return isNeed.boolValue;
+}
+
+- (void)setContinueLevel:(NSInteger)levelNum isNeedRestoreScene:(BOOL)isNeed {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:levelNum] forKey:PS_CONTINUE_LEVEL];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:isNeed] forKey:PS_IS_NEED_RESTORE_SCENE];
+    if (![[NSUserDefaults standardUserDefaults] synchronize]) {
+        CCLOG(@"存储用户进度错误");
+    }
+}
+
+
 
 
 - (void)transToMainScene {
@@ -217,19 +300,8 @@
     [[SimpleAudioEngine sharedEngine] playEffect:EFFECT_BACK];
 }
 
-- (void)playSoundByNameEn:(NSString *)soundEn Cn:(NSString *)soundCn Jp:(NSString *)soundJp {
-//    if (_isEnglish) {
-//        [[SimpleAudioEngine sharedEngine] playEffect:soundEn];
-//    } else {
-//        if ([GPNavBar getNumberEnCnJp] == 2) {
-//            [[SimpleAudioEngine sharedEngine] playEffect:soundCn];
-//        } else {
-//            [[SimpleAudioEngine sharedEngine] playEffect:soundJp];
-//        }
-//    }
-}
 
-+(CGPoint) locationFromTouch:(UITouch*)touch
++ (CGPoint) locationFromTouch:(UITouch*)touch
 {
 	CGPoint touchLocation = [touch locationInView: [touch view]];
 	return [[CCDirector sharedDirector] convertToGL:touchLocation];

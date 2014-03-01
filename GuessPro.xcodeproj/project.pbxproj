@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		001C248F183F241D00188FE5 /* Afterschool.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 001C248E183F241D00188FE5 /* Afterschool.mp3 */; };
 		002007021826AB330057CDDB /* GPNavBar-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 002007001826AB330057CDDB /* GPNavBar-ipad.plist */; };
 		002007031826AB330057CDDB /* GPNavBar-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 002007011826AB330057CDDB /* GPNavBar-ipad.png */; };
 		002959BD18BB6553004D07DE /* background-dawn-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 002959AD18BB6553004D07DE /* background-dawn-hd.png */; };
@@ -256,10 +255,11 @@
 		007A101F18BB60ED00A6CCE2 /* GameData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 007A101E18BB60ED00A6CCE2 /* GameData.plist */; };
 		007A102418BB615500A6CCE2 /* cc_levelmenu-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 007A102018BB615500A6CCE2 /* cc_levelmenu-ipadhd.plist */; };
 		007A102518BB615500A6CCE2 /* cc_levelmenu-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A102118BB615500A6CCE2 /* cc_levelmenu-ipadhd.png */; };
-		007A102C18BB619B00A6CCE2 /* cc_levelmenu-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 007A102818BB619B00A6CCE2 /* cc_levelmenu-hd.plist */; };
-		007A102D18BB619B00A6CCE2 /* cc_levelmenu-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A102918BB619B00A6CCE2 /* cc_levelmenu-hd.png */; };
 		007A102E18BB619B00A6CCE2 /* cc_levelmenu.plist in Resources */ = {isa = PBXBuildFile; fileRef = 007A102A18BB619B00A6CCE2 /* cc_levelmenu.plist */; };
 		007A102F18BB619B00A6CCE2 /* cc_levelmenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A102B18BB619B00A6CCE2 /* cc_levelmenu.png */; };
+		009689DB18BF690C00CF0A70 /* cc_levelmenu-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 009689D918BF690C00CF0A70 /* cc_levelmenu-hd.plist */; };
+		009689DC18BF690C00CF0A70 /* cc_levelmenu-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 009689DA18BF690C00CF0A70 /* cc_levelmenu-hd.png */; };
+		009689DE18BF871B00CF0A70 /* PlayerState.plist in Resources */ = {isa = PBXBuildFile; fileRef = 009689DD18BF871B00CF0A70 /* PlayerState.plist */; };
 		009936BC1827FF32000C7598 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 009936BB1827FF32000C7598 /* Icon-76.png */; };
 		00A051F5182A6C0D00465A1D /* WhoScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A051F4182A6C0D00465A1D /* WhoScene.m */; };
 		00A051F8182A6C2C00465A1D /* Who.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A051F6182A6C2C00465A1D /* Who.plist */; };
@@ -388,7 +388,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		001C248E183F241D00188FE5 /* Afterschool.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Afterschool.mp3; sourceTree = "<group>"; };
 		002007001826AB330057CDDB /* GPNavBar-ipad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GPNavBar-ipad.plist"; path = "MoviesPics/GPNavBar-ipad.plist"; sourceTree = "<group>"; };
 		002007011826AB330057CDDB /* GPNavBar-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GPNavBar-ipad.png"; path = "MoviesPics/GPNavBar-ipad.png"; sourceTree = "<group>"; };
 		002007041826AB440057CDDB /* GPNavBar-ipad.zwd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GPNavBar-ipad.zwd"; sourceTree = "<group>"; };
@@ -816,10 +815,11 @@
 		007A101E18BB60ED00A6CCE2 /* GameData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GameData.plist; sourceTree = "<group>"; };
 		007A102018BB615500A6CCE2 /* cc_levelmenu-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "cc_levelmenu-ipadhd.plist"; sourceTree = "<group>"; };
 		007A102118BB615500A6CCE2 /* cc_levelmenu-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cc_levelmenu-ipadhd.png"; sourceTree = "<group>"; };
-		007A102818BB619B00A6CCE2 /* cc_levelmenu-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "cc_levelmenu-hd.plist"; sourceTree = "<group>"; };
-		007A102918BB619B00A6CCE2 /* cc_levelmenu-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cc_levelmenu-hd.png"; sourceTree = "<group>"; };
 		007A102A18BB619B00A6CCE2 /* cc_levelmenu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cc_levelmenu.plist; sourceTree = "<group>"; };
 		007A102B18BB619B00A6CCE2 /* cc_levelmenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cc_levelmenu.png; sourceTree = "<group>"; };
+		009689D918BF690C00CF0A70 /* cc_levelmenu-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "cc_levelmenu-hd.plist"; sourceTree = "<group>"; };
+		009689DA18BF690C00CF0A70 /* cc_levelmenu-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cc_levelmenu-hd.png"; sourceTree = "<group>"; };
+		009689DD18BF871B00CF0A70 /* PlayerState.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlayerState.plist; sourceTree = "<group>"; };
 		009936BB1827FF32000C7598 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
 		00A051F3182A6C0D00465A1D /* WhoScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhoScene.h; sourceTree = "<group>"; };
 		00A051F4182A6C0D00465A1D /* WhoScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhoScene.m; sourceTree = "<group>"; };
@@ -1065,7 +1065,6 @@
 		00346D47181C1D3B00A4A998 /* GuessScene */ = {
 			isa = PBXGroup;
 			children = (
-				001C248E183F241D00188FE5 /* Afterschool.mp3 */,
 				00B8DDD71822151600E0238C /* Res */,
 				00A2FC8A1827961B00555F9A /* UIImage+MostColor */,
 				00E7AD691821E5D1003973A8 /* ZZAcquirePath.h */,
@@ -1658,8 +1657,8 @@
 			children = (
 				002959CD18BB65FE004D07DE /* Fonts */,
 				002959AC18BB6553004D07DE /* Backgrounds */,
-				007A102818BB619B00A6CCE2 /* cc_levelmenu-hd.plist */,
-				007A102918BB619B00A6CCE2 /* cc_levelmenu-hd.png */,
+				009689D918BF690C00CF0A70 /* cc_levelmenu-hd.plist */,
+				009689DA18BF690C00CF0A70 /* cc_levelmenu-hd.png */,
 				007A102A18BB619B00A6CCE2 /* cc_levelmenu.plist */,
 				007A102B18BB619B00A6CCE2 /* cc_levelmenu.png */,
 				007A102018BB615500A6CCE2 /* cc_levelmenu-ipadhd.plist */,
@@ -1671,6 +1670,7 @@
 				00295A3E18BB69B6004D07DE /* cc_menu.plist */,
 				00295A3F18BB69B6004D07DE /* cc_menu.png */,
 				007A101E18BB60ED00A6CCE2 /* GameData.plist */,
+				009689DD18BF871B00CF0A70 /* PlayerState.plist */,
 				007A101018BB529E00A6CCE2 /* Helper */,
 				007A100418BB4C5400A6CCE2 /* GameManager.h */,
 				007A100518BB4C5400A6CCE2 /* GameManager.mm */,
@@ -1967,7 +1967,6 @@
 				002007021826AB330057CDDB /* GPNavBar-ipad.plist in Resources */,
 				00295A3618BB65FE004D07DE /* Visitor40-ipadhd.png in Resources */,
 				00295A3918BB65FE004D07DE /* Visitor40.png in Resources */,
-				007A102C18BB619B00A6CCE2 /* cc_levelmenu-hd.plist in Resources */,
 				007A102E18BB619B00A6CCE2 /* cc_levelmenu.plist in Resources */,
 				00A2FC7718276F8A00555F9A /* Kayac079.png in Resources */,
 				00295A0E18BB65FE004D07DE /* BadaBoom20.GlyphProject in Resources */,
@@ -1994,6 +1993,7 @@
 				00295A2818BB65FE004D07DE /* Visitor25-hd.fnt in Resources */,
 				00A2FC7C18276F8A00555F9A /* Kayac084.png in Resources */,
 				00A2FC7618276F8A00555F9A /* Kayac078.png in Resources */,
+				009689DC18BF690C00CF0A70 /* cc_levelmenu-hd.png in Resources */,
 				00A2FC5D18276F8A00555F9A /* Kayac053.png in Resources */,
 				00A2FC6F18276F8A00555F9A /* Kayac071.png in Resources */,
 				00295A0718BB65FE004D07DE /* Anime8.fnt in Resources */,
@@ -2011,6 +2011,7 @@
 				00295A0F18BB65FE004D07DE /* BadaBoom20.png in Resources */,
 				00295A0D18BB65FE004D07DE /* BadaBoom20.fnt in Resources */,
 				00A2FC2C18276F8A00555F9A /* Kayac004.png in Resources */,
+				009689DE18BF871B00CF0A70 /* PlayerState.plist in Resources */,
 				00A2FC7418276F8A00555F9A /* Kayac076.png in Resources */,
 				00295A1D18BB65FE004D07DE /* BadaBoom40.GlyphProject in Resources */,
 				00A2FC6118276F8A00555F9A /* Kayac057.png in Resources */,
@@ -2065,6 +2066,7 @@
 				00A2FC4C18276F8A00555F9A /* Kayac036.png in Resources */,
 				00295A3318BB65FE004D07DE /* Visitor40-hd.png in Resources */,
 				7B7BDE7D168D710C00C970F1 /* main-hd.plist in Resources */,
+				009689DB18BF690C00CF0A70 /* cc_levelmenu-hd.plist in Resources */,
 				7B7BDE7E168D710C00C970F1 /* main-hd.png in Resources */,
 				7B7BDE81168D711900C970F1 /* main.plist in Resources */,
 				00A2FC5118276F8A00555F9A /* Kayac041.png in Resources */,
@@ -2081,7 +2083,6 @@
 				00A2FC6818276F8A00555F9A /* Kayac064.png in Resources */,
 				002959C918BB6553004D07DE /* background-noon-hd.png in Resources */,
 				009936BC1827FF32000C7598 /* Icon-76.png in Resources */,
-				007A102D18BB619B00A6CCE2 /* cc_levelmenu-hd.png in Resources */,
 				002959C118BB6553004D07DE /* background-evening-hd.png in Resources */,
 				002007031826AB330057CDDB /* GPNavBar-ipad.png in Resources */,
 				00A2FC4818276F8A00555F9A /* Kayac032.png in Resources */,
@@ -2098,7 +2099,6 @@
 				00295A0C18BB65FE004D07DE /* BadaBoom20-hd.png in Resources */,
 				00A2FC3418276F8A00555F9A /* Kayac012.png in Resources */,
 				00295A3418BB65FE004D07DE /* Visitor40-ipadhd.fnt in Resources */,
-				001C248F183F241D00188FE5 /* Afterschool.mp3 in Resources */,
 				00A2FC5518276F8A00555F9A /* Kayac045.png in Resources */,
 				00295A2B18BB65FE004D07DE /* Visitor25-ipadhd.fnt in Resources */,
 				00A2FC6D18276F8A00555F9A /* Kayac069.png in Resources */,

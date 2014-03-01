@@ -58,32 +58,28 @@
         CCLabelTTF *label = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%i", (self.levelIndex + 1)] fontName:@"Helvetica" fontSize:18.0 * __HIGHRES_SCALE];
 #endif
   
-        label.position = CGPointMake(35 * __HIGHRES_SCALE, 31 * __HIGHRES_SCALE);
-        label.color = ccc3(153, 102, 51);
+        label.position = CGPointMake(27 * __HIGHRES_SCALE, 18 * __HIGHRES_SCALE);
+        label.color = ccc3(255, 255, 255);
         [self addChild:label];
         [label release];
     
         // Stars
-        NSInteger starPosX = 15 * __HIGHRES_SCALE;
-        for(int starIndex=0; starIndex < 3; starIndex++) {
-            CCSprite *starImage;
-            
-            if(starIndex < self.stars) {
-                starImage = [[CCSprite alloc] initWithSpriteFrameName:@"cc_levelmenu_star.png"];
-            } else {
-                starImage = [[CCSprite alloc] initWithSpriteFrameName:@"cc_levelmenu_star_hidden.png"];
-            }
-            starImage.position = CGPointMake(starPosX, self.contentSize.height - (10 * __HIGHRES_SCALE));
+        NSInteger starPosX = 15 * __HIGHRES_SCALE * 2.7;
+        if (self.special) {
+            CCSprite *starImage = [[CCSprite alloc] initWithSpriteFrameName:@"cc_levelmenu_star.png"];
+            starImage.position = CGPointMake(starPosX, self.contentSize.height - (40 * __HIGHRES_SCALE));
             [self addChild:starImage z:10];
             [starImage release];
             starPosX += 15 * __HIGHRES_SCALE;
         }
         
+        /*
         if(self.special) {
             CCSprite *specialItem = [CCSprite spriteWithSpriteFrameName:@"cc_levelmenu_award.png"];
             specialItem.position = ccp(54 *__HIGHRES_SCALE, 18 * __HIGHRES_SCALE);
             [self addChild:specialItem z:15];
         }
+         */
         
     }
     
@@ -109,9 +105,9 @@
     [layer setTextureRect:frame.rect];
     
 
-    for (CCNode *kind in [layer children]) {
-        kind.position = CGPointMake(kind.position.x, kind.position.y - (9 * __HIGHRES_SCALE));
-    }
+//    for (CCNode *kind in [layer children]) {
+//        kind.position = CGPointMake(kind.position.x, kind.position.y - (9 * __HIGHRES_SCALE));
+//    }
     return layer;
 }
 

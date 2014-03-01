@@ -21,6 +21,8 @@
 
 + (GuessScene *)sharedGuessScene;
 
+- (void)saveScene;
+
 //- (void)startPuzzleWithLevelNum:(int)levelNum;
 
 - (void)playBounsAnimation;

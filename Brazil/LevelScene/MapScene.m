@@ -11,8 +11,11 @@
 #import "CCLabelTTF.h"
 #import "LevelItemSprite.h"
 #import "PageControlLayer.h"
+#import "GPNavBar.h"
 
 @interface MapScene()
+
+@property GPNavBar *navBar;
 
 @property (nonatomic, retain) CCLabelBMFont *title;
 
@@ -21,7 +24,7 @@
 @end
 
 @implementation MapScene
-@synthesize title = _title;
+//@synthesize title = _title;
 @synthesize pageControl = _pageControl;
 
 +(id)scene {
@@ -32,7 +35,7 @@
 }
 - (void)dealloc {
     [_pageControl release];
-    [_title release];
+//    [_title release];
     [super dealloc];
 }
 
@@ -69,12 +72,12 @@
         
         
         // Map Overview Title
-        _title = [[CCLabelBMFont labelWithString:[self titleForIndex:0] fntFile:[AssetHelper getDeviceSpecificFileNameFor:@"BadaBoom40.fnt"]] retain];
-		_title.position = CGPointMake(winSize.width / 2, winSize.height - (winSize.height * 0.10));
-        _title.scale = 0.1;
-		[self addChild:_title z:2];
-		id actionScaleTo = [CCScaleTo actionWithDuration:0.5 scale:1];
-		[_title runAction:actionScaleTo];
+//        _title = [[CCLabelBMFont labelWithString:[self titleForIndex:0] fntFile:[AssetHelper getDeviceSpecificFileNameFor:@"BadaBoom40.fnt"]] retain];
+//		_title.position = CGPointMake(winSize.width / 2, winSize.height - (winSize.height * 0.10));
+//        _title.scale = 0.1;
+//		[self addChild:_title z:2];
+//		id actionScaleTo = [CCScaleTo actionWithDuration:0.5 scale:1];
+//		[_title runAction:actionScaleTo];
         
     
         int i = 0;
@@ -87,7 +90,7 @@
 
             BOOL isCompleted    = (levelStatus || (!levelStatus && lastCompletedMap) || (i == 0));
             lastCompletedMap    = levelStatus;
-            BOOL special        = [[GameManager sharedGameManager] hasSpecialItemForLevelIndex:i];
+            BOOL special        = [[GameManager sharedGameManager] hasPassMarkForLevelIndex:i];
             int heaviness       = [[level objectForKey:@"Heaviness"] intValue];
             
             SEL onClick = (isCompleted) ? @selector(selectLevel:) : nil;
@@ -122,7 +125,7 @@
             menuGrid = [SlidingMenuGrid menuWithArray:allItems 
                                                                   cols:5 
                                                                   rows:6
-                                                              position:ccp(45 * __HIGHRES_SCALE, 360 * __HIGHRES_SCALE)
+                                                              position:ccp(40 * __HIGHRES_SCALE, 420 * __HIGHRES_SCALE)
                                                                padding:ccp(75 * __HIGHRES_SCALE, 65 * __HIGHRES_SCALE)
                                                          verticalPages:NO];
         } else {
@@ -172,6 +175,11 @@
         self.pageControl.position = CGPointMake(winSize.width / 2, winSize.height - (winSize.height * 0.90));
 		[self addChild:self.pageControl z:7];
         
+        
+        //NavBar
+        _navBar = [[[GPNavBar alloc] initWithIsFromPlaying:NO] autorelease];
+        [self addChild:_navBar z:ZORDER_NAV_BAR];
+//        [_navBar setTotalLabelScore:500];        
 		
 	}
 	return self;
@@ -207,7 +215,7 @@
             CCSequence *sequence = [CCSequence actions:fadeIn, finish, nil];
             [backgroundFade runAction:sequence];
             
-            [_title setString:[self titleForIndex:index]];
+//            [_title setString:[self titleForIndex:index]];
  
     
     

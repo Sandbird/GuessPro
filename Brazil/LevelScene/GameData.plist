@@ -16,7 +16,7 @@
 				<string>160</string>
 			</array>
 			<key>Completed</key>
-			<true/>
+			<false/>
 			<key>Score</key>
 			<integer>100</integer>
 			<key>Tilemap</key>

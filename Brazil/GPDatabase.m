@@ -75,7 +75,7 @@
     //开始查询
     NSString *sel = nil;
     
-    if (IS_KAYAC || YES) {
+    if (IS_KAYAC) {
         sel = [NSString stringWithFormat:@"SELECT PicName, AnswerCN, AnswerJA, AnswerEN, WordNum, GroupName, Hiragana, Position FROM pictrue WHERE id = %d", index];
     } else {
         sel = [NSString stringWithFormat:@"SELECT PicName, AnswerCN, AnswerJA, AnswerEN, WordNum, GroupName FROM pictrue WHERE id = %d", index];
@@ -112,16 +112,16 @@
         pc = [PuzzleClass puzzleWithIdKey:index picName:picName answerCN:answerCN JA:answerJA EN:answerEN groupName:groupName wordNum:wordNum];
         
         
-        if (IS_KAYAC || YES) {
-            char *cHiragana = (char *)sqlite3_column_text(stmt, 6);
-            if (cHiragana != NULL) {
-                hiragana = [NSString stringWithUTF8String:cHiragana];
-            }
-            
-            position = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, 7)];
-            pc.Hiragana = hiragana;
-            pc.Position = position;
-        }
+//        if (IS_KAYAC) {
+//            char *cHiragana = (char *)sqlite3_column_text(stmt, 6);
+//            if (cHiragana != NULL) {
+//                hiragana = [NSString stringWithUTF8String:cHiragana];
+//            }
+//            
+//            position = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, 7)];
+//            pc.Hiragana = hiragana;
+//            pc.Position = position;
+//        }
         
     }
     sqlite3_finalize(stmt);
@@ -153,11 +153,6 @@
                 }
             }
         }
-        
-        
-        
-        
-        
         
 //        answerJA = [NSMutableString stringWithUTF8String:(char *)sqlite3_column_text(stmt_random, 1)];
 //        

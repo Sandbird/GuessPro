@@ -22,16 +22,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Brazil/GuessScene.m"
-            timestampString = "415031183.011064"
+            timestampString = "415381341.031552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "745"
-            endingLineNumber = "745"
-            landmarkName = "-calculateScore"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "-initWithPuzzleNum:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

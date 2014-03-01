@@ -13,11 +13,6 @@
 // 是否模拟器
 #define isSimulator (NSNotFound != [[[UIDevice currentDevice] model] rangeOfString:@"Simulator"].location)
 
-#define LOCALIZED_NAME @"localized"
-#define LOCALIZED_ENGLISH @"en"
-#define LOCALIZED_CHINESE @"cn"
-#define LOCALIZED_JAPANESE @"jp"
-
 #define ACTION_UP_SCORE_TAG 999
 
 @interface GPNavBar : CCLayer {
@@ -31,44 +26,37 @@
 
 @property BOOL isEnglish;
 
+- (id)initWithIsFromPlaying:(BOOL)isPlaying;
+
+- (int)scores;
+
 - (void)setTipsLabelStr:(NSString *)str;
 
-- (void)stopAnimationAndSetScore:(int)totalScore;
+- (void)stopAnimationAndRefreshScore;
 
-- (void)setTotalLabelScore:(int)score;
+//- (void)setTotalLabelScore:(int)score;
+- (void)refreshTotalScore;
+- (void)changeTotalScore:(int)changeScore;
 
-- (void)playScoreAnimationWithExtraScore:(int)extraScore totalScore:(int)score;
+- (void)playScoreAnimationWithExtraScore:(int)extraScore;
+- (void)playScoreAnimationNoPlusExtraScore:(int)extraScore;
 
-//- (void)transToMainScene;
-//
-//- (void)transToOtherLanguage;
-
-//- (void)stopActionWithScene:(CCNode *)scene;
-
-//- (void)playSoundByNameEn:(NSString *)soundEn Cn:(NSString *)soundCn Jp:(NSString *)soundJp;
+- (void)savePlayerStatusTotalScore;
 
 + (BOOL)isiPad;
 
 + (BOOL)isiPhone5;
 
-//+ (BOOL)isiPhoneNormalScreen;
-
 + (BOOL)isRetina;
-
-//+ (BOOL)isiPhone4Retina;
 
 + (void)playGoEffect;
 
 + (void)playBackEffect;
 
-//+ (int)getLocalizedLanguage;
++ (CGPoint) locationFromTouch:(UITouch*)touch;
 
-//+ (int)getLocalizedLanguageByStr:(NSString *)language;
-
-//+ (int)getNumberEnCnJp;
-
-//+ (NSString *)getStringEnCnJp;
-
-+(CGPoint) locationFromTouch:(UITouch*)touch;
+- (NSInteger)continueLevel;
+- (BOOL)isNeedRestoreScene;
+- (void)setContinueLevel:(NSInteger)levelNum isNeedRestoreScene:(BOOL)isNeed;
 
 @end
