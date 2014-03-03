@@ -168,12 +168,8 @@ static GuessScene *instanceOfGuessScene;
         NSInteger continueLevelNum = [_navBar continueLevel];
         BOOL isNeedRestore = [_navBar isNeedRestoreScene];
         
-        if (levelNum == continueLevelNum) {
-            if (isNeedRestore) {
-                [self loadContinuePuzzleWithLevelNum:levelNum];
-            } else {
-                [self startPuzzleWithLevelNum:levelNum];
-            }
+        if (levelNum == continueLevelNum && isNeedRestore) {
+            [self loadContinuePuzzleWithLevelNum:levelNum];
         } else {
             [self startPuzzleWithLevelNum:levelNum];
         }
@@ -193,8 +189,6 @@ static GuessScene *instanceOfGuessScene;
     
     NSString *picName = [playerState objectForKey:PS_PIC_NAME];
     NSString *answerCN = [playerState objectForKey:PS_ANSWER];
-//    NSString *answerJA = [playerState objectForKey:PS_ANSWER_JA];
-//    NSString *answerEN = [playerState objectForKey:PS_ANSWER_EN];
     NSString *groupName = [playerState objectForKey:PS_GROUP_NAME];
     NSInteger wordNum = [[playerState objectForKey:PS_WORD_NUM] integerValue];
     NSString *wordMixes = [playerState objectForKey:PS_WORD_MIXES];
@@ -204,13 +198,15 @@ static GuessScene *instanceOfGuessScene;
     GPDatabase *gpdb = [[GPDatabase alloc] init];
     [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
     _picSequenceArray = [gpdb PuzzleSequenceIsOutOfOrder:NO groupName:PuzzleGroupALL];
+    [gpdb close];
+    [gpdb release];
+    
+    //还原puzzle
     self.currPuzzleIndex = levelNum;
     int indexOfPic = [[self.picSequenceArray objectAtIndex:self.currPuzzleIndex] integerValue];
     PuzzleClass * pc = [PuzzleClass puzzleWithIdKey:indexOfPic picName:picName answerCN:answerCN JA:nil EN:nil groupName:groupName wordNum:wordNum];
     pc.wordMixes = wordMixes;
     self.currPuzzle = pc;
-    [gpdb close];
-    [gpdb release];
     
     //设置blank和picture和block
     [self setBlankAndBlockAndPictrue];
@@ -880,15 +876,82 @@ static GuessScene *instanceOfGuessScene;
 //    self.currPuzzleIndex++;
     self.currRecivedStatus = RecivedStatusNormal;
     
-    //获得下一个PuzzleClass
-    GPDatabase *gpdb = [[GPDatabase alloc] init];
     
-    [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
-    int indexOfPic = [[self.picSequenceArray objectAtIndex:self.currPuzzleIndex] integerValue];
-    self.currPuzzle = [gpdb puzzlesWithGroup:PuzzleGroupMovies indexOfPic:indexOfPic];
-    [gpdb close];
+    if (self.currPuzzleIndex == [_navBar continueLevel] && [_navBar isNeedRestoreScene]) {
+        NSString *gameDataFileName = @"PlayerState";
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask ,YES );
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *settingsPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", gameDataFileName]];
+        
+        NSMutableDictionary *playerState = [[[NSMutableDictionary alloc] initWithContentsOfFile:settingsPath] autorelease];
+        
+        NSString *picName = [playerState objectForKey:PS_PIC_NAME];
+        NSString *answerCN = [playerState objectForKey:PS_ANSWER];
+        NSString *groupName = [playerState objectForKey:PS_GROUP_NAME];
+        NSInteger wordNum = [[playerState objectForKey:PS_WORD_NUM] integerValue];
+        NSString *wordMixes = [playerState objectForKey:PS_WORD_MIXES];
+        
+        
+        //获得PuzzleClass
+        int indexOfPic = [[self.picSequenceArray objectAtIndex:self.currPuzzleIndex] integerValue];
+        PuzzleClass * pc = [PuzzleClass puzzleWithIdKey:indexOfPic picName:picName answerCN:answerCN JA:nil EN:nil groupName:groupName wordNum:wordNum];
+        pc.wordMixes = wordMixes;
+        self.currPuzzle = pc;
+        
+        //Reset BlockArray
+        for (iBlock *block in self.blockArray) {
+            
+            [block blockSpriteStopActionByTag:CCActionGoldenEffectTag];
+            [block blockSpriteStopActionByTag:CCActionBlockDisappearEffectTag];
+            
+            [block resetBlockBackToInitalStatus];
+        }
+        
+        //还原block现场
+        //useItemArray
+        NSArray *useItemGoneArray = [playerState objectForKey:PS_USE_ITEM_GONE];
+        NSArray *useItemSmallArray = [playerState objectForKey:PS_USE_ITEM_SMALL];
+        NSArray *useItemBombArray = [playerState objectForKey:PS_USE_ITEM_TRANS];
+        
+        for (NSNumber *numberGone in useItemGoneArray) {
+            NSInteger goneIndex = [numberGone integerValue];
+            iBlock *currBlock = [self.blockArray objectAtIndex:goneIndex];
+            [currBlock makeBlock:BlockStatusGone];
+        }
+        
+        for (NSNumber *numberSmall in useItemSmallArray) {
+            NSInteger smallIndex = [numberSmall integerValue];
+            iBlock *currBlock = [self.blockArray objectAtIndex:smallIndex];
+            [currBlock makeBlock:BlockStatusSmall];
+        }
+        
+        for (NSNumber *numberBomb in useItemBombArray) {
+            NSInteger bombIndex = [numberBomb integerValue];
+            iBlock *currBlock = [self.blockArray objectAtIndex:bombIndex];
+            [currBlock makeBlock:BlockStatusBomb];
+        }
+    } else {
+        //获得下一个PuzzleClass
+        GPDatabase *gpdb = [[GPDatabase alloc] init];
+        
+        [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
+        int indexOfPic = [[self.picSequenceArray objectAtIndex:self.currPuzzleIndex] integerValue];
+        self.currPuzzle = [gpdb puzzlesWithGroup:PuzzleGroupMovies indexOfPic:indexOfPic];
+        [gpdb close];
+        
+        [gpdb release];
+        
+        //Reset BlockArray
+        for (iBlock *block in self.blockArray) {
+            
+            [block blockSpriteStopActionByTag:CCActionGoldenEffectTag];
+            [block blockSpriteStopActionByTag:CCActionBlockDisappearEffectTag];
+            
+            [block resetBlockBackToInitalStatus];
+        }
+    }
     
-    [gpdb release];
     
     //更换答案
     self.answerStr = self.currPuzzle.answer;
@@ -906,17 +969,6 @@ static GuessScene *instanceOfGuessScene;
     
     //调整WordBlank数组
     [self resetWordBlankArray];
-    
-    //Reset BlockArray
-    for (iBlock *block in self.blockArray) {
-        
-        [block blockSpriteStopActionByTag:CCActionGoldenEffectTag];
-        [block blockSpriteStopActionByTag:CCActionBlockDisappearEffectTag];
-        
-        [block resetBlockBackToInitalStatus];
-        
-//        block.blockSprite.color = ccc3(255, 255, 255);
-    }
     
     //更换图片
     [self resetPictrue];

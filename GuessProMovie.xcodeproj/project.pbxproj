@@ -476,7 +476,7 @@
 		005BCE121828C338006A8CDB /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		005BCE211828EE1D006A8CDB /* NextPrev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NextPrev.plist; sourceTree = "<group>"; };
 		005BCE221828EE1D006A8CDB /* NextPrev.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NextPrev.png; sourceTree = "<group>"; };
-		006B1F7D1663762D008ED362 /* GuessPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		006B1F7D1663762D008ED362 /* GuessProMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessProMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006B1F811663762D008ED362 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		006B1F831663762D008ED362 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		006B1F851663762D008ED362 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -1125,7 +1125,7 @@
 		006B1F7E1663762D008ED362 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				006B1F7D1663762D008ED362 /* GuessPro.app */,
+				006B1F7D1663762D008ED362 /* GuessProMovie.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1844,9 +1844,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		006B1F7C1663762D008ED362 /* GuessPro */ = {
+		006B1F7C1663762D008ED362 /* GuessProMovie */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 006B217616637631008ED362 /* Build configuration list for PBXNativeTarget "GuessPro" */;
+			buildConfigurationList = 006B217616637631008ED362 /* Build configuration list for PBXNativeTarget "GuessProMovie" */;
 			buildPhases = (
 				006B1F791663762D008ED362 /* Sources */,
 				006B1F7A1663762D008ED362 /* Frameworks */,
@@ -1856,9 +1856,9 @@
 			);
 			dependencies = (
 			);
-			name = GuessPro;
+			name = GuessProMovie;
 			productName = Brazil;
-			productReference = 006B1F7D1663762D008ED362 /* GuessPro.app */;
+			productReference = 006B1F7D1663762D008ED362 /* GuessProMovie.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1874,7 +1874,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 006B1F771663762D008ED362 /* Build configuration list for PBXProject "GuessPro" */;
+			buildConfigurationList = 006B1F771663762D008ED362 /* Build configuration list for PBXProject "GuessProMovie" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1886,7 +1886,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				006B1F7C1663762D008ED362 /* GuessPro */,
+				006B1F7C1663762D008ED362 /* GuessProMovie */,
 			);
 		};
 /* End PBXProject section */
@@ -2336,9 +2336,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-lz";
-				PRODUCT_NAME = GuessPro;
+				PRODUCT_NAME = GuessProMovie;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"Brazil/libs\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2365,9 +2365,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-lz";
-				PRODUCT_NAME = GuessPro;
+				PRODUCT_NAME = GuessProMovie;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"Brazil/libs\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -2377,7 +2377,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		006B1F771663762D008ED362 /* Build configuration list for PBXProject "GuessPro" */ = {
+		006B1F771663762D008ED362 /* Build configuration list for PBXProject "GuessProMovie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006B217416637631008ED362 /* Debug */,
@@ -2386,7 +2386,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		006B217616637631008ED362 /* Build configuration list for PBXNativeTarget "GuessPro" */ = {
+		006B217616637631008ED362 /* Build configuration list for PBXNativeTarget "GuessProMovie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				006B217716637631008ED362 /* Debug */,

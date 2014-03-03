@@ -132,8 +132,8 @@
             menuGrid = [SlidingMenuGrid menuWithArray:allItems 
                                                  cols:5
                                                  rows:6
-                                             position:ccp(55 * __HIGHRES_SCALE, 210 * __HIGHRES_SCALE) 
-                                              padding:ccp(90 * __HIGHRES_SCALE, 100 * __HIGHRES_SCALE) 
+                                             position:ccp(40 * __HIGHRES_SCALE, 400 * __HIGHRES_SCALE)
+                                              padding:ccp(60 * __HIGHRES_SCALE, 60 * __HIGHRES_SCALE)
                                         verticalPages:NO];
         }
 
