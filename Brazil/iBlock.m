@@ -36,12 +36,7 @@
         
         self.currBlockStatus = status;
         
-        float picWidth;
-        if ([GPNavBar isiPad]) {
-            picWidth = 500.0f;
-        } else {
-            picWidth = 250.0f;
-        }
+        float picWidth = PICTURE_WIDTH;
         
         int numPerLine = sqrtf((float)totalNum);
         float blockWidth = (float)picWidth / numPerLine;
@@ -60,12 +55,14 @@
         
         self.blockSprite.anchorPoint = ccp(0.5, 0.5);
         
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
+        CGFloat narrowWidth = (winSize.width - PICTURE_WIDTH) / 2.0f;
         if ([GPNavBar isiPad]) {
-            self.blockSprite.position = ccp(blockX + NARROW_WIDTH, 920 - blockY);
+            self.blockSprite.position = ccp(blockX + narrowWidth, 920 - blockY);
         } else if ([GPNavBar isiPhone5]) {
-            self.blockSprite.position = ccp(blockX + NARROW_WIDTH, 568 - 76 - blockY);
+            self.blockSprite.position = ccp(blockX + narrowWidth, 568 - 76 - blockY);
         } else {
-            self.blockSprite.position = ccp(blockX + NARROW_WIDTH, 480 - 76 - blockY);
+            self.blockSprite.position = ccp(blockX + narrowWidth, 480 - 48 - blockY);
         }
         
         self.initalPos = self.blockSprite.position;

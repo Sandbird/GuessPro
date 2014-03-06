@@ -22,7 +22,7 @@
         
 //        CCSpriteFrameCache *frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         
-        float blankWidth = 96.0;
+        float blankWidth = [GPNavBar isiPad] ? 96.0 : 40.0;
         //250 * 250()
         int initalPosOfX = (screenSize.width - totalNum * blankWidth) / 2;
 

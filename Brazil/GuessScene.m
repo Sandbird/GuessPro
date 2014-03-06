@@ -48,7 +48,9 @@ typedef enum {
 typedef enum {
     ItemSmallMinusScore = 5,
     ItemBombMinusScore = 10,
-    ItemFlyingMinusScore = 50,
+    ItemFlyingMinusScore = 20,
+    ItemTipsMinusScore = 30,
+    ItemAnswerMinusScore = 100,
 }ItemMinusScore;
 
 
@@ -171,12 +173,6 @@ static GuessScene *instanceOfGuessScene;
         _blockTouchLocked = NO;
         _wordTouchLocked = NO;
         
-        //照片背后的框
-        CCSprite *backBoraderSprite = [CCSprite spriteWithSpriteFrameName:@"outSide.png"];
-        backBoraderSprite.anchorPoint = ccp(0.5, 0.5);
-        backBoraderSprite.position = _FPSet.pictrue;
-        [self addChild:backBoraderSprite z:ZORDER_PICTRUE];
-        
         //道具初始状态
         self.currRecivedStatus = RecivedStatusNormal;
         
@@ -198,6 +194,13 @@ static GuessScene *instanceOfGuessScene;
         } else {
             [self startPuzzleWithLevelNum:levelNum];
         }
+        
+        //照片背后的框
+        CCSprite *backBoraderSprite = [CCSprite spriteWithSpriteFrameName:@"outSide.png"];
+        backBoraderSprite.anchorPoint = ccp(0.5, 0.5);
+        backBoraderSprite.scale = _picSprite.scale;
+        backBoraderSprite.position = _FPSet.pictrue;
+        [self addChild:backBoraderSprite z:ZORDER_PICTRUE];
     }
     
     return self;
@@ -383,7 +386,7 @@ static GuessScene *instanceOfGuessScene;
 }
 
 - (void)setInitalPosition {
-//    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
     
     if ([GPNavBar isiPad]) {
         _FPSet.readyItemSmall   = ccp(15, 820);
@@ -402,7 +405,7 @@ static GuessScene *instanceOfGuessScene;
         _FPSet.closeItemAnswer  = ccp(645+15, 670);
         _FPSet.closeItemShare   = ccp(645+15, 520);
         
-        _FPSet.pictrue = ccp(134 + 250, 920 - 250);
+        _FPSet.pictrue = ccp(winSize.width / 2, 920 - 250);
     } else if ([GPNavBar isiPhone5]) {
         _FPSet.readyItemSmall   = ccp(15, 820);
         _FPSet.readyItemBomb    = ccp(15, 670);
@@ -420,26 +423,26 @@ static GuessScene *instanceOfGuessScene;
         _FPSet.closeItemAnswer  = ccp(645+15, 670);
         _FPSet.closeItemShare   = ccp(645+15, 520);
         
-        _FPSet.pictrue = ccp(35 + 125, 568 - 76 - 125);
+        _FPSet.pictrue = ccp(winSize.width / 2, 568 - 48 - PICTURE_WIDTH / 2);
 
     } else {
-        _FPSet.readyItemSmall   = ccp(15, 820);
-        _FPSet.readyItemBomb    = ccp(15, 670);
-        _FPSet.readyItemFlying  = ccp(15, 520);
+        _FPSet.readyItemSmall   = ccp(0, 380);
+        _FPSet.readyItemBomb    = ccp(0, 330);
+        _FPSet.readyItemFlying  = ccp(0, 280);
         
-        _FPSet.closeItemSmall   = ccp(15, 820);
-        _FPSet.closeItemBomb    = ccp(15, 670);
-        _FPSet.closeItemFlying  = ccp(15, 520);
+        _FPSet.closeItemSmall   = ccp(0, 380);
+        _FPSet.closeItemBomb    = ccp(0, 330);
+        _FPSet.closeItemFlying  = ccp(0, 280);
         
-        _FPSet.readyItemTips    = ccp(645+15, 820);
-        _FPSet.readyItemAnswer  = ccp(645+15, 670);
-        _FPSet.readyItemShare   = ccp(645+15, 520);
+        _FPSet.readyItemTips    = ccp(270, 380);
+        _FPSet.readyItemAnswer  = ccp(270, 330);
+        _FPSet.readyItemShare   = ccp(270, 280);
         
-        _FPSet.closeItemTips    = ccp(645+15, 820);
-        _FPSet.closeItemAnswer  = ccp(645+15, 670);
-        _FPSet.closeItemShare   = ccp(645+15, 520);
+        _FPSet.closeItemTips    = ccp(270, 380);
+        _FPSet.closeItemAnswer  = ccp(270, 330);
+        _FPSet.closeItemShare   = ccp(270, 280);
         
-        _FPSet.pictrue = ccp(35 + 125, 480 - 76 - 125);
+        _FPSet.pictrue = ccp(winSize.width / 2, 480 - 38 - 10 - PICTURE_WIDTH / 2);
     }
     
     
@@ -759,9 +762,9 @@ static GuessScene *instanceOfGuessScene;
     CCSprite *flySprite = [CCSprite spriteWithSpriteFrameName:@"Fly01.png"];
     flySprite.tag = CCSpriteFlyingItemTag;
     [self addChild:flySprite z:ZORDER_ITEM_FLY];
-    flySprite.scale = 1.0;
+    flySprite.scale = _picSprite.scale;
     flySprite.anchorPoint = ccp(0.5, 0.5);
-    flySprite.position = ccp(flySprite.boundingBox.size.width * -1 / 2, 920 - 250);
+    flySprite.position = ccp(flySprite.boundingBox.size.width * -1 / 2, _FPSet.pictrue.y);
     
     //判断是否有飞行道具在运行
     _blockTouchLocked = YES;
@@ -774,7 +777,7 @@ static GuessScene *instanceOfGuessScene;
     CCSprite *flySprite = (CCSprite *)[self getChildByTag:CCSpriteFlyingItemTag];
     CGPoint pos = flySprite.position;
     
-    pos.x += 15.0 * 3;
+    pos.x += 15.0 * ([GPNavBar isiPad] ? 2.5 : 0.5);
     
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     // Reposition stripes when they're out of bounds
@@ -1110,6 +1113,8 @@ static GuessScene *instanceOfGuessScene;
     _picSprite = [CCSprite spriteWithFile:self.currPuzzle.picName];
     [self addChild:_picSprite z:ZORDER_PICTRUE];
     _picSprite.anchorPoint = ccp(0.5, 0.5);
+    
+    _picSprite.scale = PICTURE_WIDTH / _picSprite.boundingBox.size.height;
     _picSprite.position = _FPSet.pictrue;
     
     //ipad用ipadRetina的屏幕

@@ -182,6 +182,7 @@
 		00D1540718C71A8300ABBE74 /* CoinStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D1540618C71A8300ABBE74 /* CoinStore.m */; };
 		00D1540918C7717C00ABBE74 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D1540818C7717C00ABBE74 /* Default-568h@2x.png */; };
 		00E48ABB1824EFD8005573DF /* SuccessLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E48ABA1824EFD8005573DF /* SuccessLayer.m */; };
+		00E7900218C8C327006224E1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00E7900118C8C327006224E1 /* StoreKit.framework */; };
 		00E7AD661821E33B003973A8 /* GPDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E7AD651821E33B003973A8 /* GPDatabase.m */; };
 		00E7AD681821E39C003973A8 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 00E7AD671821E39C003973A8 /* libsqlite3.0.dylib */; };
 		00E7AD6B1821E5D1003973A8 /* ZZAcquirePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E7AD6A1821E5D1003973A8 /* ZZAcquirePath.m */; };
@@ -731,6 +732,7 @@
 		00D1540818C7717C00ABBE74 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		00E48AB91824EFD8005573DF /* SuccessLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessLayer.h; sourceTree = "<group>"; };
 		00E48ABA1824EFD8005573DF /* SuccessLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessLayer.m; sourceTree = "<group>"; };
+		00E7900118C8C327006224E1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		00E7AD641821E33B003973A8 /* GPDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPDatabase.h; sourceTree = "<group>"; };
 		00E7AD651821E33B003973A8 /* GPDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPDatabase.m; sourceTree = "<group>"; };
 		00E7AD671821E39C003973A8 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -930,6 +932,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00E7900218C8C327006224E1 /* StoreKit.framework in Frameworks */,
 				00E7AD681821E39C003973A8 /* libsqlite3.0.dylib in Frameworks */,
 				006B1F821663762D008ED362 /* QuartzCore.framework in Frameworks */,
 				006B1F841663762D008ED362 /* OpenGLES.framework in Frameworks */,
@@ -949,6 +952,7 @@
 			isa = PBXGroup;
 			children = (
 				00A2FC8A1827961B00555F9A /* UIImage+MostColor */,
+				00E7AD701821E72C003973A8 /* PuzzleDefine.h */,
 				00E7AD691821E5D1003973A8 /* ZZAcquirePath.h */,
 				00E7AD6A1821E5D1003973A8 /* ZZAcquirePath.m */,
 				00C8D249181D629A00E21D01 /* Word.h */,
@@ -961,7 +965,6 @@
 				00C2E55B181FD77200CEC2D0 /* WordBlank.m */,
 				00E7AD641821E33B003973A8 /* GPDatabase.h */,
 				00E7AD651821E33B003973A8 /* GPDatabase.m */,
-				00E7AD701821E72C003973A8 /* PuzzleDefine.h */,
 				00E7AD711821E80A003973A8 /* PuzzleClass.h */,
 				00E7AD721821E80A003973A8 /* PuzzleClass.m */,
 				00B8DDD01822109A00E0238C /* GPNavBar.h */,
@@ -1014,6 +1017,7 @@
 		006B1F801663762D008ED362 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00E7900118C8C327006224E1 /* StoreKit.framework */,
 				007A101A18BB554A00A6CCE2 /* libz.dylib */,
 				00E7AD671821E39C003973A8 /* libsqlite3.0.dylib */,
 				006B1F811663762D008ED362 /* QuartzCore.framework */,

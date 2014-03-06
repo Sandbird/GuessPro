@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CCAnimationHelper.h"
 
-#define NARROW_WIDTH ([GPNavBar isiPad] ? 134.0f : 35.0f)
+#define NARROW_WIDTH ([GPNavBar isiPad] ? 134.0f : 60.0f)
 
 @interface iBlock : NSObject
 

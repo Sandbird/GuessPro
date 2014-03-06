@@ -11,6 +11,8 @@
 
 #define NUM_OF_WORD_SELECTED 24
 
+#define PICTURE_WIDTH ([GPNavBar isiPad] ? 500.0 : 220.0)
+
 
 #define ZORDER_BLANK            0
 #define ZORDER_WORD_HOME        0

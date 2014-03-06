@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <StoreKit/StoreKit.h>
 #import "cocos2d.h"
 
-@interface CoinStore : CCLayer {
+@interface CoinStore : CCLayer <SKPaymentTransactionObserver, SKProductsRequestDelegate, SKRequestDelegate> {
     
 }
 
