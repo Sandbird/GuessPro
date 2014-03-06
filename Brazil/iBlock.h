@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CCAnimationHelper.h"
 
-#define NARROW_WIDTH 134.0f
+#define NARROW_WIDTH ([GPNavBar isiPad] ? 134.0f : 35.0f)
 
 @interface iBlock : NSObject
 
@@ -39,5 +39,7 @@
 - (void)blockSpriteStopActionByTag:(int)tag;
 - (void)blockSpriteRunAction:(CCAction *)action;
 - (CGRect)blockSpriteBoundingBox;
+
+- (void)makeBlockBackToStatusBeforeFlyItem;
 
 @end

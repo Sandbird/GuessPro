@@ -54,6 +54,8 @@
 {
 	// Init the window
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    NSLog(@"%f", [[UIScreen mainScreen] bounds].size.height);
 	
 	// Try to use CADisplayLink director
 	// if it fails (SDK < 3.1) use the default director
@@ -136,7 +138,7 @@
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
-    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Afterschool.mp3" loop:YES];
+//    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Afterschool.mp3" loop:YES];
 }
 
 

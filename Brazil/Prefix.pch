@@ -14,6 +14,7 @@
 #import "cocos2d.h"
 #import "PuzzleDefine.h"
 #import "ZZNavBar.h"
+#import "GPNavBar.h"
 
 
 #import "GameManager.h"

@@ -16,7 +16,7 @@
 #import "StartLayer.h"
 //#import "HeartScene.h"
 //#import "SmileScene.h"
-#import "WhoScene.h"
+//#import "WhoScene.h"
 
 //判断设备是IPHONE还是IPAD
 #define IPAD_DEVICE [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
@@ -105,7 +105,7 @@
             break;
             
         case KayacSceneMetroTag:
-            nextScene = [WhoScene scene];
+//            nextScene = [WhoScene scene];
             break;
             
         case KayacSceneWhoTag:
@@ -171,7 +171,7 @@
             break;
             
         case KayacSceneGuessProTag:
-            prevScene = [WhoScene scene];
+//            prevScene = [WhoScene scene];
             break;
             
         case KayacSceneSmileTag:

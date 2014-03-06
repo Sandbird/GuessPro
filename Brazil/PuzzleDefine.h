@@ -21,7 +21,7 @@
 #define ZORDER_PICTRUE          2
 
 #define ZORDER_BLOCK            3
-#define ZORDER_NAV_BAR          3
+#define ZORDER_NAV_BAR          100
 
 #define ZORDER_ITEM_FLY         4
 
@@ -96,6 +96,9 @@ typedef enum {
     CCMenuItemSmallTag,
     CCMenuItemBombTag,
     CCMenuItemFlyingTag,
+    CCMenuItemTipsTag,
+    CCMenuItemAnswerTag,
+    CCMenuItemShareTag,
     CCNodeMAXTag = INT_MAX,
 }CCNodeTag;
 

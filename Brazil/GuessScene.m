@@ -15,6 +15,7 @@
 
 //所有的位置坐标
 typedef struct FixedPostion {
+    //左边三个道具
     CGPoint readyItemSmall;
     CGPoint readyItemBomb;
     CGPoint readyItemFlying;
@@ -22,6 +23,15 @@ typedef struct FixedPostion {
     CGPoint closeItemSmall;
     CGPoint closeItemBomb;
     CGPoint closeItemFlying;
+    
+    //右边三个道具
+    CGPoint readyItemTips;
+    CGPoint readyItemAnswer;
+    CGPoint readyItemShare;
+    
+    CGPoint closeItemTips;
+    CGPoint closeItemAnswer;
+    CGPoint closeItemShare;
     
     CGPoint pictrue;
 }FixedPostionSet;
@@ -59,10 +69,14 @@ typedef enum {
     
     FixedPostionSet _FPSet;
     
+    CCSpriteBatchNode *_blockBatch;
+    CCSpriteBatchNode *_wordBatch;
+    
 }
 @property (nonatomic, retain)NSMutableArray *blockArray;
 @property (nonatomic, retain)NSMutableArray *wordArray;
 @property (nonatomic, retain)NSMutableArray *blankArray;
+
 
 @property (nonatomic, retain)NSMutableArray *picSequenceArray;
 @property (nonatomic, retain)NSString *answerStr;
@@ -99,6 +113,7 @@ static GuessScene *instanceOfGuessScene;
     
     //    [SimpleAudioEngine end];
     instanceOfGuessScene = nil;
+    
     [super dealloc];
 }
 
@@ -123,7 +138,7 @@ static GuessScene *instanceOfGuessScene;
         
         //加载帧到缓存
         CCSpriteFrameCache *framCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [framCache addSpriteFramesWithFile:@"GPNavBar.plist"];
+        [framCache addSpriteFramesWithFile:[AssetHelper getDeviceSpecificFileNameFor:@"GuessPro.plist"]];
         
         //touch is enabled
         [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:-1 swallowsTouches:YES];
@@ -136,6 +151,16 @@ static GuessScene *instanceOfGuessScene;
         _blockArray = [[NSMutableArray alloc] init];
         _wordArray = [[NSMutableArray alloc] init];
         _blankArray = [[NSMutableArray alloc] init];
+        
+        /*稍后修改
+        CCSpriteFrame *blockFrame = [framCache spriteFrameByName:@"Block.png"];
+        _blockBatch = [CCSpriteBatchNode batchNodeWithTexture:blockFrame.texture];
+        [self addChild:_blockBatch z:ZORDER_BLOCK];
+        
+        CCSpriteFrame *wordFrame = [framCache spriteFrameByName:@"WordBlank.png"];
+        _wordBatch = [CCSpriteBatchNode batchNodeWithTexture:wordFrame.texture];
+        [self addChild:_wordBatch z:ZORDER_WORD_HOME];
+         */
         
         self.isNeedRestoreScene = YES;
         
@@ -266,6 +291,23 @@ static GuessScene *instanceOfGuessScene;
     [playerState setObject:self.currPuzzle.groupName forKey:PS_GROUP_NAME];
     [playerState setObject:[NSNumber numberWithInt:self.currPuzzle.wordNum] forKey:PS_WORD_NUM];
     [playerState setObject:self.currPuzzle.wordMixes forKey:PS_WORD_MIXES];
+    
+    
+    //如果正在使用fly道具，把全部的block还使用fly道具之前的状态再保存
+    if (_blockTouchLocked) {
+        [self unschedule:@selector(updateFly)];
+        _blockTouchLocked = NO;
+        CCSprite *flySprite = (CCSprite *)[self getChildByTag:CCSpriteFlyingItemTag];
+        if (flySprite != nil) {
+            [flySprite removeFromParentAndCleanup:YES];
+        }
+        
+        for (iBlock *block in self.blockArray) {
+            [block makeBlockBackToStatusBeforeFlyItem];
+        }
+    }
+    
+    //记录block的现场
     NSMutableArray *useItemGoneArray = [NSMutableArray array];
     NSMutableArray *useItemSmallArray = [NSMutableArray array];
     NSMutableArray *useItemBombArray = [NSMutableArray array];
@@ -321,7 +363,7 @@ static GuessScene *instanceOfGuessScene;
     
     //block
     iBlock *block = nil;
-    _totalSquareNum = 49;
+    _totalSquareNum = 25;
     for (int i = 0; i < _totalSquareNum; i++) {
         block = [iBlock blockWithStatus:BlockStatusNormal squareIndex:i squareNum:_totalSquareNum parentNode:self];
         [self.blockArray addObject:block];
@@ -341,15 +383,66 @@ static GuessScene *instanceOfGuessScene;
 }
 
 - (void)setInitalPosition {
-    _FPSet.readyItemSmall = ccp(0, 750);
-    _FPSet.readyItemBomb = ccp(0, 650);
-    _FPSet.readyItemFlying = ccp(0, 550);
+//    CGSize winSize = [[CCDirector sharedDirector] winSize];
     
-    _FPSet.closeItemSmall = ccp(-30, 750);
-    _FPSet.closeItemBomb = ccp(-30, 650);
-    _FPSet.closeItemFlying = ccp(-30, 550);
+    if ([GPNavBar isiPad]) {
+        _FPSet.readyItemSmall   = ccp(15, 820);
+        _FPSet.readyItemBomb    = ccp(15, 670);
+        _FPSet.readyItemFlying  = ccp(15, 520);
+        
+        _FPSet.closeItemSmall   = ccp(15, 820);
+        _FPSet.closeItemBomb    = ccp(15, 670);
+        _FPSet.closeItemFlying  = ccp(15, 520);
+        
+        _FPSet.readyItemTips    = ccp(645+15, 820);
+        _FPSet.readyItemAnswer  = ccp(645+15, 670);
+        _FPSet.readyItemShare   = ccp(645+15, 520);
+        
+        _FPSet.closeItemTips    = ccp(645+15, 820);
+        _FPSet.closeItemAnswer  = ccp(645+15, 670);
+        _FPSet.closeItemShare   = ccp(645+15, 520);
+        
+        _FPSet.pictrue = ccp(134 + 250, 920 - 250);
+    } else if ([GPNavBar isiPhone5]) {
+        _FPSet.readyItemSmall   = ccp(15, 820);
+        _FPSet.readyItemBomb    = ccp(15, 670);
+        _FPSet.readyItemFlying  = ccp(15, 520);
+        
+        _FPSet.closeItemSmall   = ccp(15, 820);
+        _FPSet.closeItemBomb    = ccp(15, 670);
+        _FPSet.closeItemFlying  = ccp(15, 520);
+        
+        _FPSet.readyItemTips    = ccp(645+15, 820);
+        _FPSet.readyItemAnswer  = ccp(645+15, 670);
+        _FPSet.readyItemShare   = ccp(645+15, 520);
+        
+        _FPSet.closeItemTips    = ccp(645+15, 820);
+        _FPSet.closeItemAnswer  = ccp(645+15, 670);
+        _FPSet.closeItemShare   = ccp(645+15, 520);
+        
+        _FPSet.pictrue = ccp(35 + 125, 568 - 76 - 125);
+
+    } else {
+        _FPSet.readyItemSmall   = ccp(15, 820);
+        _FPSet.readyItemBomb    = ccp(15, 670);
+        _FPSet.readyItemFlying  = ccp(15, 520);
+        
+        _FPSet.closeItemSmall   = ccp(15, 820);
+        _FPSet.closeItemBomb    = ccp(15, 670);
+        _FPSet.closeItemFlying  = ccp(15, 520);
+        
+        _FPSet.readyItemTips    = ccp(645+15, 820);
+        _FPSet.readyItemAnswer  = ccp(645+15, 670);
+        _FPSet.readyItemShare   = ccp(645+15, 520);
+        
+        _FPSet.closeItemTips    = ccp(645+15, 820);
+        _FPSet.closeItemAnswer  = ccp(645+15, 670);
+        _FPSet.closeItemShare   = ccp(645+15, 520);
+        
+        _FPSet.pictrue = ccp(35 + 125, 480 - 76 - 125);
+    }
     
-    _FPSet.pictrue = ccp(134 + 250, 920 - 250);
+    
 }
 
 #pragma mark - Item Menu Event
@@ -360,22 +453,39 @@ static GuessScene *instanceOfGuessScene;
     
      //加返回按钮和主页按钮
      //设一个全局变量，点到游戏中的时候，改变这个值，根据这个值判断返回哪个layer
-    CCSprite *bombSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemBomb.png"]];
-    CCMenuItem *bombItem = [CCMenuItemImage itemFromNormalSprite:bombSprite selectedSprite:nil target:self selector:@selector(bombItemPressed)];
-    bombItem.tag = CCMenuItemBombTag;
-    _isBombReady = NO;
-    
-    CCSprite *smallSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemSmall.png"]];
-    CCMenuItem *smallItem = [CCMenuItemImage itemFromNormalSprite:smallSprite selectedSprite:nil target:self selector:@selector(smallItemPressed)];
+    CCSprite *smallSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item5.png"]];
+    CCSprite *smallHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item5_HL.png"]];
+    CCMenuItem *smallItem = [CCMenuItemImage itemFromNormalSprite:smallSprite selectedSprite:smallHLSprite target:self selector:@selector(smallItemPressed)];
     smallItem.tag = CCMenuItemSmallTag;
     _isSmallReady = NO;
     
-    CCSprite *flySprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemFly.png"]];
-    CCMenuItem *flyItem = [CCMenuItemImage itemFromNormalSprite:flySprite selectedSprite:nil target:self selector:@selector(flyItemPressed)];
+    
+    CCSprite *bombSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item10.png"]];
+    CCSprite *bombHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item10_HL.png"]];
+    CCMenuItem *bombItem = [CCMenuItemImage itemFromNormalSprite:bombSprite selectedSprite:bombHLSprite target:self selector:@selector(bombItemPressed)];
+    bombItem.tag = CCMenuItemBombTag;
+    _isBombReady = NO;
+    
+    
+    CCSprite *flySprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item50.png"]];
+    CCSprite *flyHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item50_HL.png"]];
+    CCMenuItem *flyItem = [CCMenuItemImage itemFromNormalSprite:flySprite selectedSprite:flyHLSprite target:self selector:@selector(flyItemPressed)];
     flyItem.tag = CCMenuItemFlyingTag;
     _isFlyReady = NO;
+    
+    //Tips
+    CCSprite *tipsSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item100.png"]];
+    CCSprite *tipsHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item100_HL.png"]];
+    CCMenuItem *tipsItem = [CCMenuItemImage itemFromNormalSprite:tipsSprite selectedSprite:tipsHLSprite target:self selector:@selector(flyItemPressed)];
+    tipsItem.tag = CCMenuItemTipsTag;
+    
+    //Answer
+    CCSprite *answerSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item200.png"]];
+    CCSprite *answerHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item200_HL.png"]];
+    CCMenuItem *answerItem = [CCMenuItemImage itemFromNormalSprite:answerSprite selectedSprite:answerHLSprite target:self selector:@selector(flyItemPressed)];
+    answerItem.tag = CCMenuItemAnswerTag;
      
-    _itemMenu = [CCMenu menuWithItems:smallItem, bombItem, flyItem, nil];
+    _itemMenu = [CCMenu menuWithItems:smallItem, bombItem, flyItem, tipsItem, answerItem, nil];
     
     _itemMenu.position = ccp(0, 0);
     
@@ -388,7 +498,11 @@ static GuessScene *instanceOfGuessScene;
     flyItem.anchorPoint = ccp(0, 0.5);
     flyItem.position = _FPSet.closeItemFlying;
     
+    tipsItem.anchorPoint = ccp(0, 0.5);
+    tipsItem.position = _FPSet.closeItemTips;
     
+    answerItem.anchorPoint = ccp(0, 0.5);
+    answerItem.position = _FPSet.closeItemAnswer;
     
     [self addChild:_itemMenu];
     
@@ -649,6 +763,7 @@ static GuessScene *instanceOfGuessScene;
     flySprite.anchorPoint = ccp(0.5, 0.5);
     flySprite.position = ccp(flySprite.boundingBox.size.width * -1 / 2, 920 - 250);
     
+    //判断是否有飞行道具在运行
     _blockTouchLocked = YES;
     [self schedule:@selector(updateFly)];
 }
@@ -826,10 +941,6 @@ static GuessScene *instanceOfGuessScene;
         
         self.currPuzzleScore = 0;
     }
-    
-    //过关之后，保存分数
-    [[GameManager sharedGameManager] setScoreForCurrentActiveLevel:self.currPuzzleScore];
-    [[GameManager sharedGameManager] setPassMarkForCurrentActiveLevel:YES];
 }
 
 - (void)blocksFlyToScoreAndDisappear {
@@ -1226,6 +1337,11 @@ static GuessScene *instanceOfGuessScene;
                 if ([customAnswer isEqualToString:self.answerStr]) {
                     NSLog(@"Win");
                     
+                    //过关之后，保存本关的状态
+                    [[GameManager sharedGameManager] setCompletedForCurrentActiveLevel:self.currPuzzleIndex];
+                    [[GameManager sharedGameManager] setPassMarkForCurrentActiveLevel:YES];
+                    
+                    //下一关的序号
                     self.currPuzzleIndex++;
                     self.isNeedRestoreScene = NO;
                     

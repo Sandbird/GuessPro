@@ -130,6 +130,9 @@ typedef enum GameManagerControls {
 - (void) saveGameState;
 - (void) loadGameState;
 
+//GuessProMethod
+- (void)setCompletedForCurrentActiveLevel:(int)levelNum;
+
 
 
 @end

@@ -125,8 +125,8 @@
             menuGrid = [SlidingMenuGrid menuWithArray:allItems 
                                                                   cols:5 
                                                                   rows:6
-                                                              position:ccp(40 * __HIGHRES_SCALE, 420 * __HIGHRES_SCALE)
-                                                               padding:ccp(75 * __HIGHRES_SCALE, 65 * __HIGHRES_SCALE)
+                                                              position:ccp(40 * __HIGHRES_SCALE, 400 * __HIGHRES_SCALE)
+                                                               padding:ccp(75 * __HIGHRES_SCALE, 60 * __HIGHRES_SCALE)
                                                          verticalPages:NO];
         } else {
             menuGrid = [SlidingMenuGrid menuWithArray:allItems 
@@ -157,18 +157,18 @@
 		[frameCache addSpriteFramesWithFile:[AssetHelper getDeviceSpecificFileNameFor:@"cc_menu.plist"]];
         
         // Back Button
-		CCSprite *back = [CCSprite spriteWithSpriteFrameName:@"back.png"];
-		CCSprite *backSelected = [CCSprite spriteWithSpriteFrameName:@"back_pushed.png"];
-		CCMenuItemSprite *backMenuItem = [CCMenuItemSprite itemFromNormalSprite:back 
-																 selectedSprite:backSelected 
-																 disabledSprite:nil 
-																		 target:self 
-																	   selector:@selector(back:)];
-		
-        // Back Button Menu
-        CCMenu *backMenu = [CCMenu menuWithItems:backMenuItem,  nil];
-		backMenu.position = CGPointMake(90 * __HIGHRES_SCALE,winSize.height - (winSize.height * 0.90));
-		[self addChild:backMenu z:5];
+//		CCSprite *back = [CCSprite spriteWithSpriteFrameName:@"back.png"];
+//		CCSprite *backSelected = [CCSprite spriteWithSpriteFrameName:@"back_pushed.png"];
+//		CCMenuItemSprite *backMenuItem = [CCMenuItemSprite itemFromNormalSprite:back 
+//																 selectedSprite:backSelected 
+//																 disabledSprite:nil 
+//																		 target:self 
+//																	   selector:@selector(back:)];
+//		
+//        // Back Button Menu
+//        CCMenu *backMenu = [CCMenu menuWithItems:backMenuItem,  nil];
+//		backMenu.position = CGPointMake(90 * __HIGHRES_SCALE,winSize.height - (winSize.height * 0.90));
+//		[self addChild:backMenu z:5];
         
         
         self.pageControl = [PageControlLayer layerWithPages:menuGrid.iPageCount+1 currentPage:0];

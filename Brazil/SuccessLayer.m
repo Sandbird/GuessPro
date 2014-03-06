@@ -39,7 +39,7 @@
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         //touch is enabled
-        [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:-255 swallowsTouches:YES];
+        [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:-97 swallowsTouches:YES];
         
         _nextSprite = [CCSprite spriteWithSpriteFrameName:@"nextButton.png"];
         _nextSprite.anchorPoint = ccp(0.5, 0.5);

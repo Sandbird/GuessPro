@@ -373,6 +373,12 @@
 - (void)setScoreForCurrentActiveLevel:(int)score {
     [self setScore:score forLevelIndex:self.currentActiveLevelIndex];
 }
+
+- (void)setCompletedForCurrentActiveLevel:(int)levelNum {
+    self.currentActiveLevelIndex = levelNum;
+    [self setScore:0 forLevelIndex:self.currentActiveLevelIndex];
+}
+
 - (int)starsForCurrentActiveLevelWithScore:(int)score {
     NSDictionary *level = [self levelWithIndex:self.currentActiveLevelIndex];
     NSArray *bestScores = [level objectForKey:@"BestScores"];

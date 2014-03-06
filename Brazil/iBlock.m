@@ -8,7 +8,9 @@
 
 #import "iBlock.h"
 
-@interface iBlock()
+@interface iBlock() {
+    CCNode *_parentNode;
+}
 
 @property (nonatomic, retain)CCSprite *blockSprite;
 
@@ -28,12 +30,21 @@
     self = [super init];
     if (self) {
         
+        _parentNode = parent;
+        
         self.squareIndex = index;
         
         self.currBlockStatus = status;
         
+        float picWidth;
+        if ([GPNavBar isiPad]) {
+            picWidth = 500.0f;
+        } else {
+            picWidth = 250.0f;
+        }
+        
         int numPerLine = sqrtf((float)totalNum);
-        float blockWidth = (float)500.0 / numPerLine;
+        float blockWidth = (float)picWidth / numPerLine;
         //250 * 250()
         int posOfX = (index % numPerLine) + 1;
 
@@ -48,7 +59,15 @@
         
         
         self.blockSprite.anchorPoint = ccp(0.5, 0.5);
-        self.blockSprite.position = ccp(blockX + NARROW_WIDTH, 920 - blockY);
+        
+        if ([GPNavBar isiPad]) {
+            self.blockSprite.position = ccp(blockX + NARROW_WIDTH, 920 - blockY);
+        } else if ([GPNavBar isiPhone5]) {
+            self.blockSprite.position = ccp(blockX + NARROW_WIDTH, 568 - 76 - blockY);
+        } else {
+            self.blockSprite.position = ccp(blockX + NARROW_WIDTH, 480 - 76 - blockY);
+        }
+        
         self.initalPos = self.blockSprite.position;
         [parent addChild:self.blockSprite z:ZORDER_BLOCK];
         
@@ -91,6 +110,11 @@
             self.currBlockStatus = BlockStatusGone;
             [self.blockSprite stopAllActions];
             self.blockSprite.visible = NO;
+            CCParticleSystem* system = [CCParticleSystemQuad particleWithFile:@"PressEffects.plist"];
+//            system.positionType = kCCPositionTypeFree;
+            system.positionType = kCCPositionTypeRelative;
+            system.sourcePosition = self.blockSpriteBoundingBox.origin;
+            [_parentNode addChild:system z:10];
             break;
             
         case BlockStatusBomb:
@@ -168,6 +192,14 @@
 
 - (CGRect)blockSpriteBoundingBox {
     return self.blockSprite.boundingBox;
+}
+
+//返回使用fly道具之前的状态
+- (void)makeBlockBackToStatusBeforeFlyItem {
+    if ([self isBlockNormal] || [self isBlockSmall] || [self isBlockBomb]) {
+        self.blockSprite.visible = YES;
+        self.blockSprite.scale = self.blockScale;
+    }
 }
 
 

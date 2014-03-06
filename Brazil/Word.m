@@ -32,7 +32,7 @@
         self.wordString = wordStr;
         
         int numPerLine = 8;
-        float wordWidth = 96;
+        float wordWidth = [GPNavBar isiPad] ? 96 : 40;
         
         
         int row = floorf((float)index / numPerLine);
@@ -52,13 +52,14 @@
         self.wordSprite.position = ccp(wordX, wordY);
         [parent addChild:self.wordSprite z:ZORDER_WORD_HOME];
         
-//        CCLabelTTF *wordLabel = [CCLabelTTF labelWithString:self.wordString fontName:@"MarkerFelt-Thin" fontSize:30];
-        CCLabelTTF *wordLabel = [CCLabelTTF labelWithString:self.wordString dimensions:CGSizeMake(96, 96) alignment:NSTextAlignmentCenter fontName:@"HiraKakuProN-W6" fontSize:96];
+        
+        CCLabelTTF *wordLabel = [CCLabelTTF labelWithString:self.wordString dimensions:CGSizeMake(wordWidth - 20, wordWidth - 20) alignment:NSTextAlignmentCenter fontName:@"HiraKakuProN-W6" fontSize:[GPNavBar isiPad] ? 76 : 20];
         wordLabel.color = ccBLACK;
         wordLabel.tag = TAG_WORD_LABEL;
         
-        wordLabel.anchorPoint = ccp(0, 0);
-        wordLabel.position = ccp(0, 0);
+        CGFloat wordPosX = self.wordSprite.boundingBox.size.width / 2;
+        wordLabel.anchorPoint = ccp(0.5, 0.5);
+        wordLabel.position = ccp(wordPosX, wordPosX);
         [self.wordSprite addChild:wordLabel];
         
         
