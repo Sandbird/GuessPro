@@ -27,7 +27,7 @@
 
 #define ZORDER_ITEM_FLY         4
 
-#define IS_KAYAC                YES
+#define IS_KAYAC                NO
 
 #define PS_TOTAL_SCORE      @"totalScore"
 #define PS_CONTINUE_LEVEL   @"continueLevel"
@@ -42,9 +42,11 @@
 #define PS_GROUP_NAME       @"groupName"
 #define PS_WORD_NUM         @"wordNum"
 #define PS_ANSWER           @"answer"
+#define PS_IS_BUIED_ANSWER  @"isBuiedAnswer"
 #define PS_WORD_MIXES       @"wordMixes"
-#define PS_TIP              @"tip"
-#define PS_IS_BUY_TIP       @"isBuyTip"
+#define PS_TIP              @"tips"
+#define PS_IS_BUY_TIP       @"isBuiedTips"
+#define PS_INFORMATION      @"information"
 //#define PS_SELECTED_WORDS   @"selectedWords"
 //#define PS_SELECTED_BLANK   @"selectedBlank"
 #define PS_USE_ITEM_GONE    @"useItemGone"

@@ -13,22 +13,21 @@
 #import "GPDatabase.h"
 #import "SuccessLayer.h"
 
+
+#define TAG_ALERT_ITEM_TIPS     111
+#define TAG_ALERT_ITEM_ANSWER   222
+
+#define TAG_ALERT_SHOW_TIPS     333
+#define TAG_ALERT_SHOW_ANSWER   444
+
 //所有的位置坐标
 typedef struct FixedPostion {
     //左边三个道具
-    CGPoint readyItemSmall;
-    CGPoint readyItemBomb;
-    CGPoint readyItemFlying;
-    
     CGPoint closeItemSmall;
     CGPoint closeItemBomb;
     CGPoint closeItemFlying;
     
     //右边三个道具
-    CGPoint readyItemTips;
-    CGPoint readyItemAnswer;
-    CGPoint readyItemShare;
-    
     CGPoint closeItemTips;
     CGPoint closeItemAnswer;
     CGPoint closeItemShare;
@@ -58,6 +57,7 @@ typedef enum {
     int _totalSquareNum;
     
     CCMenu *_itemMenu;
+    
     BOOL _isBombReady;
     BOOL _isSmallReady;
     BOOL _isFlyReady;
@@ -217,9 +217,13 @@ static GuessScene *instanceOfGuessScene;
     
     NSString *picName = [playerState objectForKey:PS_PIC_NAME];
     NSString *answerCN = [playerState objectForKey:PS_ANSWER];
+    BOOL isBuiedAnswer = [[playerState objectForKey:PS_IS_BUIED_ANSWER] boolValue];
     NSString *groupName = [playerState objectForKey:PS_GROUP_NAME];
     NSInteger wordNum = [[playerState objectForKey:PS_WORD_NUM] integerValue];
     NSString *wordMixes = [playerState objectForKey:PS_WORD_MIXES];
+    NSString *tips = [playerState objectForKey:PS_TIP];
+    BOOL isBuiedTips = [[playerState objectForKey:PS_IS_BUY_TIP] boolValue];
+    NSString *information = [playerState objectForKey:PS_INFORMATION];
     
     
     //获得PuzzleClass
@@ -234,6 +238,10 @@ static GuessScene *instanceOfGuessScene;
     int indexOfPic = [[self.picSequenceArray objectAtIndex:self.currPuzzleIndex] integerValue];
     PuzzleClass * pc = [PuzzleClass puzzleWithIdKey:indexOfPic picName:picName answerCN:answerCN JA:nil EN:nil groupName:groupName wordNum:wordNum];
     pc.wordMixes = wordMixes;
+    pc.isBuiedAnswer = isBuiedAnswer;
+    pc.tips = tips;
+    pc.isBuiedTips = isBuiedTips;
+    pc.information = information;
     self.currPuzzle = pc;
     
     //设置blank和picture和block
@@ -291,10 +299,13 @@ static GuessScene *instanceOfGuessScene;
     [playerState setObject:[NSNumber numberWithInt:self.currPuzzle.idKey] forKey:PS_ID_KEY];
     [playerState setObject:self.currPuzzle.picName forKey:PS_PIC_NAME];
     [playerState setObject:self.currPuzzle.answer forKey:PS_ANSWER];
+    [playerState setObject:[NSNumber numberWithBool:self.currPuzzle.isBuiedAnswer] forKey:PS_IS_BUIED_ANSWER];
     [playerState setObject:self.currPuzzle.groupName forKey:PS_GROUP_NAME];
     [playerState setObject:[NSNumber numberWithInt:self.currPuzzle.wordNum] forKey:PS_WORD_NUM];
     [playerState setObject:self.currPuzzle.wordMixes forKey:PS_WORD_MIXES];
-    
+    [playerState setObject:self.currPuzzle.tips forKey:PS_TIP];
+    [playerState setObject:[NSNumber numberWithBool:self.currPuzzle.isBuiedTips] forKey:PS_IS_BUY_TIP];
+    [playerState setObject:self.currPuzzle.information forKey:PS_INFORMATION];
     
     //如果正在使用fly道具，把全部的block还使用fly道具之前的状态再保存
     if (_blockTouchLocked) {
@@ -389,17 +400,10 @@ static GuessScene *instanceOfGuessScene;
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     
     if ([GPNavBar isiPad]) {
-        _FPSet.readyItemSmall   = ccp(15, 820);
-        _FPSet.readyItemBomb    = ccp(15, 670);
-        _FPSet.readyItemFlying  = ccp(15, 520);
         
         _FPSet.closeItemSmall   = ccp(15, 820);
         _FPSet.closeItemBomb    = ccp(15, 670);
         _FPSet.closeItemFlying  = ccp(15, 520);
-        
-        _FPSet.readyItemTips    = ccp(645+15, 820);
-        _FPSet.readyItemAnswer  = ccp(645+15, 670);
-        _FPSet.readyItemShare   = ccp(645+15, 520);
         
         _FPSet.closeItemTips    = ccp(645+15, 820);
         _FPSet.closeItemAnswer  = ccp(645+15, 670);
@@ -407,17 +411,10 @@ static GuessScene *instanceOfGuessScene;
         
         _FPSet.pictrue = ccp(winSize.width / 2, 920 - 250);
     } else if ([GPNavBar isiPhone5]) {
-        _FPSet.readyItemSmall   = ccp(15, 820);
-        _FPSet.readyItemBomb    = ccp(15, 670);
-        _FPSet.readyItemFlying  = ccp(15, 520);
         
         _FPSet.closeItemSmall   = ccp(15, 820);
         _FPSet.closeItemBomb    = ccp(15, 670);
         _FPSet.closeItemFlying  = ccp(15, 520);
-        
-        _FPSet.readyItemTips    = ccp(645+15, 820);
-        _FPSet.readyItemAnswer  = ccp(645+15, 670);
-        _FPSet.readyItemShare   = ccp(645+15, 520);
         
         _FPSet.closeItemTips    = ccp(645+15, 820);
         _FPSet.closeItemAnswer  = ccp(645+15, 670);
@@ -426,17 +423,10 @@ static GuessScene *instanceOfGuessScene;
         _FPSet.pictrue = ccp(winSize.width / 2, 568 - 48 - PICTURE_WIDTH / 2);
 
     } else {
-        _FPSet.readyItemSmall   = ccp(0, 380);
-        _FPSet.readyItemBomb    = ccp(0, 330);
-        _FPSet.readyItemFlying  = ccp(0, 280);
         
         _FPSet.closeItemSmall   = ccp(0, 380);
         _FPSet.closeItemBomb    = ccp(0, 330);
         _FPSet.closeItemFlying  = ccp(0, 280);
-        
-        _FPSet.readyItemTips    = ccp(270, 380);
-        _FPSet.readyItemAnswer  = ccp(270, 330);
-        _FPSet.readyItemShare   = ccp(270, 280);
         
         _FPSet.closeItemTips    = ccp(270, 380);
         _FPSet.closeItemAnswer  = ccp(270, 330);
@@ -479,13 +469,13 @@ static GuessScene *instanceOfGuessScene;
     //Tips
     CCSprite *tipsSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item100.png"]];
     CCSprite *tipsHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item100_HL.png"]];
-    CCMenuItem *tipsItem = [CCMenuItemImage itemFromNormalSprite:tipsSprite selectedSprite:tipsHLSprite target:self selector:@selector(flyItemPressed)];
+    CCMenuItem *tipsItem = [CCMenuItemImage itemFromNormalSprite:tipsSprite selectedSprite:tipsHLSprite target:self selector:@selector(tipsItemPressed)];
     tipsItem.tag = CCMenuItemTipsTag;
     
     //Answer
     CCSprite *answerSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item200.png"]];
     CCSprite *answerHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item200_HL.png"]];
-    CCMenuItem *answerItem = [CCMenuItemImage itemFromNormalSprite:answerSprite selectedSprite:answerHLSprite target:self selector:@selector(flyItemPressed)];
+    CCMenuItem *answerItem = [CCMenuItemImage itemFromNormalSprite:answerSprite selectedSprite:answerHLSprite target:self selector:@selector(answerItemPressed)];
     answerItem.tag = CCMenuItemAnswerTag;
      
     _itemMenu = [CCMenu menuWithItems:smallItem, bombItem, flyItem, tipsItem, answerItem, nil];
@@ -513,29 +503,22 @@ static GuessScene *instanceOfGuessScene;
 
 - (void)smallItemPressed {
     
-    if (![self canMinusScore:ItemSmallMinusScore]) {
-        return;
-    }
-    
     //把剩余block变回正常
     [self makeSelectedBlockNormal];
     
+    if (![self canMinusScore:ItemSmallMinusScore]) {
+        //金币不够了，跳出购买金币界面
+        [_navBar showStoreLayer];
+        return;
+    }
+    
     CCMenuItem *smallItem = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemSmallTag];
     
-    CCMoveTo *MoveIn = nil;
     if (_isSmallReady) {
-        MoveIn = [CCMoveTo actionWithDuration:0.1 position:_FPSet.closeItemSmall];
         _isSmallReady = NO;
-        [smallItem runAction:MoveIn];
         
-//        //执行动画
-//        CCAnimation *animation = [CCAnimation animationWithFrame:@"Small" frameCount:2 delay:0.1];
-//        CCAnimate *animate = [CCAnimate actionWithAnimation:animation];
-//        CCRepeatForever *repeat = [CCRepeatForever actionWithAction:animate];
-//        repeat.tag = 000;
-//        [smallItem. runAction:repeat];
+        [smallItem unselected];
         
-//        [self makeAllBlockGreen:NO];
         [self makeBlockEffectByEffectStatus:ItemEffectSmall isEffectOn:NO];
         
         //把block的状态改成正常
@@ -544,18 +527,12 @@ static GuessScene *instanceOfGuessScene;
     } else {
         _isSmallReady = YES;
         
-        //停止动画
-//        [smallItem stopAllActions];
-//        [smallItem set]
-        
-        CCMoveTo *MoveOut = [CCMoveTo actionWithDuration:0.1 position:_FPSet.readyItemSmall];
-        [smallItem runAction:MoveOut];
+        [smallItem selected];
         
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusFlying];
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusBomb];
         
         //所有方块闪光
-//        [self makeAllBlockGreen:YES];
         [self makeBlockEffectByEffectStatus:ItemEffectSmall isEffectOn:YES];
         
         
@@ -567,23 +544,22 @@ static GuessScene *instanceOfGuessScene;
 
 - (void)bombItemPressed {
     
-    if (![self canMinusScore:ItemBombMinusScore]) {
-        return;
-    }
-    
     //把剩余block变回正常
     [self makeSelectedBlockNormal];
     
+    if (![self canMinusScore:ItemBombMinusScore]) {
+        //金币不够了，跳出购买金币界面
+        [_navBar showStoreLayer];
+        return;
+    }
     
     CCMenuItem *bombItem = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemBombTag];
     
-    CCMoveTo *MoveIn = nil;
     if (_isBombReady) {
         _isBombReady = NO;
-        MoveIn = [CCMoveTo actionWithDuration:0.1 position:_FPSet.closeItemBomb];
-        [bombItem runAction:MoveIn];
         
-//        [self makeAllBlockRed:NO];
+        [bombItem unselected];
+        
         [self makeBlockEffectByEffectStatus:ItemEffectBomb isEffectOn:NO];
         
         //把block的状态改成正常
@@ -591,13 +567,12 @@ static GuessScene *instanceOfGuessScene;
         
     } else {
         _isBombReady = YES;
-        CCMoveTo *MoveOut = [CCMoveTo actionWithDuration:0.1 position:_FPSet.readyItemBomb];
-        [bombItem runAction:MoveOut];
+        
+        [bombItem selected];
         
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusSmall];
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusFlying];
         
-//        [self makeAllBlockRed:YES];
         [self makeBlockEffectByEffectStatus:ItemEffectBomb isEffectOn:YES];
         
         self.currRecivedStatus = RecivedStatusBomb;
@@ -607,23 +582,23 @@ static GuessScene *instanceOfGuessScene;
 
 - (void)flyItemPressed {
     
-    if (![self canMinusScore:ItemFlyingMinusScore]) {
-        return;
-    }
-    
     //把剩余block变回正常
     [self makeSelectedBlockNormal];
     
+    if (![self canMinusScore:ItemFlyingMinusScore]) {
+        //金币不够了，跳出购买金币界面
+        [_navBar showStoreLayer];
+        
+        return;
+    }
     
     CCMenuItem *flyItem = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemFlyingTag];
     
-    CCMoveTo *MoveIn = nil;
     if (_isFlyReady) {
         _isFlyReady = NO;
-        MoveIn = [CCMoveTo actionWithDuration:0.1 position:_FPSet.closeItemFlying];
-        [flyItem runAction:MoveIn];
         
-//        [self makeAllBlockBlue:NO];
+        [flyItem unselected];
+        
         [self makeBlockEffectByEffectStatus:ItemEffectFlying isEffectOn:NO];
         
         //把block的状态改成正常
@@ -631,18 +606,114 @@ static GuessScene *instanceOfGuessScene;
         
     } else {
         _isFlyReady = YES;
-        CCMoveTo *MoveOut = [CCMoveTo actionWithDuration:0.1 position:_FPSet.readyItemFlying];
-        [flyItem runAction:MoveOut];
+        
+//        [flyItem selected];
+        [flyItem selected];
         
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusSmall];
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusBomb];
         
-//        [self makeAllBlockBlue:YES];
         [self makeBlockEffectByEffectStatus:ItemEffectFlying isEffectOn:YES];
         
         self.currRecivedStatus = RecivedStatusFlying;
     }
 }
+
+- (void)tipsItemPressed {
+    
+    //把剩余block变回正常
+    [self makeSelectedBlockNormal];
+    
+    if (self.currPuzzle.isBuiedTips) {
+        [self showTipsAlert];
+    } else {
+        //显示Alert
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看提示道具" message:@"您愿意消耗50个黄金摄像机查看本关的提示么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
+        [alertView show];
+        alertView.tag = TAG_ALERT_ITEM_TIPS;
+        [alertView release];
+    }
+    
+}
+
+- (void)showTipsAlert {
+    //标记是否购买
+    self.currPuzzle.isBuiedTips = YES;
+    
+    //显示Alert
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示如下" message:self.currPuzzle.tips delegate:self cancelButtonTitle:@"看好了" otherButtonTitles:nil];
+    [alertView show];
+    alertView.tag = TAG_ALERT_SHOW_TIPS;
+    [alertView release];
+}
+
+- (void)answerItemPressed {
+    
+    //把剩余block变回正常
+    [self makeSelectedBlockNormal];
+    
+    if (self.currPuzzle.isBuiedAnswer) {
+        [self showAnswerAlert];
+    } else {
+        //显示Alert
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看答案道具" message:@"您愿意消耗100个黄金摄像机查看本关的答案么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
+        [alertView show];
+        alertView.tag = TAG_ALERT_ITEM_ANSWER;
+        [alertView release];
+    }
+}
+
+- (void)showAnswerAlert {
+    //标记是否购买
+    self.currPuzzle.isBuiedAnswer = YES;
+    
+    //显示Alert
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"答案如下" message:self.currPuzzle.answer delegate:self cancelButtonTitle:@"看好了" otherButtonTitles:nil];
+    [alertView show];
+    alertView.tag = TAG_ALERT_SHOW_ANSWER;
+    [alertView release];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == TAG_ALERT_ITEM_TIPS) {
+        if (buttonIndex == 1) {
+            if (![self canMinusScore:ItemTipsMinusScore]) {
+                //显示购买金币界面
+                [_navBar showStoreLayer];
+                return;
+            }
+            
+            //显示Alert
+            [self showTipsAlert];
+            
+            //扣金币
+            [_navBar changeTotalScore:(-1 *ItemTipsMinusScore)];
+            [_navBar refreshTotalScore];
+            
+            
+        }
+    } else if (alertView.tag == TAG_ALERT_ITEM_ANSWER) {
+        if (buttonIndex == 1) {
+            if (![self canMinusScore:ItemAnswerMinusScore]) {
+                //显示购买金币界面
+                [_navBar showStoreLayer];
+                return;
+            }
+            
+            //显示Alert
+            [self showAnswerAlert];
+            
+            //扣金币
+            [_navBar changeTotalScore:(-1 *ItemAnswerMinusScore)];
+            [_navBar refreshTotalScore];
+        }
+    } else if (alertView.tag == TAG_ALERT_SHOW_TIPS) {
+        
+    } else if (alertView.tag == TAG_ALERT_SHOW_ANSWER) {
+        
+    }
+}
+
 
 #pragma mark - Block Effect
 - (void)makeSelectedBlockNormal {
@@ -654,39 +725,37 @@ static GuessScene *instanceOfGuessScene;
 }
 
 - (void)makeBlockEffectBackToNormalByReceivedStatus:(RecivedStatus)rStatus {
+    CCMenuItem *item;
     switch (rStatus) {
         case RecivedStatusSmall:
+            item = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemSmallTag];
             if (_isSmallReady) {
                 _isSmallReady = NO;
-                CCMoveTo *MoveIn = [CCMoveTo actionWithDuration:0.1 position:_FPSet.closeItemSmall];
-                CCMenuItem *smallItem = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemSmallTag];
-                [smallItem runAction:MoveIn];
                 
-                //                [self makeAllBlockGreen:NO];
+                [item unselected];
+                
                 [self makeBlockEffectByEffectStatus:ItemEffectSmall isEffectOn:NO];
             }
             break;
             
         case RecivedStatusBomb:
+            item = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemBombTag];
             if (_isBombReady) {
                 _isBombReady = NO;
-                CCMoveTo *MoveIn = [CCMoveTo actionWithDuration:0.1 position:_FPSet.closeItemBomb];
-                CCMenuItem *bombItem = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemBombTag];
-                [bombItem runAction:MoveIn];
                 
-                //                [self makeAllBlockRed:NO];
+                [item unselected];
+                
                 [self makeBlockEffectByEffectStatus:ItemEffectBomb isEffectOn:NO];
             }
             break;
             
         case RecivedStatusFlying:
+            item = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemFlyingTag];
             if (_isFlyReady) {
                 _isFlyReady = NO;
-                CCMoveTo *MoveIn = [CCMoveTo actionWithDuration:0.1 position:_FPSet.closeItemFlying];
-                CCMenuItem *flyItem = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemFlyingTag];
-                [flyItem runAction:MoveIn];
                 
-                //                [self makeAllBlockBlue:NO];
+                [item unselected];
+
                 [self makeBlockEffectByEffectStatus:ItemEffectFlying isEffectOn:NO];
             }
             break;

@@ -31,6 +31,8 @@
 //    CCSprite *_kayacSprite;
     
     CCMenuItem *_coinItem;
+    
+    CoinStore *_coinStore;
 }
 
 @property (assign) int totalScore;
@@ -308,16 +310,22 @@
 }
 
 - (void)showStoreLayer {
-    CoinStore *storeLayer = [CoinStore node];
-    [self addChild:storeLayer];
-    storeLayer.scale = 0;
-    CCScaleTo *scaleToBig = [CCScaleTo actionWithDuration:0.2 scale:1];
-    CCScaleTo *scaleToSmall = [CCScaleTo actionWithDuration:0.1 scale:0.9];
-    CCScaleTo *scaleToNormal = [CCScaleTo actionWithDuration:0.1 scale:1];
+    if (_coinStore) {
+        [_coinStore removeFromParentAndCleanup:YES];
+        _coinStore = nil;
+    } else {
+        _coinStore = [CoinStore node];
+        [self addChild:_coinStore];
+        _coinStore.scale = 0;
+        CCScaleTo *scaleToBig = [CCScaleTo actionWithDuration:0.2 scale:1];
+        CCScaleTo *scaleToSmall = [CCScaleTo actionWithDuration:0.1 scale:0.9];
+        CCScaleTo *scaleToNormal = [CCScaleTo actionWithDuration:0.1 scale:1];
+        
+        CCSequence *smallToBig = [CCSequence actions:scaleToBig, scaleToSmall, scaleToNormal, nil];
+        
+        [_coinStore runAction:smallToBig];
+    }
     
-    CCSequence *smallToBig = [CCSequence actions:scaleToBig, scaleToSmall, scaleToNormal, nil];
-    
-    [storeLayer runAction:smallToBig];
     
 }
 

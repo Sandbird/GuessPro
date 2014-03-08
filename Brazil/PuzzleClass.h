@@ -19,9 +19,14 @@
 @property (assign)int wordNum;
 
 @property (nonatomic, retain)NSString *answer;
+@property (assign)BOOL isBuiedAnswer;//是否购买了answer道具
 
 @property (nonatomic, retain)NSString *wordMixes;
 
+@property (nonatomic, retain)NSString *tips;
+@property (assign)BOOL isBuiedTips;//是否购买了tips道具
+
+@property (nonatomic, retain)NSString *information;
 
 
 //Kayac's

@@ -59,4 +59,6 @@
 - (BOOL)isNeedRestoreScene;
 - (void)setContinueLevel:(NSInteger)levelNum isNeedRestoreScene:(BOOL)isNeed;
 
+- (void)showStoreLayer;
+
 @end

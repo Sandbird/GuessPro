@@ -154,11 +154,11 @@
 }
 
 - (BOOL)isBlockSmall {
-    return (self.currBlockStatus == BlockStatusSmall || self.blockSprite.scale < self.blockScaleInital);
+    return (self.currBlockStatus == BlockStatusSmall || (self.blockSprite.scale < self.blockScaleInital && self.blockSprite.visible == YES));
 }
 
 - (BOOL)isBlockBomb {
-    return (self.currBlockStatus == BlockStatusBomb || self.blockSprite.opacity < 255);
+    return (self.currBlockStatus == BlockStatusBomb || (self.blockSprite.opacity < 255 && self.blockSprite.visible == YES));
 }
 
 - (BOOL)isBlockHadItemEffect {

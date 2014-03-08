@@ -12,7 +12,15 @@
 	<integer>0</integer>
 	<key>answer</key>
 	<string></string>
+	<key>isBuiedAnswer</key>
+	<false/>
 	<key>wordMixes</key>
+	<string></string>
+	<key>tips</key>
+	<string></string>
+	<key>isBuiedTips</key>
+	<false/>
+	<key>information</key>
 	<string></string>
 	<key>useItemGone</key>
 	<array/>

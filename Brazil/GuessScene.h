@@ -9,7 +9,7 @@
 #import "CCLayer.h"
 #import "GPNavBar.h"
 
-@interface GuessScene : CCLayer {
+@interface GuessScene : CCLayer <UIAlertViewDelegate> {
     CGPoint _defaultPosition;
 	CGPoint _lastTouchLocation;
     

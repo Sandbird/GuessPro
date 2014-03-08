@@ -78,7 +78,7 @@
     if (IS_KAYAC) {
         sel = [NSString stringWithFormat:@"SELECT PicName, AnswerCN, AnswerJA, AnswerEN, WordNum, GroupName, Hiragana, Position FROM pictrue WHERE id = %d", index];
     } else {
-        sel = [NSString stringWithFormat:@"SELECT PicName, AnswerCN, AnswerJA, AnswerEN, WordNum, GroupName FROM pictrue WHERE id = %d", index];
+        sel = [NSString stringWithFormat:@"SELECT PicName, AnswerCN, AnswerJA, AnswerEN, WordNum, GroupName, Tips, Information FROM pictrue WHERE id = %d", index];
     }
     sqlite3_stmt *stmt;
     if (sqlite3_prepare_v2(_database, [sel UTF8String], -1, &stmt, nil) != SQLITE_OK) {
@@ -93,8 +93,11 @@
     int wordNum = 0;
     NSString *groupName = nil;
     
-    NSString *hiragana = @"";
-    NSString *position = nil;
+    NSString *tips = nil;
+    NSString *information = nil;
+    
+//    NSString *hiragana = @"";
+//    NSString *position = nil;
     while (sqlite3_step(stmt) == SQLITE_ROW) {
         picName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, 0)];
         picName = [picName stringByAppendingString:@".png"];
@@ -107,9 +110,36 @@
         
         wordNum = sqlite3_column_int(stmt, 4);
         
-        groupName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, 5)];
+        char *cGroupName = (char *)sqlite3_column_text(stmt, 5);
+        if (cGroupName != NULL) {
+            groupName = [NSString stringWithUTF8String:cGroupName];
+        } else {
+            groupName = @"无分类名称";
+        }
+        
+        
+        char *cTips = (char *)sqlite3_column_text(stmt, 6);
+        if (cTips != NULL) {
+            tips = [NSString stringWithUTF8String:cTips];
+        } else {
+            tips = @"等待添加提示信息...";
+        }
+        
+        
+        char *cInfo = (char *)sqlite3_column_text(stmt, 7);
+        if (cInfo != NULL) {
+            information = [NSString stringWithUTF8String:cInfo];
+        } else {
+            information = @"等待添加Information...";
+        }
+        
         
         pc = [PuzzleClass puzzleWithIdKey:index picName:picName answerCN:answerCN JA:answerJA EN:answerEN groupName:groupName wordNum:wordNum];
+        
+        pc.tips = tips;
+        pc.isBuiedTips = NO;
+        pc.isBuiedAnswer = NO;
+        pc.information = information;
         
         
 //        if (IS_KAYAC) {

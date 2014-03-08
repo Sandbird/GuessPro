@@ -8,6 +8,18 @@
 
 #import "CoinStore.h"
 
+//所有的位置坐标
+typedef struct ItemPostion {
+    CGPoint ItemPrice6;
+    CGPoint ItemPrice12;
+    CGPoint ItemPrice18;
+    CGPoint ItemPrice30;
+    CGPoint ItemPrice88;
+    
+    CGPoint ItemClose;
+    CGPoint ItemBackground;
+}ItemPostionSet;
+
 typedef enum {
     ProductPrice6,
     ProductPrice12,
@@ -17,9 +29,13 @@ typedef enum {
     ProductPriceMAX,
 }ProductPriceTags;
 
-@interface CoinStore()
+@interface CoinStore() {
+    ItemPostionSet _IPSet;
+}
 
 @property (nonatomic, retain) UIAlertView *indicator;
+
+@property (assign) ProductPriceTags ppTag;
 
 @end
 
@@ -27,8 +43,13 @@ typedef enum {
 @implementation CoinStore
 
 - (void)dealloc {
+    
+    CCLOG(@"coinStore is dealloc");
 
     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];//解除监听
+    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:[AssetHelper getDeviceSpecificFileNameFor:@"Store.plist"]];
+    [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     
     [super dealloc];
 }
@@ -37,17 +58,22 @@ typedef enum {
     self = [super init];
     if (self) {
         
+        self.isTouchEnabled = YES;
+        
+        self.ppTag = ProductPriceMAX;
+        
         //为内部交易加监听事件
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
-        //touch is enabled
-//        [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:-97 swallowsTouches:YES];
-        
         //加载帧到缓存
         CCSpriteFrameCache *framCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [framCache addSpriteFramesWithFile:[AssetHelper getDeviceSpecificFileNameFor:@"Store.plist"]];
+        
+        
+        //设置初始位置
+        [self setItemInitalPostion];
         
         CCSprite *backgroud = [CCSprite spriteWithSpriteFrameName:@"StoreBackgroud.png"];
         [self addChild:backgroud z:0];
@@ -58,12 +84,6 @@ typedef enum {
         CCMenuItem *closeItem = [CCMenuItemImage itemFromNormalSprite:closeSprite selectedSprite:closeHLSprite target:self selector:@selector(closeStore)];
         closeItem.anchorPoint = ccp(1, 1);
         closeItem.position = ccp(winSize.width / 2 + backgroud.boundingBox.size.width / 2, winSize.height / 2 + backgroud.boundingBox.size.height / 2);
-        
-//        CCSpriteBatchNode *storeBannerBatch = [CCSpriteBatchNode batchNodeWithTexture:[[framCache spriteFrameByName:@"StoreBanner.png"] texture]];
-//        [self addChild:storeBannerBatch];
-//        
-//        CCSpriteBatchNode *storeBannerHLBatch = [CCSpriteBatchNode batchNodeWithTexture:[[framCache spriteFrameByName:@"StoreBanner_HL.png"] texture]];
-//        [self addChild:storeBannerHLBatch];
         
         CCArray *storeBannerArray = [CCArray array];
         CCArray *storeBannerHLArray = [CCArray array];
@@ -95,19 +115,19 @@ typedef enum {
         
         CCMenuItem *tier0Item = [CCMenuItemImage itemFromNormalSprite:[storeBtns objectAtIndex:0] selectedSprite:[storeHLBtns objectAtIndex:0] target:self selector:@selector(buyTier0)];
 //        tier0Item.anchorPoint = ccp(0, 0);
-        tier0Item.position = ccp(winSize.width / 2, 225+75*4+40*4);
+        tier0Item.position = _IPSet.ItemPrice6;
         
         CCMenuItem *tier1Item = [CCMenuItemImage itemFromNormalSprite:[storeBtns objectAtIndex:1] selectedSprite:[storeHLBtns objectAtIndex:1] target:self selector:@selector(buyTier1)];
-        tier1Item.position = ccp(winSize.width / 2, 225+75*3+40*3);
+        tier1Item.position = _IPSet.ItemPrice12;
         
         CCMenuItem *tier2Item = [CCMenuItemImage itemFromNormalSprite:[storeBtns objectAtIndex:2] selectedSprite:[storeHLBtns objectAtIndex:2] target:self selector:@selector(buyTier2)];
-        tier2Item.position = ccp(winSize.width / 2, 225+75*2+40*2);
+        tier2Item.position = _IPSet.ItemPrice18;
         
         CCMenuItem *tier3Item = [CCMenuItemImage itemFromNormalSprite:[storeBtns objectAtIndex:3] selectedSprite:[storeHLBtns objectAtIndex:3] target:self selector:@selector(buyTier3)];
-        tier3Item.position = ccp(winSize.width / 2, 225+75+40);
+        tier3Item.position = _IPSet.ItemPrice30;
         
         CCMenuItem *tier4Item = [CCMenuItemImage itemFromNormalSprite:[storeBtns objectAtIndex:4] selectedSprite:[storeHLBtns objectAtIndex:4] target:self selector:@selector(buyTier4)];
-        tier4Item.position = ccp(winSize.width / 2, 225);
+        tier4Item.position = _IPSet.ItemPrice88;
         
         
         CCMenu *menu = [CCMenu menuWithItems:tier0Item, tier1Item, tier2Item, tier3Item, tier4Item, closeItem, nil];
@@ -118,36 +138,93 @@ typedef enum {
     return self;
 }
 
+- (void)setItemInitalPostion {
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
+    CGFloat posX = winSize.width / 2;
+    CGFloat heightToBottom, heightOfBanner, spaceBetweenBanner;
+    
+    if ([GPNavBar isiPad]) {
+        heightToBottom = 225;
+        heightOfBanner = 75;
+        spaceBetweenBanner = 40;
+    } else if ([GPNavBar isiPhone5]) {
+        heightToBottom = 130;
+        heightOfBanner = 36;
+        spaceBetweenBanner = 20;
+    } else {
+        heightToBottom = 100;
+        heightOfBanner = 36;
+        spaceBetweenBanner = 20;
+    }
+    
+//    _IPSet.ItemBackground = ccp(winSize.width / 2, winSize.height / 2);
+//    _IPSet.ItemClose = ccp(winSize.width / 2 + backgroud.boundingBox.size.width / 2, winSize.height / 2 + backgroud.boundingBox.size.height / 2);
+    
+    _IPSet.ItemPrice6 = ccp(posX, heightToBottom+heightOfBanner*4+spaceBetweenBanner*4);
+    _IPSet.ItemPrice12 = ccp(posX, heightToBottom+heightOfBanner*3+spaceBetweenBanner*3);
+    _IPSet.ItemPrice18 = ccp(posX, heightToBottom+heightOfBanner*2+spaceBetweenBanner*2);
+    _IPSet.ItemPrice30 = ccp(posX, heightToBottom+heightOfBanner+spaceBetweenBanner);
+    _IPSet.ItemPrice88 = ccp(posX, heightToBottom);
+    
+}
+
+- (void)registerWithTouchDispatcher {
+    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:-127 swallowsTouches:YES];
+}
+
++ (CGPoint) locationFromTouch:(UITouch*)touch
+{
+	CGPoint touchLocation = [touch locationInView: [touch view]];
+	return [[CCDirector sharedDirector] convertToGL:touchLocation];
+}
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    CGPoint point = [CoinStore locationFromTouch:touch];
+    BOOL isTouchHandled = CGRectContainsPoint(self.boundingBox, point);
+    if (isTouchHandled) {
+    }
+    return isTouchHandled;
+}
+
 - (void)closeStore {
-    [self removeFromParentAndCleanup:YES];
+//    [self removeFromParentAndCleanup:YES];
+    
+    GPNavBar *navBar = (GPNavBar *)[self parent];
+    [navBar showStoreLayer];
 }
 
 - (void)buyTier0 {
-    [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.100Coins"];
+    self.ppTag = ProductPrice6;
+    [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.50"];
     
     [self setIndicatorShow];
 }
 
 - (void)buyTier1 {
-    [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.100Coins"];
+    self.ppTag = ProductPrice12;
+    [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.150"];
     
     [self setIndicatorShow];
 }
 
 - (void)buyTier2 {
-    [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.100Coins"];
+    self.ppTag = ProductPrice18;
+    [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.250"];
     
     [self setIndicatorShow];
 }
 
 - (void)buyTier3 {
-    [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.100Coins"];
+    self.ppTag = ProductPrice30;
+    [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.450"];
     
     [self setIndicatorShow];
 }
 
 - (void)buyTier4 {
-    [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.100Coins"];
+    self.ppTag = ProductPrice88;
+    [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.1500"];
     
     [self setIndicatorShow];
 }
@@ -184,12 +261,47 @@ typedef enum {
 
 //处理下载内容
 -(void)provideContent:(NSString *)productName{
-        NSLog(@"购买成功，给100金币");
+//        NSLog(@"购买成功，给100金币");
     
-    //    [UserSetting setPurchaseVIPMode:YES];
+    CCLOG(@"成功购买%d", [productName intValue]);
     
-//    [UserSetting setIsPurchaseNoAdBanner:YES];
+    GPNavBar *navBar = (GPNavBar *)[self parent];
+    [navBar changeTotalScore:productName.intValue];
+    [navBar refreshTotalScore];
     
+//    switch (self.ppTag) {
+//        case ProductPrice6:
+//            <#statements#>
+//            break;
+//            
+//        case ProductPrice12:
+//            <#statements#>
+//            break;
+//            
+//        case ProductPrice18:
+//            <#statements#>
+//            break;
+//            
+//        case ProductPrice30:
+//            <#statements#>
+//            break;
+//            
+//        case ProductPrice88:
+//            <#statements#>
+//            break;
+//            
+//        case ProductPriceMAX:
+//            <#statements#>
+//            break;
+//            
+//        case ProductPrice6:
+//            <#statements#>
+//            break;
+//            
+//        default:
+//            break;
+//    }
+
 }
 
 - (void)transactionCompleted:(SKPaymentTransaction *)transaction {
