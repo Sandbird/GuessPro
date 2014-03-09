@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Brazil/GuessScene.m"
-            timestampString = "415975485.073888"
+            timestampString = "416060357.133597"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "-initWithPuzzleNum:"
             landmarkType = "5">
          </BreakpointContent>
@@ -48,6 +48,22 @@
             startingLineNumber = "55"
             endingLineNumber = "55"
             landmarkName = "-initWithStatus:word:squareIndex:parent:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Brazil/GuessScene.m"
+            timestampString = "416060748.615611"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "837"
+            endingLineNumber = "837"
+            landmarkName = "-simpleShareAllButtonClickHandler:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

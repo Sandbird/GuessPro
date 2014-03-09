@@ -9,6 +9,8 @@
 #ifndef Brazil_PuzzleDefine_h
 #define Brazil_PuzzleDefine_h
 
+#define ADMOB_ID @"a152d1f7e98daee"
+
 #define NUM_OF_WORD_SELECTED 24
 
 #define PICTURE_WIDTH ([GPNavBar isiPad] ? 500.0 : 220.0)

@@ -8,7 +8,9 @@
 
 #import "CCLayer.h"
 
-@interface SuccessLayer : CCLayer {
+#import "GADBannerView.h"
+
+@interface SuccessLayer : CCLayer <GADBannerViewDelegate> {
     CGPoint _defaultPosition;
 	CGPoint _lastTouchLocation;
     

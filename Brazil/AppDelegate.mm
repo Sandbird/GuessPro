@@ -18,7 +18,16 @@
 //#import "MainScene.h"
 #import "StartLayer.h"
 
+#import <ShareSDK/ShareSDK.h>
+#import "WeiboApi.h"
+//#import <TencentOpenAPI/QQApi.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "WXApi.h"
+#import <RennSDK/RennClient.h>
+
 #define FLURRY_ID @"RDG83D7D7YVPFWXBF3TG"
+#define SHARESDK_APPID @"15337169bd28"
 
 @implementation AppDelegate
 
@@ -138,8 +147,87 @@
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
-//    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Afterschool.mp3" loop:YES];
+    //设置ShareSDK
+    [ShareSDK registerApp:SHARESDK_APPID];
+    [self initializePlat];
 }
+
+- (void)initializePlat
+{
+    /**
+     连接新浪微博开放平台应用以使用相关功能，此应用需要引用SinaWeiboConnection.framework
+     http://open.weibo.com上注册新浪微博开放平台应用，并将相关信息填写到以下字段
+     **/
+    [ShareSDK connectSinaWeiboWithAppKey:@"568898243"
+                               appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
+                             redirectUri:@"http://www.sharesdk.cn"];
+    
+    /**
+     连接腾讯微博开放平台应用以使用相关功能，此应用需要引用TencentWeiboConnection.framework
+     http://dev.t.qq.com上注册腾讯微博开放平台应用，并将相关信息填写到以下字段
+     
+     如果需要实现SSO，需要导入libWeiboSDK.a，并引入WBApi.h，将WBApi类型传入接口
+     **/
+    [ShareSDK connectTencentWeiboWithAppKey:@"801307650"
+                                  appSecret:@"ae36f4ee3946e1cbb98d6965b0b2ff5c"
+                                redirectUri:@"http://www.sharesdk.cn"
+                                   wbApiCls:[WeiboApi class]];
+    
+    //连接短信分享
+//    [ShareSDK connectSMS];
+    
+    /**
+     连接QQ空间应用以使用相关功能，此应用需要引用QZoneConnection.framework
+     http://connect.qq.com/intro/login/上申请加入QQ登录，并将相关信息填写到以下字段
+     
+     如果需要实现SSO，需要导入TencentOpenAPI.framework,并引入QQApiInterface.h和TencentOAuth.h，将QQApiInterface和TencentOAuth的类型传入接口
+     **/
+    [ShareSDK connectQZoneWithAppKey:@"100371282"
+                           appSecret:@"aed9b0303e3ed1e27bae87c33761161d"
+                   qqApiInterfaceCls:[QQApiInterface class]
+                     tencentOAuthCls:[TencentOAuth class]];
+    
+    /**
+     连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
+     http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
+     **/
+    [ShareSDK connectWeChatWithAppId:@"wx253392da3cf9a6c1" wechatCls:[WXApi class]];
+    
+    /**
+     连接QQ应用以使用相关功能，此应用需要引用QQConnection.framework和QQApi.framework库
+     http://mobile.qq.com/api/上注册应用，并将相关信息填写到以下字段
+     **/
+    //旧版中申请的AppId（如：QQxxxxxx类型），可以通过下面方法进行初始化
+    //    [ShareSDK connectQQWithAppId:@"QQ075BCD15" qqApiCls:[QQApi class]];
+    
+    [ShareSDK connectQQWithQZoneAppKey:@"100371282"
+                     qqApiInterfaceCls:[QQApiInterface class]
+                       tencentOAuthCls:[TencentOAuth class]];
+    
+    
+    /**
+     连接人人网应用以使用相关功能，此应用需要引用RenRenConnection.framework
+     http://dev.renren.com上注册人人网开放平台应用，并将相关信息填写到以下字段
+     **/
+    [ShareSDK connectRenRenWithAppId:@"226427"
+                              appKey:@"fc5b8aed373c4c27a05b712acba0f8c3"
+                           appSecret:@"f29df781abdd4f49beca5a2194676ca4"
+                   renrenClientClass:[RennClient class]];
+    
+    
+    //连接邮件
+    [ShareSDK connectMail];
+    
+    
+    /**
+     连接豆瓣应用以使用相关功能，此应用需要引用DouBanConnection.framework
+     http://developers.douban.com上注册豆瓣社区应用，并将相关信息填写到以下字段
+     **/
+    [ShareSDK connectDoubanWithAppKey:@"02e2cbe5ca06de5908a863b15e149b0b"
+                            appSecret:@"9f1e7b4f71304f2f"
+                          redirectUri:@"http://www.sharesdk.cn"];
+}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -183,5 +271,114 @@
 	[window release];
 	[super dealloc];
 }
+
+- (BOOL)application:(UIApplication *)application
+      handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url
+                        wxDelegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return [ShareSDK handleOpenURL:url
+                 sourceApplication:sourceApplication
+                        annotation:annotation
+                        wxDelegate:self];
+}
+
+/*
+- (void)userInfoUpdateHandler:(NSNotification *)notif
+{
+    NSMutableArray *authList = [NSMutableArray arrayWithContentsOfFile:[NSString stringWithFormat:@"%@/authListCache.plist",NSTemporaryDirectory()]];
+    if (authList == nil)
+    {
+        authList = [NSMutableArray array];
+    }
+    
+    NSString *platName = nil;
+    NSInteger plat = [[[notif userInfo] objectForKey:SSK_PLAT] integerValue];
+    switch (plat)
+    {
+        case ShareTypeSinaWeibo:
+            platName = NSLocalizedString(@"TEXT_SINA_WEIBO", @"新浪微博");
+            break;
+        case ShareType163Weibo:
+            platName = NSLocalizedString(@"TEXT_NETEASE_WEIBO", @"网易微博");
+            break;
+        case ShareTypeDouBan:
+            platName = NSLocalizedString(@"TEXT_DOUBAN", @"豆瓣");
+            break;
+        case ShareTypeFacebook:
+            platName = @"Facebook";
+            break;
+        case ShareTypeKaixin:
+            platName = NSLocalizedString(@"TEXT_KAIXIN", @"开心网");
+            break;
+        case ShareTypeQQSpace:
+            platName = NSLocalizedString(@"TEXT_QZONE", @"QQ空间");
+            break;
+        case ShareTypeRenren:
+            platName = NSLocalizedString(@"TEXT_RENREN", @"人人网");
+            break;
+        case ShareTypeSohuWeibo:
+            platName = NSLocalizedString(@"TEXT_SOHO_WEIBO", @"搜狐微博");
+            break;
+        case ShareTypeTencentWeibo:
+            platName = NSLocalizedString(@"TEXT_TENCENT_WEIBO", @"腾讯微博");
+            break;
+        case ShareTypeTwitter:
+            platName = @"Twitter";
+            break;
+        case ShareTypeInstapaper:
+            platName = @"Instapaper";
+            break;
+        case ShareTypeYouDaoNote:
+            platName = NSLocalizedString(@"TEXT_YOUDAO_NOTE", @"有道云笔记");
+            break;
+        case ShareTypeGooglePlus:
+            platName = @"Google+";
+            break;
+        case ShareTypeLinkedIn:
+            platName = @"LinkedIn";
+            break;
+        default:
+            platName = NSLocalizedString(@"TEXT_UNKNOWN", @"未知");
+    }
+    
+    id<ISSPlatformUser> userInfo = [[notif userInfo] objectForKey:SSK_USER_INFO];
+    BOOL hasExists = NO;
+    for (int i = 0; i < [authList count]; i++)
+    {
+        NSMutableDictionary *item = [authList objectAtIndex:i];
+        ShareType type;//[[item objectForKey:@"type"] integerValue];
+        if (type == plat)
+        {
+            [item setObject:[userInfo nickname] forKey:@"username"];
+            hasExists = YES;
+            break;
+        }
+    }
+    
+    if (!hasExists)
+    {
+        NSDictionary *newItem = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                 platName,
+                                 @"title",
+                                 [NSNumber numberWithInteger:plat],
+                                 @"type",
+                                 [userInfo nickname],
+                                 @"username",
+                                 nil];
+        [authList addObject:newItem];
+    }
+    
+    [authList writeToFile:[NSString stringWithFormat:@"%@/authListCache.plist",NSTemporaryDirectory()] atomically:YES];
+}
+ */
+
 
 @end

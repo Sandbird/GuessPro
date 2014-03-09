@@ -8,6 +8,7 @@
 
 #import "CCLayer.h"
 #import "GPNavBar.h"
+#import <ShareSDK/ShareSDK.h>
 
 @interface GuessScene : CCLayer <UIAlertViewDelegate> {
     CGPoint _defaultPosition;
