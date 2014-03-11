@@ -14,4 +14,6 @@
     
 }
 
+- (void)smallToBigAction;
+
 @end

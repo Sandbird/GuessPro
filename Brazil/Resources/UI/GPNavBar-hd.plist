@@ -22,7 +22,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{67, 0}, {65, 90}}</string>
+			<string>{{54, 78}, {65, 90}}</string>
 			<key>textureRotated</key>
 			<true/>
 		</dict>
@@ -44,9 +44,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 0}, {65, 90}}</string>
+			<string>{{54, 0}, {90, 65}}</string>
 			<key>textureRotated</key>
-			<true/>
+			<false/>
 		</dict>
 		
 		<key>Coin.png</key>
@@ -66,7 +66,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{904, 0}, {60, 58}}</string>
+			<string>{{121, 67}, {60, 58}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -88,7 +88,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{966, 0}, {58, 60}}</string>
+			<string>{{121, 127}, {58, 60}}</string>
 			<key>textureRotated</key>
 			<true/>
 		</dict>
@@ -110,7 +110,51 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{134, 0}, {768, 76}}</string>
+			<string>{{203, 0}, {768, 76}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>close.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{4, 2}, {201, 52}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{201, 52}</string>
+			<key>spriteSourceSize</key>
+			<string>{209, 56}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {52, 201}}</string>
+			<key>textureRotated</key>
+			<true/>
+		</dict>
+		
+		<key>close_HL.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{5, 2}, {201, 52}}</string>
+			<key>spriteOffset</key>
+			<string>{1, -0}</string>
+			<key>spriteSize</key>
+			<string>{201, 52}</string>
+			<key>spriteSourceSize</key>
+			<string>{209, 56}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 203}, {201, 52}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -123,7 +167,7 @@
 		<key>format</key>
 		<integer>3</integer>
 		<key>size</key>
-		<string>{1024, 128}</string>
+		<string>{1024, 256}</string>
 		<key>name</key>
 		<string>GPNavBar-hd</string>
 		<key>premultipliedAlpha</key>

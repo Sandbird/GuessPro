@@ -13,6 +13,8 @@
 #import "StartLayer.h"
 
 #import "CoinStore.h"
+#import "ShareBorad.h"
+#import "ZZAcquirePath.h"
 
 //判断设备是IPHONE还是IPAD
 #define IPAD_DEVICE [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
@@ -23,7 +25,7 @@
 #define EFFECT_BARK @"bark.caf"
 
 @interface GPNavBar() {
-    CCSprite *_backgroudSprite;
+//    CCSprite *_backgroudSprite;
     CCLabelTTF *_totalScoreLabel;
     
 //    CCLabelTTF *_tipsLabel;
@@ -32,6 +34,8 @@
     
     CCMenuItem *_coinItem;
     
+    
+    ShareBorad *_shareBorad;
     CoinStore *_coinStore;
 }
 
@@ -316,17 +320,71 @@
     } else {
         _coinStore = [CoinStore node];
         [self addChild:_coinStore];
+        
+//        [_coinStore smallToBigAction];
         _coinStore.scale = 0;
         CCScaleTo *scaleToBig = [CCScaleTo actionWithDuration:0.2 scale:1];
-        CCScaleTo *scaleToSmall = [CCScaleTo actionWithDuration:0.1 scale:0.9];
-        CCScaleTo *scaleToNormal = [CCScaleTo actionWithDuration:0.1 scale:1];
+//        CCScaleTo *scaleToSmall = [CCScaleTo actionWithDuration:0.1 scale:0.9];
+//        CCScaleTo *scaleToNormal = [CCScaleTo actionWithDuration:0.1 scale:1];
         
-        CCSequence *smallToBig = [CCSequence actions:scaleToBig, scaleToSmall, scaleToNormal, nil];
+        CCSequence *smallToBig = [CCSequence actions:scaleToBig,/* scaleToSmall, scaleToNormal,*/ nil];
         
         [_coinStore runAction:smallToBig];
     }
+}
+
+- (void)saveScreenshotToLocal {
     
+    NSString *filePath = [ZZAcquirePath getDocDirectoryWithFileName:@"sharePic.png"];
+
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
     
+    // 设定截图大小
+    CCRenderTexture  *target = [CCRenderTexture renderTextureWithWidth:winSize.width height:winSize.height];
+    [target begin];
+    
+    // 添加需要截取的CCNode
+    [[self parent] visit];
+    
+    [target end];
+    [target saveBuffer:filePath format:kCCImageFormatPNG];
+}
+
+- (void)deleteScreenshotFromLocal {
+    NSString *filePath = [ZZAcquirePath getDocDirectoryWithFileName:@"sharePic.png"];
+    
+    NSFileManager *defaultManager = [NSFileManager defaultManager];
+    
+    NSError *error = nil;
+    BOOL result = [defaultManager removeItemAtPath:filePath error:&error];
+    
+    if (!result) {
+        CCLOG(@"%@", error);
+    }
+}
+
+- (void)showShareBorad {
+    if (_shareBorad) {
+        //删除本地截图
+        [self deleteScreenshotFromLocal];
+        
+        [_shareBorad removeFromParentAndCleanup:YES];
+        _shareBorad = nil;
+    } else {
+        //保存截图到本地
+        [self saveScreenshotToLocal];
+        
+        _shareBorad = [ShareBorad node];
+        [self addChild:_shareBorad];
+        _shareBorad.scale = 0;
+        CCScaleTo *scaleToBig = [CCScaleTo actionWithDuration:0.2 scale:1];
+//        CCScaleTo *scaleToSmall = [CCScaleTo actionWithDuration:0.1 scale:0.9];
+//        CCScaleTo *scaleToNormal = [CCScaleTo actionWithDuration:0.1 scale:1];
+        
+        CCSequence *smallToBig = [CCSequence actions:scaleToBig, /*scaleToSmall, scaleToNormal,*/ nil];
+        
+        [_shareBorad runAction:smallToBig];
+    }
 }
 
 @end

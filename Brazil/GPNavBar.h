@@ -22,7 +22,10 @@
     CCNode *worldScene;
     
     CGFloat fontsize;
+    
 }
+
+@property (nonatomic, retain)CCSprite *backgroudSprite;
 
 @property BOOL isEnglish;
 
@@ -60,5 +63,6 @@
 - (void)setContinueLevel:(NSInteger)levelNum isNeedRestoreScene:(BOOL)isNeed;
 
 - (void)showStoreLayer;
+- (void)showShareBorad;
 
 @end

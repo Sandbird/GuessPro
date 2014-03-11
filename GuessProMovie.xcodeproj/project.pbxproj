@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002F25EE18CEF92800B47BE3 /* ShareBorad.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F25ED18CEF92800B47BE3 /* ShareBorad.m */; };
 		002FFACF18C60EE6001C2586 /* PressEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = 002FFACE18C60EE6001C2586 /* PressEffects.plist */; };
 		00346D4A181C1DA200A4A998 /* iBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 00346D49181C1DA200A4A998 /* iBlock.m */; };
 		00346D4D181C1DBC00A4A998 /* GuessScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 00346D4C181C1DBC00A4A998 /* GuessScene.m */; };
@@ -397,6 +398,8 @@
 		00D4869418CB2C15001D6718 /* PuzzleDatabase.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 00D485EB18CB2C15001D6718 /* PuzzleDatabase.sqlite */; };
 		00D4869518CB2C15001D6718 /* 电影数据.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 00D485EC18CB2C15001D6718 /* 电影数据.xlsx */; };
 		00E48ABB1824EFD8005573DF /* SuccessLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E48ABA1824EFD8005573DF /* SuccessLayer.m */; };
+		00E6588B18CF2A780095B70E /* Share-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00E6588918CF2A780095B70E /* Share-hd.plist */; };
+		00E6588C18CF2A780095B70E /* Share-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E6588A18CF2A780095B70E /* Share-hd.png */; };
 		00E7900218C8C327006224E1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00E7900118C8C327006224E1 /* StoreKit.framework */; };
 		00E7AD661821E33B003973A8 /* GPDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E7AD651821E33B003973A8 /* GPDatabase.m */; };
 		00E7AD681821E39C003973A8 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 00E7AD671821E39C003973A8 /* libsqlite3.0.dylib */; };
@@ -492,6 +495,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		002F25EC18CEF92800B47BE3 /* ShareBorad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareBorad.h; sourceTree = "<group>"; };
+		002F25ED18CEF92800B47BE3 /* ShareBorad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareBorad.m; sourceTree = "<group>"; };
 		002FFACE18C60EE6001C2586 /* PressEffects.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PressEffects.plist; sourceTree = "<group>"; };
 		00346D48181C1DA200A4A998 /* iBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iBlock.h; sourceTree = "<group>"; };
 		00346D49181C1DA200A4A998 /* iBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iBlock.m; sourceTree = "<group>"; };
@@ -1080,6 +1085,8 @@
 		00D485EC18CB2C15001D6718 /* 电影数据.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "电影数据.xlsx"; sourceTree = "<group>"; };
 		00E48AB91824EFD8005573DF /* SuccessLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessLayer.h; sourceTree = "<group>"; };
 		00E48ABA1824EFD8005573DF /* SuccessLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessLayer.m; sourceTree = "<group>"; };
+		00E6588918CF2A780095B70E /* Share-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Share-hd.plist"; sourceTree = "<group>"; };
+		00E6588A18CF2A780095B70E /* Share-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share-hd.png"; sourceTree = "<group>"; };
 		00E7900118C8C327006224E1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		00E7AD641821E33B003973A8 /* GPDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPDatabase.h; sourceTree = "<group>"; };
 		00E7AD651821E33B003973A8 /* GPDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPDatabase.m; sourceTree = "<group>"; };
@@ -1260,6 +1267,8 @@
 				00E48ABA1824EFD8005573DF /* SuccessLayer.m */,
 				00D1540518C71A8300ABBE74 /* CoinStore.h */,
 				00D1540618C71A8300ABBE74 /* CoinStore.m */,
+				002F25EC18CEF92800B47BE3 /* ShareBorad.h */,
+				002F25ED18CEF92800B47BE3 /* ShareBorad.m */,
 			);
 			name = GuessScene;
 			sourceTree = "<group>";
@@ -2269,6 +2278,8 @@
 		00E8608B18C44B7E00EBC9DF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				00E6588918CF2A780095B70E /* Share-hd.plist */,
+				00E6588A18CF2A780095B70E /* Share-hd.png */,
 				00E8615A18C477B900EBC9DF /* GuessPro-hd.plist */,
 				00E8615B18C477B900EBC9DF /* GuessPro-hd.png */,
 				00E8608C18C44B7E00EBC9DF /* cc_levelmenu-hd.plist */,
@@ -2437,6 +2448,7 @@
 				00E8615118C44B7E00EBC9DF /* Icon-76.png in Resources */,
 				00D4863518CB2C15001D6718 /* 1073.png in Resources */,
 				00D4869118CB2C15001D6718 /* 1165.png in Resources */,
+				00E6588C18CF2A780095B70E /* Share-hd.png in Resources */,
 				00D4861118CB2C15001D6718 /* 1037.png in Resources */,
 				009689DE18BF871B00CF0A70 /* PlayerState.plist in Resources */,
 				00D4867018CB2C15001D6718 /* 1132.png in Resources */,
@@ -2579,6 +2591,7 @@
 				00E860D318C44B7E00EBC9DF /* Visitor18.fnt in Resources */,
 				00D4864818CB2C15001D6718 /* 1092.png in Resources */,
 				00E860B518C44B7E00EBC9DF /* Anime8.fnt in Resources */,
+				00E6588B18CF2A780095B70E /* Share-hd.plist in Resources */,
 				00E860B118C44B7E00EBC9DF /* background-noon.png in Resources */,
 				00D485F018CB2C15001D6718 /* 1004.png in Resources */,
 				00E860CC18C44B7E00EBC9DF /* BadaBoom40.png in Resources */,
@@ -2672,6 +2685,7 @@
 				006B20161663762E008ED362 /* CCParticleSystem.m in Sources */,
 				006B20191663762E008ED362 /* CCParticleSystemPoint.m in Sources */,
 				006B201C1663762E008ED362 /* CCParticleSystemQuad.m in Sources */,
+				002F25EE18CEF92800B47BE3 /* ShareBorad.m in Sources */,
 				006B201F1663762E008ED362 /* CCPhysicsDebugNode.m in Sources */,
 				006B20221663762E008ED362 /* CCPhysicsSprite.mm in Sources */,
 				006B20251663762E008ED362 /* CCProgressTimer.m in Sources */,

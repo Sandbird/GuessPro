@@ -31,6 +31,10 @@ typedef enum {
 
 @interface CoinStore() {
     ItemPostionSet _IPSet;
+    
+    CCMenu *_menu;
+    
+//    CCSprite *_backgroud;
 }
 
 @property (nonatomic, retain) UIAlertView *indicator;
@@ -43,6 +47,7 @@ typedef enum {
 @implementation CoinStore
 
 - (void)dealloc {
+
     
     CCLOG(@"coinStore is dealloc");
 
@@ -66,6 +71,9 @@ typedef enum {
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
+        
+        CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 100)];
+        [self addChild:color z:0];
         
         //加载帧到缓存
         CCSpriteFrameCache *framCache = [CCSpriteFrameCache sharedSpriteFrameCache];
@@ -130,9 +138,9 @@ typedef enum {
         tier4Item.position = _IPSet.ItemPrice88;
         
         
-        CCMenu *menu = [CCMenu menuWithItems:tier0Item, tier1Item, tier2Item, tier3Item, tier4Item, closeItem, nil];
-        menu.position = ccp(0, 0);
-        [self addChild:menu];
+        _menu = [CCMenu menuWithItems:tier0Item, tier1Item, tier2Item, tier3Item, tier4Item, closeItem, nil];
+        _menu.position = ccp(0, 0);
+        [self addChild:_menu];
         
     }
     return self;
@@ -169,8 +177,19 @@ typedef enum {
     
 }
 
+//- (void)smallToBigAction {
+//    _backgroud.scale = 0;
+//    CCScaleTo *scaleToBig = [CCScaleTo actionWithDuration:0.2 scale:1];
+//    CCScaleTo *scaleToSmall = [CCScaleTo actionWithDuration:0.1 scale:0.9];
+//    CCScaleTo *scaleToNormal = [CCScaleTo actionWithDuration:0.1 scale:1];
+//    
+//    CCSequence *smallToBig = [CCSequence actions:scaleToBig, scaleToSmall, scaleToNormal, nil];
+//    
+//    [_backgroud runAction:smallToBig];
+//}
+
 - (void)registerWithTouchDispatcher {
-    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:-127 swallowsTouches:YES];
+    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:INT_MIN swallowsTouches:YES];
 }
 
 + (CGPoint) locationFromTouch:(UITouch*)touch
@@ -181,9 +200,13 @@ typedef enum {
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint point = [CoinStore locationFromTouch:touch];
-    BOOL isTouchHandled = CGRectContainsPoint(self.boundingBox, point);
-    if (isTouchHandled) {
+    BOOL isTouchHandled = YES;
+    for (CCMenuItem *item in _menu.children) {
+        if (CGRectContainsPoint(item.boundingBox, point)) {
+            isTouchHandled = NO;
+        }
     }
+    
     return isTouchHandled;
 }
 

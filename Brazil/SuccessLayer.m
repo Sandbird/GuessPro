@@ -22,6 +22,8 @@
     CCLayerColor *_successColor;
     
     CCLabelTTF *_posLabel;
+    
+    CCMenu *_menu;
 }
 
 @property (nonatomic, retain) GADBannerView *adView;
@@ -39,37 +41,37 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _isBeginTouched = NO;
+//        _isBeginTouched = NO;
+        
+        self.isTouchEnabled = YES;
         
         CGSize size = [[CCDirector sharedDirector] winSize];
         
-        //touch is enabled
-        [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:-97 swallowsTouches:YES];
+        CCSprite *shareSprite = [CCSprite spriteWithSpriteFrameName:@"shareBtn.png"];
+        CCSprite *shareHLSprite = [CCSprite spriteWithSpriteFrameName:@"shareBtn_HL.png"];
+        CCMenuItem *shareItem = [CCMenuItemImage itemFromNormalSprite:shareSprite selectedSprite:shareHLSprite target:self selector:@selector(shareToSocial)];
+        shareItem.position = ccp(size.width / 2 - 80, 100);
         
-        _nextSprite = [CCSprite spriteWithSpriteFrameName:@"nextButton.png"];
-        _nextSprite.anchorPoint = ccp(0.5, 0.5);
-        _nextSprite.position = ccp(size.width / 2, 150);
-        [self addChild:_nextSprite z:ZORDER_SUCCESS_LAYER + 1];
+        CCSprite *infoSprite = [CCSprite spriteWithSpriteFrameName:@"infoBtn.png"];
+        CCSprite *infoHLSprite = [CCSprite spriteWithSpriteFrameName:@"infoBtn_HL.png"];
+        CCMenuItem *infoItem = [CCMenuItemImage itemFromNormalSprite:infoSprite selectedSprite:infoHLSprite target:self selector:@selector(popInformation)];
+        infoItem.position = ccp(size.width / 2, 100);
         
-        CGSize fontSize = CGSizeMake(768, 80);
-        _posLabel = [CCLabelTTF labelWithString:@"" dimensions:fontSize alignment:NSTextAlignmentCenter fontName:@"HiraKakuProN-W6" fontSize:50];
-        _posLabel.color = ccBLACK;
-        _posLabel.anchorPoint = ccp(0.5, 0.5);
-        _posLabel.position = ccp(size.width / 2, 240);
-        [self addChild:_posLabel z:ZORDER_SUCCESS_LAYER + 3];
+        CCSprite *nextSprite = [CCSprite spriteWithSpriteFrameName:@"nextBtn.png"];
+        CCSprite *nextHLSprite = [CCSprite spriteWithSpriteFrameName:@"nextBtn_HL.png"];
+        CCMenuItem *nextItem = [CCMenuItemImage itemFromNormalSprite:nextSprite selectedSprite:nextHLSprite target:self selector:@selector(nextPicture)];
+        nextItem.position = ccp(size.width / 2 + 80, 100);
         
-        
-//        _successColor = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 255)];
-//        [self addChild:_successColor z:ZORDER_SUCCESS_LAYER];
-        
-        //加NavBar
-//        ZZNavBar *navBar = [ZZNavBar node];
-//        [self addChild:navBar z:5];
-//        [navBar setKayacSceneTag:KayacSceneGuessProTag];
-        
-        [self addAdMob];
+        _menu = [CCMenu menuWithItems:shareItem, infoItem, nextItem, nil];
+        [self addChild:_menu z:ZORDER_NAV_BAR];
+        _menu.position = ccp(0, 0);
     }
     return self;
+}
+
+- (void)registerWithTouchDispatcher {
+    //touch is enabled
+    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:INT_MIN swallowsTouches:YES];
 }
 
 - (void)setPositionLabel:(NSString *)posString {
@@ -99,51 +101,21 @@
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     
-    _lastTouchLocation = [SuccessLayer locationFromTouch:touch];
-    
-    _isTouchHandled = YES;
-    
-    
-    if (_isTouchHandled) {
-        if (CGRectContainsPoint([_nextSprite boundingBox], _lastTouchLocation)) {
-            [_nextSprite runAction:[CCScaleTo actionWithDuration:0.1 scale:1.1]];
-            _isBeginTouched = YES;
+    CGPoint point = [SuccessLayer locationFromTouch:touch];
+    BOOL isTouchHandled = YES;
+//    BOOL isTouchNavbar = YES;
+    for (CCMenuItem *item in _menu.children) {
+        if (CGRectContainsPoint(item.boundingBox, point)) {
+            isTouchHandled = NO;
         }
     }
     
-    return _isTouchHandled;
+//    if (CGRectContainsPoint([[[GuessScene sharedGuessScene] navBar] backgroudSprite].boundingBox, point)) {
+//        isTouchNavbar = NO;
+//    }
     
-}
-
-- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint touchLocation = [SuccessLayer locationFromTouch:touch];
+    return isTouchHandled;
     
-    if (_isTouchHandled && _isBeginTouched) {
-        
-        if (CGRectContainsPoint(_nextSprite.boundingBox, touchLocation)) {
-            [_nextSprite runAction:[CCScaleTo actionWithDuration:0.1 scale:1.1]];
-        } else {
-            [_nextSprite runAction:[CCScaleTo actionWithDuration:0.1 scale:1.0]];
-        }
-        
-        
-//        [[GuessScene sharedGuessScene] playBounsAnimation];
-    }
-}
-
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint touchLocation = [SuccessLayer locationFromTouch:touch];
-    
-    if (CGRectContainsPoint(_nextSprite.boundingBox, touchLocation) && _isBeginTouched) {
-        [_nextSprite runAction:[CCScaleTo actionWithDuration:0.1 scale:1.0]];
-        
-        [[GuessScene sharedGuessScene] changeToNextPuzzle];
-    }
-    
-    _isBeginTouched = NO;
-}
-- (void)onExitTransitionDidStart {
-    [[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
 }
 
 #pragma mark-
@@ -227,6 +199,22 @@
 //    
 //    [self.view insertSubview:view belowSubview:self.mainTableView];
 }
+
+#pragma mark-
+#pragma mark Button Pressed
+
+- (void)shareToSocial {
+    [[[GuessScene sharedGuessScene] navBar] showShareBorad];
+}
+
+- (void)popInformation {
+    
+}
+
+- (void)nextPicture {
+    [[GuessScene sharedGuessScene] changeToNextPuzzle];
+}
+
 
 
 

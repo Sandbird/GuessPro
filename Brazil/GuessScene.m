@@ -13,13 +13,11 @@
 #import "GPDatabase.h"
 #import "SuccessLayer.h"
 
-#import <AGCommon/UINavigationBar+Common.h>
-#import <AGCommon/UIImage+Common.h>
-#import <AGCommon/UIColor+Common.h>
-#import <AGCommon/UIDevice+Common.h>
-#import <AGCommon/NSString+Common.h>
-
-#define CONTENT NSLocalizedString(@"TEXT_SHARE_CONTENT", @"ShareSDK不仅集成简单、支持如QQ好友、微信、新浪微博、腾讯微博等所有社交平台，而且还有强大的统计分析管理后台，实时了解用户、信息流、回流率、传播效应等数据，详情见官网http://sharesdk.cn @ShareSDK")
+//#import <AGCommon/UINavigationBar+Common.h>
+//#import <AGCommon/UIImage+Common.h>
+//#import <AGCommon/UIColor+Common.h>
+//#import <AGCommon/UIDevice+Common.h>
+//#import <AGCommon/NSString+Common.h>
 
 
 #define TAG_ALERT_ITEM_TIPS     111
@@ -32,6 +30,10 @@
 //所有的位置坐标
 typedef struct FixedPostion {
     //左边三个道具
+    CGPoint readyItemSmall;
+    CGPoint readyItemBomb;
+    CGPoint readyItemFlying;
+    
     CGPoint closeItemSmall;
     CGPoint closeItemBomb;
     CGPoint closeItemFlying;
@@ -91,7 +93,7 @@ typedef enum {
 
 @property (nonatomic, retain)NSMutableArray *picSequenceArray;
 @property (nonatomic, retain)NSString *answerStr;
-@property (nonatomic, assign)GPNavBar *navBar;
+
 
 @property (nonatomic, retain)PuzzleClass *currPuzzle;
 @property (assign)int currPuzzleIndex;
@@ -207,7 +209,7 @@ static GuessScene *instanceOfGuessScene;
         //照片背后的框
         CCSprite *backBoraderSprite = [CCSprite spriteWithSpriteFrameName:@"outSide.png"];
         backBoraderSprite.anchorPoint = ccp(0.5, 0.5);
-        CGFloat shouldWidth = ([GPNavBar isiPad] ? 520 : 228.8f);
+        CGFloat shouldWidth = ([GPNavBar isiPad] ? 468 : 228.8f);
         CGFloat currWidth = backBoraderSprite.boundingBox.size.width;
         backBoraderSprite.scale = shouldWidth / currWidth;
         backBoraderSprite.position = _FPSet.pictrue;
@@ -388,7 +390,7 @@ static GuessScene *instanceOfGuessScene;
     
     //block
     iBlock *block = nil;
-    _totalSquareNum = 25;
+    _totalSquareNum = 16;
     for (int i = 0; i < _totalSquareNum; i++) {
         block = [iBlock blockWithStatus:BlockStatusNormal squareIndex:i squareNum:_totalSquareNum parentNode:self];
         [self.blockArray addObject:block];
@@ -412,20 +414,28 @@ static GuessScene *instanceOfGuessScene;
     
     if ([GPNavBar isiPad]) {
         
-        _FPSet.closeItemSmall   = ccp(15, 820);
-        _FPSet.closeItemBomb    = ccp(15, 670);
-        _FPSet.closeItemFlying  = ccp(15, 520);
+        _FPSet.readyItemSmall = ccp(0, 820);
+        _FPSet.readyItemBomb = ccp(0, 670);
+        _FPSet.readyItemFlying = ccp(0, 520);
+        
+        _FPSet.closeItemSmall   = ccp(-30, 820);
+        _FPSet.closeItemBomb    = ccp(-30, 670);
+        _FPSet.closeItemFlying  = ccp(-30, 520);
         
         _FPSet.closeItemTips    = ccp(645+15, 820);
         _FPSet.closeItemAnswer  = ccp(645+15, 670);
         _FPSet.closeItemShare   = ccp(645+15, 520);
         
-        _FPSet.pictrue = ccp(winSize.width / 2, 920 - 250);
+        _FPSet.pictrue = ccp(winSize.width / 2, 920 - 225);
     } else if ([GPNavBar isiPhone5]) {
         
-        _FPSet.closeItemSmall   = ccp(15, 820);
-        _FPSet.closeItemBomb    = ccp(15, 670);
-        _FPSet.closeItemFlying  = ccp(15, 520);
+        _FPSet.readyItemSmall = ccp(0, 820);
+        _FPSet.readyItemBomb = ccp(0, 670);
+        _FPSet.readyItemFlying = ccp(0, 520);
+        
+        _FPSet.closeItemSmall   = ccp(-15, 820);
+        _FPSet.closeItemBomb    = ccp(-15, 670);
+        _FPSet.closeItemFlying  = ccp(-15, 520);
         
         _FPSet.closeItemTips    = ccp(645+15, 820);
         _FPSet.closeItemAnswer  = ccp(645+15, 670);
@@ -435,9 +445,13 @@ static GuessScene *instanceOfGuessScene;
 
     } else {
         
-        _FPSet.closeItemSmall   = ccp(0, 380);
-        _FPSet.closeItemBomb    = ccp(0, 330);
-        _FPSet.closeItemFlying  = ccp(0, 280);
+        _FPSet.readyItemSmall = ccp(0, 380);
+        _FPSet.readyItemBomb = ccp(0, 330);
+        _FPSet.readyItemFlying = ccp(0, 280);
+        
+        _FPSet.closeItemSmall   = ccp(-20, 380);
+        _FPSet.closeItemBomb    = ccp(-20, 330);
+        _FPSet.closeItemFlying  = ccp(-20, 280);
         
         _FPSet.closeItemTips    = ccp(270, 380);
         _FPSet.closeItemAnswer  = ccp(270, 330);
@@ -457,41 +471,41 @@ static GuessScene *instanceOfGuessScene;
     
      //加返回按钮和主页按钮
      //设一个全局变量，点到游戏中的时候，改变这个值，根据这个值判断返回哪个layer
-    CCSprite *smallSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item5.png"]];
-    CCSprite *smallHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item5_HL.png"]];
-    CCMenuItem *smallItem = [CCMenuItemImage itemFromNormalSprite:smallSprite selectedSprite:smallHLSprite target:self selector:@selector(smallItemPressed)];
+    CCSprite *smallSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemSmall.png"]];
+//    CCSprite *smallHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemSmall_HL.png"]];
+    CCMenuItem *smallItem = [CCMenuItemImage itemFromNormalSprite:smallSprite selectedSprite:nil target:self selector:@selector(smallItemPressed)];
     smallItem.tag = CCMenuItemSmallTag;
     _isSmallReady = NO;
     
     
-    CCSprite *bombSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item10.png"]];
-    CCSprite *bombHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item10_HL.png"]];
-    CCMenuItem *bombItem = [CCMenuItemImage itemFromNormalSprite:bombSprite selectedSprite:bombHLSprite target:self selector:@selector(bombItemPressed)];
+    CCSprite *bombSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemBomb.png"]];
+//    CCSprite *bombHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item10_HL.png"]];
+    CCMenuItem *bombItem = [CCMenuItemImage itemFromNormalSprite:bombSprite selectedSprite:nil target:self selector:@selector(bombItemPressed)];
     bombItem.tag = CCMenuItemBombTag;
     _isBombReady = NO;
     
     
-    CCSprite *flySprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item50.png"]];
-    CCSprite *flyHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item50_HL.png"]];
-    CCMenuItem *flyItem = [CCMenuItemImage itemFromNormalSprite:flySprite selectedSprite:flyHLSprite target:self selector:@selector(flyItemPressed)];
+    CCSprite *flySprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemFly.png"]];
+//    CCSprite *flyHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item50_HL.png"]];
+    CCMenuItem *flyItem = [CCMenuItemImage itemFromNormalSprite:flySprite selectedSprite:nil target:self selector:@selector(flyItemPressed)];
     flyItem.tag = CCMenuItemFlyingTag;
     _isFlyReady = NO;
     
     //Tips
-    CCSprite *tipsSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item100.png"]];
-    CCSprite *tipsHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item100_HL.png"]];
+    CCSprite *tipsSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemTips.png"]];
+    CCSprite *tipsHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemTips_HL.png"]];
     CCMenuItem *tipsItem = [CCMenuItemImage itemFromNormalSprite:tipsSprite selectedSprite:tipsHLSprite target:self selector:@selector(tipsItemPressed)];
     tipsItem.tag = CCMenuItemTipsTag;
     
     //Answer
-    CCSprite *answerSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item200.png"]];
-    CCSprite *answerHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item200_HL.png"]];
+    CCSprite *answerSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemAnswer.png"]];
+    CCSprite *answerHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemAnswer_HL.png"]];
     CCMenuItem *answerItem = [CCMenuItemImage itemFromNormalSprite:answerSprite selectedSprite:answerHLSprite target:self selector:@selector(answerItemPressed)];
     answerItem.tag = CCMenuItemAnswerTag;
     
     //Share
-    CCSprite *shareSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item200.png"]];
-    CCSprite *shareHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"Item200_HL.png"]];
+    CCSprite *shareSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemShare.png"]];
+    CCSprite *shareHLSprite = [CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:@"ItemShare_HL.png"]];
     CCMenuItem *shareItem = [CCMenuItemImage itemFromNormalSprite:shareSprite selectedSprite:shareHLSprite target:self selector:@selector(shareItemPressed)];
     shareItem.tag = CCMenuItemShareTag;
      
@@ -534,10 +548,14 @@ static GuessScene *instanceOfGuessScene;
     
     CCMenuItem *smallItem = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemSmallTag];
     
+    CCMoveTo *MoveIn = nil;
     if (_isSmallReady) {
         _isSmallReady = NO;
         
-        [smallItem unselected];
+        MoveIn = [CCMoveTo actionWithDuration:0.1 position:_FPSet.closeItemSmall];
+        [smallItem runAction:MoveIn];
+        
+//        [smallItem unselected];
         
         [self makeBlockEffectByEffectStatus:ItemEffectSmall isEffectOn:NO];
         
@@ -547,7 +565,11 @@ static GuessScene *instanceOfGuessScene;
     } else {
         _isSmallReady = YES;
         
-        [smallItem selected];
+        CCMoveTo *MoveOut = [CCMoveTo actionWithDuration:0.1 position:_FPSet.readyItemSmall];
+        [smallItem runAction:MoveOut];
+
+        
+//        [smallItem selected];
         
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusFlying];
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusBomb];
@@ -578,7 +600,10 @@ static GuessScene *instanceOfGuessScene;
     if (_isBombReady) {
         _isBombReady = NO;
         
-        [bombItem unselected];
+        CCMoveTo *MoveIn = [CCMoveTo actionWithDuration:0.1 position:_FPSet.closeItemBomb];
+        [bombItem runAction:MoveIn];
+        
+//        [bombItem unselected];
         
         [self makeBlockEffectByEffectStatus:ItemEffectBomb isEffectOn:NO];
         
@@ -588,7 +613,10 @@ static GuessScene *instanceOfGuessScene;
     } else {
         _isBombReady = YES;
         
-        [bombItem selected];
+        CCMoveTo *MoveOut = [CCMoveTo actionWithDuration:0.1 position:_FPSet.readyItemBomb];
+        [bombItem runAction:MoveOut];
+        
+//        [bombItem selected];
         
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusSmall];
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusFlying];
@@ -617,7 +645,10 @@ static GuessScene *instanceOfGuessScene;
     if (_isFlyReady) {
         _isFlyReady = NO;
         
-        [flyItem unselected];
+        CCMoveTo *MoveIn = [CCMoveTo actionWithDuration:0.1 position:_FPSet.closeItemFlying];
+        [flyItem runAction:MoveIn];
+        
+//        [flyItem unselected];
         
         [self makeBlockEffectByEffectStatus:ItemEffectFlying isEffectOn:NO];
         
@@ -627,8 +658,10 @@ static GuessScene *instanceOfGuessScene;
     } else {
         _isFlyReady = YES;
         
+        CCMoveTo *MoveOut = [CCMoveTo actionWithDuration:0.1 position:_FPSet.readyItemFlying];
+        [flyItem runAction:MoveOut];
+        
 //        [flyItem selected];
-        [flyItem selected];
         
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusSmall];
         [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusBomb];
@@ -699,8 +732,10 @@ static GuessScene *instanceOfGuessScene;
     //把剩余block变回正常
     [self makeSelectedBlockNormal];
     
+    [_navBar showShareBorad];
+    
 //    [self shareToWeiXin];
-    [self shareToSina];
+//    [self shareToSina];
     
 //    //显示Alert
 //    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"向朋友求助" message:@"使用向朋友求助道具，分享到社交网络，可奖励10个黄金摄像机，每天最多可以奖励50个" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil];
@@ -708,76 +743,6 @@ static GuessScene *instanceOfGuessScene;
 //    alertView.tag = TAG_ALERT_ITEM_SHARE;
 //    [alertView release];
 }
-
-- (void)shareToSina {
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"sharesdk_img" ofType:@"jpg"];
-    
-    id<ISSContent> publishContent = [ShareSDK content:CONTENT
-                                       defaultContent:@""
-                                                image:[ShareSDK imageWithPath:imagePath]
-                                                title:nil
-                                                  url:nil
-                                          description:nil
-                                            mediaType:SSPublishContentMediaTypeText];
-    
-    //创建弹出菜单容器
-//    id<ISSContainer> container = [ShareSDK container];
-//    [container setIPadContainerWithView:sender arrowDirect:UIPopoverArrowDirectionUp];
-    
-    
-    //显示分享菜单
-    [ShareSDK showShareViewWithType:ShareTypeSinaWeibo
-                          container:nil
-                            content:publishContent
-                      statusBarTips:YES
-                        authOptions:nil
-                       shareOptions:nil
-                             result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                 
-                                 if (state == SSPublishContentStateSuccess)
-                                 {
-                                     NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"发表成功"));
-                                 }
-                                 else if (state == SSPublishContentStateFail)
-                                 {
-                                     NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"发布失败!error code == %d, error code == %@"), [error errorCode], [error errorDescription]);
-                                 }
-                             }];
-}
-
-- (void)shareToWeiXin {
-    
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"sharesdk_img" ofType:@"jpg"];
-    
-    //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:CONTENT
-                                       defaultContent:@""
-                                                image:[ShareSDK imageWithPath:imagePath]
-                                                title:@"ShareSDK"
-                                                  url:@"http://www.sharesdk.cn"
-                                          description:NSLocalizedString(@"TEXT_TEST_MSG", @"这是一条测试信息")
-                                            mediaType:SSPublishContentMediaTypeNews];
-    
-    
-    [ShareSDK showShareViewWithType:ShareTypeWeixiTimeline
-                          container:nil
-                            content:publishContent
-                      statusBarTips:YES
-                        authOptions:nil
-                       shareOptions:nil
-                             result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                 
-                                 if (state == SSPublishContentStateSuccess)
-                                 {
-                                     NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"发表成功"));
-                                 }
-                                 else if (state == SSPublishContentStateFail)
-                                 {
-                                     NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"发布失败!error code == %d, error code == %@"), [error errorCode], [error errorDescription]);
-                                 }
-                             }];
-}
-
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == TAG_ALERT_ITEM_TIPS) {
@@ -817,153 +782,9 @@ static GuessScene *instanceOfGuessScene;
     } else if (alertView.tag == TAG_ALERT_SHOW_ANSWER) {
         
     } else if (alertView.tag == TAG_ALERT_ITEM_SHARE) {
-        if (buttonIndex == 0) {
-            [self simpleShareAllButtonClickHandler:nil];
-        }
+        
     }
 }
-
-/**
- *	@brief	简单分享全部
- *
- *	@param 	sender 	事件对象
- */
-
-- (void)simpleShareAllButtonClickHandler:(id)sender
-{
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"sharesdk_img" ofType:@"jpg"];
-    
-    //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:CONTENT
-                                       defaultContent:@""
-                                                image:[ShareSDK imageWithPath:imagePath]
-                                                title:@"ShareSDK"
-                                                  url:@"http://www.sharesdk.cn"
-                                          description:NSLocalizedString(@"TEXT_TEST_MSG", @"这是一条测试信息")
-                                            mediaType:SSPublishContentMediaTypeNews];
-    
-    ///////////////////////
-    //以下信息为特定平台需要定义分享内容，如果不需要可省略下面的添加方法
-    
-    //定制人人网信息
-    [publishContent addRenRenUnitWithName:NSLocalizedString(@"TEXT_HELLO_RENREN", @"Hello 人人网")
-                              description:INHERIT_VALUE
-                                      url:INHERIT_VALUE
-                                  message:INHERIT_VALUE
-                                    image:INHERIT_VALUE
-                                  caption:nil];
-    
-    //定制QQ空间信息
-    [publishContent addQQSpaceUnitWithTitle:NSLocalizedString(@"TEXT_HELLO_QZONE", @"Hello QQ空间")
-                                        url:INHERIT_VALUE
-                                       site:nil
-                                    fromUrl:nil
-                                    comment:INHERIT_VALUE
-                                    summary:INHERIT_VALUE
-                                      image:INHERIT_VALUE
-                                       type:INHERIT_VALUE
-                                    playUrl:nil
-                                       nswb:nil];
-    
-    //定制微信好友信息
-    [publishContent addWeixinSessionUnitWithType:INHERIT_VALUE
-                                         content:INHERIT_VALUE
-                                           title:NSLocalizedString(@"TEXT_HELLO_WECHAT_SESSION", @"Hello 微信好友!")
-                                             url:INHERIT_VALUE
-                                      thumbImage:[ShareSDK imageWithUrl:@"http://img1.bdstatic.com/img/image/67037d3d539b6003af38f5c4c4f372ac65c1038b63f.jpg"]
-                                           image:INHERIT_VALUE
-                                    musicFileUrl:nil
-                                         extInfo:nil
-                                        fileData:nil
-                                    emoticonData:nil];
-    
-    //定制微信朋友圈信息
-    [publishContent addWeixinTimelineUnitWithType:[NSNumber numberWithInteger:SSPublishContentMediaTypeMusic]
-                                          content:INHERIT_VALUE
-                                            title:NSLocalizedString(@"TEXT_HELLO_WECHAT_TIMELINE", @"Hello 微信朋友圈!")
-                                              url:@"http://y.qq.com/i/song.html#p=7B22736F6E675F4E616D65223A22E4BDA0E4B88DE698AFE79C9FE6ADA3E79A84E5BFABE4B990222C22736F6E675F5761704C69766555524C223A22687474703A2F2F74736D7573696332342E74632E71712E636F6D2F586B303051563558484A645574315070536F4B7458796931667443755A68646C2F316F5A4465637734356375386355672B474B304964794E6A3770633447524A574C48795333383D2F3634363232332E6D34613F7569643D32333230303738313038266469723D423226663D312663743D3026636869643D222C22736F6E675F5769666955524C223A22687474703A2F2F73747265616D31382E71716D757369632E71712E636F6D2F33303634363232332E6D7033222C226E657454797065223A2277696669222C22736F6E675F416C62756D223A22E5889BE980A0EFBC9AE5B08FE5B7A8E89B8B444E414C495645EFBC81E6BC94E594B1E4BC9AE5889BE7BAAAE5BD95E99FB3222C22736F6E675F4944223A3634363232332C22736F6E675F54797065223A312C22736F6E675F53696E676572223A22E4BA94E69C88E5A4A9222C22736F6E675F576170446F776E4C6F616455524C223A22687474703A2F2F74736D757369633132382E74632E71712E636F6D2F586C464E4D31354C5569396961495674593739786D436534456B5275696879366A702F674B65356E4D6E684178494C73484D6C6A307849634A454B394568572F4E3978464B316368316F37636848323568413D3D2F33303634363232332E6D70333F7569643D32333230303738313038266469723D423226663D302663743D3026636869643D2673747265616D5F706F733D38227D"
-                                       thumbImage:[ShareSDK imageWithUrl:@"http://img1.bdstatic.com/img/image/67037d3d539b6003af38f5c4c4f372ac65c1038b63f.jpg"]
-                                            image:INHERIT_VALUE
-                                     musicFileUrl:@"http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3"
-                                          extInfo:nil
-                                         fileData:nil
-                                     emoticonData:nil];
-    
-    //定制微信收藏信息
-//    [publishContent addWeixinFavUnitWithType:INHERIT_VALUE
-//                                     content:INHERIT_VALUE
-//                                       title:NSLocalizedString(@"TEXT_HELLO_WECHAT_FAV", @"Hello 微信收藏!")
-//                                         url:INHERIT_VALUE
-//                                  thumbImage:[ShareSDK imageWithUrl:@"http://img1.bdstatic.com/img/image/67037d3d539b6003af38f5c4c4f372ac65c1038b63f.jpg"]
-//                                       image:INHERIT_VALUE
-//                                musicFileUrl:nil
-//                                     extInfo:nil
-//                                    fileData:nil
-//                                emoticonData:nil];
-    
-    //定制QQ分享信息
-    [publishContent addQQUnitWithType:INHERIT_VALUE
-                              content:INHERIT_VALUE
-                                title:@"Hello QQ!"
-                                  url:INHERIT_VALUE
-                                image:INHERIT_VALUE];
-    
-    //定制邮件信息
-    [publishContent addMailUnitWithSubject:@"Hello Mail"
-                                   content:INHERIT_VALUE
-                                    isHTML:[NSNumber numberWithBool:YES]
-                               attachments:INHERIT_VALUE
-                                        to:nil
-                                        cc:nil
-                                       bcc:nil];
-    
-    //结束定制信息
-    ////////////////////////
-    
-    /*
-    
-    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
-                                                         allowCallback:NO
-                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
-                                                          viewDelegate:nil
-                                               authManagerViewDelegate:_appDelegate.viewDelegate];
-    
-    //在授权页面中添加关注官方微博
-    [authOptions setFollowAccounts:[NSDictionary dictionaryWithObjectsAndKeys:
-                                    [ShareSDK userFieldWithType:SSUserFieldTypeName value:@"ShareSDK"],
-                                    SHARE_TYPE_NUMBER(ShareTypeSinaWeibo),
-                                    [ShareSDK userFieldWithType:SSUserFieldTypeName value:@"ShareSDK"],
-                                    SHARE_TYPE_NUMBER(ShareTypeTencentWeibo),
-                                    nil]];
-    
-    id<ISSShareOptions> shareOptions = [ShareSDK simpleShareOptionsWithTitle:NSLocalizedString(@"TEXT_SHARE_TITLE", @"内容分享")
-                                                           shareViewDelegate:_appDelegate.viewDelegate];
-     */
-    
-    //创建弹出菜单容器
-//    id<ISSContainer> container = [ShareSDK container];
-//    [container setIPadContainerWithView:sender arrowDirect:UIPopoverArrowDirectionUp];
-    
-    //弹出分享菜单
-    [ShareSDK showShareActionSheet:/*container*/nil
-                         shareList:nil
-                           content:publishContent
-                     statusBarTips:YES
-                       authOptions:nil
-                      shareOptions:nil
-                            result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                
-                                if (state == SSPublishContentStateSuccess)
-                                {
-                                    NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"分享成功"));
-                                }
-                                else if (state == SSPublishContentStateFail)
-                                {
-                                    NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
-                                }
-                            }];
-}
-
 
 #pragma mark - Block Effect
 - (void)makeSelectedBlockNormal {
@@ -982,7 +803,10 @@ static GuessScene *instanceOfGuessScene;
             if (_isSmallReady) {
                 _isSmallReady = NO;
                 
-                [item unselected];
+                CCMoveTo *MoveIn = [CCMoveTo actionWithDuration:0.1 position:_FPSet.closeItemSmall];
+                [item runAction:MoveIn];
+                
+//                [item unselected];
                 
                 [self makeBlockEffectByEffectStatus:ItemEffectSmall isEffectOn:NO];
             }
@@ -993,7 +817,10 @@ static GuessScene *instanceOfGuessScene;
             if (_isBombReady) {
                 _isBombReady = NO;
                 
-                [item unselected];
+                CCMoveTo *MoveIn = [CCMoveTo actionWithDuration:0.1 position:_FPSet.closeItemBomb];
+                [item runAction:MoveIn];
+                
+//                [item unselected];
                 
                 [self makeBlockEffectByEffectStatus:ItemEffectBomb isEffectOn:NO];
             }
@@ -1004,7 +831,10 @@ static GuessScene *instanceOfGuessScene;
             if (_isFlyReady) {
                 _isFlyReady = NO;
                 
-                [item unselected];
+                CCMoveTo *MoveIn = [CCMoveTo actionWithDuration:0.1 position:_FPSet.closeItemFlying];
+                [item runAction:MoveIn];
+                
+//                [item unselected];
 
                 [self makeBlockEffectByEffectStatus:ItemEffectFlying isEffectOn:NO];
             }
