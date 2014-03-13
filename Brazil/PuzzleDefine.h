@@ -15,6 +15,9 @@
 
 #define PICTURE_WIDTH ([GPNavBar isiPad] ? 450.0 : 220.0)
 
+#define NUM_OF_ADD_COIN_USING_SOS   5
+#define NUM_OF_ADD_COIN_USING_SHARE 10
+
 
 #define ZORDER_BLANK            0
 #define ZORDER_WORD_HOME        0
@@ -25,7 +28,7 @@
 #define ZORDER_PICTRUE          2
 
 #define ZORDER_BLOCK            3
-#define ZORDER_NAV_BAR          100
+#define ZORDER_NAV_BAR          99
 
 #define ZORDER_ITEM_FLY         4
 

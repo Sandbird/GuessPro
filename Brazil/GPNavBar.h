@@ -10,6 +10,8 @@
 #import "cocos2d.h"
 #import "SimpleAudioEngine.h"
 
+#import "ShareBorad.h"
+
 // 是否模拟器
 #define isSimulator (NSNotFound != [[[UIDevice currentDevice] model] rangeOfString:@"Simulator"].location)
 
@@ -63,6 +65,16 @@
 - (void)setContinueLevel:(NSInteger)levelNum isNeedRestoreScene:(BOOL)isNeed;
 
 - (void)showStoreLayer;
-- (void)showShareBorad;
+- (void)showShareBoradWithType:(ShareBoradShareType)SBSType;
+
++ (BOOL)isTodayFirstTimeComeIn;
+
++ (void)setTimesByUsingSOS:(NSInteger)times;
++ (void)setTimesByUsingShare:(NSInteger)times;
++ (BOOL)isTodayCanAddCoinWithSOS;
++ (BOOL)isTodayCanAddCoinWithShare;
+
++ (NSInteger)numOfCoinAdded;
++ (void)setNumOfCoinAdded:(NSInteger)num;
 
 @end

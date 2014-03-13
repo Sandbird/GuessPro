@@ -9,8 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+typedef enum {
+    ShareTypeSOS,
+    ShareTypeShare,
+    ShareTypeNONE,
+    
+}ShareBoradShareType;
+
 @interface ShareBorad : CCLayer {
     
 }
+
+- (id)initWithShareType:(ShareBoradShareType)SBSType;
 
 @end

@@ -12,6 +12,7 @@
 #import "ZZAcquirePath.h"
 
 #import "RootViewController.h"
+#import "InformationBorad.h"
 
 @interface SuccessLayer() {
 
@@ -28,6 +29,7 @@
 
 @property (nonatomic, retain) GADBannerView *adView;
 @property (nonatomic, retain) RootViewController *controller;
+@property (nonatomic, retain) NSString *curInfo;
 
 @end
 
@@ -43,28 +45,38 @@
     if (self) {
 //        _isBeginTouched = NO;
         
-        self.isTouchEnabled = YES;
+//        self.isTouchEnabled = YES;
         
-        CGSize size = [[CCDirector sharedDirector] winSize];
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
         
         CCSprite *shareSprite = [CCSprite spriteWithSpriteFrameName:@"shareBtn.png"];
         CCSprite *shareHLSprite = [CCSprite spriteWithSpriteFrameName:@"shareBtn_HL.png"];
         CCMenuItem *shareItem = [CCMenuItemImage itemFromNormalSprite:shareSprite selectedSprite:shareHLSprite target:self selector:@selector(shareToSocial)];
-        shareItem.position = ccp(size.width / 2 - 80, 100);
+        shareItem.position = ccp(winSize.width / 2 - 80, 100);
         
         CCSprite *infoSprite = [CCSprite spriteWithSpriteFrameName:@"infoBtn.png"];
         CCSprite *infoHLSprite = [CCSprite spriteWithSpriteFrameName:@"infoBtn_HL.png"];
         CCMenuItem *infoItem = [CCMenuItemImage itemFromNormalSprite:infoSprite selectedSprite:infoHLSprite target:self selector:@selector(popInformation)];
-        infoItem.position = ccp(size.width / 2, 100);
+        infoItem.position = ccp(winSize.width / 2, 100);
         
         CCSprite *nextSprite = [CCSprite spriteWithSpriteFrameName:@"nextBtn.png"];
         CCSprite *nextHLSprite = [CCSprite spriteWithSpriteFrameName:@"nextBtn_HL.png"];
         CCMenuItem *nextItem = [CCMenuItemImage itemFromNormalSprite:nextSprite selectedSprite:nextHLSprite target:self selector:@selector(nextPicture)];
-        nextItem.position = ccp(size.width / 2 + 80, 100);
+        nextItem.position = ccp(winSize.width / 2 + 80, 100);
         
         _menu = [CCMenu menuWithItems:shareItem, infoItem, nextItem, nil];
         [self addChild:_menu z:ZORDER_NAV_BAR];
         _menu.position = ccp(0, 0);
+        
+        
+        //加一个UIViewController
+        _controller = [[RootViewController alloc] init];
+        _controller.view.frame = CGRectMake(0,0,winSize.width,winSize.height);
+        [[[CCDirector sharedDirector] openGLView]addSubview : _controller.view];
+        
+//        [self addAdMob];
+        
+        
     }
     return self;
 }
@@ -76,6 +88,10 @@
 
 - (void)setPositionLabel:(NSString *)posString {
     [_posLabel setString:posString];
+}
+
+- (void)setCurrentPuzzleInfo:(NSString *)info {
+    self.curInfo = info;
 }
 
 - (void)setSuccessLayerColorWithImgName:(NSString *)imgName {
@@ -99,34 +115,32 @@
 	return [[CCDirector sharedDirector] convertToGL:touchLocation];
 }
 
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    
-    CGPoint point = [SuccessLayer locationFromTouch:touch];
-    BOOL isTouchHandled = YES;
-//    BOOL isTouchNavbar = YES;
-    for (CCMenuItem *item in _menu.children) {
-        if (CGRectContainsPoint(item.boundingBox, point)) {
-            isTouchHandled = NO;
-        }
-    }
-    
-//    if (CGRectContainsPoint([[[GuessScene sharedGuessScene] navBar] backgroudSprite].boundingBox, point)) {
-//        isTouchNavbar = NO;
+//- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+//    
+//    CGPoint point = [SuccessLayer locationFromTouch:touch];
+//    BOOL isTouchHandled = YES;
+////    BOOL isTouchNavbar = YES;
+//    for (CCNode *node in self.children) {
+//        if (CGRectContainsPoint(node.boundingBox, point)) {
+//            isTouchHandled = NO;
+//        }
 //    }
-    
-    return isTouchHandled;
-    
-}
+//    
+////    if (CGRectContainsPoint([[[GuessScene sharedGuessScene] navBar] backgroudSprite].boundingBox, point)) {
+////        isTouchNavbar = NO;
+////    }
+//    
+//    return isTouchHandled;
+//    
+//}
 
 #pragma mark-
 #pragma mark admob
 - (void)addAdMob {
     
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
+//    CGSize winSize = [[CCDirector sharedDirector] winSize];
     
 //    RootViewController *controller;
-    _controller = [[RootViewController alloc] init];
-    _controller.view.frame = CGRectMake(0,0,winSize.width,winSize.height);
     
     //    //判断网络状态
     //	NetworkStatus NetStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
@@ -140,10 +154,11 @@
         _adView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeMediumRectangle];
     }
     
-    _adView.rootViewController = _controller;
     
-//    RootViewController *rootVC = (RootViewController *)[[[[UIApplication sharedApplication] windows] objectAtIndex:0] rootViewController];
-//    _adView.rootViewController = rootVC;
+    
+//    _controller = (RootViewController *)[[[[UIApplication sharedApplication] windows] objectAtIndex:0] rootViewController];
+    
+    _adView.rootViewController = _controller;
     
     _adView.adUnitID = ADMOB_ID;
     
@@ -164,12 +179,13 @@
     //设置广告条的位置
     CGPoint point = CGPointMake(160, 160);
     _adView.center = point;
-    _adView.delegate = self;
+//    _adView.delegate = self;
     //    [self.view insertSubview:_adView belowSubview:self.mainTableView];
     [_adView loadRequest:[GADRequest request]];
     
     [_controller.view addSubview:_adView];
-    [[[CCDirector sharedDirector] openGLView]addSubview : _controller.view];
+//    [[[CCDirector sharedDirector] openGLView]addSubview : _controller.view];
+
     
     
     /**
@@ -187,6 +203,9 @@
 //    [imgView setFrame:imgFrame];
 //    [self.view insertSubview:imgView belowSubview:self.mainTableView];
 //    imgView.tag = TAG_OFFLINE_ADBANNER;
+    
+    
+    
 }
 
 - (void)adViewDidReceiveAd:(GADBannerView *)view {
@@ -204,11 +223,12 @@
 #pragma mark Button Pressed
 
 - (void)shareToSocial {
-    [[[GuessScene sharedGuessScene] navBar] showShareBorad];
+    [[[GuessScene sharedGuessScene] navBar] showShareBoradWithType:ShareTypeShare];
 }
 
 - (void)popInformation {
-    
+    InformationBorad *infoLayer = [InformationBorad nodeWithInformation:self.curInfo parentView:_controller.view];
+    [[[GuessScene sharedGuessScene] navBar] addChild:infoLayer];
 }
 
 - (void)nextPicture {

@@ -33,6 +33,8 @@ typedef struct ItemSharePostion {
     CCMenu *_menu;
 }
 
+@property (assign)ShareBoradShareType SBStype;
+
 @end
 
 
@@ -48,15 +50,17 @@ typedef struct ItemSharePostion {
     [super dealloc];
 }
 
-- (id)init {
+- (id)initWithShareType:(ShareBoradShareType)SBSType {
     self = [super init];
     if (self) {
+        
+        self.SBStype = SBSType;
         
         self.isTouchEnabled = YES;
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
-        CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 100)];
+        CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 200)];
         [self addChild:color z:0];
         
         //加载帧到缓存
@@ -66,19 +70,19 @@ typedef struct ItemSharePostion {
         //设置初始位置
         [self setItemInitalPostion];
         
-        CCSprite *backgroud = [CCSprite spriteWithSpriteFrameName:@"shareBanner.png"];
-        [self addChild:backgroud z:0];
-        CGFloat scaleX = winSize.width / backgroud.boundingBox.size.width;
-        CGFloat scaleY = ([GPNavBar isiPad] ? backgroud.boundingBox.size.height : 120.0f) / backgroud.boundingBox.size.height;
-        [backgroud setScaleX:scaleX];
-        [backgroud setScaleY:scaleY];
-        backgroud.position = ccp(winSize.width / 2, backgroud.boundingBox.size.height / 2);
+//        CCSprite *backgroud = [CCSprite spriteWithSpriteFrameName:@"shareBanner.png"];
+//        [self addChild:backgroud z:0];
+//        CGFloat scaleX = winSize.width / backgroud.boundingBox.size.width;
+//        CGFloat scaleY = ([GPNavBar isiPad] ? backgroud.boundingBox.size.height : 120.0f) / backgroud.boundingBox.size.height;
+//        [backgroud setScaleX:scaleX];
+//        [backgroud setScaleY:scaleY];
+//        backgroud.position = ccp(winSize.width / 2, backgroud.boundingBox.size.height / 2);
         
         CCSprite *closeSprite = [CCSprite spriteWithSpriteFrameName:@"close.png"];
         CCSprite *closeHLSprite = [CCSprite spriteWithSpriteFrameName:@"close_HL.png"];
         CCMenuItem *closeItem = [CCMenuItemImage itemFromNormalSprite:closeSprite selectedSprite:closeHLSprite target:self selector:@selector(closeShareBorad)];
-        closeItem.anchorPoint = ccp(1, 0);
-        closeItem.position = ccp(winSize.width / 2 + backgroud.boundingBox.size.width / 2, /*winSize.height / 2 + backgroud.boundingBox.size.height / 2*/0);
+        closeItem.anchorPoint = ccp(0.5, 0.5);
+        closeItem.position = ccp(winSize.width / 2, /*winSize.height / 2 + backgroud.boundingBox.size.height / 2*/50);
         
         NSArray *selectorNameArray = [NSArray arrayWithObjects:@"shareToQQ", @"shareToQQZone", @"shareToQQWeibo", @"shareToWeiXin", @"shareToPYQ", @"shareToRenRen", @"shareToSinaWeiBo", @"shareToDouban", nil];
         
@@ -194,65 +198,132 @@ typedef struct ItemSharePostion {
 
 - (void)closeShareBorad {
     GPNavBar *navBar = (GPNavBar *)[self parent];
-    [navBar showShareBorad];
+    [navBar showShareBoradWithType:ShareTypeNONE];
 }
 
 - (void)shareToQQ {
-    [self shareWithShareType:ShareTypeQQ];
+    [self shareWithShareType:ShareTypeQQ mediaType:SSPublishContentMediaTypeImage];
 }
 
 - (void)shareToQQZone {
-    [self shareWithShareType:ShareTypeQQSpace];
+    [self shareWithShareType:ShareTypeQQSpace mediaType:SSPublishContentMediaTypeImage];
 }
 
 - (void)shareToQQWeibo {
-    [self shareWithShareType:ShareTypeTencentWeibo];
+    [self shareWithShareType:ShareTypeTencentWeibo mediaType:SSPublishContentMediaTypeText];
 }
 
 - (void)shareToWeiXin {
-    [self shareWithShareType:ShareTypeWeixiSession];
+    [self shareWithShareType:ShareTypeWeixiSession mediaType:SSPublishContentMediaTypeImage];
 }
 
 - (void)shareToPYQ {
-    [self shareWithShareType:ShareTypeWeixiTimeline];
+    [self shareWithShareType:ShareTypeWeixiTimeline mediaType:SSPublishContentMediaTypeImage];
 }
 
 - (void)shareToRenRen {
-    [self shareWithShareType:ShareTypeRenren];
+    [self shareWithShareType:ShareTypeRenren mediaType:SSPublishContentMediaTypeText];
 }
 
 - (void)shareToSinaWeiBo {
-    [self shareWithShareType:ShareTypeSinaWeibo];
+    [self shareWithShareType:ShareTypeSinaWeibo mediaType:SSPublishContentMediaTypeText];
 }
 
 - (void)shareToDouban {
-    [self shareWithShareType:ShareTypeDouBan];
+    [self shareWithShareType:ShareTypeDouBan mediaType:SSPublishContentMediaTypeText];
 }
 
-- (void)shareWithShareType:(ShareType)type {
-    NSString *imagePath = [ZZAcquirePath getDocDirectoryWithFileName:@"sharePic.png"];
+- (void)shareWithShareType:(ShareType)type mediaType:(SSPublishContentMediaType *)mediaType {
     
-    id<ISSContent> publishContent = [ShareSDK content:CONTENT defaultContent:@"" image:[ShareSDK imageWithPath:imagePath] title:nil url:nil description:nil mediaType:SSPublishContentMediaTypeText];
+    NSString *imagePath = nil;
+    NSString *content = nil;
+    NSString *title = nil;
+    NSString *url = nil;
     
-    //显示分享菜单
-    [ShareSDK showShareViewWithType:type
-                          container:nil
-                            content:publishContent
-                      statusBarTips:NO
-                        authOptions:nil
-                       shareOptions:nil
-                             result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                 
-                                 if (state == SSPublishContentStateSuccess)
-                                 {
-                                     NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"发表成功"));
-                                 }
-                                 else if (state == SSPublishContentStateFail)
-                                 {
-                                     NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"发布失败!error code == %d, error code == %@"), [error errorCode], [error errorDescription]);
-                                     CCLOG(@"发布失败!error code == %d, error code == %@", [error errorCode], [error errorDescription]);
-                                 }
-                             }];
+    if (self.SBStype == ShareTypeSOS) {
+        imagePath = [ZZAcquirePath getDocDirectoryWithFileName:@"sharePic.png"];
+        content = @"我正在玩电影海报猜猜猜，遇到了一个难猜的海报，快来帮我看看是什么电影啊。详情见官网http://sharesdk.cn @TAD";
+        title = @"电影海报猜猜猜";
+        url = nil;
+        
+        
+    } else if (self.SBStype == ShareTypeShare) {
+        imagePath = [ZZAcquirePath getDocDirectoryWithFileName:@"sharePic.png"];
+        content = @"我正在玩电影海报猜猜猜，遇到了一个难猜的海报，快来帮我看看是什么电影啊。详情见官网http://sharesdk.cn @TAD";
+        title = @"电影海报猜猜猜";
+        url = @"www.baidu.com";
+
+    }
+    
+    id<ISSContent> publishContent = [ShareSDK content:content
+                        defaultContent:@""
+                                 image:[ShareSDK imageWithPath:imagePath]
+                                 title:title
+                                   url:url
+                           description:nil
+                             mediaType:mediaType];
+    
+    if (self.SBStype == ShareTypeSOS) {
+        //显示分享菜单
+        [ShareSDK showShareViewWithType:type
+                              container:nil
+                                content:publishContent
+                          statusBarTips:NO
+                            authOptions:nil
+                           shareOptions:nil
+                                 result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                     
+                                     if (state == SSPublishContentStateSuccess)
+                                     {
+                                         CCLOG(@"%@", NSLocalizedString(@"TEXT_SHARE_SUC", @"发表成功"));
+                                         
+                                         BOOL isAddCoin = [GPNavBar isTodayCanAddCoinWithSOS];
+                                         if (isAddCoin) {
+                                             GPNavBar *navBar = (GPNavBar *)[self parent];
+                                             [navBar changeTotalScore:NUM_OF_ADD_COIN_USING_SOS];
+                                             [navBar refreshTotalScore];
+                                         }
+                                         
+                                         
+                                         
+                                     }
+                                     else if (state == SSPublishContentStateFail)
+                                     {
+//                                         CCLOG(@"%@", (NSLocalizedString(@"TEXT_SHARE_FAI", @"发布失败!error code == %d, error code == %@"), [error errorCode], [error errorDescription]));
+                                         CCLOG(@"发布失败!error code == %d, error code == %@", [error errorCode], [error errorDescription]);
+                                     }
+                                 }];
+        
+    } else if (self.SBStype == ShareTypeShare) {
+        //显示分享菜单
+        [ShareSDK showShareViewWithType:type
+                              container:nil
+                                content:publishContent
+                          statusBarTips:NO
+                            authOptions:nil
+                           shareOptions:nil
+                                 result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                     
+                                     if (state == SSPublishContentStateSuccess)
+                                     {
+                                         CCLOG(@"%@", NSLocalizedString(@"TEXT_SHARE_SUC", @"发表成功"));
+                                         
+                                         BOOL isAddCoin = [GPNavBar isTodayCanAddCoinWithShare];
+                                         if (isAddCoin) {
+                                             GPNavBar *navBar = (GPNavBar *)[self parent];
+                                             [navBar changeTotalScore:NUM_OF_ADD_COIN_USING_SHARE];
+                                             [navBar refreshTotalScore];
+                                         }
+                                     }
+                                     else if (state == SSPublishContentStateFail)
+                                     {
+                                         CCLOG(@"发布失败!error code == %d, error code == %@", [error errorCode], [error errorDescription]);
+                                     }
+                                 }];
+        
+    }
+    
+    
 }
 
 

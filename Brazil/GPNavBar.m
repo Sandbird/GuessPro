@@ -13,7 +13,6 @@
 #import "StartLayer.h"
 
 #import "CoinStore.h"
-#import "ShareBorad.h"
 #import "ZZAcquirePath.h"
 
 //判断设备是IPHONE还是IPAD
@@ -363,7 +362,7 @@
     }
 }
 
-- (void)showShareBorad {
+- (void)showShareBoradWithType:(ShareBoradShareType)SBSType {
     if (_shareBorad) {
         //删除本地截图
         [self deleteScreenshotFromLocal];
@@ -374,7 +373,7 @@
         //保存截图到本地
         [self saveScreenshotToLocal];
         
-        _shareBorad = [ShareBorad node];
+        _shareBorad = [[[ShareBorad alloc] initWithShareType:SBSType] autorelease];
         [self addChild:_shareBorad];
         _shareBorad.scale = 0;
         CCScaleTo *scaleToBig = [CCScaleTo actionWithDuration:0.2 scale:1];
@@ -385,6 +384,91 @@
         
         [_shareBorad runAction:smallToBig];
     }
+}
+
+#pragma mark - push method
+
+#define ADD_COIN_TIMES_SOS_TODAY    @"AddCoinTimesSOSToday"
+#define ADD_COIN_TIMES_SHARE_TODAY  @"AddCoinTimesShareToday"
+//#define ADD_COIN_TIMES_COMEIN_TODAY @"AddCoinTimesComeInToday"
+#define LAST_DATE_STRING @"LastDateString"
+
++ (NSString *)todayDateString {
+    NSString *dateString = [[NSDate date] description];
+    NSArray *dateArray = [dateString componentsSeparatedByString:@" "];
+    NSString *todayString = [dateArray objectAtIndex:0];
+    
+    return todayString;
+}
+
++ (void)setLastDateString:(NSString *)dateString {
+    [[NSUserDefaults standardUserDefaults] setObject:dateString forKey:LAST_DATE_STRING];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *)lastDateString {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:LAST_DATE_STRING];
+}
+
++ (BOOL)isTodayFirstTimeComeIn {
+    
+    NSString *now = [GPNavBar todayDateString];
+    NSString *last = [GPNavBar lastDateString];
+    
+    
+    if ([now isEqualToString:last]) {//是同一天
+        return NO;
+    } else {//是新的一天
+        [GPNavBar setLastDateString:now];
+        return YES;
+    }
+    
+}
+
++ (void)setTimesByUsingSOS:(NSInteger)times {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:times] forKey:ADD_COIN_TIMES_SOS_TODAY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void)setTimesByUsingShare:(NSInteger)times {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:times] forKey:ADD_COIN_TIMES_SHARE_TODAY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+//今天求助是否还加分
++ (BOOL)isTodayCanAddCoinWithSOS {
+    NSInteger times = [[[NSUserDefaults standardUserDefaults] objectForKey:ADD_COIN_TIMES_SOS_TODAY] integerValue];
+    times++;
+    if (times >= 5) {
+        return NO;
+    } else {
+        [GPNavBar setTimesByUsingSOS:times];
+        return YES;
+    }
+}
+
+//今天分享是否还加分
++ (BOOL)isTodayCanAddCoinWithShare {
+    NSInteger times = [[[NSUserDefaults standardUserDefaults] objectForKey:ADD_COIN_TIMES_SHARE_TODAY] integerValue];
+    times++;
+    if (times >= 5) {
+        return NO;
+    } else {
+        [GPNavBar setTimesByUsingShare:times];
+        return YES;
+    }
+}
+
+#define NUM_OF_COIN_ADDED @"NumOfCoinToBeAdding"
+
+//加金币的数量
++ (NSInteger)numOfCoinAdded {
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:NUM_OF_COIN_ADDED] integerValue];
+}
+
++ (void)setNumOfCoinAdded:(NSInteger)num {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:num] forKey:NUM_OF_COIN_ADDED];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

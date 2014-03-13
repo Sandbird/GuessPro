@@ -20,4 +20,6 @@
 - (void)setSuccessLayerColorWithImgName:(NSString *)imgName;
 - (void)setPositionLabel:(NSString *)posString;
 
+- (void)setCurrentPuzzleInfo:(NSString *)info;
+
 @end

@@ -19,6 +19,8 @@
     CGPoint _currentTouchPoint;
     
     CGSize _screenSize;
+    
+    GPNavBar *_navBar;
 
 }
 @end
@@ -44,6 +46,7 @@
 - (id)init {
     
     if (self = [super init]) {
+        
         //touch event
         isTouchEnabled_ = YES;
         
@@ -113,7 +116,22 @@
         CCSequence *seqHajimaru = [CCSequence actionOne:delayHajimaru two:hajimaruSpwan];
         [_hajimaruSprite runAction:seqHajimaru];
         
+        _navBar = [[GPNavBar alloc] initWithIsFromPlaying:NO];
+        [self addChild:_navBar];
         
+        
+        if ([GPNavBar isTodayFirstTimeComeIn]) {
+            //加金币
+            NSInteger numOfCoin = [GPNavBar numOfCoinAdded];
+            [_navBar changeTotalScore:numOfCoin];
+            [_navBar refreshTotalScore];
+            
+            [GPNavBar setTimesByUsingShare:0];
+            [GPNavBar setTimesByUsingSOS:0];
+        }
+        
+        [StartLayer cancelLocalNotification];
+        [StartLayer createLocalNotification];
     }
     
     return self;
@@ -170,6 +188,96 @@
 
 - (void)onExit {
     [[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
+}
+
++ (void)cancelLocalNotification {
+    
+    //删除badge
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    
+    //删除所有通知
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+}
+
++ (void)createLocalNotification {
+    
+//    if (![UserSetting isPushDate]) {
+//        return;
+//    }
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif) {
+        
+        int hour = 10;
+        int min = 0;
+        
+        NSString *tomorrow = [[NSDate dateWithTimeIntervalSinceNow:24*60*60] description];
+        
+        NSArray *dateArray = [tomorrow componentsSeparatedByString:@" "];
+        NSString *tomorrowStr = [dateArray objectAtIndex:0];
+        dateArray = [tomorrowStr componentsSeparatedByString:@"-"];
+        
+        NSInteger year = [[dateArray objectAtIndex:0] integerValue];
+        NSInteger month = [[dateArray objectAtIndex:1] integerValue];
+        NSInteger day = [[dateArray objectAtIndex:2] integerValue];
+        
+        NSDateComponents *components = [[[NSDateComponents alloc] init] autorelease];
+        [components setYear:year];
+        [components setMonth:month];
+        [components setDay:day];
+        [components setHour:hour];
+        [components setMinute:min];
+        
+        //本地化一下子
+        NSCalendar *localCalendar = [NSCalendar currentCalendar];
+        
+        NSDate *date = [localCalendar dateFromComponents:components];
+        
+        localNotif.fireDate = date;
+        
+        CCLOG(@"hour is %d, min is %d\n下次推送时间是%@", hour, min, localNotif.fireDate);
+        
+        localNotif.timeZone = [NSTimeZone defaultTimeZone];
+        
+        localNotif.repeatInterval = NSDayCalendarUnit;
+        
+        //本地化一下子
+        NSString *pushStr = nil;
+        
+        switch (arc4random() % 3) {
+            case 0://大椰
+                pushStr = NSLocalizedString(@"今天之内来玩，就送50个黄金摄像机！", @"alertBody");
+                [GPNavBar setNumOfCoinAdded:50];
+                break;
+                
+            case 1://小桃
+                pushStr = NSLocalizedString(@"今天之内来玩，就送30个黄金摄像机！", @"alertBody");
+                [GPNavBar setNumOfCoinAdded:30];
+                break;
+                
+            case 2:
+                pushStr = NSLocalizedString(@"今天之内来玩，就送20个黄金摄像机！", @"alertBody");
+                [GPNavBar setNumOfCoinAdded:20];
+                break;
+                
+            default:
+                pushStr = NSLocalizedString(@"今天之内来玩，就送50个黄金摄像机！", @"alertBody");
+                [GPNavBar setNumOfCoinAdded:50];
+                break;
+        }
+        localNotif.alertBody = pushStr;
+        localNotif.alertAction = NSLocalizedString(@"来玩就送黄金摄像机", @"alertAction");
+        
+        localNotif.soundName = UILocalNotificationDefaultSoundName;
+        
+        localNotif.applicationIconBadgeNumber = 1;
+        
+        NSDictionary *info = [NSDictionary dictionaryWithObject:@"name"forKey:@"key"];
+        localNotif.userInfo = info;
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+    }
+    [localNotif release];
+    
 }
 
 

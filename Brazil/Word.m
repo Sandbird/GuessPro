@@ -55,7 +55,7 @@
         CGSize wordSize = self.wordSprite.boundingBox.size;
 //        CCLabelTTF *wordLabel = [CCLabelTTF labelWithString:self.wordString dimensions:/*CGSizeMake(wordWidth - 20, wordWidth - 20)*/wordSize alignment:NSTextAlignmentCenter fontName:@"HiraKakuProN-W6" fontSize:[GPNavBar isiPad] ? 76 : 20];
         
-       CCLabelTTF *wordLabel =  [CCLabelTTF labelWithString:self.wordString dimensions:wordSize alignment:NSTextAlignmentCenter vertAlignment:CCVerticalAlignmentCenter lineBreakMode:NSLineBreakByWordWrapping fontName:@"HiraKakuProN-W6" fontSize:[GPNavBar isiPad] ? 76 : 30];
+       CCLabelTTF *wordLabel =  [CCLabelTTF labelWithString:self.wordString dimensions:wordSize alignment:NSTextAlignmentCenter vertAlignment:CCVerticalAlignmentCenter lineBreakMode:NSLineBreakByWordWrapping fontName:/*@"HiraKakuProN-W6"*/@"STHeitiSC-Medium"/*@"STHeitiK-Medium"*/ fontSize:[GPNavBar isiPad] ? 76 : 30];
         wordLabel.color = ccBLACK;
         wordLabel.tag = TAG_WORD_LABEL;
         

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001B239218D03C9C00F52BB3 /* InformationBorad.m in Sources */ = {isa = PBXBuildFile; fileRef = 001B239118D03C9C00F52BB3 /* InformationBorad.m */; };
 		002F25EE18CEF92800B47BE3 /* ShareBorad.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F25ED18CEF92800B47BE3 /* ShareBorad.m */; };
 		002FFACF18C60EE6001C2586 /* PressEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = 002FFACE18C60EE6001C2586 /* PressEffects.plist */; };
 		00346D4A181C1DA200A4A998 /* iBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 00346D49181C1DA200A4A998 /* iBlock.m */; };
@@ -495,6 +496,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		001B239018D03C9C00F52BB3 /* InformationBorad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationBorad.h; sourceTree = "<group>"; };
+		001B239118D03C9C00F52BB3 /* InformationBorad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationBorad.m; sourceTree = "<group>"; };
 		002F25EC18CEF92800B47BE3 /* ShareBorad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareBorad.h; sourceTree = "<group>"; };
 		002F25ED18CEF92800B47BE3 /* ShareBorad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareBorad.m; sourceTree = "<group>"; };
 		002FFACE18C60EE6001C2586 /* PressEffects.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PressEffects.plist; sourceTree = "<group>"; };
@@ -900,6 +903,8 @@
 		00831F1918CCB6A20023E713 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		00831F1A18CCB6A20023E713 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		00831F1B18CCB6A20023E713 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		0096223918D185690051ED04 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		0096223B18D186070051ED04 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		009689DD18BF871B00CF0A70 /* PlayerState.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlayerState.plist; sourceTree = "<group>"; };
 		00A2FC8B1827961B00555F9A /* UIImage+MostColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MostColor.h"; sourceTree = "<group>"; };
 		00A2FC8C1827961B00555F9A /* UIImage+MostColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MostColor.m"; sourceTree = "<group>"; };
@@ -1269,6 +1274,8 @@
 				00D1540618C71A8300ABBE74 /* CoinStore.m */,
 				002F25EC18CEF92800B47BE3 /* ShareBorad.h */,
 				002F25ED18CEF92800B47BE3 /* ShareBorad.m */,
+				001B239018D03C9C00F52BB3 /* InformationBorad.h */,
+				001B239118D03C9C00F52BB3 /* InformationBorad.m */,
 			);
 			name = GuessScene;
 			sourceTree = "<group>";
@@ -1313,6 +1320,8 @@
 		006B1F801663762D008ED362 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0096223B18D186070051ED04 /* CoreFoundation.framework */,
+				0096223918D185690051ED04 /* libstdc++.6.0.9.dylib */,
 				00831F0E18CCAE250023E713 /* AdSupport.framework */,
 				00831EFE18CC78770023E713 /* libicucore.dylib */,
 				00831DD818CC3FE20023E713 /* MessageUI.framework */,
@@ -2679,6 +2688,7 @@
 				006B20071663762E008ED362 /* CCMotionStreak.m in Sources */,
 				006B200A1663762E008ED362 /* CCNode.m in Sources */,
 				006B200D1663762E008ED362 /* CCParallaxNode.m in Sources */,
+				001B239218D03C9C00F52BB3 /* InformationBorad.m in Sources */,
 				007A0FFE18BB4BD700A6CCE2 /* SlidingMenuGrid.mm in Sources */,
 				006B20101663762E008ED362 /* CCParticleBatchNode.m in Sources */,
 				006B20131663762E008ED362 /* CCParticleExamples.m in Sources */,
@@ -2841,6 +2851,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -2855,6 +2866,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -2886,15 +2898,15 @@
 				GCC_THUMB_SUPPORT = NO;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = Brazil/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/zhaozilong/GitHub/GuessPro/Brazil/ShareSDK/Extend/SinaWeiboSDK,
 					/Users/zhaozilong/GitHub/GuessPro/Brazil/ShareSDK/Extend/TencentWeiboSDK,
 					/Users/zhaozilong/GitHub/GuessPro/Brazil/ShareSDK/Extend/WeChatSDK,
-					/Users/zhaozilong/GitHub/GuessPro/Brazil/Admob,
 					"/Users/zhaozilong/GitHub/GuessPro/Brazil/GoogleAdMobAdsSdkiOS-6.8.0",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -2903,6 +2915,7 @@
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"Brazil/libs\"";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2934,13 +2947,12 @@
 				GCC_THUMB_SUPPORT = NO;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = Brazil/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/zhaozilong/GitHub/GuessPro/Brazil/ShareSDK/Extend/SinaWeiboSDK,
 					/Users/zhaozilong/GitHub/GuessPro/Brazil/ShareSDK/Extend/TencentWeiboSDK,
 					/Users/zhaozilong/GitHub/GuessPro/Brazil/ShareSDK/Extend/WeChatSDK,
-					/Users/zhaozilong/GitHub/GuessPro/Brazil/Admob,
 					"/Users/zhaozilong/GitHub/GuessPro/Brazil/GoogleAdMobAdsSdkiOS-6.8.0",
 				);
 				OTHER_LDFLAGS = (
@@ -2952,6 +2964,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"Brazil/libs\"";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

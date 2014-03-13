@@ -149,12 +149,11 @@ static GuessScene *instanceOfGuessScene;
     if (self = [super init]) {
         instanceOfGuessScene = self;
         
+        self.isTouchEnabled = YES;
+        
         //加载帧到缓存
         CCSpriteFrameCache *framCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [framCache addSpriteFramesWithFile:[AssetHelper getDeviceSpecificFileNameFor:@"GuessPro.plist"]];
-        
-        //touch is enabled
-        [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:-1 swallowsTouches:YES];
         
         //初始位置设定
         [self setInitalPosition];
@@ -217,6 +216,11 @@ static GuessScene *instanceOfGuessScene;
     }
     
     return self;
+}
+
+- (void)registerWithTouchDispatcher {
+    //touch is enabled
+    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:-1 swallowsTouches:YES];
 }
 
 - (void)loadContinuePuzzleWithLevelNum:(int)levelNum {
@@ -732,7 +736,7 @@ static GuessScene *instanceOfGuessScene;
     //把剩余block变回正常
     [self makeSelectedBlockNormal];
     
-    [_navBar showShareBorad];
+    [_navBar showShareBoradWithType:ShareTypeSOS];
     
 //    [self shareToWeiXin];
 //    [self shareToSina];
@@ -1128,11 +1132,22 @@ static GuessScene *instanceOfGuessScene;
         sLayer = [SuccessLayer node];
         [sLayer setSuccessLayerColorWithImgName:self.currPuzzle.picName];
         [sLayer setPositionLabel:self.currPuzzle.Position];
-        [self addChild:sLayer];
+        [self addChild:sLayer z:self.zOrder + 1];
         sLayer.tag = CCLayerSuccessLayerTag;
+        
+        [sLayer setCurrentPuzzleInfo:self.currPuzzle.information];
+        
+        //把上一个layer的touch事件都暂停。
+        self.isTouchEnabled = NO;
+        _itemMenu.isTouchEnabled = NO;
+        
     } else {
         sLayer = (SuccessLayer *)[self getChildByTag:CCLayerSuccessLayerTag];
         [sLayer removeFromParentAndCleanup:YES];
+        
+        //把上一个layer的touch事件重新开启。
+        self.isTouchEnabled = YES;
+        _itemMenu.isTouchEnabled = YES;
     }
 }
 

@@ -72,7 +72,7 @@ typedef enum {
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
-        CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 100)];
+        CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 200)];
         [self addChild:color z:0];
         
         //加载帧到缓存
@@ -83,15 +83,15 @@ typedef enum {
         //设置初始位置
         [self setItemInitalPostion];
         
-        CCSprite *backgroud = [CCSprite spriteWithSpriteFrameName:@"StoreBackgroud.png"];
-        [self addChild:backgroud z:0];
-        backgroud.position = ccp(winSize.width / 2, winSize.height / 2);
+//        CCSprite *backgroud = [CCSprite spriteWithSpriteFrameName:@"StoreBackgroud.png"];
+//        [self addChild:backgroud z:0];
+//        backgroud.position = ccp(winSize.width / 2, winSize.height / 2);
         
-        CCSprite *closeSprite = [CCSprite spriteWithSpriteFrameName:@"Close.png"];
-        CCSprite *closeHLSprite = [CCSprite spriteWithSpriteFrameName:@"Close_HL.png"];
+        CCSprite *closeSprite = [CCSprite spriteWithSpriteFrameName:@"close.png"];
+        CCSprite *closeHLSprite = [CCSprite spriteWithSpriteFrameName:@"close_HL.png"];
         CCMenuItem *closeItem = [CCMenuItemImage itemFromNormalSprite:closeSprite selectedSprite:closeHLSprite target:self selector:@selector(closeStore)];
-        closeItem.anchorPoint = ccp(1, 1);
-        closeItem.position = ccp(winSize.width / 2 + backgroud.boundingBox.size.width / 2, winSize.height / 2 + backgroud.boundingBox.size.height / 2);
+        closeItem.anchorPoint = ccp(0.5, 0.5);
+        closeItem.position = ccp(winSize.width / 2, 50);
         
         CCArray *storeBannerArray = [CCArray array];
         CCArray *storeBannerHLArray = [CCArray array];
