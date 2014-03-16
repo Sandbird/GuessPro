@@ -12,6 +12,7 @@
 #import "WordBlank.h"
 #import "GPDatabase.h"
 #import "SuccessLayer.h"
+#import "WordBorad.h"
 
 //#import <AGCommon/UINavigationBar+Common.h>
 //#import <AGCommon/UIImage+Common.h>
@@ -190,7 +191,7 @@ static GuessScene *instanceOfGuessScene;
         [self setItemMenu];
         
         //NavBar
-        _navBar = [[[GPNavBar alloc] initWithIsFromPlaying:YES] autorelease];
+        _navBar = [[[GPNavBar alloc] initWithSceneType:GPSceneTypeGuessLayer] autorelease];
         [self addChild:_navBar z:ZORDER_NAV_BAR];
 //        if (IS_KAYAC) {
 //            [_navBar setTipsLabelStr:self.currPuzzle.Hiragana];
@@ -208,7 +209,7 @@ static GuessScene *instanceOfGuessScene;
         //照片背后的框
         CCSprite *backBoraderSprite = [CCSprite spriteWithSpriteFrameName:@"outSide.png"];
         backBoraderSprite.anchorPoint = ccp(0.5, 0.5);
-        CGFloat shouldWidth = ([GPNavBar isiPad] ? 468 : 228.8f);
+        CGFloat shouldWidth = ([GPNavBar isiPad] ? 468 : 208.0f);
         CGFloat currWidth = backBoraderSprite.boundingBox.size.width;
         backBoraderSprite.scale = shouldWidth / currWidth;
         backBoraderSprite.position = _FPSet.pictrue;
@@ -418,50 +419,50 @@ static GuessScene *instanceOfGuessScene;
     
     if ([GPNavBar isiPad]) {
         
-        _FPSet.readyItemSmall = ccp(0, 820);
-        _FPSet.readyItemBomb = ccp(0, 670);
-        _FPSet.readyItemFlying = ccp(0, 520);
+        _FPSet.readyItemSmall = ccp(0, 770);
+        _FPSet.readyItemBomb = ccp(0, 660);
+        _FPSet.readyItemFlying = ccp(0, 550);
         
-        _FPSet.closeItemSmall   = ccp(-30, 820);
-        _FPSet.closeItemBomb    = ccp(-30, 670);
-        _FPSet.closeItemFlying  = ccp(-30, 520);
+        _FPSet.closeItemSmall   = ccp(-15, 770);
+        _FPSet.closeItemBomb    = ccp(-15, 660);
+        _FPSet.closeItemFlying  = ccp(-15, 550);
         
-        _FPSet.closeItemTips    = ccp(645+15, 820);
-        _FPSet.closeItemAnswer  = ccp(645+15, 670);
-        _FPSet.closeItemShare   = ccp(645+15, 520);
+        _FPSet.closeItemTips    = ccp(645+15, 770);
+        _FPSet.closeItemAnswer  = ccp(645+15, 660);
+        _FPSet.closeItemShare   = ccp(645+15, 550);
         
-        _FPSet.pictrue = ccp(winSize.width / 2, 920 - 225);
+        _FPSet.pictrue = ccp(winSize.width / 2, 1024 - 100 - 40 - PICTURE_WIDTH / 2);
     } else if ([GPNavBar isiPhone5]) {
         
-        _FPSet.readyItemSmall = ccp(0, 820);
-        _FPSet.readyItemBomb = ccp(0, 670);
-        _FPSet.readyItemFlying = ccp(0, 520);
+        _FPSet.readyItemSmall = ccp(0, 355+70);
+        _FPSet.readyItemBomb = ccp(0, 305+70);
+        _FPSet.readyItemFlying = ccp(0, 255+70);
         
-        _FPSet.closeItemSmall   = ccp(-15, 820);
-        _FPSet.closeItemBomb    = ccp(-15, 670);
-        _FPSet.closeItemFlying  = ccp(-15, 520);
+        _FPSet.closeItemSmall   = ccp(-8, 355+70);
+        _FPSet.closeItemBomb    = ccp(-8, 305+70);
+        _FPSet.closeItemFlying  = ccp(-8, 255+70);
         
-        _FPSet.closeItemTips    = ccp(645+15, 820);
-        _FPSet.closeItemAnswer  = ccp(645+15, 670);
-        _FPSet.closeItemShare   = ccp(645+15, 520);
+        _FPSet.closeItemTips    = ccp(272, 355+70);
+        _FPSet.closeItemAnswer  = ccp(272, 305+70);
+        _FPSet.closeItemShare   = ccp(272, 255+70);
         
-        _FPSet.pictrue = ccp(winSize.width / 2, 568 - 48 - PICTURE_WIDTH / 2);
+        _FPSet.pictrue = ccp(winSize.width / 2, 568 - 50 - 45 - PICTURE_WIDTH / 2);
 
     } else {
         
-        _FPSet.readyItemSmall = ccp(0, 380);
-        _FPSet.readyItemBomb = ccp(0, 330);
-        _FPSet.readyItemFlying = ccp(0, 280);
+        _FPSet.readyItemSmall = ccp(0, 355);
+        _FPSet.readyItemBomb = ccp(0, 305);
+        _FPSet.readyItemFlying = ccp(0, 255);
         
-        _FPSet.closeItemSmall   = ccp(-20, 380);
-        _FPSet.closeItemBomb    = ccp(-20, 330);
-        _FPSet.closeItemFlying  = ccp(-20, 280);
+        _FPSet.closeItemSmall   = ccp(-8, 355);
+        _FPSet.closeItemBomb    = ccp(-8, 305);
+        _FPSet.closeItemFlying  = ccp(-8, 255);
         
-        _FPSet.closeItemTips    = ccp(270, 380);
-        _FPSet.closeItemAnswer  = ccp(270, 330);
-        _FPSet.closeItemShare   = ccp(270, 280);
+        _FPSet.closeItemTips    = ccp(272, 355);
+        _FPSet.closeItemAnswer  = ccp(272, 305);
+        _FPSet.closeItemShare   = ccp(272, 255);
         
-        _FPSet.pictrue = ccp(winSize.width / 2, 480 - 38 - 10 - PICTURE_WIDTH / 2);
+        _FPSet.pictrue = ccp(winSize.width / 2, 480 - 50 - 25 - PICTURE_WIDTH / 2);
     }
     
     
@@ -680,6 +681,9 @@ static GuessScene *instanceOfGuessScene;
     
     //把剩余block变回正常
     [self makeSelectedBlockNormal];
+    [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusSmall];
+    [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusBomb];
+    [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusFlying];
     
     if (self.currPuzzle.isBuiedTips) {
         [self showTipsAlert];
@@ -697,17 +701,23 @@ static GuessScene *instanceOfGuessScene;
     //标记是否购买
     self.currPuzzle.isBuiedTips = YES;
     
-    //显示Alert
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示如下" message:self.currPuzzle.tips delegate:self cancelButtonTitle:@"看好了" otherButtonTitles:nil];
-    [alertView show];
-    alertView.tag = TAG_ALERT_SHOW_TIPS;
-    [alertView release];
+    WordBorad *tipsBorad = [WordBorad nodeWithWords:self.currPuzzle.tips wordBoradType:WordBoradTypeTips];
+    [self addChild:tipsBorad z:ZORDER_NAV_BAR + 1];
+    
+    tipsBorad.scale = 0;
+    CCScaleTo *scaleToBig = [CCScaleTo actionWithDuration:0.2 scale:1];
+    CCSequence *smallToBig = [CCSequence actions:scaleToBig, nil];
+    [tipsBorad runAction:smallToBig];
+    
 }
 
 - (void)answerItemPressed {
     
     //把剩余block变回正常
     [self makeSelectedBlockNormal];
+    [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusSmall];
+    [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusBomb];
+    [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusFlying];
     
     if (self.currPuzzle.isBuiedAnswer) {
         [self showAnswerAlert];
@@ -724,28 +734,25 @@ static GuessScene *instanceOfGuessScene;
     //标记是否购买
     self.currPuzzle.isBuiedAnswer = YES;
     
-    //显示Alert
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"答案如下" message:self.currPuzzle.answer delegate:self cancelButtonTitle:@"看好了" otherButtonTitles:nil];
-    [alertView show];
-    alertView.tag = TAG_ALERT_SHOW_ANSWER;
-    [alertView release];
+    WordBorad *answerBorad = [WordBorad nodeWithWords:self.currPuzzle.answer wordBoradType:WordBoradTypeAnswer];
+    [self addChild:answerBorad z:ZORDER_NAV_BAR + 1];
+    
+    answerBorad.scale = 0;
+    CCScaleTo *scaleToBig = [CCScaleTo actionWithDuration:0.2 scale:1];
+    CCSequence *smallToBig = [CCSequence actions:scaleToBig, nil];
+    [answerBorad runAction:smallToBig];
 }
 
 - (void)shareItemPressed {
     
     //把剩余block变回正常
     [self makeSelectedBlockNormal];
+    [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusSmall];
+    [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusBomb];
+    [self makeBlockEffectBackToNormalByReceivedStatus:RecivedStatusFlying];
     
     [_navBar showShareBoradWithType:ShareTypeSOS];
     
-//    [self shareToWeiXin];
-//    [self shareToSina];
-    
-//    //显示Alert
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"向朋友求助" message:@"使用向朋友求助道具，分享到社交网络，可奖励10个黄金摄像机，每天最多可以奖励50个" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-//    [alertView show];
-//    alertView.tag = TAG_ALERT_ITEM_SHARE;
-//    [alertView release];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -932,7 +939,7 @@ static GuessScene *instanceOfGuessScene;
     CCSprite *flySprite = (CCSprite *)[self getChildByTag:CCSpriteFlyingItemTag];
     CGPoint pos = flySprite.position;
     
-    pos.x += 15.0 * ([GPNavBar isiPad] ? 2.5 : 0.5);
+    pos.x += 15.0 * ([GPNavBar isiPad] ? 2.5 : 1.0);
     
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     // Reposition stripes when they're out of bounds
@@ -1105,12 +1112,22 @@ static GuessScene *instanceOfGuessScene;
     float time = 0.0;
     for (iBlock *block in self.blockArray) {
         
-        ccBezierConfig bc = {ccp(40, 980), ccp(800, 0), ccp(0, 800),};
+        ccBezierConfig bc;// = {ccp(40, 980), ccp(800, 0), ccp(0, 800),};
+        
+        if ([GPNavBar isiPad]) {
+            bc.endPosition      = ccp(700, 980);
+            bc.controlPoint_1   = ccp(0, 800);
+            bc.controlPoint_2   = ccp(800, 0);
+        } else {
+            bc.endPosition      = ccp(290, 470);
+            bc.controlPoint_1   = ccp(0, 500);
+            bc.controlPoint_2   = ccp(300, 0);
+        }
         
         
-        time+=0.05;
+        time+=([GPNavBar isiPad] ? 0.05 : 0.1);
         CCBezierTo *bt = [CCBezierTo actionWithDuration:time bezier:bc];
-//        CCMoveTo *moveToScore = [CCMoveTo actionWithDuration:time position:ccp(0, 1024)];
+//        CCMoveTo *moveToScore = [CCMoveTo actionWithDuration:time position:bc.endPosition];
         CCScaleTo *scaleToNone = [CCScaleTo actionWithDuration:time scale:0];
         CCSpawn *moveAndScale = [CCSpawn actionOne:bt two:scaleToNone];
         
@@ -1271,6 +1288,29 @@ static GuessScene *instanceOfGuessScene;
     //如果有图片，先把图片从内存中清除
     if (_picSprite) {
         CCTexture2D *texture = _picSprite.texture;
+//        [_picSprite removeFromParentAndCleanup:YES];
+        CCTextureCache *textureCache = [CCTextureCache sharedTextureCache];
+        [textureCache removeTexture:texture];
+        
+        CCSprite *newPic = [CCSprite spriteWithFile:self.currPuzzle.picName];
+        _picSprite.texture = newPic.texture;
+    } else {
+        _picSprite = [CCSprite spriteWithFile:self.currPuzzle.picName];
+        [self addChild:_picSprite z:ZORDER_PICTRUE];
+        _picSprite.anchorPoint = ccp(0.5, 0.5);
+        _picSprite.scale = PICTURE_WIDTH / _picSprite.boundingBox.size.height;
+        _picSprite.position = _FPSet.pictrue;
+    }
+    
+    
+    
+}
+
+/*
+- (void)resetPictrue {
+    //如果有图片，先把图片从内存中清除
+    if (_picSprite) {
+        CCTexture2D *texture = _picSprite.texture;
         [_picSprite removeFromParentAndCleanup:YES];
         CCTextureCache *textureCache = [CCTextureCache sharedTextureCache];
         [textureCache removeTexture:texture];
@@ -1283,11 +1323,8 @@ static GuessScene *instanceOfGuessScene;
     _picSprite.scale = PICTURE_WIDTH / _picSprite.boundingBox.size.height;
     _picSprite.position = _FPSet.pictrue;
     
-    //ipad用ipadRetina的屏幕
-//    _picSprite.scale = 0.5;
-    
-    
 }
+ */
 
 - (void)resetWordBlankArray {
     

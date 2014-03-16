@@ -17,21 +17,30 @@
 
 #define ACTION_UP_SCORE_TAG 999
 
+typedef enum {
+    GPSceneTypeStartLayer,
+    GPSceneTypeLevelLayer,
+    GPSceneTypeGuessLayer,
+    GPSceneTypeNone,
+}GPSceneType;
+
 @interface GPNavBar : CCLayer {
    
     //    CCMenuItem *homeItem;
     
     CCNode *worldScene;
     
-    CGFloat fontsize;
+//    CGFloat fontsize;
     
 }
 
-@property (nonatomic, retain)CCSprite *backgroudSprite;
+//@property (nonatomic, retain)CCSprite *backgroudSprite;
 
 @property BOOL isEnglish;
 
-- (id)initWithIsFromPlaying:(BOOL)isPlaying;
+//- (id)initWithIsFromPlaying:(BOOL)isPlaying;
+
+- (id)initWithSceneType:(GPSceneType)sceneType;
 
 - (int)scores;
 

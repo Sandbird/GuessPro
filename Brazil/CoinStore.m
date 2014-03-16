@@ -79,6 +79,33 @@ typedef enum {
         CCSpriteFrameCache *framCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [framCache addSpriteFramesWithFile:[AssetHelper getDeviceSpecificFileNameFor:@"Store.plist"]];
         
+        CGFloat posY;
+        CGSize wordSize;
+        if ([GPNavBar isiPad]) {
+            posY = winSize.height - 76.0f;
+            wordSize = CGSizeMake(600, 200);
+        } else if ([GPNavBar isiPhone5]) {
+            posY = winSize.height - 38.0f;
+            wordSize = CGSizeMake(250, 100);
+        } else {
+            posY = winSize.height - 38.0f;
+            wordSize = CGSizeMake(250, 100);
+        }
+        
+        NSString *title = @"电影院卖场";
+        
+        CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
+        labelTitle.color = ccWHITE;
+        labelTitle.anchorPoint = ccp(0.5, 0.5);
+        labelTitle.position = ccp(winSize.width / 2, posY);
+        [self addChild:labelTitle];
+        
+        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:@"欢迎购买黄金摄像机！购买任意数量黄金摄像机，即可去除广告条。" dimensions:wordSize alignment:NSTextAlignmentCenter vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
+        labelWords.color = ccWHITE;
+        labelWords.anchorPoint = ccp(0.5, 1);
+        labelWords.position = ccp(winSize.width / 2,  posY - labelTitle.boundingBox.size.height);
+        [self addChild:labelWords];
+        
         
         //设置初始位置
         [self setItemInitalPostion];

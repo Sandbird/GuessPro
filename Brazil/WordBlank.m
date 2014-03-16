@@ -27,7 +27,14 @@
         int initalPosOfX = (screenSize.width - totalNum * blankWidth) / 2;
 
         float blankX = initalPosOfX + ((float)index + (float)1 / 2) * blankWidth;
-        float blankY = blankWidth * 3.5 + 20.0;
+        float blankY;
+        if ([GPNavBar isiPad]) {
+            blankY = blankWidth * 3.5 + 20.0;
+        } else if ([GPNavBar isiPhone5]) {
+            blankY = blankWidth * 3.5 + 75.0;
+        } else {
+            blankY = blankWidth * 3.5 + 20.0;
+        }
         
         self.point = ccp(blankX, blankY);
         

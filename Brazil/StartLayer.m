@@ -116,8 +116,8 @@
         CCSequence *seqHajimaru = [CCSequence actionOne:delayHajimaru two:hajimaruSpwan];
         [_hajimaruSprite runAction:seqHajimaru];
         
-        _navBar = [[GPNavBar alloc] initWithIsFromPlaying:NO];
-        [self addChild:_navBar];
+        _navBar = [[[GPNavBar alloc] initWithSceneType:GPSceneTypeStartLayer] autorelease];
+        [self addChild:_navBar z:ZORDER_NAV_BAR];
         
         
         if ([GPNavBar isTodayFirstTimeComeIn]) {

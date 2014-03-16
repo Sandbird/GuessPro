@@ -78,6 +78,42 @@ typedef struct ItemSharePostion {
 //        [backgroud setScaleY:scaleY];
 //        backgroud.position = ccp(winSize.width / 2, backgroud.boundingBox.size.height / 2);
         
+        CGFloat posY;
+        CGSize wordSize;
+        if ([GPNavBar isiPad]) {
+            posY = winSize.height - 76.0f;
+            wordSize = CGSizeMake(600, 200);
+        } else if ([GPNavBar isiPhone5]) {
+            posY = winSize.height - 38.0f;
+            wordSize = CGSizeMake(250, 100);
+        } else {
+            posY = winSize.height - 38.0f;
+            wordSize = CGSizeMake(250, 100);
+        }
+        
+        NSString *title = @"";
+        NSString *text = @"";
+        
+        if (self.SBStype == ShareTypeSOS) {
+            title = @"求助朋友";
+            text = @"如果成功分享到任意一个社交平台向朋友求助的话，鉴于你的谦虚品质，将获得5个黄金摄像机的奖励。每天最多可奖励50个黄金摄像机。";
+        } else if (self.SBStype == ShareTypeShare) {
+            title = @"分享电影海报猜猜猜";
+            text = @"如果成功分享到任意一个社交平台的话，你将获得10个黄金摄像机的奖励，快让更多你身边的电影大神加入吧。每天最多可奖励50个黄金摄像机。";
+        }
+        
+        CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
+        labelTitle.color = ccWHITE;
+        labelTitle.anchorPoint = ccp(0.5, 0.5);
+        labelTitle.position = ccp(winSize.width / 2, posY);
+        [self addChild:labelTitle];
+        
+        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:text dimensions:wordSize alignment:NSTextAlignmentCenter vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
+        labelWords.color = ccWHITE;
+        labelWords.anchorPoint = ccp(0.5, 1);
+        labelWords.position = ccp(winSize.width / 2,  posY - labelTitle.boundingBox.size.height);
+        [self addChild:labelWords];
+        
         CCSprite *closeSprite = [CCSprite spriteWithSpriteFrameName:@"close.png"];
         CCSprite *closeHLSprite = [CCSprite spriteWithSpriteFrameName:@"close_HL.png"];
         CCMenuItem *closeItem = [CCMenuItemImage itemFromNormalSprite:closeSprite selectedSprite:closeHLSprite target:self selector:@selector(closeShareBorad)];
@@ -124,50 +160,56 @@ typedef struct ItemSharePostion {
 }
 
 - (void)setItemInitalPostion {
-    CGFloat spaceX, spaceY, width;
+    CGFloat spaceX, spaceY, width, posX, posY;
     if ([GPNavBar isiPad]) {
-        spaceX = 15.0f;
-        spaceY = 20.0f;
+        spaceX = 80.0f;
+        spaceY = 80.0f;
         width = 80.0f;
+        posX = 30;
+        posY = 350;
         
-        _ISPSet.ItemSharePYQ        = ccp(0, 0);
-        _ISPSet.ItemShareWeixin     = ccp(0, 0);
-        _ISPSet.ItemShareSinaWeiBo  = ccp(0, 0);
-        _ISPSet.ItemShareQQ         = ccp(0, 0);
-        _ISPSet.ItemShareQQZone     = ccp(0, 0);
-        _ISPSet.ItemShareQQWeiBo    = ccp(0, 0);
-        _ISPSet.ItemShareRenRen     = ccp(0, 0);
-        _ISPSet.ItemShareDouban     = ccp(0, 0);
+        _ISPSet.ItemSharePYQ        = ccp(posX + spaceX,               spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareWeixin     = ccp(posX + spaceX*2 + width,     spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareSinaWeiBo  = ccp(posX + spaceX*3 + width*2,   spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareQQ         = ccp(posX + spaceX*4 + width*3,   spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareQQZone     = ccp(posX + spaceX,               width+spaceY + posY);
+        _ISPSet.ItemShareQQWeiBo    = ccp(posX + spaceX*2 + width,     width+spaceY + posY);
+        _ISPSet.ItemShareRenRen     = ccp(posX + spaceX*3 + width*2,   width+spaceY + posY);
+        _ISPSet.ItemShareDouban     = ccp(posX + spaceX*4 + width*3,   width+spaceY + posY);
         
         _ISPSet.ItemClose           = ccp(0, 0);
     } else if ([GPNavBar isiPhone5]) {
-        spaceX = 5.0f;
-        spaceY = 4.0f;
+        spaceX = 20.0f;
+        spaceY = 40.0f;
         width = 40.0f;
+        posX = 30;
+        posY = 150;
         
-        _ISPSet.ItemSharePYQ        = ccp(0, 0);
-        _ISPSet.ItemShareWeixin     = ccp(0, 0);
-        _ISPSet.ItemShareSinaWeiBo  = ccp(0, 0);
-        _ISPSet.ItemShareQQ         = ccp(0, 0);
-        _ISPSet.ItemShareQQZone     = ccp(0, 0);
-        _ISPSet.ItemShareQQWeiBo    = ccp(0, 0);
-        _ISPSet.ItemShareRenRen     = ccp(0, 0);
-        _ISPSet.ItemShareDouban     = ccp(0, 0);
+        _ISPSet.ItemSharePYQ        = ccp(posX + spaceX,               spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareWeixin     = ccp(posX + spaceX*2 + width,     spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareSinaWeiBo  = ccp(posX + spaceX*3 + width*2,   spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareQQ         = ccp(posX + spaceX*4 + width*3,   spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareQQZone     = ccp(posX + spaceX,               width+spaceY + posY);
+        _ISPSet.ItemShareQQWeiBo    = ccp(posX + spaceX*2 + width,     width+spaceY + posY);
+        _ISPSet.ItemShareRenRen     = ccp(posX + spaceX*3 + width*2,   width+spaceY + posY);
+        _ISPSet.ItemShareDouban     = ccp(posX + spaceX*4 + width*3,   width+spaceY + posY);
         
         _ISPSet.ItemClose           = ccp(0, 0);
     } else {
-        spaceX = 15.0f;
-        spaceY = 15.0f;
+        spaceX = 20.0f;
+        spaceY = 30.0f;
         width = 40.0f;
+        posX = 30;
+        posY = 130;
         
-        _ISPSet.ItemSharePYQ        = ccp(spaceX,               spaceY*2 + width*2);
-        _ISPSet.ItemShareWeixin     = ccp(spaceX*2 + width,     spaceY*2 + width*2);
-        _ISPSet.ItemShareSinaWeiBo  = ccp(spaceX*3 + width*2,   spaceY*2 + width*2);
-        _ISPSet.ItemShareQQ         = ccp(spaceX*4 + width*3,   spaceY*2 + width*2);
-        _ISPSet.ItemShareQQZone     = ccp(spaceX,               width+spaceY);
-        _ISPSet.ItemShareQQWeiBo    = ccp(spaceX*2 + width,     width+spaceY);
-        _ISPSet.ItemShareRenRen     = ccp(spaceX*3 + width*2,   width+spaceY);
-        _ISPSet.ItemShareDouban     = ccp(spaceX*4 + width*3,   width+spaceY);
+        _ISPSet.ItemSharePYQ        = ccp(posX + spaceX,               spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareWeixin     = ccp(posX + spaceX*2 + width,     spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareSinaWeiBo  = ccp(posX + spaceX*3 + width*2,   spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareQQ         = ccp(posX + spaceX*4 + width*3,   spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareQQZone     = ccp(posX + spaceX,               width+spaceY + posY);
+        _ISPSet.ItemShareQQWeiBo    = ccp(posX + spaceX*2 + width,     width+spaceY + posY);
+        _ISPSet.ItemShareRenRen     = ccp(posX + spaceX*3 + width*2,   width+spaceY + posY);
+        _ISPSet.ItemShareDouban     = ccp(posX + spaceX*4 + width*3,   width+spaceY + posY);
         
         _ISPSet.ItemClose           = ccp(0, 0);
     }

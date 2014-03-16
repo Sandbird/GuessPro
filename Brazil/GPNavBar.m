@@ -23,6 +23,7 @@
 #define EFFECT_BACK @"backEffect.caf"
 #define EFFECT_BARK @"bark.caf"
 
+
 @interface GPNavBar() {
 //    CCSprite *_backgroudSprite;
     CCLabelTTF *_totalScoreLabel;
@@ -36,10 +37,14 @@
     
     ShareBorad *_shareBorad;
     CoinStore *_coinStore;
+    
+    CGRect _rect;
 }
 
 @property (assign) int totalScore;
-@property (assign) BOOL isPlaying;
+//@property (assign) BOOL isPlaying;
+
+@property (assign) GPSceneType sceneType;
 
 @end
 
@@ -51,59 +56,72 @@
     [super dealloc];
 }
 
-- (id)initWithIsFromPlaying:(BOOL)isPlaying {
+- (id)initWithSceneType:(GPSceneType)sceneType {
+
     
     if (self = [super init]) {
         
         self.isTouchEnabled = YES;
     
-        self.isPlaying = isPlaying;
+        self.sceneType = sceneType;
         
         CCSpriteFrameCache *frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [frameCache addSpriteFramesWithFile:[AssetHelper getDeviceSpecificFileNameFor:@"GPNavBar.plist"]];
-        CCSpriteFrame *frame;
+//        CCSpriteFrame *frame;
         
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        if ([GPNavBar isiPad]) {
-            fontsize = 48;
-        } else {
-            fontsize = 22;
+//        if ([GPNavBar isiPad]) {
+//            fontsize = 48;
+//        } else {
+//            fontsize = 22;
+//        }
+        
+        //第一页没有背景
+        if (self.sceneType != GPSceneTypeStartLayer) {
+            CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255) width:winSize.width height:([GPNavBar isiPad] ? 88 : 44)];
+            color.position = ccp(0, winSize.height - color.boundingBox.size.height);
+            [self addChild:color];
         }
         
-        frame = [frameCache spriteFrameByName:@"GPNavBar.png"];
-        _backgroudSprite = [CCSprite spriteWithSpriteFrame:frame];
-        _backgroudSprite.anchorPoint = ccp(0.5, 1);
-        _backgroudSprite.position = ccp(winSize.width / 2, winSize.height);
-        [self addChild:_backgroudSprite];
+        _rect = CGRectMake(0, winSize.height - ([GPNavBar isiPad] ? 88 : 44), winSize.width, ([GPNavBar isiPad] ? 88 : 44));
         
-        CGFloat centreOfHeight = winSize.height - _backgroudSprite.boundingBox.size.height / 2;
+        CGFloat centreOfHeight = winSize.height - _rect.size.height / 2;
         
         //金币
         CCSprite *coinSprite = [CCSprite spriteWithSpriteFrameName:@"Coin.png"];
         CCSprite *coinHLSprite = [CCSprite spriteWithSpriteFrameName:@"Coin_HL.png"];
         _coinItem = [CCMenuItemImage itemFromNormalSprite:coinSprite selectedSprite:coinHLSprite target:self selector:@selector(showStoreLayer)];
         _coinItem.anchorPoint = ccp(0.5, 0.5);
-        _coinItem.position = ccp(winSize.width - _coinItem.boundingBox.size.width / 2 - 20, centreOfHeight);
+        _coinItem.position = ccp(winSize.width - _coinItem.boundingBox.size.width / 2 - 10, centreOfHeight);
         
         //分数
         self.totalScore = [self loadPlayerStatusTotalScore];
-        _totalScoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", self.totalScore] fontName:@"ArialRoundedMTBold" fontSize:fontsize];
+        _totalScoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", self.totalScore] fontName:/*@"ArialRoundedMTBold"*/FONTNAME_OF_TEXT fontSize:([GPNavBar isiPad] ? 48 : 22)];
         _totalScoreLabel.color = ccc3(60, 60, 60);
         _totalScoreLabel.anchorPoint = ccp(1, 0.5);
         _totalScoreLabel.position = ccp(_coinItem.boundingBox.origin.x - _coinItem.boundingBox.size.width / 2, centreOfHeight);
         [self addChild:_totalScoreLabel];
         
-        //返回键
-        CCSprite *backSprite = [CCSprite spriteWithSpriteFrameName:@"Back.png"];
-        CCSprite *backHLSprite = [CCSprite spriteWithSpriteFrameName:@"Back_HL.png"];
-        CCMenuItem *backItem = [CCMenuItemImage itemFromNormalSprite:backSprite selectedSprite:backHLSprite target:self selector:@selector(popToMenu)];
+        CCMenu *mainMenu = nil;
+        if (self.sceneType != GPSceneTypeStartLayer) {
+            //返回键
+            CCSprite *backSprite = [CCSprite spriteWithSpriteFrameName:@"Back.png"];
+            CCSprite *backHLSprite = [CCSprite spriteWithSpriteFrameName:@"Back_HL.png"];
+            CCMenuItem *backItem = [CCMenuItemImage itemFromNormalSprite:backSprite selectedSprite:backHLSprite target:self selector:@selector(popToMenu)];
+            
+            mainMenu = [CCMenu menuWithItems:backItem, _coinItem, nil];
+            backItem.anchorPoint = ccp(0, 0.5);
+            backItem.position = ccp(10, centreOfHeight);
+            
+        } else {
+            mainMenu = [CCMenu menuWithItems:_coinItem, nil];
+        }
         
-        CCMenu *mainMenu = [CCMenu menuWithItems:backItem, _coinItem, nil];
-        backItem.anchorPoint = ccp(0, 0.5);
-        backItem.position = ccp(10, centreOfHeight);
         mainMenu.position = ccp(0, 0);
         [self addChild:mainMenu];
+        
+        
     }
     
     return self;
@@ -116,7 +134,7 @@
 }
 
 - (BOOL)isTouchForMe:(CGPoint)touchLocation {
-    return CGRectContainsPoint(_backgroudSprite.boundingBox, touchLocation);
+    return CGRectContainsPoint(_rect, touchLocation);
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -131,11 +149,10 @@
 
 - (void)popToMenu {
     
-    if (self.isPlaying) {
+    if (self.sceneType == GPSceneTypeGuessLayer) {
         [[GuessScene sharedGuessScene] saveScene];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5 scene:[MapScene scene]]];
-    } else {
-        
+    } else if (self.sceneType == GPSceneTypeLevelLayer){
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[StartLayer scene]]];
    
     }
@@ -173,8 +190,8 @@
     NSMutableArray *actions = [NSMutableArray array];
     //    NSMutableArray *kayacActions = [NSMutableArray array];
     for (int i = self.totalScore + 1; i <= self.totalScore + extraScore; i++) {
-        CCScaleTo *big = [CCScaleTo actionWithDuration:0.02 scale:1.1];
-        CCScaleTo *normal = [CCScaleTo actionWithDuration:0.01 scale:1.0];
+        CCScaleTo *big = [CCScaleTo actionWithDuration:0.08 scale:1.1];
+        CCScaleTo *normal = [CCScaleTo actionWithDuration:0.02 scale:1.0];
         CCCallBlock *changeWord = [CCCallBlock actionWithBlock:^{
             [_totalScoreLabel setString:[NSString stringWithFormat:@"%d", self.totalScore]];
         }];
@@ -196,8 +213,8 @@
     NSMutableArray *actions = [NSMutableArray array];
 //    NSMutableArray *kayacActions = [NSMutableArray array];
     for (int i = self.totalScore + 1; i <= self.totalScore + extraScore; i++) {
-        CCScaleTo *big = [CCScaleTo actionWithDuration:0.02 scale:1.1];
-        CCScaleTo *normal = [CCScaleTo actionWithDuration:0.01 scale:1.0];
+        CCScaleTo *big = [CCScaleTo actionWithDuration:0.08 scale:1.1];
+        CCScaleTo *normal = [CCScaleTo actionWithDuration:0.02 scale:1.0];
         CCCallBlock *changeWord = [CCCallBlock actionWithBlock:^{
             [_totalScoreLabel setString:[NSString stringWithFormat:@"%d", i]];
         }];
@@ -313,21 +330,18 @@
 }
 
 - (void)showStoreLayer {
+    
     if (_coinStore) {
+        
         [_coinStore removeFromParentAndCleanup:YES];
         _coinStore = nil;
     } else {
         _coinStore = [CoinStore node];
         [self addChild:_coinStore];
         
-//        [_coinStore smallToBigAction];
         _coinStore.scale = 0;
         CCScaleTo *scaleToBig = [CCScaleTo actionWithDuration:0.2 scale:1];
-//        CCScaleTo *scaleToSmall = [CCScaleTo actionWithDuration:0.1 scale:0.9];
-//        CCScaleTo *scaleToNormal = [CCScaleTo actionWithDuration:0.1 scale:1];
-        
-        CCSequence *smallToBig = [CCSequence actions:scaleToBig,/* scaleToSmall, scaleToNormal,*/ nil];
-        
+        CCSequence *smallToBig = [CCSequence actions:scaleToBig, nil];
         [_coinStore runAction:smallToBig];
     }
 }

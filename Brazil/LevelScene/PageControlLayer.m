@@ -43,18 +43,25 @@
     }
 }
 - (void)setupLayer {
+    CGFloat gap = 15.0f;
+    NSInteger count = self.pages;
+    CGFloat radius = 5.0f;
     
-    for (int i = 0; i < self.pages; i++) {
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    CGFloat startX = (winSize.width - ((count * radius) + ((count - 1) * gap))) / 2;
+    
+    
+    for (int i = 0; i < count; i++) {
         ccColor4B color;
         if(self.currentPage == i) {
             color = ccc4(255, 255, 255, 255);
         } else {
             color = ccc4(255, 255, 255, 150);
         }
-        ColoredCircleSprite *circle = [ColoredCircleSprite circleWithColor:color radius:5];
-        circle.position = ccp((15 * i),0);
+        ColoredCircleSprite *circle = [ColoredCircleSprite circleWithColor:color radius:radius];
+        circle.position = ccp(startX + (i+1) * circle.boundingBox.size.width / 2 + (gap * i),0);
         [self addChild:circle];
     }
-    self.contentSize = CGSizeMake(self.pages * 10, 10);
+//    self.contentSize = CGSizeMake(self.pages * 10, 10);
 }
 @end

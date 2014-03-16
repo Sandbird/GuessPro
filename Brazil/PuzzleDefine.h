@@ -11,9 +11,12 @@
 
 #define ADMOB_ID @"a152d1f7e98daee"
 
-#define NUM_OF_WORD_SELECTED 24
+#define NUM_OF_WORD_SELECTED ([GPNavBar isiPhone5] ? 32 : 24)
 
-#define PICTURE_WIDTH ([GPNavBar isiPad] ? 450.0 : 220.0)
+#define PICTURE_WIDTH ([GPNavBar isiPad] ? 450.0 : 200.0)
+#define FONTSIZE_OF_BORAD_TITLE ([GPNavBar isiPad] ? 80 : 60)
+#define FONTSIZE_OF_BORAD_TEXT  ([GPNavBar isiPad] ? 26 : 16)
+#define FONTNAME_OF_TEXT        @"STHeitiSC-Medium"
 
 #define NUM_OF_ADD_COIN_USING_SOS   5
 #define NUM_OF_ADD_COIN_USING_SHARE 10

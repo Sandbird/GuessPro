@@ -52,17 +52,31 @@
         CCSprite *shareSprite = [CCSprite spriteWithSpriteFrameName:@"shareBtn.png"];
         CCSprite *shareHLSprite = [CCSprite spriteWithSpriteFrameName:@"shareBtn_HL.png"];
         CCMenuItem *shareItem = [CCMenuItemImage itemFromNormalSprite:shareSprite selectedSprite:shareHLSprite target:self selector:@selector(shareToSocial)];
-        shareItem.position = ccp(winSize.width / 2 - 80, 100);
+        
         
         CCSprite *infoSprite = [CCSprite spriteWithSpriteFrameName:@"infoBtn.png"];
         CCSprite *infoHLSprite = [CCSprite spriteWithSpriteFrameName:@"infoBtn_HL.png"];
         CCMenuItem *infoItem = [CCMenuItemImage itemFromNormalSprite:infoSprite selectedSprite:infoHLSprite target:self selector:@selector(popInformation)];
-        infoItem.position = ccp(winSize.width / 2, 100);
+        
         
         CCSprite *nextSprite = [CCSprite spriteWithSpriteFrameName:@"nextBtn.png"];
         CCSprite *nextHLSprite = [CCSprite spriteWithSpriteFrameName:@"nextBtn_HL.png"];
         CCMenuItem *nextItem = [CCMenuItemImage itemFromNormalSprite:nextSprite selectedSprite:nextHLSprite target:self selector:@selector(nextPicture)];
-        nextItem.position = ccp(winSize.width / 2 + 80, 100);
+        
+        
+        if ([GPNavBar isiPad]) {
+            shareItem.position = ccp(winSize.width / 2 - 200, 200);
+            infoItem.position = ccp(winSize.width / 2, 200);
+            nextItem.position = ccp(winSize.width / 2 + 200, 200);
+        } else if ([GPNavBar isiPhone5]) {
+            shareItem.position = ccp(winSize.width / 2 - 80, 100);
+            infoItem.position = ccp(winSize.width / 2, 100);
+            nextItem.position = ccp(winSize.width / 2 + 80, 100);
+        } else {
+            shareItem.position = ccp(winSize.width / 2 - 80, 100);
+            infoItem.position = ccp(winSize.width / 2, 100);
+            nextItem.position = ccp(winSize.width / 2 + 80, 100);
+        }
         
         _menu = [CCMenu menuWithItems:shareItem, infoItem, nextItem, nil];
         [self addChild:_menu z:ZORDER_NAV_BAR];
@@ -115,24 +129,6 @@
 	return [[CCDirector sharedDirector] convertToGL:touchLocation];
 }
 
-//- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-//    
-//    CGPoint point = [SuccessLayer locationFromTouch:touch];
-//    BOOL isTouchHandled = YES;
-////    BOOL isTouchNavbar = YES;
-//    for (CCNode *node in self.children) {
-//        if (CGRectContainsPoint(node.boundingBox, point)) {
-//            isTouchHandled = NO;
-//        }
-//    }
-//    
-////    if (CGRectContainsPoint([[[GuessScene sharedGuessScene] navBar] backgroudSprite].boundingBox, point)) {
-////        isTouchNavbar = NO;
-////    }
-//    
-//    return isTouchHandled;
-//    
-//}
 
 #pragma mark-
 #pragma mark admob
@@ -229,6 +225,11 @@
 - (void)popInformation {
     InformationBorad *infoLayer = [InformationBorad nodeWithInformation:self.curInfo parentView:_controller.view];
     [[[GuessScene sharedGuessScene] navBar] addChild:infoLayer];
+    
+    infoLayer.scale = 0;
+    CCScaleTo *scaleToBig = [CCScaleTo actionWithDuration:0.2 scale:1];
+    CCSequence *smallToBig = [CCSequence actions:scaleToBig, nil];
+    [infoLayer runAction:smallToBig];
 }
 
 - (void)nextPicture {

@@ -49,22 +49,22 @@
         [frameCache addSpriteFramesWithFile:[AssetHelper getDeviceSpecificFileNameFor:@"cc_levelmenu.plist"]];      
         
         // Preloading
-        [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:0]]];
-        [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:1]]];
-        [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:2]]];
-        [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:3]]];
+//        [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:0]]];
+//        [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:1]]];
+//        [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:2]]];
+//        [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:3]]];
         
         // Scene Background
-		CCSprite *background = [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:0]]];
-		background.position = CGPointMake(winSize.width / 2, winSize.height / 2);
-        background.tag = 10;
-		[self addChild:background z:0];
+//		CCSprite *background = [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:0]]];
+//		background.position = CGPointMake(winSize.width / 2, winSize.height / 2);
+//        background.tag = 10;
+//		[self addChild:background z:0];
         
-        CCSprite *backgroundFade = [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:0]]];
-        backgroundFade.position = background.position;
-        backgroundFade.tag = 11;
-        backgroundFade.opacity = 0.0;
-		[self addChild:backgroundFade z:1];
+//        CCSprite *backgroundFade = [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:0]]];
+//        backgroundFade.position = background.position;
+//        backgroundFade.tag = 11;
+//        backgroundFade.opacity = 0.0;
+//		[self addChild:backgroundFade z:1];
 		
         
 		NSArray *levels = [[GameManager sharedGameManager] levels];
@@ -131,8 +131,8 @@
         } else {
             menuGrid = [SlidingMenuGrid menuWithArray:allItems 
                                                  cols:5
-                                                 rows:6
-                                             position:ccp(40 * __HIGHRES_SCALE, 400 * __HIGHRES_SCALE)
+                                                 rows:([GPNavBar isiPhone5] ? 7 : 6)
+                                             position:([GPNavBar isiPhone5] ? ccp(40 * __HIGHRES_SCALE, 450 * __HIGHRES_SCALE) : ccp(40 * __HIGHRES_SCALE, 380 * __HIGHRES_SCALE))
                                               padding:ccp(60 * __HIGHRES_SCALE, 60 * __HIGHRES_SCALE)
                                         verticalPages:NO];
         }
@@ -172,12 +172,13 @@
         
         
         self.pageControl = [PageControlLayer layerWithPages:menuGrid.iPageCount+1 currentPage:0];
-        self.pageControl.position = CGPointMake(winSize.width / 2, winSize.height - (winSize.height * 0.90));
+//        self.pageControl.anchorPoint = ccp(0.5, 0.5);
+        self.pageControl.position = CGPointMake(0/* - self.pageControl.boundingBox.size.width / 2*/, winSize.height * 0.02);
 		[self addChild:self.pageControl z:7];
         
         
         //NavBar
-        _navBar = [[[GPNavBar alloc] initWithIsFromPlaying:NO] autorelease];
+        _navBar = [[[GPNavBar alloc] initWithSceneType:GPSceneTypeLevelLayer] autorelease];
         [self addChild:_navBar z:ZORDER_NAV_BAR];
 //        [_navBar setTotalLabelScore:500];        
 		
@@ -197,24 +198,24 @@
 - (void)menu:(SlidingMenuGrid *)menu didScrollToPage:(int)index {
     [self.pageControl setCurrentPage:index];
     
-    CCSprite *background = (CCSprite *)[self getChildByTag:10];
-    CCSprite *backgroundFade = (CCSprite *)[self getChildByTag:11];
+//    CCSprite *background = (CCSprite *)[self getChildByTag:10];
+//    CCSprite *backgroundFade = (CCSprite *)[self getChildByTag:11];
+//    
+//    
+//    
+//  
+//        CCSprite *newBackground = [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:index]]];
+//        
+//  
+//            backgroundFade.texture = newBackground.texture;
+//            
+//            CCFadeIn *fadeIn = [CCFadeIn actionWithDuration:0.2];
+//            CCCallBlock *finish = [CCCallBlock actionWithBlock:^{
+//                background.texture = newBackground.texture;
+//            }];
+//            CCSequence *sequence = [CCSequence actions:fadeIn, finish, nil];
+//            [backgroundFade runAction:sequence];
     
-    
-    
-  
-        CCSprite *newBackground = [CCSprite spriteWithFile:[AssetHelper getDeviceSpecificFileNameFor:[self backgroundForIndex:index]]];
-        
-  
-            backgroundFade.texture = newBackground.texture;
-            
-            CCFadeIn *fadeIn = [CCFadeIn actionWithDuration:0.2];
-            CCCallBlock *finish = [CCCallBlock actionWithBlock:^{
-                background.texture = newBackground.texture;
-            }];
-            CCSequence *sequence = [CCSequence actions:fadeIn, finish, nil];
-            [backgroundFade runAction:sequence];
-            
 //            [_title setString:[self titleForIndex:index]];
  
     

@@ -88,6 +88,17 @@
 }
 
 - (void)closeInformation {
+//    CCScaleTo *scaleToSmall = [CCScaleTo actionWithDuration:0.2 scale:0];
+//    CCSequence *bigToSmall = [CCSequence actions:scaleToSmall, nil];
+//    
+//    CCCallBlock *cleanUp = [CCCallBlock actionWithBlock:^{
+//        [self removeFromParentAndCleanup:YES];
+//    }];
+//    
+//    CCSequence *seq = [CCSequence actionOne:bigToSmall two:cleanUp];
+//    
+//    [self runAction:seq];
+    
     [self removeFromParentAndCleanup:YES];
 }
 
