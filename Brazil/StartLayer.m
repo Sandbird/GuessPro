@@ -245,22 +245,22 @@
         
         switch (arc4random() % 3) {
             case 0://大椰
-                pushStr = NSLocalizedString(@"今天之内来玩，就送50个黄金摄像机！", @"alertBody");
+                pushStr = NSLocalizedString(@"今天之内来玩，就送50枚黄金摄像机！", @"alertBody");
                 [GPNavBar setNumOfCoinAdded:50];
                 break;
                 
             case 1://小桃
-                pushStr = NSLocalizedString(@"今天之内来玩，就送30个黄金摄像机！", @"alertBody");
+                pushStr = NSLocalizedString(@"今天之内来玩，就送30枚黄金摄像机！", @"alertBody");
                 [GPNavBar setNumOfCoinAdded:30];
                 break;
                 
             case 2:
-                pushStr = NSLocalizedString(@"今天之内来玩，就送20个黄金摄像机！", @"alertBody");
+                pushStr = NSLocalizedString(@"今天之内来玩，就送20枚黄金摄像机！", @"alertBody");
                 [GPNavBar setNumOfCoinAdded:20];
                 break;
                 
             default:
-                pushStr = NSLocalizedString(@"今天之内来玩，就送50个黄金摄像机！", @"alertBody");
+                pushStr = NSLocalizedString(@"今天之内来玩，就送50枚黄金摄像机！", @"alertBody");
                 [GPNavBar setNumOfCoinAdded:50];
                 break;
         }

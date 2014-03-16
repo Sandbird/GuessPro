@@ -57,11 +57,11 @@ typedef enum {
 
 
 typedef enum {
-    ItemSmallMinusScore = 5,
-    ItemBombMinusScore = 10,
-    ItemFlyingMinusScore = 20,
-    ItemTipsMinusScore = 30,
-    ItemAnswerMinusScore = 100,
+    ItemSmallMinusScore = 3,
+    ItemBombMinusScore = 8,
+    ItemFlyingMinusScore = 15,
+    ItemTipsMinusScore = 40,
+    ItemAnswerMinusScore = 80,
 }ItemMinusScore;
 
 
@@ -331,6 +331,7 @@ static GuessScene *instanceOfGuessScene;
         _blockTouchLocked = NO;
         CCSprite *flySprite = (CCSprite *)[self getChildByTag:CCSpriteFlyingItemTag];
         if (flySprite != nil) {
+            [flySprite stopAllActions];
             [flySprite removeFromParentAndCleanup:YES];
         }
         
@@ -689,7 +690,7 @@ static GuessScene *instanceOfGuessScene;
         [self showTipsAlert];
     } else {
         //显示Alert
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看提示道具" message:@"您愿意消耗50个黄金摄像机查看本关的提示么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看提示道具" message:@"您愿意消耗50枚黄金摄像机查看本关的提示么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
         [alertView show];
         alertView.tag = TAG_ALERT_ITEM_TIPS;
         [alertView release];
@@ -723,7 +724,7 @@ static GuessScene *instanceOfGuessScene;
         [self showAnswerAlert];
     } else {
         //显示Alert
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看答案道具" message:@"您愿意消耗100个黄金摄像机查看本关的答案么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看答案道具" message:@"您愿意消耗100枚黄金摄像机查看本关的答案么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
         [alertView show];
         alertView.tag = TAG_ALERT_ITEM_ANSWER;
         [alertView release];
@@ -931,6 +932,11 @@ static GuessScene *instanceOfGuessScene;
     //判断是否有飞行道具在运行
     _blockTouchLocked = YES;
     [self schedule:@selector(updateFly)];
+    
+    CCRotateBy *rotate = [CCRotateBy actionWithDuration:0.6 angle:360];
+    CCRepeatForever *repeat = [CCRepeatForever actionWithAction:rotate];
+    [flySprite runAction:repeat];
+    
 }
 
 -(void) updateFly
@@ -967,6 +973,7 @@ static GuessScene *instanceOfGuessScene;
     
     if ((pos.x - flySprite.boundingBox.size.width / 2) > screenSize.width + 100) {
         [self unschedule:@selector(updateFly)];
+        [flySprite stopAllActions];
         [flySprite removeFromParentAndCleanup:YES];
         _blockTouchLocked = NO;
     }

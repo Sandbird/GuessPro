@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0008045B18D5E96A005F4AF2 /* GuessPro-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0008045918D5E96A005F4AF2 /* GuessPro-hd.plist */; };
+		0008045C18D5E96A005F4AF2 /* GuessPro-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0008045A18D5E96A005F4AF2 /* GuessPro-hd.png */; };
+		0008045F18D5E9E5005F4AF2 /* Store-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0008045D18D5E9E5005F4AF2 /* Store-hd.plist */; };
+		0008046018D5E9E5005F4AF2 /* Store-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0008045E18D5E9E5005F4AF2 /* Store-hd.png */; };
 		001B239218D03C9C00F52BB3 /* InformationBorad.m in Sources */ = {isa = PBXBuildFile; fileRef = 001B239118D03C9C00F52BB3 /* InformationBorad.m */; };
 		002F25EE18CEF92800B47BE3 /* ShareBorad.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F25ED18CEF92800B47BE3 /* ShareBorad.m */; };
 		002FFACF18C60EE6001C2586 /* PressEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = 002FFACE18C60EE6001C2586 /* PressEffects.plist */; };
@@ -223,10 +227,6 @@
 		0096223F18D1DB410051ED04 /* WordBorad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0096223E18D1DB410051ED04 /* WordBorad.m */; };
 		0096224818D20C920051ED04 /* Share-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0096224418D20C920051ED04 /* Share-hd.plist */; };
 		0096224918D20C920051ED04 /* Share-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0096224518D20C920051ED04 /* Share-hd.png */; };
-		0096224A18D20C920051ED04 /* Store-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0096224618D20C920051ED04 /* Store-hd.plist */; };
-		0096224B18D20C920051ED04 /* Store-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0096224718D20C920051ED04 /* Store-hd.png */; };
-		0096224E18D20ECB0051ED04 /* GuessPro-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0096224C18D20ECB0051ED04 /* GuessPro-hd.plist */; };
-		0096224F18D20ECB0051ED04 /* GuessPro-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0096224D18D20ECB0051ED04 /* GuessPro-hd.png */; };
 		0096225A18D324A90051ED04 /* GPNavBar-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0096225818D324A90051ED04 /* GPNavBar-hd.plist */; };
 		0096225B18D324A90051ED04 /* GPNavBar-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0096225918D324A90051ED04 /* GPNavBar-hd.png */; };
 		009689DE18BF871B00CF0A70 /* PlayerState.plist in Resources */ = {isa = PBXBuildFile; fileRef = 009689DD18BF871B00CF0A70 /* PlayerState.plist */; };
@@ -493,6 +493,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0008045918D5E96A005F4AF2 /* GuessPro-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GuessPro-hd.plist"; sourceTree = "<group>"; };
+		0008045A18D5E96A005F4AF2 /* GuessPro-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GuessPro-hd.png"; sourceTree = "<group>"; };
+		0008045D18D5E9E5005F4AF2 /* Store-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Store-hd.plist"; sourceTree = "<group>"; };
+		0008045E18D5E9E5005F4AF2 /* Store-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Store-hd.png"; sourceTree = "<group>"; };
 		001B239018D03C9C00F52BB3 /* InformationBorad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationBorad.h; sourceTree = "<group>"; };
 		001B239118D03C9C00F52BB3 /* InformationBorad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationBorad.m; sourceTree = "<group>"; };
 		002F25EC18CEF92800B47BE3 /* ShareBorad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareBorad.h; sourceTree = "<group>"; };
@@ -906,10 +910,6 @@
 		0096223E18D1DB410051ED04 /* WordBorad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordBorad.m; sourceTree = "<group>"; };
 		0096224418D20C920051ED04 /* Share-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Share-hd.plist"; sourceTree = "<group>"; };
 		0096224518D20C920051ED04 /* Share-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share-hd.png"; sourceTree = "<group>"; };
-		0096224618D20C920051ED04 /* Store-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Store-hd.plist"; sourceTree = "<group>"; };
-		0096224718D20C920051ED04 /* Store-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Store-hd.png"; sourceTree = "<group>"; };
-		0096224C18D20ECB0051ED04 /* GuessPro-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GuessPro-hd.plist"; sourceTree = "<group>"; };
-		0096224D18D20ECB0051ED04 /* GuessPro-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GuessPro-hd.png"; sourceTree = "<group>"; };
 		0096225818D324A90051ED04 /* GPNavBar-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GPNavBar-hd.plist"; sourceTree = "<group>"; };
 		0096225918D324A90051ED04 /* GPNavBar-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GPNavBar-hd.png"; sourceTree = "<group>"; };
 		009689DD18BF871B00CF0A70 /* PlayerState.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlayerState.plist; sourceTree = "<group>"; };
@@ -2284,18 +2284,18 @@
 		00E8608B18C44B7E00EBC9DF /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				0096224C18D20ECB0051ED04 /* GuessPro-hd.plist */,
-				0096224D18D20ECB0051ED04 /* GuessPro-hd.png */,
+				0008045918D5E96A005F4AF2 /* GuessPro-hd.plist */,
+				0008045A18D5E96A005F4AF2 /* GuessPro-hd.png */,
 				0096225818D324A90051ED04 /* GPNavBar-hd.plist */,
 				0096225918D324A90051ED04 /* GPNavBar-hd.png */,
 				0096224418D20C920051ED04 /* Share-hd.plist */,
 				0096224518D20C920051ED04 /* Share-hd.png */,
-				0096224618D20C920051ED04 /* Store-hd.plist */,
-				0096224718D20C920051ED04 /* Store-hd.png */,
 				00E8608C18C44B7E00EBC9DF /* cc_levelmenu-hd.plist */,
 				00E8608D18C44B7E00EBC9DF /* cc_levelmenu-hd.png */,
 				00E8609818C44B7E00EBC9DF /* Default-Portrait.png */,
 				00E8609C18C44B7E00EBC9DF /* Icon-76.png */,
+				0008045D18D5E9E5005F4AF2 /* Store-hd.plist */,
+				0008045E18D5E9E5005F4AF2 /* Store-hd.png */,
 				00E8609F18C44B7E00EBC9DF /* StartPage.plist */,
 				00E860A018C44B7E00EBC9DF /* StartPage.png */,
 			);
@@ -2364,6 +2364,7 @@
 				00D4867A18CB2C15001D6718 /* 1142.png in Resources */,
 				00E860AF18C44B7E00EBC9DF /* background-noon-ipad.png in Resources */,
 				00D4862018CB2C15001D6718 /* 1052.png in Resources */,
+				0008046018D5E9E5005F4AF2 /* Store-hd.png in Resources */,
 				00D485FF18CB2C15001D6718 /* 1019.png in Resources */,
 				00E860C118C44B7E00EBC9DF /* BadaBoom26.fnt in Resources */,
 				00E860A818C44B7E00EBC9DF /* background-evening-ipadhd.png in Resources */,
@@ -2442,13 +2443,13 @@
 				00E860BA18C44B7E00EBC9DF /* BadaBoom20-hd.png in Resources */,
 				00D4864218CB2C15001D6718 /* 1086.png in Resources */,
 				00D4868B18CB2C15001D6718 /* 1159.png in Resources */,
+				0008045C18D5E96A005F4AF2 /* GuessPro-hd.png in Resources */,
 				00D4861A18CB2C15001D6718 /* 1046.png in Resources */,
 				007A101F18BB60ED00A6CCE2 /* GameData.plist in Resources */,
-				0096224F18D20ECB0051ED04 /* GuessPro-hd.png in Resources */,
 				00D4864E18CB2C15001D6718 /* 1098.png in Resources */,
+				0008045B18D5E96A005F4AF2 /* GuessPro-hd.plist in Resources */,
 				00E8615118C44B7E00EBC9DF /* Icon-76.png in Resources */,
 				00D4863518CB2C15001D6718 /* 1073.png in Resources */,
-				0096224E18D20ECB0051ED04 /* GuessPro-hd.plist in Resources */,
 				00D4869118CB2C15001D6718 /* 1165.png in Resources */,
 				00D4861118CB2C15001D6718 /* 1037.png in Resources */,
 				009689DE18BF871B00CF0A70 /* PlayerState.plist in Resources */,
@@ -2465,7 +2466,6 @@
 				00E860E218C44B7E00EBC9DF /* Visitor40-ipadhd.fnt in Resources */,
 				00831EE918CC71020023E713 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				00D4867518CB2C15001D6718 /* 1137.png in Resources */,
-				0096224B18D20C920051ED04 /* Store-hd.png in Resources */,
 				00D4868918CB2C15001D6718 /* 1157.png in Resources */,
 				00D4864318CB2C15001D6718 /* 1087.png in Resources */,
 				00D4866E18CB2C15001D6718 /* 1130.png in Resources */,
@@ -2530,7 +2530,6 @@
 				00D4861B18CB2C15001D6718 /* 1047.png in Resources */,
 				00831EF918CC71020023E713 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				00831F1D18CCB6A20023E713 /* README.txt in Resources */,
-				0096224A18D20C920051ED04 /* Store-hd.plist in Resources */,
 				002FFACF18C60EE6001C2586 /* PressEffects.plist in Resources */,
 				00E860E718C44B7E00EBC9DF /* Visitor40.png in Resources */,
 				00D4865818CB2C15001D6718 /* 1108.png in Resources */,
@@ -2620,6 +2619,7 @@
 				00D4861418CB2C15001D6718 /* 1040.png in Resources */,
 				00D4860618CB2C15001D6718 /* 1026.png in Resources */,
 				00D4865618CB2C15001D6718 /* 1106.png in Resources */,
+				0008045F18D5E9E5005F4AF2 /* Store-hd.plist in Resources */,
 				00D4867E18CB2C15001D6718 /* 1146.png in Resources */,
 				00D4864918CB2C15001D6718 /* 1093.png in Resources */,
 				00D485F818CB2C15001D6718 /* 1012.png in Resources */,

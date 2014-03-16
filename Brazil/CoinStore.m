@@ -81,18 +81,22 @@ typedef enum {
         
         CGFloat posY;
         CGSize wordSize;
+        CGFloat fontSize;
         if ([GPNavBar isiPad]) {
             posY = winSize.height - 76.0f;
             wordSize = CGSizeMake(600, 200);
+            fontSize = 37;
         } else if ([GPNavBar isiPhone5]) {
             posY = winSize.height - 38.0f;
             wordSize = CGSizeMake(250, 100);
+            fontSize = 18;
         } else {
             posY = winSize.height - 38.0f;
             wordSize = CGSizeMake(250, 100);
+            fontSize = 18;
         }
         
-        NSString *title = @"电影院卖场";
+        NSString *title = @"电影院大卖场";
         
         CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
         labelTitle.color = ccWHITE;
@@ -100,7 +104,7 @@ typedef enum {
         labelTitle.position = ccp(winSize.width / 2, posY);
         [self addChild:labelTitle];
         
-        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:@"欢迎购买黄金摄像机！购买任意数量黄金摄像机，即可去除广告条。" dimensions:wordSize alignment:NSTextAlignmentCenter vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
+        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:@"欢迎购买黄金摄像机！\n购买任意数量黄金摄像机，即可去除广告条。" dimensions:wordSize alignment:NSTextAlignmentCenter vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
         labelWords.color = ccWHITE;
         labelWords.anchorPoint = ccp(0.5, 1);
         labelWords.position = ccp(winSize.width / 2,  posY - labelTitle.boundingBox.size.height);
@@ -123,11 +127,11 @@ typedef enum {
         CCArray *storeBannerArray = [CCArray array];
         CCArray *storeBannerHLArray = [CCArray array];
         
-        NSArray *tierArray = [NSArray arrayWithObjects:@"        50个 = 6.00元", @"        150个 = 12.00元", @"        300个 = 18.00元", @"        600个 = 30.00元", @"        2500个 = 88.00元", nil];
+        NSArray *tierArray = [NSArray arrayWithObjects:@"          50枚 = 6.00元", @"          150枚 = 12.00元", @"          300枚 = 18.00元", @"          600枚 = 30.00元", @"          2500枚 = 88.00元", nil];
         
         for (int i = 0; i < 5; i++) {
             CCSprite *storeBanner = [CCSprite spriteWithSpriteFrame:[framCache spriteFrameByName:@"StoreBanner.png"]];
-            CCLabelTTF *label = [CCLabelTTF labelWithString:[tierArray objectAtIndex:i] dimensions:CGSizeMake(storeBanner.boundingBox.size.width, storeBanner.boundingBox.size.height) alignment:NSTextAlignmentLeft vertAlignment:CCVerticalAlignmentCenter lineBreakMode:NSLineBreakByCharWrapping fontName:@"STHeitiTC-Medium" fontSize:40];
+            CCLabelTTF *label = [CCLabelTTF labelWithString:[tierArray objectAtIndex:i] dimensions:CGSizeMake(storeBanner.boundingBox.size.width, storeBanner.boundingBox.size.height) alignment:NSTextAlignmentLeft vertAlignment:CCVerticalAlignmentCenter lineBreakMode:NSLineBreakByCharWrapping fontName:@"STHeitiTC-Medium" fontSize:fontSize];
             label.color = ccBLACK;
             label.position = ccp(storeBanner.boundingBox.size.width / 2, storeBanner.boundingBox.size.height / 2);
             [storeBanner addChild:label];
@@ -135,8 +139,9 @@ typedef enum {
 //            [storeBannerBatch addChild:storeBanner];
             
             CCSprite *storeBannerHL = [CCSprite spriteWithSpriteFrame:[framCache spriteFrameByName:@"StoreBanner_HL.png"]];
-            CCLabelTTF *labelHL = [CCLabelTTF labelWithString:[tierArray objectAtIndex:i] dimensions:CGSizeMake(storeBannerHL.boundingBox.size.width, storeBannerHL.boundingBox.size.height) alignment:NSTextAlignmentLeft vertAlignment:CCVerticalAlignmentCenter lineBreakMode:NSLineBreakByCharWrapping fontName:@"STHeitiTC-Medium" fontSize:40];
+            CCLabelTTF *labelHL = [CCLabelTTF labelWithString:[tierArray objectAtIndex:i] dimensions:CGSizeMake(storeBannerHL.boundingBox.size.width, storeBannerHL.boundingBox.size.height) alignment:NSTextAlignmentLeft vertAlignment:CCVerticalAlignmentCenter lineBreakMode:NSLineBreakByCharWrapping fontName:@"STHeitiTC-Medium" fontSize:fontSize];
             labelHL.position = ccp(storeBannerHL.boundingBox.size.width / 2, storeBannerHL.boundingBox.size.height / 2);
+            labelHL.color = ccGRAY;
             [storeBannerHL addChild:labelHL];
             [storeBannerHLArray addObject:storeBannerHL];
 //            [storeBannerHLBatch addChild:storeBannerHL];

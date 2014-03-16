@@ -96,10 +96,10 @@ typedef struct ItemSharePostion {
         
         if (self.SBStype == ShareTypeSOS) {
             title = @"求助朋友";
-            text = @"如果成功分享到任意一个社交平台向朋友求助的话，鉴于你的谦虚品质，将获得5个黄金摄像机的奖励。每天最多可奖励50个黄金摄像机。";
+            text = @"如果成功分享到任意一个社交平台向朋友求助的话，鉴于你的谦虚品质，将获得5枚黄金摄像机的奖励。每天最多可奖励50枚黄金摄像机。";
         } else if (self.SBStype == ShareTypeShare) {
             title = @"分享电影海报猜猜猜";
-            text = @"如果成功分享到任意一个社交平台的话，你将获得10个黄金摄像机的奖励，快让更多你身边的电影大神加入吧。每天最多可奖励50个黄金摄像机。";
+            text = @"如果成功分享到任意一个社交平台的话，你将获得10枚黄金摄像机的奖励，快让更多你身边的电影大神加入吧。每天最多可奖励50枚黄金摄像机。";
         }
         
         CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
