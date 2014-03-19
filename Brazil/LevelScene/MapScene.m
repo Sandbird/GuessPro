@@ -65,6 +65,9 @@
 //        backgroundFade.tag = 11;
 //        backgroundFade.opacity = 0.0;
 //		[self addChild:backgroundFade z:1];
+        
+        CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(26, 26, 26, 255)];
+        [self addChild:color];
 		
         
 		NSArray *levels = [[GameManager sharedGameManager] levels];
@@ -91,7 +94,8 @@
             BOOL isCompleted    = (levelStatus || (!levelStatus && lastCompletedMap) || (i == 0));
             lastCompletedMap    = levelStatus;
             BOOL special        = [[GameManager sharedGameManager] hasPassMarkForLevelIndex:i];
-            int heaviness       = [[level objectForKey:@"Heaviness"] intValue];
+//            int heaviness       = [[level objectForKey:@"Heaviness"] intValue];
+            int type            = [[level objectForKey:@"Type"] intValue];
             
             SEL onClick = (isCompleted) ? @selector(selectLevel:) : nil;
             
@@ -99,7 +103,7 @@
                                                                              stars:stars 
                                                                         hasSpecial:special 
                                                                        isCompleted:isCompleted
-                                                                        withHeaviness:heaviness];
+                                                                        withType:type];
             LevelItemSprite *buttonActive   = [button activeItem];
                     
             CCMenuItemSprite *item = [CCMenuItemSprite itemFromNormalSprite:button

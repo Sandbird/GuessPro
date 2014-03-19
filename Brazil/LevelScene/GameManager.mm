@@ -75,10 +75,10 @@
 }
 - (void) loadLevelWithIndex:(int)index {
 	
-	NSDictionary *level = [self levelWithIndex:index];
-    if([level objectForKey:@"Tilemap"] == nil || [[level objectForKey:@"Tilemap"] isEqualToString:@""]) {
-        return;
-    }
+//	NSDictionary *level = [self levelWithIndex:index];
+//    if([level objectForKey:@"Tilemap"] == nil || [[level objectForKey:@"Tilemap"] isEqualToString:@""]) {
+//        return;
+//    }
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     
     self.currentActiveLevelIndex = index;

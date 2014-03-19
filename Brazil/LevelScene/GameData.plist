@@ -5,2740 +5,1824 @@
 	<key>Levels</key>
 	<array>
 		<dict>
-			<key>Heaviness</key>
-			<integer>1</integer>
 			<key>SpecialItem</key>
 			<false/>
-			<key>BestScores</key>
-			<array>
-				<string>140</string>
-				<string>150</string>
-				<string>160</string>
-			</array>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
 			<integer>100</integer>
-			<key>Tilemap</key>
-			<string>map_tutorial.tmx</string>
-		</dict>
-		<dict>
-			<key>Heaviness</key>
+			<key>Type</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
 			<false/>
-			<key>BestScores</key>
-			<array>
-				<string>140</string>
-				<string>150</string>
-				<string>160</string>
-			</array>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
-			<integer>0</integer>
-			<key>Tilemap</key>
-			<string>map_cartoonsmart.tmx</string>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
+			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
+			<false/>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>2</integer>
-			<key>BestScores</key>
-			<array>
-				<string>200</string>
-				<string>250</string>
-				<string>280</string>
-			</array>
+		</dict>
+		<dict>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
-			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_19.tmx</string>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>300</string>
-				<string>340</string>
-				<string>400</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_22.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>230</string>
-				<string>250</string>
-				<string>270</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_23.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>480</string>
-				<string>510</string>
-				<string>530</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_26.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Completed</key>
+			<false/>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Completed</key>
+			<false/>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Completed</key>
+			<false/>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Completed</key>
+			<false/>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Completed</key>
+			<false/>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Completed</key>
+			<false/>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Completed</key>
+			<false/>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Completed</key>
+			<false/>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Completed</key>
+			<false/>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Completed</key>
+			<false/>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Completed</key>
+			<false/>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
+		</dict>
+		<dict>
 			<key>SpecialItem</key>
+			<false/>
+			<key>Completed</key>
 			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
+			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 		<dict>
-			<key>Heaviness</key>
-			<integer>3</integer>
-			<key>BestScores</key>
-			<array>
-				<string>1000</string>
-				<string>1050</string>
-				<string>1080</string>
-			</array>
+			<key>SpecialItem</key>
+			<false/>
 			<key>Completed</key>
 			<false/>
 			<key>Score</key>
+			<integer>100</integer>
+			<key>Type</key>
 			<integer>0</integer>
-			<key>SpecialItem</key>
-			<false/>
-			<key>Tilemap</key>
-			<string>map_27.tmx</string>
 		</dict>
 	</array>
 	<key>Player</key>

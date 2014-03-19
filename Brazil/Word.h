@@ -11,7 +11,7 @@
 
 typedef enum {
     WordStatusNormal,
-    WordStatusHidden,
+    WordStatusWrong,
 }WordStatus;
 
 @interface Word : NSObject
@@ -31,5 +31,7 @@ typedef enum {
 - (void)goToPosition:(CGPoint)point;
 
 - (void)resetWordWithString:(NSString *)newWord;
+
+- (void)changeWordStatusTo:(WordStatus)wordStatus;
 
 @end

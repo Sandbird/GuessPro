@@ -31,4 +31,6 @@
 
 - (void)changeToNextPuzzle;
 
+- (void)checkWinOrLose;
+
 @end

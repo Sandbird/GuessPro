@@ -14,21 +14,41 @@
 
 #pragma mark - Properties
 
-@synthesize stars = _stars, levelIndex = _levelIndex, special = _special, completed = _completed, heaveness = _heaveness;
+@synthesize stars = _stars, levelIndex = _levelIndex, special = _special, completed = _completed;
 
 #pragma mark - init/dealloc
 
-+ (id)layerWithLevelIndex:(int)index stars:(int)stars hasSpecial:(BOOL)special isCompleted:(BOOL)completed withHeaviness:(int)heaviness {
-    return [[[LevelItemSprite alloc] initWithLevelIndex:index stars:stars hasSpecial:special isCompleted:completed withHeaviness:heaviness] autorelease];
++ (id)layerWithLevelIndex:(int)index stars:(int)stars hasSpecial:(BOOL)special isCompleted:(BOOL)completed withType:(int)type {
+    return [[[LevelItemSprite alloc] initWithLevelIndex:index stars:stars hasSpecial:special isCompleted:completed withType:type] autorelease];
 }
 
-- (id)initWithLevelIndex:(int)index stars:(int)stars hasSpecial:(BOOL)special isCompleted:(BOOL)completed withHeaviness:(int)heaviness {
+- (id)initWithLevelIndex:(int)index stars:(int)stars hasSpecial:(BOOL)special isCompleted:(BOOL)completed withType:(int)type {
     
     NSString *image;
     if(completed) {
-        image = @"cc_levelmenu_item.png";        
+        switch (type) {
+            case 0:
+                image = @"ItemBlack.png";
+                break;
+                
+            case 1:
+                image = @"ItemBlue.png";
+                break;
+                
+            case 2:
+                image = @"ItemRed.png";
+                break;
+                
+            case 3:
+                image = @"ItemGreen.png";
+                break;
+                
+            default:
+                break;
+        }
+        
     } else {
-        image = @"cc_levelmenu_item_locked.png";
+        image = @"ItemLock.png";
     }
     self = [super initWithSpriteFrameName:image];
     if (self) {
@@ -36,7 +56,7 @@
         self.stars      = stars;
         self.special    = special;
         self.completed  = completed;
-        self.heaveness  = heaviness;
+        self.type  = type;
         
         [self setupLayer];        
     }
@@ -58,8 +78,8 @@
         CCLabelTTF *label = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%i", (self.levelIndex + 1)] fontName:@"Helvetica" fontSize:18.0 * __HIGHRES_SCALE];
 #endif
   
-        label.position = CGPointMake(27 * __HIGHRES_SCALE, 18 * __HIGHRES_SCALE);
-        label.color = ccc3(255, 255, 255);
+        label.position = CGPointMake(27 * __HIGHRES_SCALE, 16 * __HIGHRES_SCALE);
+        label.color = ccc3(26, 26, 26);
         [self addChild:label];
         [label release];
     
@@ -90,12 +110,32 @@
  */
 - (LevelItemSprite *)activeItem {
 
-    LevelItemSprite *layer = [LevelItemSprite layerWithLevelIndex:self.levelIndex stars:self.stars hasSpecial:self.special isCompleted:self.completed withHeaviness:self.heaveness];
+    LevelItemSprite *layer = [LevelItemSprite layerWithLevelIndex:self.levelIndex stars:self.stars hasSpecial:self.special isCompleted:self.completed withType:self.type];
     NSString *image;
     if(self.completed) {
-        image = @"cc_levelmenu_item_pushed.png";
+        switch (self.type) {
+            case 0:
+                image = @"ItemBlack_HL.png";
+                break;
+                
+            case 1:
+                image = @"ItemBlue_HL.png";
+                break;
+                
+            case 2:
+                image = @"ItemRed_HL.png";
+                break;
+                
+            case 3:
+                image = @"ItemGreen_HL.png";
+                break;
+                
+            default:
+                break;
+        }
+        
     } else {
-        image = @"cc_levelmenu_item_locked_pushed.png";
+        image = @"ItemLock_HL.png";
     }
     
     CCSpriteFrameCache *frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];

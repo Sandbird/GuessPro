@@ -16,11 +16,11 @@
 @property (nonatomic) int levelIndex;
 @property (nonatomic) BOOL special;
 @property (nonatomic) BOOL completed;
-@property (nonatomic) int heaveness;
+@property (nonatomic) int type;
 
 
-+ (id)layerWithLevelIndex:(int)index stars:(int)stars hasSpecial:(BOOL)special isCompleted:(BOOL)completed withHeaviness:(int)heaviness;
-- (id)initWithLevelIndex:(int)index stars:(int)stars hasSpecial:(BOOL)special isCompleted:(BOOL)completed withHeaviness:(int)heaviness;
++ (id)layerWithLevelIndex:(int)index stars:(int)stars hasSpecial:(BOOL)special isCompleted:(BOOL)completed withType:(int)type;
+- (id)initWithLevelIndex:(int)index stars:(int)stars hasSpecial:(BOOL)special isCompleted:(BOOL)completed withType:(int)type;
 
 - (LevelItemSprite *)activeItem;
 

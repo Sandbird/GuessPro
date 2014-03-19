@@ -7,13 +7,17 @@
 //
 
 #import "Word.h"
+#import "GuessScene.h"
 
 #define TAG_WORD_LABEL 321
+#define TAG_ACTION_WORD_RED 222
 
 @interface Word()
 
 @property (assign)float posX;
 @property (assign)float posY;
+
+@property (nonatomic, assign)WordStatus wordStatus;
 
 @end
 
@@ -26,6 +30,8 @@
 - (id)initWithStatus:(WordStatus)status word:(NSString *)wordStr squareIndex:(int)index parent:(CCNode *)parent {
     self = [super init];
     if (self) {
+        
+        self.wordStatus = status;
         
         self.isAtHome = YES;
         
@@ -70,14 +76,19 @@
 }
 
 - (void)backHome {
-    CCMoveTo *backToPos = [CCMoveTo actionWithDuration:0.2 position:ccp(self.posX, self.posY)];
+    CCMoveTo *backToPos = [CCMoveTo actionWithDuration:0.1 position:ccp(self.posX, self.posY)];
     [self.wordSprite runAction:backToPos];
     
     self.isAtHome = YES;
 }
 
 - (void)goToPosition:(CGPoint)point {
-    CCMoveTo *goToPos = [CCMoveTo actionWithDuration:0.2 position:point];
+    CCMoveTo *goToPos = [CCMoveTo actionWithDuration:0.1 position:point];
+//    CCCallBlock *checkIsWin = [CCCallBlock actionWithBlock:^{
+//        [[GuessScene sharedGuessScene] checkWinOrLose];
+//    }];
+//    
+//    CCSequence *action = [CCSequence actionOne:goToPos two:checkIsWin];
     [self.wordSprite runAction:goToPos];
     
     self.isAtHome = NO;
@@ -89,6 +100,32 @@
     
     self.wordString = newWord;
 
+}
+
+- (void)changeWordStatusTo:(WordStatus)wordStatus {
+    
+    self.wordStatus = wordStatus;
+    CGFloat interval = 0.1;
+    
+    CCTintTo *changeNormal = [CCTintTo actionWithDuration:interval red:255 green:255 blue:255];
+    if (self.wordStatus == WordStatusNormal) {
+        [self.wordSprite stopActionByTag:TAG_ACTION_WORD_RED];
+        CCRotateTo *rotateToNormal = [CCRotateTo actionWithDuration:interval angle:0];
+        CCSpawn *normalAction = [CCSpawn actionOne:changeNormal two:rotateToNormal];
+        
+        [self.wordSprite runAction:normalAction];
+    } else if (self.wordStatus == WordStatusWrong) {
+//        CCTintTo *changeColor = [CCTintTo actionWithDuration:8*interval red:192 green:53 blue:62];
+//        CCSequence *cNormalToColor = [CCSequence actionOne:changeColor two:changeNormal];//16
+        CCRotateTo *rotateL = [CCRotateTo actionWithDuration:interval angle:-10];
+        CCRotateTo *rotateR = [CCRotateTo actionWithDuration:interval angle:10];
+        CCSequence *rotateLR = [CCSequence actionOne:rotateL two:rotateR];//2
+//        CCRepeat *repeatRotate = [CCRepeat actionWithAction:rotateLR times:8];
+//        CCSpawn *rotateAndBlink = [CCSpawn actionOne:cNormalToColor two:repeatRotate];
+        CCRepeatForever *repeat = [CCRepeatForever actionWithAction:rotateLR];
+        repeat.tag = TAG_ACTION_WORD_RED;
+        [self.wordSprite runAction:repeat];
+    }
 }
 
 

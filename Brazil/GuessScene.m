@@ -108,6 +108,7 @@ typedef enum {
 @property (assign)int currPuzzleScore;
 
 @property (assign)BOOL isNeedRestoreScene;
+@property (assign)BOOL isCouldLose;//判断每关只能进入一次lose
 
 @end
 
@@ -151,6 +152,10 @@ static GuessScene *instanceOfGuessScene;
         instanceOfGuessScene = self;
         
         self.isTouchEnabled = YES;
+        
+        CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(26, 26, 26, 255)];
+        [self addChild:color];
+        
         
         //加载帧到缓存
         CCSpriteFrameCache *framCache = [CCSpriteFrameCache sharedSpriteFrameCache];
@@ -1511,6 +1516,7 @@ static GuessScene *instanceOfGuessScene;
             for (WordBlank *blank in self.blankArray) {
                 if (!blank.fillWord) {
                     isBlankFull = NO;
+                    self.isCouldLose = YES;
                     break;
                 }
             }
@@ -1520,72 +1526,93 @@ static GuessScene *instanceOfGuessScene;
             if (currWord.isAtHome && !isBlankFull) {
                 [self reorderChild:currWord.wordSprite z:ZORDER_WORD_SELECTED];
                 currBlank = (WordBlank *)[self.blankArray objectAtIndex:self.currBlankIndex];
-                [currWord goToPosition:currBlank.point];
                 currBlank.fillWord = currWord.wordString;
                 currWord.currBlankIndex = self.currBlankIndex;
+                [currWord goToPosition:currBlank.point];
             } else if (!currWord.isAtHome) {
+                
+                //停止word错误动画
+                for (Word *word in self.wordArray) {
+                    if (!word.isAtHome) {
+                        [word changeWordStatusTo:WordStatusNormal];
+                    }
+                }
                 [self reorderChild:currWord.wordSprite z:ZORDER_WORD_HOME];
                 currBlank = (WordBlank *)[self.blankArray objectAtIndex:currWord.currBlankIndex];
                 [currWord backHome];
                 currBlank.fillWord = nil;
             }
             
-            //To check next blank of waiting input
-            int countIndex = 0;
-            for (WordBlank *blank in self.blankArray) {
-                if (!blank.fillWord) {
-                    self.currBlankIndex = countIndex;
-                    break;
-                }
-
-                countIndex++;
-            }
-            
-            if (countIndex >= self.blankArray.count) {
-                //可以计算结果了，都选择完了
-                NSString *customAnswer = @"";
-                for (WordBlank *blank in self.blankArray) {
-                    customAnswer = [customAnswer stringByAppendingString:blank.fillWord];
-                }
-                
-                
-                if ([customAnswer isEqualToString:self.answerStr]) {
-                    NSLog(@"Win");
-                    
-                    //过关之后，保存本关的状态
-                    [[GameManager sharedGameManager] setCompletedForCurrentActiveLevel:self.currPuzzleIndex];
-                    [[GameManager sharedGameManager] setPassMarkForCurrentActiveLevel:YES];
-                    
-                    //下一关的序号
-                    self.currPuzzleIndex++;
-                    self.isNeedRestoreScene = NO;
-                    
-                    [self makeSelectedBlockNormal];
-                    
-                    //显示成功板
-                    [self successLayerIsAppear:YES];
-                    
-                    //播放bounsBlock的动画
-                    [self playBounsAnimation];
-                    
-                    //统计分数
-                    [self calculateScore];
-                    
-                    //播放分数统计动画
-                    [self blocksFlyToScoreAndDisappear];
-                    
-                    
-                } else {
-                    NSLog(@"Lose");
-                }
-                
-            }
-            
-            
+            [self checkWinOrLose];
         }
         
     }
  }
+
+- (void)checkWinOrLose {
+    //To check next blank of waiting input
+    int countIndex = 0;
+    for (WordBlank *blank in self.blankArray) {
+        if (!blank.fillWord) {
+            self.currBlankIndex = countIndex;
+            break;
+        }
+        
+        countIndex++;
+    }
+    
+    if (countIndex >= self.blankArray.count) {
+//        _wordTouchLocked = YES;
+        
+        //可以计算结果了，都选择完了
+        NSString *customAnswer = @"";
+        for (WordBlank *blank in self.blankArray) {
+            customAnswer = [customAnswer stringByAppendingString:blank.fillWord];
+        }
+        
+        
+        if ([customAnswer isEqualToString:self.answerStr]) {
+            NSLog(@"Win");
+            
+            //过关之后，保存本关的状态
+            [[GameManager sharedGameManager] setCompletedForCurrentActiveLevel:self.currPuzzleIndex];
+            [[GameManager sharedGameManager] setPassMarkForCurrentActiveLevel:YES];
+            
+            //下一关的序号
+            self.currPuzzleIndex++;
+            self.isNeedRestoreScene = NO;
+            
+            [self makeSelectedBlockNormal];
+            
+            //显示成功板
+            [self successLayerIsAppear:YES];
+            
+            //播放bounsBlock的动画
+            [self playBounsAnimation];
+            
+            //统计分数
+            [self calculateScore];
+            
+            //播放分数统计动画
+            [self blocksFlyToScoreAndDisappear];
+            
+            
+        } else if (self.isCouldLose) {
+            NSLog(@"Lose");
+            
+            self.isCouldLose = NO;
+            
+            //word错误动画
+            for (Word *word in self.wordArray) {
+                if (!word.isAtHome) {
+                    [word changeWordStatusTo:WordStatusWrong];
+                }
+            }
+        }
+      
+//        _wordTouchLocked = NO;
+    }
+}
 
 - (void)onExit {
     [super onExit];

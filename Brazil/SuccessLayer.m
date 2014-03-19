@@ -119,7 +119,12 @@
 //    [_successColor setColor:color];
     
     CCLayerColor *successColor = [CCLayerColor layerWithColor:color];
+    successColor.opacity = 0.0f;
+    
     [self addChild:successColor z:ZORDER_SUCCESS_LAYER];
+    
+    CCFadeIn *fadeIn = [CCFadeIn actionWithDuration:0.3];
+    [successColor runAction:fadeIn];
 }
 
 
