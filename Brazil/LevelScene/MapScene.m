@@ -66,7 +66,7 @@
 //        backgroundFade.opacity = 0.0;
 //		[self addChild:backgroundFade z:1];
         
-        CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(26, 26, 26, 255)];
+        CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(40, 40, 40, 255)];
         [self addChild:color];
 		
         
@@ -191,7 +191,7 @@
 }
 - (void)selectLevel:(CCMenuItemFont *)sender {
 	[[SimpleAudioEngine sharedEngine] playEffect:@"button.mp3"];
-	[[GameManager sharedGameManager] loadLevelWithIndex:(int)(sender.tag - 1)]; 
+	[[GameManager sharedGameManager] loadLevelWithIndex:(int)(sender.tag - 1) GPSceneType:GPSceneTypeGuessLayer];
 }
 - (void)back:(id)sender {
 	[[SimpleAudioEngine sharedEngine] playEffect:@"button.mp3"];

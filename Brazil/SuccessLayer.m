@@ -37,6 +37,11 @@
 
 - (void)dealloc {
     NSLog(@"Success release");
+    
+    [_adView release];
+    [_controller.view removeFromSuperview];
+    [_controller release];
+    
     [super dealloc];
 }
 
@@ -88,7 +93,7 @@
         _controller.view.frame = CGRectMake(0,0,winSize.width,winSize.height);
         [[[CCDirector sharedDirector] openGLView]addSubview : _controller.view];
         
-//        [self addAdMob];
+        [self addAdMob];
         
         
     }
@@ -139,9 +144,7 @@
 #pragma mark admob
 - (void)addAdMob {
     
-//    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    
-//    RootViewController *controller;
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
     
     //    //判断网络状态
     //	NetworkStatus NetStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
@@ -152,49 +155,20 @@
     if ([GPNavBar isiPad]) {
         _adView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
     } else {
-        _adView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeMediumRectangle];
+        _adView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
     }
-    
-    
-    
-//    _controller = (RootViewController *)[[[[UIApplication sharedApplication] windows] objectAtIndex:0] rootViewController];
     
     _adView.rootViewController = _controller;
-    
+//    _adView.delegate = self;
     _adView.adUnitID = ADMOB_ID;
     
-    CGFloat height = 0;
-    if ([GPNavBar isiPad]) {
-        height = 0;
-    } else if ([GPNavBar isiPhone5]) {
-        height = 88;
-    } else {
-        height = 0;
-    }
-    
-    //设置tableView的高度
-    CGRect frame = self.boundingBox;
-    frame.size.height -= self.adView.frame.size.height;
-//    [self.mainTableView setFrame:frame];
-    
     //设置广告条的位置
-    CGPoint point = CGPointMake(160, 160);
+    CGPoint point = CGPointMake(winSize.width / 2, winSize.height - _adView.frame.size.height / 2);
     _adView.center = point;
-//    _adView.delegate = self;
-    //    [self.view insertSubview:_adView belowSubview:self.mainTableView];
+    
     [_adView loadRequest:[GADRequest request]];
     
     [_controller.view addSubview:_adView];
-//    [[[CCDirector sharedDirector] openGLView]addSubview : _controller.view];
-
-    
-    
-    /**
-     *Remove
-     *[bannerView release];
-     *[controller.view removeFromSuperview];
-     *[controller release];
-     */
     
     
 //    //在广告条没有加载出来之前，显示自己的广告条

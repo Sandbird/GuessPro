@@ -10,6 +10,9 @@
 #define Brazil_PuzzleDefine_h
 
 #define ADMOB_ID @"a152d1f7e98daee"
+#define APP_ID @"832491981"
+
+#define IOS_NEWER_OR_EQUAL_TO_7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
 #define NUM_OF_WORD_SELECTED ([GPNavBar isiPhone5] ? 32 : 24)
 

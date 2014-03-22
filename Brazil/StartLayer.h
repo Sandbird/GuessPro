@@ -7,8 +7,10 @@
 //
 
 #import "CCLayer.h"
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface StartLayer : CCLayer
+@interface StartLayer : CCLayer<MFMailComposeViewControllerDelegate>
 
 + (CCScene *)scene;
 

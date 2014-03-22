@@ -50,8 +50,8 @@ typedef enum GameManagerControls {
 ///---------------------------------------------------------------------------------------
 /// @name Loading Level
 ///---------------------------------------------------------------------------------------
-
-- (void) loadLevelWithIndex:(int)index;
+- (void) loadLevelWithIndex:(int)index GPSceneType:(GPSceneType)type;
+//- (void) loadLevelWithIndex:(int)index;
 - (void) loadLevelWithFilename:(NSString *)filename;
 
 

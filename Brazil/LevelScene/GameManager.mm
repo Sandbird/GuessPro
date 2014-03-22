@@ -73,7 +73,7 @@
 
 	
 }
-- (void) loadLevelWithIndex:(int)index {
+- (void) loadLevelWithIndex:(int)index GPSceneType:(GPSceneType)GPSceneType {
 	
 //	NSDictionary *level = [self levelWithIndex:index];
 //    if([level objectForKey:@"Tilemap"] == nil || [[level objectForKey:@"Tilemap"] isEqualToString:@""]) {
@@ -85,7 +85,7 @@
 
 //    CCScene *loadingScene = [LoadingScene sceneWithLevel:level index:index];
     
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GuessScene sceneWithPuzzleNum:index]]];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GuessScene sceneWithPuzzleNum:index GPSceneType:GPSceneType]]];
 
 	
     /*
@@ -121,10 +121,10 @@
 
 }
 - (void) loadNextLevel {
-	[self loadLevelWithIndex:self.currentActiveLevelIndex + 1];
+	[self loadLevelWithIndex:self.currentActiveLevelIndex + 1 GPSceneType:GPSceneTypeContinueLayer];
 }
 - (void) repeatLevel {
-	[self loadLevelWithIndex:self.currentActiveLevelIndex];
+	[self loadLevelWithIndex:self.currentActiveLevelIndex GPSceneType:GPSceneTypeContinueLayer];
 }
 
 - (int)totalScore {

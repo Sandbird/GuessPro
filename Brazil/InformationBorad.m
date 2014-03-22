@@ -74,7 +74,7 @@
         CCSprite *closeHLSprite = [CCSprite spriteWithSpriteFrameName:@"close_HL.png"];
         CCMenuItem *closeItem = [CCMenuItemImage itemFromNormalSprite:closeSprite selectedSprite:closeHLSprite target:self selector:@selector(closeInformation)];
         closeItem.anchorPoint = ccp(0.5, 0.5);
-        closeItem.position = ccp(winSize.width / 2, 50);
+        closeItem.position = ccp(winSize.width / 2, 60);
         
         _menu = [CCMenu menuWithItems:closeItem, nil];
         _menu.position = ccp(0, 0);

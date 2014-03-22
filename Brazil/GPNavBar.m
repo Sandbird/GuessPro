@@ -78,11 +78,11 @@
 //        }
         
         //第一页没有背景
-        if (self.sceneType != GPSceneTypeStartLayer) {
+//        if (self.sceneType != GPSceneTypeStartLayer) {
             CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255) width:winSize.width height:([GPNavBar isiPad] ? 88 : 44)];
             color.position = ccp(0, winSize.height - color.boundingBox.size.height);
             [self addChild:color];
-        }
+//        }
         
         _rect = CGRectMake(0, winSize.height - ([GPNavBar isiPad] ? 88 : 44), winSize.width, ([GPNavBar isiPad] ? 88 : 44));
         
@@ -155,6 +155,9 @@
     } else if (self.sceneType == GPSceneTypeLevelLayer){
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[StartLayer scene]]];
    
+    } else if (self.sceneType == GPSceneTypeContinueLayer) {
+        [[GuessScene sharedGuessScene] saveScene];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[StartLayer scene]]];
     }
     
     
@@ -249,7 +252,7 @@
     return score;
 }
 
-- (NSInteger)continueLevel {
++ (NSInteger)continueLevel {
     NSNumber *levelNumber = [[NSUserDefaults standardUserDefaults] objectForKey:PS_CONTINUE_LEVEL];
     if (levelNumber == nil) {
         levelNumber = [NSNumber numberWithInteger:0];
@@ -258,13 +261,13 @@
     return levelNumber.integerValue;
 }
 
-- (BOOL)isNeedRestoreScene {
++ (BOOL)isNeedRestoreScene {
     NSNumber *isNeed = [[NSUserDefaults standardUserDefaults] objectForKey:PS_IS_NEED_RESTORE_SCENE];
     
     return isNeed.boolValue;
 }
 
-- (void)setContinueLevel:(NSInteger)levelNum isNeedRestoreScene:(BOOL)isNeed {
++ (void)setContinueLevel:(NSInteger)levelNum isNeedRestoreScene:(BOOL)isNeed {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:levelNum] forKey:PS_CONTINUE_LEVEL];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:isNeed] forKey:PS_IS_NEED_RESTORE_SCENE];
     if (![[NSUserDefaults standardUserDefaults] synchronize]) {
@@ -483,6 +486,40 @@
 + (void)setNumOfCoinAdded:(NSInteger)num {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:num] forKey:NUM_OF_COIN_ADDED];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark - First Time Run
+//此版本是否第一次运行
++ (BOOL)isThisVersionFirstTimeRun {
+    NSString *version = [GPNavBar buildVersion];
+    BOOL  hasRunBefore = [[NSUserDefaults standardUserDefaults] boolForKey:version];
+    
+    if (!hasRunBefore) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:version];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (NSString *)buildVersion {
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    CFShow(infoDictionary);
+    // app build版本
+    NSString *app_build = [infoDictionary objectForKey:@"CFBundleVersion"];
+    return app_build;
+}
+
+#define kIsNeedRate @"kIsNeedRate"
++ (void)setIsNeedRate:(BOOL)isRate {
+    [[NSUserDefaults standardUserDefaults] setBool:isRate forKey:kIsNeedRate];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL)isNeedRate {
+    BOOL isRate = [[NSUserDefaults standardUserDefaults] boolForKey:kIsNeedRate];
+    return isRate;
 }
 
 @end

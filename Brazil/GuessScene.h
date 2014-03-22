@@ -19,7 +19,7 @@
 @property (nonatomic, assign)GPNavBar *navBar;
 
 //+ (CCScene *)scene;
-+ (CCScene *)sceneWithPuzzleNum:(int)puzzleNum;
++ (CCScene *)sceneWithPuzzleNum:(int)levelNum GPSceneType:(GPSceneType)type;
 
 + (GuessScene *)sharedGuessScene;
 

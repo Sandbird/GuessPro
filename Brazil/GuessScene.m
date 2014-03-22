@@ -118,6 +118,8 @@ static GuessScene *instanceOfGuessScene;
 
 - (void)dealloc {
     CCLOG(@"Puzzle Dealloc");
+    //删除消息中心的注册对象
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [self.blockArray release];
     [self.wordArray release];
@@ -137,23 +139,23 @@ static GuessScene *instanceOfGuessScene;
 	return instanceOfGuessScene;
 }
 
-+ (CCScene *)sceneWithPuzzleNum:(int)levelNum {
++ (CCScene *)sceneWithPuzzleNum:(int)levelNum GPSceneType:(GPSceneType)type {
     CCScene *scene = [CCScene node];
     
-    GuessScene *layer = [[[GuessScene alloc] initWithPuzzleNum:levelNum] autorelease];
+    GuessScene *layer = [[[GuessScene alloc] initWithPuzzleNum:levelNum GPSceneType:type] autorelease];
     
     [scene addChild:layer];
     
     return scene;
 }
 
-- (id)initWithPuzzleNum:(int)levelNum {
+- (id)initWithPuzzleNum:(int)levelNum GPSceneType:(GPSceneType)GPSceneType {
     if (self = [super init]) {
         instanceOfGuessScene = self;
         
         self.isTouchEnabled = YES;
         
-        CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(26, 26, 26, 255)];
+        CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(40, 40, 40, 255)];
         [self addChild:color];
         
         
@@ -196,14 +198,14 @@ static GuessScene *instanceOfGuessScene;
         [self setItemMenu];
         
         //NavBar
-        _navBar = [[[GPNavBar alloc] initWithSceneType:GPSceneTypeGuessLayer] autorelease];
+        _navBar = [[[GPNavBar alloc] initWithSceneType:GPSceneType] autorelease];
         [self addChild:_navBar z:ZORDER_NAV_BAR];
 //        if (IS_KAYAC) {
 //            [_navBar setTipsLabelStr:self.currPuzzle.Hiragana];
 //        }
         
-        NSInteger continueLevelNum = [_navBar continueLevel];
-        BOOL isNeedRestore = [_navBar isNeedRestoreScene];
+        NSInteger continueLevelNum = [GPNavBar continueLevel];
+        BOOL isNeedRestore = [GPNavBar isNeedRestoreScene];
         
         if (levelNum == continueLevelNum && isNeedRestore) {
             [self loadContinuePuzzleWithLevelNum:levelNum];
@@ -219,9 +221,20 @@ static GuessScene *instanceOfGuessScene;
         backBoraderSprite.scale = shouldWidth / currWidth;
         backBoraderSprite.position = _FPSet.pictrue;
         [self addChild:backBoraderSprite z:ZORDER_PICTRUE];
+        
+        //监听程序中断
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
     }
     
     return self;
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+    
+    
+    //进入后台的时候保护现场
+    [self saveScene];
+
 }
 
 - (void)registerWithTouchDispatcher {
@@ -299,11 +312,11 @@ static GuessScene *instanceOfGuessScene;
 - (void)saveScene {
     
     //如果此关已经打过，则不必要保存现场
-    if (self.currPuzzleIndex < [_navBar continueLevel]) {
+    if (self.currPuzzleIndex < [GPNavBar continueLevel]) {
         return;
     }
     
-    [_navBar setContinueLevel:self.currPuzzleIndex isNeedRestoreScene:self.isNeedRestoreScene];
+    [GPNavBar setContinueLevel:self.currPuzzleIndex isNeedRestoreScene:self.isNeedRestoreScene];
     
     //如果不需要保存现场
     if (!self.isNeedRestoreScene) {
@@ -1107,7 +1120,7 @@ static GuessScene *instanceOfGuessScene;
     
     //只有大于零才播放积分动画
     if (self.currPuzzleScore > 0) {
-        if ((self.currPuzzleIndex - 1)/*因为此时的currPuzzleIndex已经是下一个puzzle的Index了，所以需要-1*/ < [_navBar continueLevel]) {
+        if ((self.currPuzzleIndex - 1)/*因为此时的currPuzzleIndex已经是下一个puzzle的Index了，所以需要-1*/ < [GPNavBar continueLevel]) {
             [_navBar playScoreAnimationNoPlusExtraScore:self.currPuzzleScore];
 //            [_navBar changeTotalScore:self.currPuzzleScore];
         } else {
@@ -1186,7 +1199,7 @@ static GuessScene *instanceOfGuessScene;
     self.currRecivedStatus = RecivedStatusNormal;
     
     
-    if (self.currPuzzleIndex == [_navBar continueLevel] && [_navBar isNeedRestoreScene]) {
+    if (self.currPuzzleIndex == [GPNavBar continueLevel] && [GPNavBar isNeedRestoreScene]) {
         NSString *gameDataFileName = @"PlayerState";
         
         NSArray *paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask ,YES );

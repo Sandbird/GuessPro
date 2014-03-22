@@ -18,7 +18,8 @@
 #define ACTION_UP_SCORE_TAG 999
 
 typedef enum {
-    GPSceneTypeStartLayer,
+    GPSceneTypeStartLayer,//从选关界面进入的Guess界面
+    GPSceneTypeContinueLayer,//从开始按钮进入的Guess界面
     GPSceneTypeLevelLayer,
     GPSceneTypeGuessLayer,
     GPSceneTypeNone,
@@ -69,9 +70,9 @@ typedef enum {
 
 + (CGPoint) locationFromTouch:(UITouch*)touch;
 
-- (NSInteger)continueLevel;
-- (BOOL)isNeedRestoreScene;
-- (void)setContinueLevel:(NSInteger)levelNum isNeedRestoreScene:(BOOL)isNeed;
++ (NSInteger)continueLevel;
++ (BOOL)isNeedRestoreScene;
++ (void)setContinueLevel:(NSInteger)levelNum isNeedRestoreScene:(BOOL)isNeed;
 
 - (void)showStoreLayer;
 - (void)showShareBoradWithType:(ShareBoradShareType)SBSType;
@@ -85,5 +86,9 @@ typedef enum {
 
 + (NSInteger)numOfCoinAdded;
 + (void)setNumOfCoinAdded:(NSInteger)num;
+
++ (BOOL)isThisVersionFirstTimeRun;
++ (void)setIsNeedRate:(BOOL)isRate;
++ (BOOL)isNeedRate;
 
 @end

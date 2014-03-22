@@ -79,7 +79,7 @@
 #endif
   
         label.position = CGPointMake(27 * __HIGHRES_SCALE, 16 * __HIGHRES_SCALE);
-        label.color = ccc3(26, 26, 26);
+        label.color = ccc3(40, 40, 40);
         [self addChild:label];
         [label release];
     

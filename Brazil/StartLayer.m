@@ -10,24 +10,53 @@
 //#import "EggsScene.h"
 #import "GuessScene.h"
 #import "MapScene.h"
+#import "GameManager.h"
+#import "RootViewController.h"
+
+//所有的位置坐标
+typedef struct StartPostion {
+    
+    CGPoint startItem;
+    CGPoint selectItem;
+    
+    CGPoint feedbackItem;
+    CGPoint rateItem;
+    CGPoint soundItem;
+    
+    CGPoint infoItem;
+    CGPoint dialogueSprite;
+    
+    //Logo
+    CGPoint logoChinese;
+    CGPoint logoEnglish;
+    CGPoint logoCamera;
+    
+}StartPostionSet;
 
 @interface StartLayer() {
     CCSprite *_logoSprite;
-    CCSprite *_startSprite;
-    CCSprite *_hajimaruSprite;
+//    CCSprite *_startSprite;
+//    CCSprite *_hajimaruSprite;
     
     CGPoint _currentTouchPoint;
     
     CGSize _screenSize;
     
     GPNavBar *_navBar;
+    
+    StartPostionSet _SPSet;
 
 }
+@property (nonatomic, retain) RootViewController *controller;
 @end
 
 @implementation StartLayer
 
 - (void)dealloc {
+    
+    CCLOG(@"startlayer is dealloc");
+    [_controller.view removeFromSuperview];
+    [_controller release], _controller = nil;
     
     [super dealloc];
 }
@@ -47,74 +76,125 @@
     
     if (self = [super init]) {
         
+        //这个版本的第一次运行
+        if ([GPNavBar isThisVersionFirstTimeRun]) {
+            //这个版本是否需要评价
+            [GPNavBar setIsNeedRate:YES];
+            
+        }
+        
         //touch event
-        isTouchEnabled_ = YES;
+//        isTouchEnabled_ = YES;
         
         //screen size
         _screenSize = [[CCDirector sharedDirector] winSize];
         
         //add texture to momery
         CCSpriteFrameCache *frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
-        [frameCache addSpriteFramesWithFile:@"StartPage.plist"];
+        [frameCache addSpriteFramesWithFile:[AssetHelper getDeviceSpecificFileNameFor:@"StartPage.plist"]];
         
-        CCLayerColor *whiteBack = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255)];
+        CCLayerColor *whiteBack = [CCLayerColor layerWithColor:ccc4(40, 40, 40, 255)];
         [self addChild:whiteBack];
         
-        //Logo
-        CCSpriteFrame *frame = [frameCache spriteFrameByName:@"KayacLogo.png"];
-        _logoSprite = [CCSprite spriteWithSpriteFrame:frame];
-        _logoSprite.position = ccp(_screenSize.width / 2, _screenSize.height / 2);
-        CGPoint pointLogo = _logoSprite.position;
-        [self addChild:_logoSprite];
+        //界面
+        [self initalPostion];
         
-        //上移
-        CCDelayTime *delayMove = [CCDelayTime actionWithDuration:1.0];
-        CCMoveTo *moveToUp = [CCMoveTo actionWithDuration:0.5 position:ccp(pointLogo.x, pointLogo.y + 250)];
-        CCSequence *seqMove = [CCSequence actionOne:delayMove two:moveToUp];
-        [_logoSprite runAction:seqMove];
+        //LOGO
+        CCSprite *ChineseSprite = [CCSprite spriteWithSpriteFrameName:@"LogoChinese.png"];
+        ChineseSprite.position = _SPSet.logoChinese;
+        [self addChild:ChineseSprite];
         
-        //Start button
-        frame = [frameCache spriteFrameByName:@"StartButton.png"];
-        _startSprite = [CCSprite spriteWithSpriteFrame:frame];
-        _startSprite.anchorPoint = ccp(0.5, 0.5);
-        _startSprite.position = ccp(_screenSize.width / 2, 0);
-        CGPoint pointStart = ccp(_screenSize.width / 2, _startSprite.boundingBox.size.height / 2);
-        [self addChild:_startSprite];
-        _startSprite.scale = 0;
+        CCSprite *EnglishSprite = [CCSprite spriteWithSpriteFrameName:@"LogoEnglish.png"];
+        EnglishSprite.position = _SPSet.logoEnglish;
+        [self addChild:EnglishSprite];
         
-        //又小变大，移动
-        CCScaleTo *scaleTo = [CCScaleTo actionWithDuration:1.0 scale:1.0];
-        CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.7 position:ccp(_screenSize.width / 2, pointStart.y + 150)];
-        CCSpawn *spawn = [CCSpawn actionOne:scaleTo two:moveTo];
+        CCSprite *cameraSprite = [CCSprite spriteWithSpriteFrameName:@"LogoCamera.png"];
+        cameraSprite.position = _SPSet.logoCamera;
+        [self addChild:cameraSprite];
         
-        CCDelayTime *delayStart = [CCDelayTime actionWithDuration:1.0];
+        //开始
+        NSString *spriteName = nil;
+        NSString *spriteNameHL = nil;
+        if ([GPNavBar continueLevel] > 0 || [GPNavBar isNeedRestoreScene]) {
+            spriteName = @"ContinueBtn.png";
+            spriteNameHL = @"ContinueBtn_HL.png";
+        } else {
+            spriteName = @"StartBtn.png";
+            spriteNameHL = @"StartBtn_HL.png";
+        }
+        CCSprite *startSprite = [CCSprite spriteWithSpriteFrameName:spriteName];
+        CCSprite *startHLSprite = [CCSprite spriteWithSpriteFrameName:spriteNameHL];
+        CCMenuItem *startItem = [CCMenuItemSprite itemFromNormalSprite:startSprite selectedSprite:startHLSprite target:self selector:@selector(startBtnPressed)];
+        startItem.anchorPoint = ccp(0.5, 0.5);
         
-        //变大变小
-        CCScaleTo *big = [CCScaleTo actionWithDuration:0.1 scale:1.1];
-        CCScaleTo *small = [CCScaleTo actionWithDuration:0.1 scale:1];
-        CCDelayTime *time = [CCDelayTime actionWithDuration:1.2];
-        CCSequence *bigSmall = [CCSequence actions:big, small, time, nil];
-        CCRepeat *repeat = [CCRepeat actionWithAction:bigSmall times:50];
+        //选择关卡
+        CCSprite *selectSprite = [CCSprite spriteWithSpriteFrameName:@"SelectBtn.png"];
+        CCSprite *selectHLSprite = [CCSprite spriteWithSpriteFrameName:@"SelectBtn_HL.png"];
+        CCMenuItem *selectItem = [CCMenuItemSprite itemFromNormalSprite:selectSprite selectedSprite:selectHLSprite target:self selector:@selector(selectBtnPressed)];
+        selectItem.anchorPoint = ccp(0.5, 0.5);
         
-        //开始执行动作
-        CCSequence *seqStart = [CCSequence actions:delayStart, spawn, repeat, nil];
-        [_startSprite runAction:seqStart];
+        //反馈
+        CCSprite *feedbackSprite = [CCSprite spriteWithSpriteFrameName:@"SettingFeedback.png"];
+        CCSprite *feedbackHLSprite = [CCSprite spriteWithSpriteFrameName:@"SettingFeedback_HL.png"];
+        CCMenuItem *feedbackItem = [CCMenuItemSprite itemFromNormalSprite:feedbackSprite selectedSprite:feedbackHLSprite target:self selector:@selector(feedback)];
+        feedbackItem.anchorPoint = ccp(0.5, 0.5);
+        
+        //声音开启关闭
+        CCSprite *soundOnSprite = [CCSprite spriteWithSpriteFrameName:@"SettingSoundOn.png"];
+        CCSprite *soundOnHLSprite = [CCSprite spriteWithSpriteFrameName:@"SettingSoundOn_HL.png"];
+        CCMenuItem *soundOnItem = [CCMenuItemSprite itemFromNormalSprite:soundOnSprite selectedSprite:soundOnHLSprite];
+        
+        CCSprite *soundOffSprite = [CCSprite spriteWithSpriteFrameName:@"SettingSoundOff.png"];
+        CCSprite *soundOffHLSprite = [CCSprite spriteWithSpriteFrameName:@"SettingSoundOff_HL.png"];
+        CCMenuItem *soundOffItem = [CCMenuItemSprite itemFromNormalSprite:soundOffSprite selectedSprite:soundOffHLSprite];
+        
+        CCMenuItemToggle *soundToggle = [CCMenuItemToggle itemWithTarget:self selector:@selector(soundOn) items:soundOnItem, soundOffItem, nil];
+        soundToggle.anchorPoint = ccp(0.5, 0.5);
+        
+        //评价
+        CCSprite *rateSprite = [CCSprite spriteWithSpriteFrameName:@"SettingRate.png"];
+        CCSprite *rateHLSprite = [CCSprite spriteWithSpriteFrameName:@"SettingRate_HL.png"];
+        CCMenuItem *rateItem = [CCMenuItemSprite itemFromNormalSprite:rateSprite selectedSprite:rateHLSprite target:self selector:@selector(rateThisApp)];
+        rateItem.anchorPoint = ccp(0.5, 0.5);
+        
+        if ([GPNavBar isNeedRate]) {
+            //鼓励评价的dialogue
+            CCSprite *dialogue = [CCSprite spriteWithSpriteFrameName:@"SettingDialogue.png"];
+            dialogue.position = _SPSet.dialogueSprite;
+            [self addChild:dialogue];
+            
+            CCLabelTTF *label = [CCLabelTTF labelWithString:@"求评价~" fontName:FONTNAME_OF_TEXT fontSize:15];
+            [dialogue addChild:label];
+            label.color = ccc3(40, 40, 40);
+            label.position = ccp(dialogue.boundingBox.size.width / 2, dialogue.boundingBox.size.height / 2);
+            
+            //dialogue的动画
+            CCMoveTo *moveL = [CCMoveTo actionWithDuration:0.5 position:ccp(_SPSet.dialogueSprite.x - 5, _SPSet.dialogueSprite.y)];
+            CCMoveTo *moveR = [CCMoveTo actionWithDuration:0.5 position:ccp(_SPSet.dialogueSprite.x + 5, _SPSet.dialogueSprite.y)];
+            CCSequence *moveLR = [CCSequence actionOne:moveL two:moveR];
+            CCRepeatForever *repeat = [CCRepeatForever actionWithAction:moveLR];
+            [dialogue runAction:repeat];
+        }
+        
+        //信息
+        CCSprite *infoSprite = [CCSprite spriteWithSpriteFrameName:@"SettingInfo.png"];
+        CCSprite *infoHLSprite = [CCSprite spriteWithSpriteFrameName:@"SettingInfo_HL.png"];
+        CCMenuItem *infoItem = [CCMenuItemSprite itemFromNormalSprite:infoSprite selectedSprite:infoHLSprite target:self selector:@selector(showInfo)];
+        infoItem.anchorPoint = ccp(0.5, 0.5);
+        
+        CCMenu *menu = [CCMenu menuWithItems:startItem, selectItem, feedbackItem, soundToggle, rateItem, infoItem, nil];
+        menu.anchorPoint = ccp(0, 0);
+        menu.position = ccp(0, 0);
+        [self addChild:menu];
         
         
-        //settings button
-        frame = [frameCache spriteFrameByName:@"Hajimaru1.png"];
-        _hajimaruSprite = [CCSprite spriteWithSpriteFrame:frame];
-        _hajimaruSprite.anchorPoint = ccp(1, 0.5);
-        _hajimaruSprite.position = ccp(0, 80);
-        [self addChild:_hajimaruSprite];
-        _hajimaruSprite.visible = NO;
+        startItem.position = _SPSet.startItem;
+        selectItem.position = _SPSet.selectItem;
+        feedbackItem.position = _SPSet.feedbackItem;
+        soundToggle.position = _SPSet.soundItem;
+        rateItem.position = _SPSet.rateItem;
+        infoItem.position = _SPSet.infoItem;
         
-        CCDelayTime *delayHajimaru = [CCDelayTime actionWithDuration:1.0];
-        CCMoveTo *moveToCenter = [CCMoveTo actionWithDuration:0.9 position:ccp((_screenSize.width + _hajimaruSprite.boundingBox.size.width) / 2, 80)];
-        CCShow *show = [CCShow action];
-        CCSpawn *hajimaruSpwan = [CCSpawn actionOne:moveToCenter two:show];
-        CCSequence *seqHajimaru = [CCSequence actionOne:delayHajimaru two:hajimaruSpwan];
-        [_hajimaruSprite runAction:seqHajimaru];
         
         _navBar = [[[GPNavBar alloc] initWithSceneType:GPSceneTypeStartLayer] autorelease];
         [self addChild:_navBar z:ZORDER_NAV_BAR];
@@ -132,63 +212,169 @@
         
         [StartLayer cancelLocalNotification];
         [StartLayer createLocalNotification];
+        
+        
     }
     
     return self;
 }
 
--(void) registerWithTouchDispatcher
-{
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
-}
+//-(void) registerWithTouchDispatcher
+//{
+//	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+//}
 
-
-+(CGPoint) locationFromTouch:(UITouch*)touch
-{
-	CGPoint touchLocation = [touch locationInView: [touch view]];
-	return [[CCDirector sharedDirector] convertToGL:touchLocation];
-}
-
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    
-    _currentTouchPoint = [StartLayer locationFromTouch:touch];
-    
-    isTouchEnabled_ = CGRectContainsPoint(_startSprite.boundingBox, _currentTouchPoint);
-    
-    if (isTouchEnabled_) {
+- (void)initalPostion {
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    if ([GPNavBar isiPad]) {
+        _SPSet.startItem = ccp(winSize.width / 2, winSize.height / 2 + 90 - 100);
+        _SPSet.selectItem = ccp(winSize.width / 2, winSize.height / 2 - 90 - 100);
         
+        _SPSet.feedbackItem = ccp(90, 90);
+        _SPSet.soundItem = ccp(180, 90);
+        _SPSet.rateItem = ccp(270, 90);
+        _SPSet.dialogueSprite = ccp(450, 90);
+        
+        _SPSet.infoItem = ccp(winSize.width - 90, 90);
+        
+        _SPSet.logoChinese = ccp(winSize.width / 2 - 63, winSize.height - 88 - 225);
+        _SPSet.logoEnglish = ccp(winSize.width / 2, winSize.height - 88 - 300);
+        _SPSet.logoCamera = ccp(winSize.width / 2 + 248, _SPSet.logoChinese.y + 3);
+    } else if ([GPNavBar isiPhone5]) {
+        _SPSet.startItem = ccp(winSize.width / 2, winSize.height / 2 - 40);
+        _SPSet.selectItem = ccp(winSize.width / 2, winSize.height / 2 - 120);
+        
+        _SPSet.feedbackItem = ccp(45, 45);
+        _SPSet.soundItem = ccp(90, 45);
+        _SPSet.rateItem = ccp(135, 45);
+        _SPSet.dialogueSprite = ccp(200, 45);
+        
+        _SPSet.infoItem = ccp(winSize.width - 45, 45);
+        
+        _SPSet.logoChinese = ccp(winSize.width / 2 - 31, winSize.height - 44 - 102);
+        _SPSet.logoEnglish = ccp(winSize.width / 2, winSize.height - 44 - 140);
+        _SPSet.logoCamera = ccp(winSize.width / 2 + 123, _SPSet.logoChinese.y + 1);
+        
+    } else {
+        _SPSet.startItem = ccp(winSize.width / 2, winSize.height / 2 - 10);
+        _SPSet.selectItem = ccp(winSize.width / 2, winSize.height / 2 - 90);
+        
+        _SPSet.feedbackItem     = ccp(30, 30);
+        _SPSet.soundItem        = ccp(80, 30);
+        _SPSet.rateItem         = ccp(130, 30);
+        _SPSet.dialogueSprite = ccp(200, 30);
+        _SPSet.infoItem         = ccp(winSize.width - 30, 30);
+        
+        _SPSet.logoChinese = ccp(winSize.width / 2 - 31, winSize.height - 44 - 62);
+        _SPSet.logoEnglish = ccp(winSize.width / 2, winSize.height - 44 - 100);
+        _SPSet.logoCamera = ccp(winSize.width / 2 + 123, _SPSet.logoChinese.y + 1);
+    }
+}
+
+- (void)startBtnPressed {
+    NSInteger continueLevelNum = [GPNavBar continueLevel];
+    [[GameManager sharedGameManager] loadLevelWithIndex:(int)continueLevelNum GPSceneType:GPSceneTypeContinueLayer];
+}
+
+- (void)selectBtnPressed {
+    [[CCDirector sharedDirector] replaceScene:
+	 [CCTransitionFade transitionWithDuration:0.5f scene:[MapScene scene]]];
+}
+
+- (void)soundOff {
+    
+}
+
+- (void)soundOn {
+    
+}
+
+- (void)mailData:(NSData *)data {
+    if (![MFMailComposeViewController canSendMail]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops!", @"")
+                                                        message:NSLocalizedString(@"Your device cannot send mail.", @"")
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return;
     }
     
-    return isTouchEnabled_;
+	// Start up mail picker
+	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+	
+	UINavigationBar *bar = picker.navigationBar;
+	picker.mailComposeDelegate = self;
+	
+	[picker setSubject:@"Check out this cute wallpaper!"];
+	[picker addAttachmentData:data mimeType:@"image/jpg" fileName:@"wallpaper.jpg"];
+	
+	// Set up the recipients.
+	NSArray *toRecipients = [NSArray arrayWithObjects:nil];
+	[picker setToRecipients:toRecipients];
+	
+	// Fill out the email body text.
+    NSString *actualBody = @"Check out this cute wallpaper!  You can download the fullscreen version for free from: http://www.vickiwenderlich.com";
+	[picker setMessageBody:actualBody isHTML:NO];
+	
+	// Present the mail composition interface.
+    [_controller presentViewController:picker animated:YES completion:^{}];
+//	[_controller presentModalViewController:picker animated:YES];
+	
+	bar.topItem.title = @"Email Wallpaper";
+	
+	[picker release]; // Can safely release the controller now.
+}
+
+
+- (void)feedback {
     
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
+    if (_controller == nil) {
+        //加一个UIViewController
+        _controller = [[RootViewController alloc] init];
+        _controller.view.frame = CGRectMake(0,0,winSize.width,winSize.height);
+        [[[CCDirector sharedDirector] openGLView]addSubview : _controller.view];
+    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+//        NSData *data = UIImageJPEGRepresentation(curImage, 0.8);
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+//            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self mailData:nil];
+        });
+    });
+
+}
+
+- (void)rateThisApp {
+    
+    //评论之后，不需要再次闪现评论dialogue
+    [GPNavBar setIsNeedRate:NO];
+    
+    NSString *rateMe = nil;
+    if (IOS_NEWER_OR_EQUAL_TO_7) {
+        rateMe = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", APP_ID];
+    } else {
+        rateMe = [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", APP_ID];
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:rateMe]];
     
 }
 
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint endPoint = [StartLayer locationFromTouch:touch];
-    
-    if (CGRectContainsPoint(_startSprite.boundingBox, _currentTouchPoint)){
-          _startSprite.scale = 1.0;
-          
-          if (CGRectContainsPoint(_startSprite.boundingBox, endPoint)) {
-              [self transToNext];
-          }
-      }
+- (void)showInfo {
     
 }
+
 
 - (void)transToNext {
-    
-    //跳转
-//    [[CCDirector sharedDirector] replaceScene:[CCTransitionSlideInR transitionWithDuration:0.5 scene:[GuessScene scene]]];
     
     [[CCDirector sharedDirector] replaceScene:
 	 [CCTransitionFade transitionWithDuration:0.5f scene:[MapScene scene]]];
 }
 
-- (void)onExit {
-    [[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
-}
 
 + (void)cancelLocalNotification {
     
@@ -278,6 +464,15 @@
     }
     [localNotif release];
     
+}
+
+#pragma mark MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+		  didFinishWithResult:(MFMailComposeResult)result
+						error:(NSError *)error {
+    
+    [_controller dismissViewControllerAnimated:YES completion:^{}];
 }
 
 
