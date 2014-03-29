@@ -98,7 +98,7 @@
 //    CCSequence *seq = [CCSequence actionOne:bigToSmall two:cleanUp];
 //    
 //    [self runAction:seq];
-    
+    [GPNavBar playBtnPressedEffect];
     [self removeFromParentAndCleanup:YES];
 }
 

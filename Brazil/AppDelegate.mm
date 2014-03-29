@@ -134,6 +134,17 @@
 	
 	// Removes the startup flicker
 	[self removeStartupFlicker];
+    
+    //初始化一些设置
+    if ([GPNavBar isFirstTimeInstallApplication]) {
+        [GPNavBar setIsEnabledSoundEffect:YES];
+        CCLOG(@"默认开启音频");
+    }
+    
+    if ([GPNavBar isEnabledSoundEffect]) {
+        CCLOG(@"加载音频");
+        [GPNavBar preloadSoundEffect];
+    }
 	
 	// Run the intro Scene
 //	[[CCDirector sharedDirector] runWithScene:[GuessScene scene]];

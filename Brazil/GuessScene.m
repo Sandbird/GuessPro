@@ -110,6 +110,8 @@ typedef enum {
 @property (assign)BOOL isNeedRestoreScene;
 @property (assign)BOOL isCouldLose;//判断每关只能进入一次lose
 
+@property (assign)ALint successSoundInt;
+
 @end
 
 @implementation GuessScene
@@ -570,6 +572,8 @@ static GuessScene *instanceOfGuessScene;
         return;
     }
     
+    [GPNavBar playBtnPressedEffect];
+    
     CCMenuItem *smallItem = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemSmallTag];
     
     CCMoveTo *MoveIn = nil;
@@ -610,6 +614,7 @@ static GuessScene *instanceOfGuessScene;
 
 - (void)bombItemPressed {
     
+    
     //把剩余block变回正常
     [self makeSelectedBlockNormal];
     
@@ -618,6 +623,8 @@ static GuessScene *instanceOfGuessScene;
         [_navBar showStoreLayer];
         return;
     }
+    
+    [GPNavBar playBtnPressedEffect];
     
     CCMenuItem *bombItem = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemBombTag];
     
@@ -664,6 +671,8 @@ static GuessScene *instanceOfGuessScene;
         return;
     }
     
+    [GPNavBar playBtnPressedEffect];
+    
     CCMenuItem *flyItem = (CCMenuItem *)[_itemMenu getChildByTag:CCMenuItemFlyingTag];
     
     if (_isFlyReady) {
@@ -707,6 +716,8 @@ static GuessScene *instanceOfGuessScene;
     if (self.currPuzzle.isBuiedTips) {
         [self showTipsAlert];
     } else {
+        
+        [GPNavBar playBtnPressedEffect];
         //显示Alert
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看提示道具" message:@"您愿意消耗50枚黄金摄像机查看本关的提示么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
         [alertView show];
@@ -717,6 +728,8 @@ static GuessScene *instanceOfGuessScene;
 }
 
 - (void)showTipsAlert {
+    [GPNavBar playBtnPressedEffect];
+    
     //标记是否购买
     self.currPuzzle.isBuiedTips = YES;
     
@@ -741,6 +754,8 @@ static GuessScene *instanceOfGuessScene;
     if (self.currPuzzle.isBuiedAnswer) {
         [self showAnswerAlert];
     } else {
+        
+        [GPNavBar playBtnPressedEffect];
         //显示Alert
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看答案道具" message:@"您愿意消耗100枚黄金摄像机查看本关的答案么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
         [alertView show];
@@ -750,6 +765,8 @@ static GuessScene *instanceOfGuessScene;
 }
 
 - (void)showAnswerAlert {
+    [GPNavBar playBtnPressedEffect];
+    
     //标记是否购买
     self.currPuzzle.isBuiedAnswer = YES;
     
@@ -763,6 +780,8 @@ static GuessScene *instanceOfGuessScene;
 }
 
 - (void)shareItemPressed {
+    
+    [GPNavBar playBtnPressedEffect];
     
     //把剩余block变回正常
     [self makeSelectedBlockNormal];
@@ -954,6 +973,8 @@ static GuessScene *instanceOfGuessScene;
     CCRotateBy *rotate = [CCRotateBy actionWithDuration:0.6 angle:360];
     CCRepeatForever *repeat = [CCRepeatForever actionWithAction:rotate];
     [flySprite runAction:repeat];
+    
+    [GPNavBar playFlyItemEffect];
     
 }
 
@@ -1183,6 +1204,9 @@ static GuessScene *instanceOfGuessScene;
         self.isTouchEnabled = NO;
         _itemMenu.isTouchEnabled = NO;
         
+        //开启音效
+        self.successSoundInt = [GPNavBar playSuccessEffect];
+        
     } else {
         sLayer = (SuccessLayer *)[self getChildByTag:CCLayerSuccessLayerTag];
         [sLayer removeFromParentAndCleanup:YES];
@@ -1190,6 +1214,9 @@ static GuessScene *instanceOfGuessScene;
         //把上一个layer的touch事件重新开启。
         self.isTouchEnabled = YES;
         _itemMenu.isTouchEnabled = YES;
+        
+        //暂停音效
+        [GPNavBar stopSuccessEffectBy:self.successSoundInt];
     }
 }
 
@@ -1475,8 +1502,12 @@ static GuessScene *instanceOfGuessScene;
                 switch (self.currRecivedStatus) {
                     case RecivedStatusNormal:
                         if ([currBlock isBlockSelected]) {
+                            [GPNavBar playBlockBreakEffect];
+                            
                             [currBlock makeBlock:BlockStatusGone];
                         } else {
+                            [GPNavBar playBtnPressedEffect];
+                            
                             [self makeSelectedBlockNormal];
                             [currBlock makeBlock:BlockStatusSelected];
                         }
@@ -1537,12 +1568,17 @@ static GuessScene *instanceOfGuessScene;
             //触摸的是单词，本单词消失
             WordBlank *currBlank = nil;
             if (currWord.isAtHome && !isBlankFull) {
+                
+                [GPNavBar playBtnPressedEffect];
+                
                 [self reorderChild:currWord.wordSprite z:ZORDER_WORD_SELECTED];
                 currBlank = (WordBlank *)[self.blankArray objectAtIndex:self.currBlankIndex];
                 currBlank.fillWord = currWord.wordString;
                 currWord.currBlankIndex = self.currBlankIndex;
                 [currWord goToPosition:currBlank.point];
             } else if (!currWord.isAtHome) {
+                
+                [GPNavBar playBtnPressedEffect];
                 
                 //停止word错误动画
                 for (Word *word in self.wordArray) {

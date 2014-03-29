@@ -202,6 +202,7 @@
 }
 
 - (void)popInformation {
+    [GPNavBar playBtnPressedEffect];
     InformationBorad *infoLayer = [InformationBorad nodeWithInformation:self.curInfo parentView:_controller.view];
     [[[GuessScene sharedGuessScene] navBar] addChild:infoLayer];
     
@@ -212,6 +213,7 @@
 }
 
 - (void)nextPicture {
+    [GPNavBar playBtnPressedEffect];
     [[GuessScene sharedGuessScene] changeToNextPuzzle];
 }
 

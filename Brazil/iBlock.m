@@ -107,10 +107,12 @@
             self.currBlockStatus = BlockStatusGone;
             [self.blockSprite stopAllActions];
             self.blockSprite.visible = NO;
-            CCParticleSystem* system = [CCParticleSystemQuad particleWithFile:@"PressEffects.plist"];
+            CCParticleSystem* system = [CCParticleSystemQuad particleWithFile:[AssetHelper getDeviceSpecificFileNameFor:@"TouchEffect.plist"]];
 //            system.positionType = kCCPositionTypeFree;
             system.positionType = kCCPositionTypeRelative;
-            system.sourcePosition = self.blockSpriteBoundingBox.origin;
+            CGPoint blockPos = self.blockSpriteBoundingBox.origin;
+            CGSize blockSize = self.blockSpriteBoundingBox.size;
+            system.sourcePosition = ccp(blockPos.x + blockSize.width / 2, blockPos.y + blockSize.height / 2);
             [_parentNode addChild:system z:10];
             break;
             

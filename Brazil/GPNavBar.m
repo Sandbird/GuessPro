@@ -15,6 +15,9 @@
 #import "CoinStore.h"
 #import "ZZAcquirePath.h"
 
+#include <sys/types.h>
+#include <sys/sysctl.h>
+
 //判断设备是IPHONE还是IPAD
 #define IPAD_DEVICE [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
 #define IPHONE5_DEVICE [[UIScreen mainScreen] bounds].size.height == 568.000000
@@ -149,6 +152,8 @@
 
 - (void)popToMenu {
     
+    [GPNavBar playBtnPressedEffect];
+    
     if (self.sceneType == GPSceneTypeGuessLayer) {
         [[GuessScene sharedGuessScene] saveScene];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5 scene:[MapScene scene]]];
@@ -277,7 +282,6 @@
 
 - (void)transToMainScene {
     
-    [GPNavBar playBackEffect];
     [GPNavBar resumeBackgroundMusicPlay];
 //    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5 scene:[ChooseBallLayer scene] withColor:ccWHITE]];
     
@@ -313,18 +317,6 @@
 //    }
 }
 
-+ (void)playGoEffect {
-    [[SimpleAudioEngine sharedEngine] playEffect:EFFECT_GO];
-}
-
-+ (void)playBarkEffect {
-    [[SimpleAudioEngine sharedEngine] playEffect:EFFECT_BARK];
-}
-
-+ (void)playBackEffect {
-    [[SimpleAudioEngine sharedEngine] playEffect:EFFECT_BACK];
-}
-
 
 + (CGPoint) locationFromTouch:(UITouch*)touch
 {
@@ -333,6 +325,8 @@
 }
 
 - (void)showStoreLayer {
+    
+    [GPNavBar playBtnPressedEffect];
     
     if (_coinStore) {
         
@@ -380,6 +374,7 @@
 }
 
 - (void)showShareBoradWithType:(ShareBoradShareType)SBSType {
+    [GPNavBar playBtnPressedEffect];
     if (_shareBorad) {
         //删除本地截图
         [self deleteScreenshotFromLocal];
@@ -489,6 +484,20 @@
 }
 
 #pragma mark - First Time Run
+
+//程序是否第一次安装运行
+#define kIsFirstTimeInstall @"kIsFirstTimeInstall"
++ (BOOL)isFirstTimeInstallApplication {
+    BOOL  hasRunBefore = [[NSUserDefaults standardUserDefaults] boolForKey:kIsFirstTimeInstall];
+    if (!hasRunBefore) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsFirstTimeInstall];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return YES;
+    }
+    
+    return NO;
+}
+
 //此版本是否第一次运行
 + (BOOL)isThisVersionFirstTimeRun {
     NSString *version = [GPNavBar buildVersion];
@@ -520,6 +529,171 @@
 + (BOOL)isNeedRate {
     BOOL isRate = [[NSUserDefaults standardUserDefaults] boolForKey:kIsNeedRate];
     return isRate;
+}
+
+#define kIsEnabledSoundEffect @"kIsEnabledSoundEffect"
++ (BOOL)isEnabledSoundEffect {
+    BOOL isEnabledSound = [[NSUserDefaults standardUserDefaults] boolForKey:kIsEnabledSoundEffect];
+    return isEnabledSound;
+}
+
++ (void)setIsEnabledSoundEffect:(BOOL)isEnabled {
+    [[NSUserDefaults standardUserDefaults] setBool:isEnabled forKey:kIsEnabledSoundEffect];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void)preloadSoundEffect {
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"BtnPressed.caf"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"BlockBreak.caf"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"Success.mp3"];
+}
+
++ (void)unloadSoundEffect {
+    [[SimpleAudioEngine sharedEngine] unloadEffect:@"BtnPressed.caf"];
+    [[SimpleAudioEngine sharedEngine] unloadEffect:@"BlockBreak.caf"];
+    [[SimpleAudioEngine sharedEngine] unloadEffect:@"Success.mp3"];
+}
+
++ (ALint)playSuccessEffect {
+    ALint soundInt = 0;
+    if ([GPNavBar isEnabledSoundEffect]) {
+        soundInt = [[SimpleAudioEngine sharedEngine] playEffect:@"Success.mp3"];
+    }
+    
+    return soundInt;
+}
+
++ (void)stopSuccessEffectBy:(ALint)soundInt {
+    if ([GPNavBar isEnabledSoundEffect]) {
+        [[SimpleAudioEngine sharedEngine] stopEffect:soundInt];
+    }
+}
+
++ (void)playBtnPressedEffect {
+    if ([GPNavBar isEnabledSoundEffect]) {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"BtnPressed.caf"];
+    }
+    
+}
+
++ (void)playBlockBreakEffect {
+    if ([GPNavBar isEnabledSoundEffect]) {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"BlockBreak.caf"];
+    }
+}
+
++ (void)playWordPressedEffect {
+    if ([GPNavBar isEnabledSoundEffect]) {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"WordPressedEffect.caf"];
+    }
+}
+
++ (void)playWordBackEffect {
+    if ([GPNavBar isEnabledSoundEffect]) {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"WordBackEffect.caf"];
+    }
+}
+
++ (void)playFlyItemEffect {
+    if ([GPNavBar isEnabledSoundEffect]) {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"FlyItemSoundEffect.mp3"];
+    }
+}
+
+#pragma mark - Device Info
+
++ (NSString *) platform{
+    size_t size;
+    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+    char *machine = malloc(size);
+    sysctlbyname("hw.machine", machine, &size, NULL, 0);
+    NSString *platform = [NSString stringWithCString:machine encoding:NSUTF8StringEncoding];
+    free(machine);
+    return platform;
+}
+
++ (NSString *)applicationDisplayName {
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    CFShow(infoDictionary);
+    //    NSString *appName = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+    NSString *appName = NSLocalizedStringFromTable(@"CFBundleDisplayName", @"InfoPlist", @"应用名称");
+    
+    return appName;
+}
+
++ (NSString *)applicationVersion {
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    CFShow(infoDictionary);
+    // app名称
+    //    NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+    // app版本
+    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    
+    return app_Version;
+}
+
++ (NSString *)systemVersion {
+    return [[UIDevice currentDevice] systemVersion];
+}
+
++ (NSString *) platformString{
+    
+    /*
+     @"i386"      on the simulator
+     @"iPod1,1"   on iPod Touch
+     @"iPod2,1"   on iPod Touch Second Generation
+     @"iPod3,1"   on iPod Touch Third Generation
+     @"iPod4,1"   on iPod Touch Fourth Generation
+     @"iPhone1,1" on iPhone
+     @"iPhone1,2" on iPhone 3G
+     @"iPhone2,1" on iPhone 3GS
+     @"iPad1,1"   on iPad
+     @"iPad2,1"   on iPad 2
+     @"iPad3,1"   on 3rd Generation iPad
+     @"iPhone3,1" on iPhone 4
+     @"iPhone4,1" on iPhone 4S
+     @"iPhone5,1" on iPhone 5 (model A1428, AT&T/Canada)
+     @"iPhone5,2" on iPhone 5 (model A1429, everything else)
+     @"iPad3,4" on 4th Generation iPad
+     @"iPad2,5" on iPad Mini
+     @"iPhone5,3" on iPhone 5c (model A1456, A1532 | GSM)
+     @"iPhone5,4" on iPhone 5c (model A1507, A1516, A1526 (China), A1529 | Global)
+     @"iPhone6,1" on iPhone 5s (model A1433, A1533 | GSM)
+     @"iPhone6,2" on iPhone 5s (model A1457, A1518, A1528 (China), A1530 | Global)
+     @"iPad4,1" on 5th Generation iPad (iPad Air) - Wifi
+     @"iPad4,2" on 5th Generation iPad (iPad Air) - Cellular
+     @"iPad4,4" on 2nd Generation iPad Mini - Wifi
+     @"iPad4,5" on 2nd Generation iPad Mini - Cellular
+     */
+    NSString *platform = [GPNavBar platform];
+    if ([platform isEqualToString:@"iPhone1,1"])    return @"iPhone 1G";
+    if ([platform isEqualToString:@"iPhone1,2"])    return @"iPhone 3G";
+    if ([platform isEqualToString:@"iPhone2,1"])    return @"iPhone 3GS";
+    if ([platform isEqualToString:@"iPhone3,1"])    return @"iPhone 4";
+    if ([platform isEqualToString:@"iPhone4,1"])    return @"iPhone 4S";
+    if ([platform isEqualToString:@"iPhone5,1"])    return @"iPhone 5";
+    if ([platform isEqualToString:@"iPhone5,2"])    return @"iPhone 5";
+    if ([platform isEqualToString:@"iPhone5,3"])    return @"iPhone 5C";
+    if ([platform isEqualToString:@"iPhone5,4"])    return @"iPhone 5C";
+    if ([platform isEqualToString:@"iPhone6,1"])    return @"iPhone 5S";
+    if ([platform isEqualToString:@"iPhone6,2"])    return @"iPhone 5S";
+    
+    if ([platform isEqualToString:@"iPod1,1"])      return @"iPod Touch 1";
+    if ([platform isEqualToString:@"iPod2,1"])      return @"iPod Touch 2";
+    if ([platform isEqualToString:@"iPod3,1"])      return @"iPod Touch 3";
+    if ([platform isEqualToString:@"iPod4,1"])      return @"iPod Touch 4";
+    
+    if ([platform isEqualToString:@"iPad1,1"])      return @"iPad";
+    if ([platform isEqualToString:@"iPad2,1"])      return @"iPad 2";
+    if ([platform isEqualToString:@"iPad2,5"])      return @"iPad Mini";
+    if ([platform isEqualToString:@"iPad3,1"])      return @"iPad 3";
+    if ([platform isEqualToString:@"iPad3,4"])      return @"iPad 4";
+    if ([platform isEqualToString:@"iPad4,1"])      return @"iPad Air(Wifi)";
+    if ([platform isEqualToString:@"iPad4,2"])      return @"iPad Air(Cellular)";
+    if ([platform isEqualToString:@"iPad4,4"])      return @"iPad Mini 2(Wifi)";
+    if ([platform isEqualToString:@"iPad4,5"])      return @"iPad Mini 2(Cellular)";
+    if ([platform isEqualToString:@"i386"] || [platform isEqualToString:@"x86_64"])         return @"iOS Simulator";
+    return platform;
 }
 
 @end

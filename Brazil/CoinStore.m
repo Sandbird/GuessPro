@@ -250,6 +250,7 @@ typedef enum {
 }
 
 - (void)buyTier0 {
+    [GPNavBar playBtnPressedEffect];
     self.ppTag = ProductPrice6;
     [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.50"];
     
@@ -257,6 +258,7 @@ typedef enum {
 }
 
 - (void)buyTier1 {
+    [GPNavBar playBtnPressedEffect];
     self.ppTag = ProductPrice12;
     [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.150"];
     
@@ -264,6 +266,7 @@ typedef enum {
 }
 
 - (void)buyTier2 {
+    [GPNavBar playBtnPressedEffect];
     self.ppTag = ProductPrice18;
     [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.250"];
     
@@ -271,6 +274,7 @@ typedef enum {
 }
 
 - (void)buyTier3 {
+    [GPNavBar playBtnPressedEffect];
     self.ppTag = ProductPrice30;
     [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.450"];
     
@@ -278,6 +282,7 @@ typedef enum {
 }
 
 - (void)buyTier4 {
+    [GPNavBar playBtnPressedEffect];
     self.ppTag = ProductPrice88;
     [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.1500"];
     

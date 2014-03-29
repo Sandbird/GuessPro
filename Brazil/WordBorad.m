@@ -114,6 +114,8 @@
 //    
 //    [self runAction:seq];
     
+    [GPNavBar playBtnPressedEffect];
+    
     [self removeFromParentAndCleanup:YES];
     
 }

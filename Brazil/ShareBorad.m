@@ -276,6 +276,7 @@ typedef struct ItemSharePostion {
 }
 
 - (void)shareWithShareType:(ShareType)type mediaType:(SSPublishContentMediaType *)mediaType {
+    [GPNavBar playBtnPressedEffect];
     
     NSString *imagePath = nil;
     NSString *content = nil;

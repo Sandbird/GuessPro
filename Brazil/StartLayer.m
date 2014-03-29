@@ -151,6 +151,15 @@ typedef struct StartPostion {
         CCMenuItemToggle *soundToggle = [CCMenuItemToggle itemWithTarget:self selector:@selector(soundOn) items:soundOnItem, soundOffItem, nil];
         soundToggle.anchorPoint = ccp(0.5, 0.5);
         
+        if ([GPNavBar isEnabledSoundEffect]) {
+            [soundToggle setSelectedIndex:0];
+            CCLOG(@"开启音频");
+        } else {
+            [soundToggle setSelectedIndex:1];
+            CCLOG(@"关闭音频");
+        }
+        
+        
         //评价
         CCSprite *rateSprite = [CCSprite spriteWithSpriteFrameName:@"SettingRate.png"];
         CCSprite *rateHLSprite = [CCSprite spriteWithSpriteFrameName:@"SettingRate_HL.png"];
@@ -244,12 +253,11 @@ typedef struct StartPostion {
         _SPSet.startItem = ccp(winSize.width / 2, winSize.height / 2 - 40);
         _SPSet.selectItem = ccp(winSize.width / 2, winSize.height / 2 - 120);
         
-        _SPSet.feedbackItem = ccp(45, 45);
-        _SPSet.soundItem = ccp(90, 45);
-        _SPSet.rateItem = ccp(135, 45);
-        _SPSet.dialogueSprite = ccp(200, 45);
-        
-        _SPSet.infoItem = ccp(winSize.width - 45, 45);
+        _SPSet.feedbackItem     = ccp(30, 30);
+        _SPSet.soundItem        = ccp(80, 30);
+        _SPSet.rateItem         = ccp(130, 30);
+        _SPSet.dialogueSprite = ccp(200, 30);
+        _SPSet.infoItem         = ccp(winSize.width - 30, 30);
         
         _SPSet.logoChinese = ccp(winSize.width / 2 - 31, winSize.height - 44 - 102);
         _SPSet.logoEnglish = ccp(winSize.width / 2, winSize.height - 44 - 140);
@@ -272,20 +280,32 @@ typedef struct StartPostion {
 }
 
 - (void)startBtnPressed {
+    [GPNavBar playBtnPressedEffect];
     NSInteger continueLevelNum = [GPNavBar continueLevel];
     [[GameManager sharedGameManager] loadLevelWithIndex:(int)continueLevelNum GPSceneType:GPSceneTypeContinueLayer];
 }
 
 - (void)selectBtnPressed {
+    [GPNavBar playBtnPressedEffect];
     [[CCDirector sharedDirector] replaceScene:
 	 [CCTransitionFade transitionWithDuration:0.5f scene:[MapScene scene]]];
 }
 
 - (void)soundOff {
     
+    
 }
 
 - (void)soundOn {
+    if ([GPNavBar isEnabledSoundEffect]) {
+        [GPNavBar setIsEnabledSoundEffect:NO];
+        [GPNavBar unloadSoundEffect];
+    } else {
+        [GPNavBar setIsEnabledSoundEffect:YES];
+        [GPNavBar preloadSoundEffect];
+        [GPNavBar playBtnPressedEffect];
+    }
+    
     
 }
 
@@ -307,16 +327,20 @@ typedef struct StartPostion {
 	UINavigationBar *bar = picker.navigationBar;
 	picker.mailComposeDelegate = self;
 	
-	[picker setSubject:@"Check out this cute wallpaper!"];
-	[picker addAttachmentData:data mimeType:@"image/jpg" fileName:@"wallpaper.jpg"];
+	[picker setSubject:@"问题反馈"];
+//	[picker addAttachmentData:data mimeType:@"image/jpg" fileName:@"wallpaper.jpg"];
 	
 	// Set up the recipients.
-	NSArray *toRecipients = [NSArray arrayWithObjects:nil];
+	NSArray *toRecipients = [NSArray arrayWithObjects:@"FeedbackTAD@gmail.com", nil];
 	[picker setToRecipients:toRecipients];
 	
 	// Fill out the email body text.
-    NSString *actualBody = @"Check out this cute wallpaper!  You can download the fullscreen version for free from: http://www.vickiwenderlich.com";
-	[picker setMessageBody:actualBody isHTML:NO];
+    NSString *appName = [GPNavBar applicationDisplayName];
+    NSString *appVersion = [GPNavBar applicationVersion];
+    NSString *systemVersion = [GPNavBar systemVersion];
+    NSString *deviceName = [GPNavBar platformString];
+    NSString *emailBody = [NSString stringWithFormat:@"\n\n\n\n\n-----------------------\n%@:%@\n%@:%@\n%@:%@\n%@:%@\n-----------------------", NSLocalizedString(@"APP_NAME", @"名称"), appName, NSLocalizedString(@"APP_VERSION", @"软件版本"), appVersion, NSLocalizedString(@"SYSTEM_VERSION", @"系统版本"), systemVersion, NSLocalizedString(@"DEVICE_NAME", @"设备"), deviceName];
+	[picker setMessageBody:emailBody isHTML:NO];
 	
 	// Present the mail composition interface.
     [_controller presentViewController:picker animated:YES completion:^{}];
@@ -329,6 +353,8 @@ typedef struct StartPostion {
 
 
 - (void)feedback {
+    
+    [GPNavBar playBtnPressedEffect];
     
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     
@@ -351,6 +377,8 @@ typedef struct StartPostion {
 
 - (void)rateThisApp {
     
+    [GPNavBar playBtnPressedEffect];
+    
     //评论之后，不需要再次闪现评论dialogue
     [GPNavBar setIsNeedRate:NO];
     
@@ -365,6 +393,8 @@ typedef struct StartPostion {
 }
 
 - (void)showInfo {
+    
+    [GPNavBar playBtnPressedEffect];
     
 }
 

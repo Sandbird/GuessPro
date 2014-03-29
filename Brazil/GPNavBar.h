@@ -64,10 +64,6 @@ typedef enum {
 
 + (BOOL)isRetina;
 
-+ (void)playGoEffect;
-
-+ (void)playBackEffect;
-
 + (CGPoint) locationFromTouch:(UITouch*)touch;
 
 + (NSInteger)continueLevel;
@@ -87,8 +83,28 @@ typedef enum {
 + (NSInteger)numOfCoinAdded;
 + (void)setNumOfCoinAdded:(NSInteger)num;
 
++ (BOOL)isFirstTimeInstallApplication;
 + (BOOL)isThisVersionFirstTimeRun;
 + (void)setIsNeedRate:(BOOL)isRate;
 + (BOOL)isNeedRate;
+
++ (BOOL)isEnabledSoundEffect;
++ (void)setIsEnabledSoundEffect:(BOOL)isEnabled;
+
++ (void)preloadSoundEffect;
++ (void)unloadSoundEffect;
+
++ (void)playFlyItemEffect;
++ (void)playBtnPressedEffect;
++ (void)playBlockBreakEffect;
++ (void)playWordPressedEffect;
++ (void)playWordBackEffect;
++ (ALint)playSuccessEffect;
++ (void)stopSuccessEffectBy:(ALint)soundInt;
+
++ (NSString *)applicationDisplayName;
++ (NSString *)applicationVersion;
++ (NSString *)systemVersion;
++ (NSString *) platformString;
 
 @end

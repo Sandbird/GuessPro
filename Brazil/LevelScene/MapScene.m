@@ -190,11 +190,10 @@
 	return self;
 }
 - (void)selectLevel:(CCMenuItemFont *)sender {
-	[[SimpleAudioEngine sharedEngine] playEffect:@"button.mp3"];
+	[GPNavBar playBtnPressedEffect];
 	[[GameManager sharedGameManager] loadLevelWithIndex:(int)(sender.tag - 1) GPSceneType:GPSceneTypeGuessLayer];
 }
 - (void)back:(id)sender {
-	[[SimpleAudioEngine sharedEngine] playEffect:@"button.mp3"];
 	[[GameManager sharedGameManager] loadMenuScene];
 }
 
