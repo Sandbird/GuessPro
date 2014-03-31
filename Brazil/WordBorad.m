@@ -43,7 +43,7 @@
         CGFloat posY;
         CGSize wordSize;
         if ([GPNavBar isiPad]) {
-            posY = winSize.height - 76.0f;
+            posY = winSize.height - 88.0f;
             wordSize = CGSizeMake(600, 800);
         } else if ([GPNavBar isiPhone5]) {
             posY = winSize.height - 38.0f;
@@ -57,8 +57,8 @@
         NSTextAlignment TA;
         CCVerticalAlignment VA;
         if (WBType == WordBoradTypeTips) {
-            title = @"提示";
-            TA = NSTextAlignmentCenter;
+            title = @"线索";
+            TA = NSTextAlignmentLeft;
             VA = CCVerticalAlignmentTop;
         } else if (WBType == WordBoradTypeAnswer) {
             title = @"答案";
@@ -88,7 +88,7 @@
         CCSprite *closeHLSprite = [CCSprite spriteWithSpriteFrameName:@"close_HL.png"];
         CCMenuItem *closeItem = [CCMenuItemImage itemFromNormalSprite:closeSprite selectedSprite:closeHLSprite target:self selector:@selector(closeWordBorad)];
         closeItem.anchorPoint = ccp(0.5, 0.5);
-        closeItem.position = ccp(winSize.width / 2, 50);
+        closeItem.position = ccp(winSize.width / 2, HEIGHT_OF_CLOSE_ITEM);
         
         _menu = [CCMenu menuWithItems:closeItem, nil];
         _menu.position = ccp(0, 0);

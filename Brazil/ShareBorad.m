@@ -81,7 +81,7 @@ typedef struct ItemSharePostion {
         CGFloat posY;
         CGSize wordSize;
         if ([GPNavBar isiPad]) {
-            posY = winSize.height - 76.0f;
+            posY = winSize.height - 88.0f;
             wordSize = CGSizeMake(600, 200);
         } else if ([GPNavBar isiPhone5]) {
             posY = winSize.height - 38.0f;
@@ -96,10 +96,10 @@ typedef struct ItemSharePostion {
         
         if (self.SBStype == ShareTypeSOS) {
             title = @"求助朋友";
-            text = @"如果成功分享到任意一个社交平台向朋友求助的话，鉴于你的谦虚品质，将获得5枚黄金摄像机的奖励。每天最多可奖励50枚黄金摄像机。";
+            text = @"如果成功分享到任意一个社交平台向朋友求助的话，鉴于你的谦虚品质，将获得5枚金币的奖励。每天最多可奖励50枚金币。";
         } else if (self.SBStype == ShareTypeShare) {
-            title = @"分享电影海报猜猜猜";
-            text = @"如果成功分享到任意一个社交平台的话，你将获得10枚黄金摄像机的奖励，快让更多你身边的电影大神加入吧。每天最多可奖励50枚黄金摄像机。";
+            title = @"分享";
+            text = @"如果成功分享到任意一个社交平台的话，你将获得10枚金币的奖励，快让更多你身边的电影大神加入吧。每天最多可奖励50枚金币。";
         }
         
         CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
@@ -118,7 +118,7 @@ typedef struct ItemSharePostion {
         CCSprite *closeHLSprite = [CCSprite spriteWithSpriteFrameName:@"close_HL.png"];
         CCMenuItem *closeItem = [CCMenuItemImage itemFromNormalSprite:closeSprite selectedSprite:closeHLSprite target:self selector:@selector(closeShareBorad)];
         closeItem.anchorPoint = ccp(0.5, 0.5);
-        closeItem.position = ccp(winSize.width / 2, /*winSize.height / 2 + backgroud.boundingBox.size.height / 2*/50);
+        closeItem.position = ccp(winSize.width / 2, HEIGHT_OF_CLOSE_ITEM);
         
         NSArray *selectorNameArray = [NSArray arrayWithObjects:@"shareToQQ", @"shareToQQZone", @"shareToQQWeibo", @"shareToWeiXin", @"shareToPYQ", @"shareToRenRen", @"shareToSinaWeiBo", @"shareToDouban", nil];
         

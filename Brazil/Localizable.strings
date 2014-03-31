@@ -1,0 +1,42 @@
+/* 
+  Localizable.strings
+  ToeflListening
+
+  Created by zhaozilong on 13-5-10.
+
+*/
+"SYSTEM_LANGUAGE"  =   "LanguageCN";
+
+"BACK"                          = "返回";
+//"USER_ADVISE"                   = "意见反馈";
+"APP_NAME"                      = "名称";
+"APP_VERSION"                   = "软件版本";
+"SYSTEM_VERSION"                = "系统版本";
+"DEVICE_NAME"                   = "设备";
+"RATE"                          = "去App Store给应用打分";
+
+//通用
+"OK"                            = "好";
+"CANCEL"                        = "取消";
+"SORRY"                         = "抱歉";
+"EDIT"                          = "编辑";
+"DONE"                          = "完成";
+
+//网络连接情况
+"CHECK_INTERNET"                = "请检查您的网络设置";
+"BAD_NETWORK"                   = "网络貌似不太好哦";
+"NO_INTERNET"                   = "当前未联网";
+
+/******Store的翻译********/
+"STORE_ALERT_TITLE"             = "提示";
+"STORE_ALERT_MSG"               = "Not available in App Store";
+"STORE_ALERT_CLOSE"             = "关闭";
+"STORE_ALERT_CON"               = "谢谢";
+"STORE_ALERT_CON_MSG"           = "支付成功";
+"STORE_ALERT_CON_OK"            = "好";
+"STORE_ALERT_FAIL_TITLE"        = "失败";
+"STORE_ALERT_FAIL_MSG"          = "购买失败";
+"STORE_ALERT_FAIL_CLOSE"        = "关闭";
+"INDICATOR_NET_ERROR"           = "网络链接错误";
+"INDICATOR_NET_NOT_CONNECT"     = "网络链接错误";
+"SEND"                          = "发送";

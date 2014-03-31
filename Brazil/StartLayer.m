@@ -172,7 +172,7 @@ typedef struct StartPostion {
             dialogue.position = _SPSet.dialogueSprite;
             [self addChild:dialogue];
             
-            CCLabelTTF *label = [CCLabelTTF labelWithString:@"求评价~" fontName:FONTNAME_OF_TEXT fontSize:15];
+            CCLabelTTF *label = [CCLabelTTF labelWithString:@"求评价~" fontName:FONTNAME_OF_TEXT fontSize:[GPNavBar isiPad] ? 30 : 15];
             [dialogue addChild:label];
             label.color = ccc3(40, 40, 40);
             label.position = ccp(dialogue.boundingBox.size.width / 2, dialogue.boundingBox.size.height / 2);
@@ -236,18 +236,17 @@ typedef struct StartPostion {
 - (void)initalPostion {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     if ([GPNavBar isiPad]) {
-        _SPSet.startItem = ccp(winSize.width / 2, winSize.height / 2 + 90 - 100);
-        _SPSet.selectItem = ccp(winSize.width / 2, winSize.height / 2 - 90 - 100);
+        _SPSet.startItem = ccp(winSize.width / 2, winSize.height / 2 - 50);
+        _SPSet.selectItem = ccp(winSize.width / 2, winSize.height / 2 - 220);
         
-        _SPSet.feedbackItem = ccp(90, 90);
-        _SPSet.soundItem = ccp(180, 90);
-        _SPSet.rateItem = ccp(270, 90);
-        _SPSet.dialogueSprite = ccp(450, 90);
+        _SPSet.feedbackItem = ccp(70, 70);
+        _SPSet.soundItem = ccp(180, 70);
+        _SPSet.rateItem = ccp(290, 70);
+        _SPSet.dialogueSprite = ccp(450, 70);
+        _SPSet.infoItem = ccp(winSize.width - 70, 70);
         
-        _SPSet.infoItem = ccp(winSize.width - 90, 90);
-        
-        _SPSet.logoChinese = ccp(winSize.width / 2 - 63, winSize.height - 88 - 225);
-        _SPSet.logoEnglish = ccp(winSize.width / 2, winSize.height - 88 - 300);
+        _SPSet.logoChinese = ccp(winSize.width / 2 - 63, winSize.height - 88 - 160);
+        _SPSet.logoEnglish = ccp(winSize.width / 2, winSize.height - 88 - 235);
         _SPSet.logoCamera = ccp(winSize.width / 2 + 248, _SPSet.logoChinese.y + 3);
     } else if ([GPNavBar isiPhone5]) {
         _SPSet.startItem = ccp(winSize.width / 2, winSize.height / 2 - 40);
@@ -461,27 +460,27 @@ typedef struct StartPostion {
         
         switch (arc4random() % 3) {
             case 0://大椰
-                pushStr = NSLocalizedString(@"今天之内来玩，就送50枚黄金摄像机！", @"alertBody");
+                pushStr = NSLocalizedString(@"今天之内来玩，就送50枚金币！", @"alertBody");
                 [GPNavBar setNumOfCoinAdded:50];
                 break;
                 
             case 1://小桃
-                pushStr = NSLocalizedString(@"今天之内来玩，就送30枚黄金摄像机！", @"alertBody");
+                pushStr = NSLocalizedString(@"今天之内来玩，就送30枚金币！", @"alertBody");
                 [GPNavBar setNumOfCoinAdded:30];
                 break;
                 
             case 2:
-                pushStr = NSLocalizedString(@"今天之内来玩，就送20枚黄金摄像机！", @"alertBody");
+                pushStr = NSLocalizedString(@"今天之内来玩，就送20枚金币！", @"alertBody");
                 [GPNavBar setNumOfCoinAdded:20];
                 break;
                 
             default:
-                pushStr = NSLocalizedString(@"今天之内来玩，就送50枚黄金摄像机！", @"alertBody");
+                pushStr = NSLocalizedString(@"今天之内来玩，就送50枚金币！", @"alertBody");
                 [GPNavBar setNumOfCoinAdded:50];
                 break;
         }
         localNotif.alertBody = pushStr;
-        localNotif.alertAction = NSLocalizedString(@"来玩就送黄金摄像机", @"alertAction");
+        localNotif.alertAction = NSLocalizedString(@"来玩就送金币", @"alertAction");
         
         localNotif.soundName = UILocalNotificationDefaultSoundName;
         

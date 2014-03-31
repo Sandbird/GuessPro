@@ -202,6 +202,7 @@ static GuessScene *instanceOfGuessScene;
         //NavBar
         _navBar = [[[GPNavBar alloc] initWithSceneType:GPSceneType] autorelease];
         [self addChild:_navBar z:ZORDER_NAV_BAR];
+        [_navBar setNavbarMissionWithNumber:levelNum+1];
 //        if (IS_KAYAC) {
 //            [_navBar setTipsLabelStr:self.currPuzzle.Hiragana];
 //        }
@@ -719,7 +720,7 @@ static GuessScene *instanceOfGuessScene;
         
         [GPNavBar playBtnPressedEffect];
         //显示Alert
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看提示道具" message:@"您愿意消耗50枚黄金摄像机查看本关的提示么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看提示道具" message:@"您愿意消耗50枚金币查看本关的提示么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
         [alertView show];
         alertView.tag = TAG_ALERT_ITEM_TIPS;
         [alertView release];
@@ -757,7 +758,7 @@ static GuessScene *instanceOfGuessScene;
         
         [GPNavBar playBtnPressedEffect];
         //显示Alert
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看答案道具" message:@"您愿意消耗100枚黄金摄像机查看本关的答案么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看答案道具" message:@"您愿意消耗100枚金币查看本关的答案么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
         [alertView show];
         alertView.tag = TAG_ALERT_ITEM_ANSWER;
         [alertView release];
@@ -1331,6 +1332,9 @@ static GuessScene *instanceOfGuessScene;
     if (IS_KAYAC) {
         [_navBar setTipsLabelStr:self.currPuzzle.Hiragana];
     }
+    
+    //调整missionNumber
+    [_navBar setNavbarMissionWithNumber:self.currPuzzleIndex + 1];
     
     //是否需要保存现场
     self.isNeedRestoreScene = YES;

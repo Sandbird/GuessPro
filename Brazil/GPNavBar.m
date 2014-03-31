@@ -42,6 +42,8 @@
     CoinStore *_coinStore;
     
     CGRect _rect;
+    
+    CGSize _winSize;
 }
 
 @property (assign) int totalScore;
@@ -70,41 +72,37 @@
         
         CCSpriteFrameCache *frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [frameCache addSpriteFramesWithFile:[AssetHelper getDeviceSpecificFileNameFor:@"GPNavBar.plist"]];
-//        CCSpriteFrame *frame;
         
+        _winSize = [[CCDirector sharedDirector] winSize];
         
-        CGSize winSize = [[CCDirector sharedDirector] winSize];
-//        if ([GPNavBar isiPad]) {
-//            fontsize = 48;
-//        } else {
-//            fontsize = 22;
-//        }
+        CGFloat heightOfNavbar = [GPNavBar isiPad] ? 88.0f : 44.0f;
         
         //第一页没有背景
 //        if (self.sceneType != GPSceneTypeStartLayer) {
-            CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255) width:winSize.width height:([GPNavBar isiPad] ? 88 : 44)];
-            color.position = ccp(0, winSize.height - color.boundingBox.size.height);
+            CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255) width:_winSize.width height:heightOfNavbar];
+            color.position = ccp(0, _winSize.height - color.boundingBox.size.height);
             [self addChild:color];
 //        }
         
-        _rect = CGRectMake(0, winSize.height - ([GPNavBar isiPad] ? 88 : 44), winSize.width, ([GPNavBar isiPad] ? 88 : 44));
+        _rect = CGRectMake(0, _winSize.height - heightOfNavbar, _winSize.width, heightOfNavbar);
         
-        CGFloat centreOfHeight = winSize.height - _rect.size.height / 2;
+        CGFloat centreOfHeight = _winSize.height - _rect.size.height / 2;
         
         //金币
         CCSprite *coinSprite = [CCSprite spriteWithSpriteFrameName:@"Coin.png"];
         CCSprite *coinHLSprite = [CCSprite spriteWithSpriteFrameName:@"Coin_HL.png"];
         _coinItem = [CCMenuItemImage itemFromNormalSprite:coinSprite selectedSprite:coinHLSprite target:self selector:@selector(showStoreLayer)];
         _coinItem.anchorPoint = ccp(0.5, 0.5);
-        _coinItem.position = ccp(winSize.width - _coinItem.boundingBox.size.width / 2 - 10, centreOfHeight);
+        _coinItem.position = ccp(_winSize.width - _coinItem.boundingBox.size.width / 2 - 10, centreOfHeight);
         
         //分数
         self.totalScore = [self loadPlayerStatusTotalScore];
         _totalScoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", self.totalScore] fontName:/*@"ArialRoundedMTBold"*/FONTNAME_OF_TEXT fontSize:([GPNavBar isiPad] ? 48 : 22)];
-        _totalScoreLabel.color = ccc3(60, 60, 60);
+        _totalScoreLabel.color = ccc3(50, 50, 50);
         _totalScoreLabel.anchorPoint = ccp(1, 0.5);
-        _totalScoreLabel.position = ccp(_coinItem.boundingBox.origin.x - _coinItem.boundingBox.size.width / 2, centreOfHeight);
+        _totalScoreLabel.position = ccp(_coinItem.boundingBox.origin.x - _coinItem.boundingBox.size.width / 2 + ([GPNavBar isiPad] ? 20 : 15), centreOfHeight);
         [self addChild:_totalScoreLabel];
+        [self resizeTotalLabel];
         
         CCMenu *mainMenu = nil;
         if (self.sceneType != GPSceneTypeStartLayer) {
@@ -131,7 +129,43 @@
     
 }
 
--(void) registerWithTouchDispatcher
+- (void)resizeTotalLabel {
+    if (_totalScoreLabel.boundingBox.size.width > _winSize.width / 5) {
+        _totalScoreLabel.scaleX = _winSize.width / 5 / _totalScoreLabel.boundingBox.size.width;
+    } else {
+        _totalScoreLabel.scaleX = 1.0;
+    }
+}
+
+#define TAG_SPRITE_BACK 222
+#define TAG_LABEL_NUMBER 333
+- (void)setNavbarMissionWithNumber:(NSInteger)number {
+    CCSprite *missionNumberSprite = (CCSprite *)[self getChildByTag:TAG_SPRITE_BACK];
+    CCLabelTTF *labelNum = nil;
+    if (missionNumberSprite != nil) {
+        labelNum = (CCLabelTTF *)[missionNumberSprite getChildByTag:TAG_LABEL_NUMBER];
+        [labelNum setString:[NSString stringWithFormat:@"-%d-", number]];
+        
+    } else {
+        
+        missionNumberSprite = [CCSprite spriteWithSpriteFrameName:@"MissionNumber.png"];
+        missionNumberSprite.tag = TAG_SPRITE_BACK;
+        [self addChild:missionNumberSprite];
+        CGFloat centreOfHeight = _winSize.height - _rect.size.height / 2;
+        missionNumberSprite.position = ccp(_winSize.width / 2, centreOfHeight);
+        
+        
+        labelNum = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"-%d-", number] fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
+        labelNum.tag = TAG_LABEL_NUMBER;
+        labelNum.color = ccWHITE;
+        [missionNumberSprite addChild:labelNum];
+        CGSize size = missionNumberSprite.boundingBox.size;
+        labelNum.position = ccp(size.width / 2, size.height / 2);
+        
+    }
+}
+
+- (void) registerWithTouchDispatcher
 {
 	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:-100 swallowsTouches:YES];
 }
@@ -177,7 +211,8 @@
 }
 
 - (void)refreshTotalScore {
-     [_totalScoreLabel setString:[NSString stringWithFormat:@"%d", self.totalScore]];
+    [_totalScoreLabel setString:[NSString stringWithFormat:@"%d", self.totalScore]];
+    [self resizeTotalLabel];
 }
 
 - (void)changeTotalScore:(int)changeScore {
@@ -225,6 +260,7 @@
         CCScaleTo *normal = [CCScaleTo actionWithDuration:0.02 scale:1.0];
         CCCallBlock *changeWord = [CCCallBlock actionWithBlock:^{
             [_totalScoreLabel setString:[NSString stringWithFormat:@"%d", i]];
+            [self resizeTotalLabel];
         }];
         CCSequence *seq = [CCSequence actions:changeWord, big, normal, nil];
         [actions addObject:seq];

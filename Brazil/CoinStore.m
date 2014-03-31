@@ -83,20 +83,20 @@ typedef enum {
         CGSize wordSize;
         CGFloat fontSize;
         if ([GPNavBar isiPad]) {
-            posY = winSize.height - 76.0f;
+            posY = winSize.height - 88.0f;
             wordSize = CGSizeMake(600, 200);
             fontSize = 37;
         } else if ([GPNavBar isiPhone5]) {
-            posY = winSize.height - 38.0f;
+            posY = winSize.height - 44.0f;
             wordSize = CGSizeMake(250, 100);
             fontSize = 18;
         } else {
-            posY = winSize.height - 38.0f;
+            posY = winSize.height - 44.0f;
             wordSize = CGSizeMake(250, 100);
             fontSize = 18;
         }
         
-        NSString *title = @"电影院大卖场";
+        NSString *title = @"大卖场";
         
         CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
         labelTitle.color = ccWHITE;
@@ -104,7 +104,7 @@ typedef enum {
         labelTitle.position = ccp(winSize.width / 2, posY);
         [self addChild:labelTitle];
         
-        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:@"欢迎购买黄金摄像机！\n购买任意数量黄金摄像机，即可去除广告条。" dimensions:wordSize alignment:NSTextAlignmentCenter vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
+        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:@"欢迎来到大卖场！购买任意数量金币，即可去除广告条。" dimensions:wordSize alignment:NSTextAlignmentCenter vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
         labelWords.color = ccWHITE;
         labelWords.anchorPoint = ccp(0.5, 1);
         labelWords.position = ccp(winSize.width / 2,  posY - labelTitle.boundingBox.size.height);
@@ -122,7 +122,7 @@ typedef enum {
         CCSprite *closeHLSprite = [CCSprite spriteWithSpriteFrameName:@"close_HL.png"];
         CCMenuItem *closeItem = [CCMenuItemImage itemFromNormalSprite:closeSprite selectedSprite:closeHLSprite target:self selector:@selector(closeStore)];
         closeItem.anchorPoint = ccp(0.5, 0.5);
-        closeItem.position = ccp(winSize.width / 2, 50);
+        closeItem.position = ccp(winSize.width / 2, HEIGHT_OF_CLOSE_ITEM);
         
         CCArray *storeBannerArray = [CCArray array];
         CCArray *storeBannerHLArray = [CCArray array];
@@ -185,17 +185,17 @@ typedef enum {
     CGFloat heightToBottom, heightOfBanner, spaceBetweenBanner;
     
     if ([GPNavBar isiPad]) {
-        heightToBottom = 225;
+        heightToBottom = 300;
         heightOfBanner = 75;
-        spaceBetweenBanner = 40;
+        spaceBetweenBanner = 30;
     } else if ([GPNavBar isiPhone5]) {
-        heightToBottom = 130;
+        heightToBottom = 180;
         heightOfBanner = 36;
         spaceBetweenBanner = 20;
     } else {
-        heightToBottom = 100;
+        heightToBottom = 120;
         heightOfBanner = 36;
-        spaceBetweenBanner = 20;
+        spaceBetweenBanner = 15;
     }
     
 //    _IPSet.ItemBackground = ccp(winSize.width / 2, winSize.height / 2);

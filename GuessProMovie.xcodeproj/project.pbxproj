@@ -7,10 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0008045B18D5E96A005F4AF2 /* GuessPro-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0008045918D5E96A005F4AF2 /* GuessPro-hd.plist */; };
-		0008045C18D5E96A005F4AF2 /* GuessPro-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0008045A18D5E96A005F4AF2 /* GuessPro-hd.png */; };
 		0008045F18D5E9E5005F4AF2 /* Store-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0008045D18D5E9E5005F4AF2 /* Store-hd.plist */; };
 		0008046018D5E9E5005F4AF2 /* Store-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0008045E18D5E9E5005F4AF2 /* Store-hd.png */; };
+		0011574B18E93C330079C5FF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0011574A18E93C330079C5FF /* Localizable.strings */; };
+		0011576518E9A71B0079C5FF /* cc_levelmenu-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0011575918E9A71B0079C5FF /* cc_levelmenu-ipadhd.plist */; };
+		0011576618E9A71B0079C5FF /* cc_levelmenu-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0011575A18E9A71B0079C5FF /* cc_levelmenu-ipadhd.png */; };
+		0011576718E9A71B0079C5FF /* GPNavBar-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0011575B18E9A71B0079C5FF /* GPNavBar-ipadhd.plist */; };
+		0011576818E9A71B0079C5FF /* GPNavBar-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0011575C18E9A71B0079C5FF /* GPNavBar-ipadhd.png */; };
+		0011576B18E9A71B0079C5FF /* Share-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0011575F18E9A71B0079C5FF /* Share-ipadhd.plist */; };
+		0011576C18E9A71B0079C5FF /* Share-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0011576018E9A71B0079C5FF /* Share-ipadhd.png */; };
+		0011576D18E9A71B0079C5FF /* StartPage-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0011576118E9A71B0079C5FF /* StartPage-ipadhd.plist */; };
+		0011576E18E9A71B0079C5FF /* StartPage-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0011576218E9A71B0079C5FF /* StartPage-ipadhd.png */; };
+		0011576F18E9A71B0079C5FF /* Store-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0011576318E9A71B0079C5FF /* Store-ipadhd.plist */; };
+		0011577018E9A71B0079C5FF /* Store-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0011576418E9A71B0079C5FF /* Store-ipadhd.png */; };
+		0011577718E9AF9D0079C5FF /* GuessPro-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0011577518E9AF9D0079C5FF /* GuessPro-ipadhd.plist */; };
+		0011577818E9AF9D0079C5FF /* GuessPro-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0011577618E9AF9D0079C5FF /* GuessPro-ipadhd.png */; };
+		0011577B18E9AFB30079C5FF /* GuessPro-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0011577918E9AFB30079C5FF /* GuessPro-hd.plist */; };
+		0011577C18E9AFB30079C5FF /* GuessPro-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0011577A18E9AFB30079C5FF /* GuessPro-hd.png */; };
 		001B239218D03C9C00F52BB3 /* InformationBorad.m in Sources */ = {isa = PBXBuildFile; fileRef = 001B239118D03C9C00F52BB3 /* InformationBorad.m */; };
 		002F25EE18CEF92800B47BE3 /* ShareBorad.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F25ED18CEF92800B47BE3 /* ShareBorad.m */; };
 		00346D4A181C1DA200A4A998 /* iBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 00346D49181C1DA200A4A998 /* iBlock.m */; };
@@ -494,10 +507,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0008045918D5E96A005F4AF2 /* GuessPro-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GuessPro-hd.plist"; sourceTree = "<group>"; };
-		0008045A18D5E96A005F4AF2 /* GuessPro-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GuessPro-hd.png"; sourceTree = "<group>"; };
 		0008045D18D5E9E5005F4AF2 /* Store-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Store-hd.plist"; sourceTree = "<group>"; };
 		0008045E18D5E9E5005F4AF2 /* Store-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Store-hd.png"; sourceTree = "<group>"; };
+		0011574A18E93C330079C5FF /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		0011575918E9A71B0079C5FF /* cc_levelmenu-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "cc_levelmenu-ipadhd.plist"; sourceTree = "<group>"; };
+		0011575A18E9A71B0079C5FF /* cc_levelmenu-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cc_levelmenu-ipadhd.png"; sourceTree = "<group>"; };
+		0011575B18E9A71B0079C5FF /* GPNavBar-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GPNavBar-ipadhd.plist"; sourceTree = "<group>"; };
+		0011575C18E9A71B0079C5FF /* GPNavBar-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GPNavBar-ipadhd.png"; sourceTree = "<group>"; };
+		0011575F18E9A71B0079C5FF /* Share-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Share-ipadhd.plist"; sourceTree = "<group>"; };
+		0011576018E9A71B0079C5FF /* Share-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share-ipadhd.png"; sourceTree = "<group>"; };
+		0011576118E9A71B0079C5FF /* StartPage-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "StartPage-ipadhd.plist"; sourceTree = "<group>"; };
+		0011576218E9A71B0079C5FF /* StartPage-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StartPage-ipadhd.png"; sourceTree = "<group>"; };
+		0011576318E9A71B0079C5FF /* Store-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Store-ipadhd.plist"; sourceTree = "<group>"; };
+		0011576418E9A71B0079C5FF /* Store-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Store-ipadhd.png"; sourceTree = "<group>"; };
+		0011577518E9AF9D0079C5FF /* GuessPro-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GuessPro-ipadhd.plist"; sourceTree = "<group>"; };
+		0011577618E9AF9D0079C5FF /* GuessPro-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GuessPro-ipadhd.png"; sourceTree = "<group>"; };
+		0011577918E9AFB30079C5FF /* GuessPro-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GuessPro-hd.plist"; sourceTree = "<group>"; };
+		0011577A18E9AFB30079C5FF /* GuessPro-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GuessPro-hd.png"; sourceTree = "<group>"; };
 		001B239018D03C9C00F52BB3 /* InformationBorad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationBorad.h; sourceTree = "<group>"; };
 		001B239118D03C9C00F52BB3 /* InformationBorad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationBorad.m; sourceTree = "<group>"; };
 		002F25EC18CEF92800B47BE3 /* ShareBorad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareBorad.h; sourceTree = "<group>"; };
@@ -1239,6 +1265,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0011575818E9A71B0079C5FF /* UI-ipadhd */ = {
+			isa = PBXGroup;
+			children = (
+				0011577518E9AF9D0079C5FF /* GuessPro-ipadhd.plist */,
+				0011577618E9AF9D0079C5FF /* GuessPro-ipadhd.png */,
+				0011575918E9A71B0079C5FF /* cc_levelmenu-ipadhd.plist */,
+				0011575A18E9A71B0079C5FF /* cc_levelmenu-ipadhd.png */,
+				0011575B18E9A71B0079C5FF /* GPNavBar-ipadhd.plist */,
+				0011575C18E9A71B0079C5FF /* GPNavBar-ipadhd.png */,
+				0011575F18E9A71B0079C5FF /* Share-ipadhd.plist */,
+				0011576018E9A71B0079C5FF /* Share-ipadhd.png */,
+				0011576118E9A71B0079C5FF /* StartPage-ipadhd.plist */,
+				0011576218E9A71B0079C5FF /* StartPage-ipadhd.png */,
+				0011576318E9A71B0079C5FF /* Store-ipadhd.plist */,
+				0011576418E9A71B0079C5FF /* Store-ipadhd.png */,
+			);
+			name = "UI-ipadhd";
+			path = "Resources/UI-ipadhd";
+			sourceTree = "<group>";
+		};
 		00346D47181C1D3B00A4A998 /* GuessScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -1369,7 +1415,8 @@
 				00E04D0918E31ECE00AC5CCB /* SoundEffects */,
 				00D4869618CB2D64001D6718 /* PressEffects */,
 				00D4854318CB2C14001D6718 /* PuzzlePictures */,
-				00E8608B18C44B7E00EBC9DF /* UI */,
+				0011575818E9A71B0079C5FF /* UI-ipadhd */,
+				00E8608B18C44B7E00EBC9DF /* UI-hd */,
 				00E85FE918C44B7D00EBC9DF /* Backgrounds */,
 				00E85FFA18C44B7D00EBC9DF /* Fonts */,
 				00E85FE818C44B7D00EBC9DF /* backEffect.caf */,
@@ -1377,6 +1424,7 @@
 				006B1F991663762D008ED362 /* fps_images.png */,
 				006B217216637631008ED362 /* blocks.png */,
 				006B1FA71663762D008ED362 /* Info.plist */,
+				0011574A18E93C330079C5FF /* Localizable.strings */,
 			);
 			name = Resources;
 			path = Brazil;
@@ -2287,15 +2335,15 @@
 			path = Resources/Fonts;
 			sourceTree = "<group>";
 		};
-		00E8608B18C44B7E00EBC9DF /* UI */ = {
+		00E8608B18C44B7E00EBC9DF /* UI-hd */ = {
 			isa = PBXGroup;
 			children = (
+				0011577918E9AFB30079C5FF /* GuessPro-hd.plist */,
+				0011577A18E9AFB30079C5FF /* GuessPro-hd.png */,
 				00617E6E18DD95840005A0F6 /* StartPage-hd.plist */,
 				00617E6F18DD95840005A0F6 /* StartPage-hd.png */,
 				00B1400018D82E400085C5EF /* cc_levelmenu-hd.plist */,
 				00B1400118D82E400085C5EF /* cc_levelmenu-hd.png */,
-				0008045918D5E96A005F4AF2 /* GuessPro-hd.plist */,
-				0008045A18D5E96A005F4AF2 /* GuessPro-hd.png */,
 				0096225818D324A90051ED04 /* GPNavBar-hd.plist */,
 				0096225918D324A90051ED04 /* GPNavBar-hd.png */,
 				0096224418D20C920051ED04 /* Share-hd.plist */,
@@ -2305,7 +2353,7 @@
 				0008045D18D5E9E5005F4AF2 /* Store-hd.plist */,
 				0008045E18D5E9E5005F4AF2 /* Store-hd.png */,
 			);
-			name = UI;
+			name = "UI-hd";
 			path = Resources/UI;
 			sourceTree = "<group>";
 		};
@@ -2397,6 +2445,7 @@
 				00D4861018CB2C15001D6718 /* 1036.png in Resources */,
 				00D4866A18CB2C15001D6718 /* 1126.png in Resources */,
 				00D4866418CB2C15001D6718 /* 1120.png in Resources */,
+				0011576E18E9A71B0079C5FF /* StartPage-ipadhd.png in Resources */,
 				00E860E618C44B7E00EBC9DF /* Visitor40.GlyphProject in Resources */,
 				00D4861E18CB2C15001D6718 /* 1050.png in Resources */,
 				00D4868C18CB2C15001D6718 /* 1160.png in Resources */,
@@ -2406,7 +2455,9 @@
 				00D4862818CB2C15001D6718 /* 1060.png in Resources */,
 				00D485F418CB2C15001D6718 /* 1008.png in Resources */,
 				00E860DA18C44B7E00EBC9DF /* Visitor25-ipadhd.GlyphProject in Resources */,
+				0011577018E9A71B0079C5FF /* Store-ipadhd.png in Resources */,
 				00E860A118C44B7E00EBC9DF /* backEffect.caf in Resources */,
+				0011577718E9AF9D0079C5FF /* GuessPro-ipadhd.plist in Resources */,
 				00D4867918CB2C15001D6718 /* 1141.png in Resources */,
 				0096225A18D324A90051ED04 /* GPNavBar-hd.plist in Resources */,
 				00E860BD18C44B7E00EBC9DF /* BadaBoom20.png in Resources */,
@@ -2448,15 +2499,14 @@
 				00E860A418C44B7E00EBC9DF /* background-dawn-ipadhd.png in Resources */,
 				00D4861318CB2C15001D6718 /* 1039.png in Resources */,
 				00D325ED18E721060017AA07 /* FlyItemSoundEffect.mp3 in Resources */,
+				0011576F18E9A71B0079C5FF /* Store-ipadhd.plist in Resources */,
 				00E8614D18C44B7E00EBC9DF /* Default-Portrait.png in Resources */,
 				00E860BA18C44B7E00EBC9DF /* BadaBoom20-hd.png in Resources */,
 				00D4864218CB2C15001D6718 /* 1086.png in Resources */,
 				00D4868B18CB2C15001D6718 /* 1159.png in Resources */,
-				0008045C18D5E96A005F4AF2 /* GuessPro-hd.png in Resources */,
 				00D4861A18CB2C15001D6718 /* 1046.png in Resources */,
 				007A101F18BB60ED00A6CCE2 /* GameData.plist in Resources */,
 				00D4864E18CB2C15001D6718 /* 1098.png in Resources */,
-				0008045B18D5E96A005F4AF2 /* GuessPro-hd.plist in Resources */,
 				00E8615118C44B7E00EBC9DF /* Icon-76.png in Resources */,
 				00D4863518CB2C15001D6718 /* 1073.png in Resources */,
 				00D4869118CB2C15001D6718 /* 1165.png in Resources */,
@@ -2476,10 +2526,12 @@
 				00E860E218C44B7E00EBC9DF /* Visitor40-ipadhd.fnt in Resources */,
 				00831EE918CC71020023E713 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				00D4867518CB2C15001D6718 /* 1137.png in Resources */,
+				0011576C18E9A71B0079C5FF /* Share-ipadhd.png in Resources */,
 				009B25DA18E56CD40039ECA8 /* WordBackEffect.caf in Resources */,
 				00D4868918CB2C15001D6718 /* 1157.png in Resources */,
 				00D4864318CB2C15001D6718 /* 1087.png in Resources */,
 				00D4866E18CB2C15001D6718 /* 1130.png in Resources */,
+				0011576D18E9A71B0079C5FF /* StartPage-ipadhd.plist in Resources */,
 				00E860B418C44B7E00EBC9DF /* Anime8-hd.png in Resources */,
 				00D4863718CB2C15001D6718 /* 1075.png in Resources */,
 				00D4866D18CB2C15001D6718 /* 1129.png in Resources */,
@@ -2531,6 +2583,7 @@
 				00D4862118CB2C15001D6718 /* 1053.png in Resources */,
 				00E860A718C44B7E00EBC9DF /* background-evening-ipad.png in Resources */,
 				00D4868418CB2C15001D6718 /* 1152.png in Resources */,
+				0011577C18E9AFB30079C5FF /* GuessPro-hd.png in Resources */,
 				00E860BB18C44B7E00EBC9DF /* BadaBoom20.fnt in Resources */,
 				00D4863A18CB2C15001D6718 /* 1078.png in Resources */,
 				00E860B218C44B7E00EBC9DF /* Anime8-hd.fnt in Resources */,
@@ -2549,6 +2602,7 @@
 				00E860CD18C44B7E00EBC9DF /* Visitor18-hd.fnt in Resources */,
 				00D4860418CB2C15001D6718 /* 1024.png in Resources */,
 				00D4864F18CB2C15001D6718 /* 1099.png in Resources */,
+				0011577B18E9AFB30079C5FF /* GuessPro-hd.plist in Resources */,
 				00D4864C18CB2C15001D6718 /* 1096.png in Resources */,
 				00D4867C18CB2C15001D6718 /* 1144.png in Resources */,
 				0096224918D20C920051ED04 /* Share-hd.png in Resources */,
@@ -2557,6 +2611,7 @@
 				00E860DF18C44B7E00EBC9DF /* Visitor40-hd.fnt in Resources */,
 				00E860C518C44B7E00EBC9DF /* BadaBoom40-hd.GlyphProject in Resources */,
 				00E860CB18C44B7E00EBC9DF /* BadaBoom40.GlyphProject in Resources */,
+				0011576718E9A71B0079C5FF /* GPNavBar-ipadhd.plist in Resources */,
 				00E04D0818E0833500AC5CCB /* TouchEffect-ipad.plist in Resources */,
 				00E860D718C44B7E00EBC9DF /* Visitor25-hd.GlyphProject in Resources */,
 				00E860B618C44B7E00EBC9DF /* Anime8.GlyphProject in Resources */,
@@ -2564,9 +2619,11 @@
 				00E860AE18C44B7E00EBC9DF /* background-noon-hd.png in Resources */,
 				00D4861D18CB2C15001D6718 /* 1049.png in Resources */,
 				00D4863818CB2C15001D6718 /* 1076.png in Resources */,
+				0011576B18E9A71B0079C5FF /* Share-ipadhd.plist in Resources */,
 				00831EE118CC71020023E713 /* Resource.bundle in Resources */,
 				00E860AA18C44B7E00EBC9DF /* background-night-hd.png in Resources */,
 				00E860C718C44B7E00EBC9DF /* BadaBoom40-ipadhd.fnt in Resources */,
+				0011574B18E93C330079C5FF /* Localizable.strings in Resources */,
 				00D4863C18CB2C15001D6718 /* 1080.png in Resources */,
 				00E860AC18C44B7E00EBC9DF /* background-night-ipadhd.png in Resources */,
 				00D485F918CB2C15001D6718 /* 1013.png in Resources */,
@@ -2596,6 +2653,7 @@
 				00D4863618CB2C15001D6718 /* 1074.png in Resources */,
 				00E860E518C44B7E00EBC9DF /* Visitor40.fnt in Resources */,
 				00D4863E18CB2C15001D6718 /* 1082.png in Resources */,
+				0011576618E9A71B0079C5FF /* cc_levelmenu-ipadhd.png in Resources */,
 				00E860C218C44B7E00EBC9DF /* BadaBoom26.GlyphProject in Resources */,
 				00D4868318CB2C15001D6718 /* 1151.png in Resources */,
 				00D4866318CB2C15001D6718 /* 1119.png in Resources */,
@@ -2607,6 +2665,7 @@
 				00E860CC18C44B7E00EBC9DF /* BadaBoom40.png in Resources */,
 				00D4865118CB2C15001D6718 /* 1101.png in Resources */,
 				00E04D0C18E31EDE00AC5CCB /* BtnPressed.caf in Resources */,
+				0011576818E9A71B0079C5FF /* GPNavBar-ipadhd.png in Resources */,
 				00D4869218CB2C15001D6718 /* 1166.png in Resources */,
 				00D4863F18CB2C15001D6718 /* 1083.png in Resources */,
 				00E860D618C44B7E00EBC9DF /* Visitor25-hd.fnt in Resources */,
@@ -2632,6 +2691,7 @@
 				00D4860618CB2C15001D6718 /* 1026.png in Resources */,
 				00D4865618CB2C15001D6718 /* 1106.png in Resources */,
 				0008045F18D5E9E5005F4AF2 /* Store-hd.plist in Resources */,
+				0011576518E9A71B0079C5FF /* cc_levelmenu-ipadhd.plist in Resources */,
 				00D4867E18CB2C15001D6718 /* 1146.png in Resources */,
 				00D4864918CB2C15001D6718 /* 1093.png in Resources */,
 				00D485F818CB2C15001D6718 /* 1012.png in Resources */,
@@ -2642,6 +2702,7 @@
 				00D4863418CB2C15001D6718 /* 1072.png in Resources */,
 				00D485FE18CB2C15001D6718 /* 1018.png in Resources */,
 				00D1540918C7717C00ABBE74 /* Default-568h@2x.png in Resources */,
+				0011577818E9AF9D0079C5FF /* GuessPro-ipadhd.png in Resources */,
 				00D4868618CB2C15001D6718 /* 1154.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

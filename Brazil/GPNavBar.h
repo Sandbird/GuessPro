@@ -107,4 +107,6 @@ typedef enum {
 + (NSString *)systemVersion;
 + (NSString *) platformString;
 
+- (void)setNavbarMissionWithNumber:(NSInteger)number;
+
 @end

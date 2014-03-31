@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		
+		<key>share_douban.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 320}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_douban_HL.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{320, 160}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_pyq.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{480, 0}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_pyq_HL.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_qq.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 2}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, -1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{160, 160}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_qq_HL.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 2}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, -1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{320, 320}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_qqweibo.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{1, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{480, 320}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_qqweibo_HL.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{1, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{160, 320}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_qqzone.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{640, 0}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_qqzone_HL.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{480, 160}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_renren.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{640, 160}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_renren_HL.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{800, 0}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_weibo.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{320, 0}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_weibo_HL.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 160}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_weixin.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{160, 0}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>share_weixin_HL.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {158, 158}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, 1}</string>
+			<key>spriteSize</key>
+			<string>{158, 158}</string>
+			<key>spriteSourceSize</key>
+			<string>{160, 160}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{640, 320}, {158, 158}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>version</key>
+		<string>1.5.5</string>
+		<key>format</key>
+		<integer>3</integer>
+		<key>size</key>
+		<string>{1024, 512}</string>
+		<key>name</key>
+		<string>Share-hd</string>
+		<key>premultipliedAlpha</key>
+		<false/>
+		<key>target</key>
+		<dict>
+			<key>name</key>
+			<string>Share-ipadhd</string>
+			<key>textureFileName</key>
+			<string>Share-ipadhd</string>
+			<key>textureFileExtension</key>
+			<string>.png</string>
+			<key>coordinatesFileName</key>
+			<string>Share-ipadhd</string>
+			<key>coordinatesFileExtension</key>
+			<string>.plist</string>
+			<key>premultipliedAlpha</key>
+			<false/>
+		</dict>
+	</dict>
+</dict>
+</plist>

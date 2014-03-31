@@ -45,9 +45,34 @@
         CCLayerColor *color = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 200)];
         [self addChild:color];
         
+        CGFloat posY;
+        CGSize wordSize;
+        CGFloat fontSize;
+        if ([GPNavBar isiPad]) {
+            posY = winSize.height - 88.0f;
+            wordSize = CGSizeMake(600, 200);
+            fontSize = 37;
+        } else if ([GPNavBar isiPhone5]) {
+            posY = winSize.height - 38.0f;
+            wordSize = CGSizeMake(250, 100);
+            fontSize = 18;
+        } else {
+            posY = winSize.height - 38.0f;
+            wordSize = CGSizeMake(250, 100);
+            fontSize = 18;
+        }
+        
+        NSString *title = @"花絮";
+        
+        CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
+        labelTitle.color = ccWHITE;
+        labelTitle.anchorPoint = ccp(0.5, 0.5);
+        labelTitle.position = ccp(winSize.width / 2, posY);
+        [self addChild:labelTitle];
+        
         CGRect infoFrame;
         if ([GPNavBar isiPad]) {
-            infoFrame = CGRectMake(0, 76, winSize.width, 600);
+            infoFrame = CGRectMake(0, 150, winSize.width, 600);
         } else if ([GPNavBar isiPhone5]) {
             infoFrame = CGRectMake(0, 38, winSize.width, 400);
         } else {
@@ -63,10 +88,10 @@
         [_infoTextView setSelectable:NO];
         [_infoTextView setShowsVerticalScrollIndicator:NO];
         
-        [_infoTextView setText:@"等待加入信息sdjahjdashdjsahdjsadhsajdslajdsjaldhjslahdsjalhdjsaldhsajdhjsaldhslahdsjladhsajhdjsahdljsahdklsajfdlksjfd;ksgjfl;khgfld;hk'flkglsdjflasjdklwjipruepogjklf;dsmvf,mvkldshfidsjfds;lfms.vnmkldshjfdsi"];
+        [_infoTextView setText:info];
         [_infoTextView setTextColor:[UIColor whiteColor]];
 //        [_infoTextView setTextAlignment:NSTextAlignmentCenter];
-        [_infoTextView setFont:[UIFont fontWithName:@"Heiti TC" size:20]];
+        [_infoTextView setFont:[UIFont fontWithName:@"Heiti TC" size:FONTSIZE_OF_BORAD_TEXT]];
         
         
         //Close Item
@@ -74,7 +99,7 @@
         CCSprite *closeHLSprite = [CCSprite spriteWithSpriteFrameName:@"close_HL.png"];
         CCMenuItem *closeItem = [CCMenuItemImage itemFromNormalSprite:closeSprite selectedSprite:closeHLSprite target:self selector:@selector(closeInformation)];
         closeItem.anchorPoint = ccp(0.5, 0.5);
-        closeItem.position = ccp(winSize.width / 2, 60);
+        closeItem.position = ccp(winSize.width / 2, HEIGHT_OF_CLOSE_ITEM);
         
         _menu = [CCMenu menuWithItems:closeItem, nil];
         _menu.position = ccp(0, 0);

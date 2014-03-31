@@ -17,9 +17,11 @@
 #define NUM_OF_WORD_SELECTED ([GPNavBar isiPhone5] ? 32 : 24)
 
 #define PICTURE_WIDTH ([GPNavBar isiPad] ? 450.0 : 200.0)
-#define FONTSIZE_OF_BORAD_TITLE ([GPNavBar isiPad] ? 80 : 60)
-#define FONTSIZE_OF_BORAD_TEXT  ([GPNavBar isiPad] ? 26 : 16)
+#define FONTSIZE_OF_BORAD_TITLE ([GPNavBar isiPad] ? 60 : 40)
+#define FONTSIZE_OF_BORAD_TEXT  ([GPNavBar isiPad] ? 30 : 16)
 #define FONTNAME_OF_TEXT        @"STHeitiSC-Medium"
+
+#define HEIGHT_OF_CLOSE_ITEM ([GPNavBar isiPad] ? 130 : 70)
 
 #define NUM_OF_ADD_COIN_USING_SOS   5
 #define NUM_OF_ADD_COIN_USING_SHARE 10
