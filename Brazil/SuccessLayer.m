@@ -14,6 +14,8 @@
 #import "RootViewController.h"
 #import "InformationBorad.h"
 
+#import "GPDatabase.h"
+
 @interface SuccessLayer() {
 
     CCSprite *_nextSprite;
@@ -27,8 +29,8 @@
     CCMenu *_menu;
 }
 
-@property (nonatomic, retain) GADBannerView *adView;
-@property (nonatomic, retain) RootViewController *controller;
+//@property (nonatomic, retain) GADBannerView *adView;
+//@property (nonatomic, retain) RootViewController *controller;
 @property (nonatomic, retain) NSString *curInfo;
 
 @end
@@ -36,11 +38,11 @@
 @implementation SuccessLayer
 
 - (void)dealloc {
-    NSLog(@"Success release");
+    CCLOG(@"Success release");
     
-    [_adView release];
-    [_controller.view removeFromSuperview];
-    [_controller release];
+//    [_adView release];
+//    [_controller.view removeFromSuperview];
+//    [_controller release];
     
     [super dealloc];
 }
@@ -89,11 +91,11 @@
         
         
         //加一个UIViewController
-        _controller = [[RootViewController alloc] init];
-        _controller.view.frame = CGRectMake(0,0,winSize.width,winSize.height);
-        [[[CCDirector sharedDirector] openGLView]addSubview : _controller.view];
-        
-        [self addAdMob];
+//        _controller = [[RootViewController alloc] init];
+//        _controller.view.frame = CGRectMake(0,0,winSize.width,winSize.height);
+//        [[[CCDirector sharedDirector] openGLView]addSubview : _controller.view];
+//        
+//        [self addAdMob];
         
         
     }
@@ -115,11 +117,31 @@
 
 - (void)setSuccessLayerColorWithImgName:(NSString *)imgName {
     
+    //方法一：计算图片颜色
+    /*
     NSString *path = [ZZAcquirePath getBundleDirectoryWithFileName:imgName];
-    //计算图片颜色
     UIImage *img = [[UIImage alloc] initWithContentsOfFile:path];
+     */
+    
+    //方法二：解密图片
+    NSData *data = [GPNavBar func_decodeFile:imgName];
+    UIImage *img = [UIImage imageWithData:data];
+    
+    //方法三：计算图片颜色，从数据库中取得
+    /*
+    GPDatabase *gpdb = [[GPDatabase alloc] init];
+    [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
+    NSString *picNamePrefix = [imgName stringByDeletingPathExtension];
+    NSData *picData = [gpdb LoadPictrueDataByName:picNamePrefix];
+    [gpdb close];
+    [gpdb release];
+    UIImage *img = [UIImage imageWithData:picData];
+    */
+    
     ccColor4B color = [img mostColor];
-    [img release];
+//    [img release];
+    
+//    ccColor4B color = ccc4(255, 255, 255, 255);
     
 //    [_successColor setColor:color];
     
@@ -139,7 +161,7 @@
 	return [[CCDirector sharedDirector] convertToGL:touchLocation];
 }
 
-
+/*
 #pragma mark-
 #pragma mark admob
 - (void)addAdMob {
@@ -193,7 +215,7 @@
 //    
 //    [self.view insertSubview:view belowSubview:self.mainTableView];
 }
-
+*/
 #pragma mark-
 #pragma mark Button Pressed
 
@@ -203,7 +225,7 @@
 
 - (void)popInformation {
     [GPNavBar playBtnPressedEffect];
-    InformationBorad *infoLayer = [InformationBorad nodeWithInformation:self.curInfo parentView:_controller.view];
+    InformationBorad *infoLayer = [InformationBorad nodeWithInformation:self.curInfo parentView:[[[GuessScene sharedGuessScene] controller] view]];
     [[[GuessScene sharedGuessScene] navBar] addChild:infoLayer];
     
     infoLayer.scale = 0;

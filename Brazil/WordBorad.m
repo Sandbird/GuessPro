@@ -42,15 +42,23 @@
         
         CGFloat posY;
         CGSize wordSize;
+        CGFloat deltaY;
+        CGFloat textFontSize;
         if ([GPNavBar isiPad]) {
             posY = winSize.height - 88.0f;
             wordSize = CGSizeMake(600, 800);
+            deltaY = 200;
+            textFontSize = 30;
         } else if ([GPNavBar isiPhone5]) {
             posY = winSize.height - 38.0f;
-            wordSize = CGSizeMake(250, 400);
+            wordSize = CGSizeMake(280, 400);
+            deltaY = 120;
+            textFontSize = 20;
         } else {
             posY = winSize.height - 38.0f;
             wordSize = CGSizeMake(250, 350);
+            deltaY = 80;
+            textFontSize = 20;
         }
         
         NSString *title = nil;
@@ -58,12 +66,15 @@
         CCVerticalAlignment VA;
         if (WBType == WordBoradTypeTips) {
             title = @"线索";
-            TA = NSTextAlignmentLeft;
+            TA = NSTextAlignmentCenter;
             VA = CCVerticalAlignmentTop;
+            
         } else if (WBType == WordBoradTypeAnswer) {
             title = @"答案";
             TA = NSTextAlignmentCenter;
-            VA = CCVerticalAlignmentCenter;
+            VA = CCVerticalAlignmentTop;
+            words = [NSString stringWithFormat:@"《%@》", words];
+            textFontSize += 6;
         } else {
             title = @"道具";
             TA = NSTextAlignmentNatural;
@@ -76,10 +87,10 @@
         labelTitle.position = ccp(winSize.width / 2, posY);
         [self addChild:labelTitle];
         
-        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:words dimensions:wordSize alignment:TA vertAlignment:VA lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
+        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:words dimensions:wordSize alignment:TA vertAlignment:VA lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:textFontSize];
         labelWords.color = ccWHITE;
         labelWords.anchorPoint = ccp(0.5, 1);
-        labelWords.position = ccp(winSize.width / 2,  posY - labelTitle.boundingBox.size.height);
+        labelWords.position = ccp(winSize.width / 2,  posY - labelTitle.boundingBox.size.height - deltaY);
         [self addChild:labelWords];
         
         

@@ -109,4 +109,7 @@ typedef enum {
 
 - (void)setNavbarMissionWithNumber:(NSInteger)number;
 
+//解密获取data
++(NSData *)func_decodeFile:(NSString *)picName;
+
 @end

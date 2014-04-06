@@ -110,9 +110,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 0}, {401, 100}}</string>
+			<string>{{403, 0}, {100, 401}}</string>
 			<key>textureRotated</key>
-			<false/>
+			<true/>
 		</dict>
 		
 		<key>close_HL.png</key>
@@ -132,9 +132,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{403, 0}, {100, 401}}</string>
+			<string>{{0, 0}, {401, 100}}</string>
 			<key>textureRotated</key>
-			<true/>
+			<false/>
 		</dict>
 		
 	</dict>

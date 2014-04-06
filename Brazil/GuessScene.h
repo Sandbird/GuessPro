@@ -8,8 +8,11 @@
 
 #import "CCLayer.h"
 #import "GPNavBar.h"
+#import "RootViewController.h"
 
-@interface GuessScene : CCLayer <UIAlertViewDelegate> {
+#import "GADBannerView.h"
+
+@interface GuessScene : CCLayer <UIAlertViewDelegate, GADBannerViewDelegate> {
     CGPoint _defaultPosition;
 	CGPoint _lastTouchLocation;
     
@@ -17,6 +20,8 @@
 }
 
 @property (nonatomic, assign)GPNavBar *navBar;
+
+@property (nonatomic, retain) RootViewController *controller;
 
 //+ (CCScene *)scene;
 + (CCScene *)sceneWithPuzzleNum:(int)levelNum GPSceneType:(GPSceneType)type;

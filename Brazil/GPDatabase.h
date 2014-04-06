@@ -17,4 +17,8 @@
 - (PuzzleClass *)puzzlesWithGroup:(PuzzleGroup)groupTag indexOfPic:(int)index;
 - (NSMutableArray *)PuzzleSequenceIsOutOfOrder:(BOOL)isOut groupName:(PuzzleGroup)groupTag;
 
+- (NSData*) LoadPictrueDataByName:(NSString *)picName;
++ (CCSprite *) convertImageToSprite:(UIImage *) image;
++ (UIImage *) convertSpriteToImage:(CCSprite *)sprite;
+
 @end

@@ -26,6 +26,10 @@
 #define EFFECT_BACK @"backEffect.caf"
 #define EFFECT_BARK @"bark.caf"
 
+#import "GTMDefines.h"
+#import "GTMBase64_New.h"
+
+
 
 @interface GPNavBar() {
 //    CCSprite *_backgroudSprite;
@@ -730,6 +734,52 @@
     if ([platform isEqualToString:@"iPad4,5"])      return @"iPad Mini 2(Cellular)";
     if ([platform isEqualToString:@"i386"] || [platform isEqualToString:@"x86_64"])         return @"iOS Simulator";
     return platform;
+}
+
+// 加密函数
++(void)func_encodeFileWithImgName:(NSString *)picName
+{
+    //NSString *path = [NSHomeDirectory() stringByAppendingFormat:@"/Documents/test.png"];
+    NSString *filePath = [NSHomeDirectory() stringByAppendingFormat:@"/Documents/PuzzlePictures_jpg/%@.jpg", picName];
+    
+    //文件路径转换为NSData
+    NSData *imageDataOrigin = [NSData dataWithContentsOfFile:filePath];
+    
+    // 对前1000位进行异或处理
+    //    unsigned char * cByte = (unsigned char*)[imageDataOrigin bytes];
+    //    for (int index = 0; (index < [imageDataOrigin length]) && (index < 1000); index++, cByte++)
+    //    {
+    //        *cByte = (*cByte) ^ arrayForEncode[index];
+    //    }
+    
+    //对NSData进行base64编码
+    NSData *imageDataEncode = [GTMBase64_New encodeData:imageDataOrigin];
+    
+    [imageDataEncode writeToFile:filePath atomically:YES];
+}
+
+// 解密函数
++(NSData *)func_decodeFile:(NSString *)picName
+{
+    //NSString *filePath = [NSHomeDirectory() stringByAppendingFormat:@"/Documents/test.png"];
+    NSString *filePath = [ZZAcquirePath getBundleDirectoryWithFileName:picName];
+    
+    // 读取被加密文件对应的数据
+    NSData *dataEncoded = [NSData dataWithContentsOfFile:filePath];
+    
+    // 对NSData进行base64解码
+    NSData *dataDecode = [GTMBase64_New decodeData:dataEncoded];
+    
+    return dataDecode;
+    
+    // 对前1000位进行异或处理
+    //    unsigned char * cByte = (unsigned char*)[dataDecode bytes];
+    //    for (int index = 0; (index < [dataDecode length]) && (index < 10); index++, cByte++)
+    //    {
+    //        *cByte = (*cByte) ^ arrayForEncode[index];
+    //    }
+    
+//    [dataDecode writeToFile:filePath atomically:YES];
 }
 
 @end

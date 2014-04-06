@@ -100,7 +100,7 @@
 //    NSString *position = nil;
     while (sqlite3_step(stmt) == SQLITE_ROW) {
         picName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, 0)];
-        picName = [picName stringByAppendingString:@".png"];
+        picName = [picName stringByAppendingString:@".jpg"];
         
         answerCN = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, 1)];
         
@@ -108,7 +108,8 @@
 //        
 //        answerEN = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, 3)];
         
-        wordNum = sqlite3_column_int(stmt, 4);
+//        wordNum = sqlite3_column_int(stmt, 4);
+        wordNum = [answerCN length];
         
         char *cGroupName = (char *)sqlite3_column_text(stmt, 5);
         if (cGroupName != NULL) {
@@ -222,6 +223,47 @@
 + (int)randomNumBelow:(int)low {
     NSAssert(low > 0, @"low不能小于等于0");
     return arc4random() % low;
+}
+
+// Load images from data base with given image url
+- (NSData*) LoadPictrueDataByName:(NSString *)picName {
+    
+    NSData* data = nil;
+    NSString* sqliteQuery = [NSString stringWithFormat:@"SELECT PictrueData FROM Pictrue WHERE PicName = '%@'", picName];
+    sqlite3_stmt* statement;
+    
+    if( sqlite3_prepare_v2(_database, [sqliteQuery UTF8String], -1, &statement, NULL) == SQLITE_OK )
+    {
+        if( sqlite3_step(statement) == SQLITE_ROW )
+        {
+            int length = sqlite3_column_bytes(statement, 0);
+            data       = [NSData dataWithBytes:sqlite3_column_blob(statement, 0) length:length];
+        }
+    }
+    
+    // Finalize and close database.
+    sqlite3_finalize(statement);
+    
+    return data;
+}
+
++(CCSprite *) convertImageToSprite:(UIImage *) image {
+//    [[CCTexture2D alloc] initWithImage:<#(UIImage *)#> resolutionType:<#(ccResolutionType)#>]
+    CCTexture2D *texture = [[CCTexture2D alloc] initWithImage:image resolutionType:kCCResolutionUnknown];
+    CCSprite    *sprite = [CCSprite spriteWithTexture:texture];
+    [texture release];
+    return sprite;
+}
+
++(UIImage *) convertSpriteToImage:(CCSprite *)sprite {
+    CGPoint p = sprite.anchorPoint;
+    [sprite setAnchorPoint:ccp(0,0)];
+    CCRenderTexture *renderer = [CCRenderTexture renderTextureWithWidth:sprite.contentSize.width height:sprite.contentSize.height];
+    [renderer begin];
+    [sprite visit];
+    [renderer end];
+    [sprite setAnchorPoint:p];
+    return [UIImage imageWithData:[renderer getUIImageAsDataFromBuffer:kCCImageFormatPNG]];
 }
 
 /*

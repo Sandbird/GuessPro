@@ -11,6 +11,7 @@
 
 #define ADMOB_ID @"a152d1f7e98daee"
 #define APP_ID @"832491981"
+//#define APP_ID @"794426921"
 
 #define IOS_NEWER_OR_EQUAL_TO_7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 

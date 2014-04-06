@@ -21,8 +21,8 @@
 #import <ShareSDK/ShareSDK.h>
 #import "WeiboApi.h"
 //#import <TencentOpenAPI/QQApi.h>
-#import <TencentOpenAPI/QQApiInterface.h>
-#import <TencentOpenAPI/TencentOAuth.h>
+//#import <TencentOpenAPI/QQApiInterface.h>
+//#import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
 #import <RennSDK/RennClient.h>
 
@@ -193,10 +193,10 @@
      
      如果需要实现SSO，需要导入TencentOpenAPI.framework,并引入QQApiInterface.h和TencentOAuth.h，将QQApiInterface和TencentOAuth的类型传入接口
      **/
-    [ShareSDK connectQZoneWithAppKey:@"100371282"
-                           appSecret:@"aed9b0303e3ed1e27bae87c33761161d"
-                   qqApiInterfaceCls:[QQApiInterface class]
-                     tencentOAuthCls:[TencentOAuth class]];
+//    [ShareSDK connectQZoneWithAppKey:@"100371282"
+//                           appSecret:@"aed9b0303e3ed1e27bae87c33761161d"
+//                   qqApiInterfaceCls:[QQApiInterface class]
+//                     tencentOAuthCls:[TencentOAuth class]];
     
     /**
      连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
@@ -211,9 +211,9 @@
     //旧版中申请的AppId（如：QQxxxxxx类型），可以通过下面方法进行初始化
     //    [ShareSDK connectQQWithAppId:@"QQ075BCD15" qqApiCls:[QQApi class]];
     
-    [ShareSDK connectQQWithQZoneAppKey:@"100371282"
-                     qqApiInterfaceCls:[QQApiInterface class]
-                       tencentOAuthCls:[TencentOAuth class]];
+//    [ShareSDK connectQQWithQZoneAppKey:@"100371282"
+//                     qqApiInterfaceCls:[QQApiInterface class]
+//                       tencentOAuthCls:[TencentOAuth class]];
     
     
     /**
@@ -227,15 +227,15 @@
     
     
     //连接邮件
-    [ShareSDK connectMail];
+//    [ShareSDK connectMail];
     
     
     /**
      连接豆瓣应用以使用相关功能，此应用需要引用DouBanConnection.framework
      http://developers.douban.com上注册豆瓣社区应用，并将相关信息填写到以下字段
      **/
-    [ShareSDK connectDoubanWithAppKey:@"02e2cbe5ca06de5908a863b15e149b0b"
-                            appSecret:@"9f1e7b4f71304f2f"
+    [ShareSDK connectDoubanWithAppKey:@"092f51152be112561b8df33f83a33702"
+                            appSecret:@"fb3ae0d2c8ae52c2"
                           redirectUri:@"http://www.sharesdk.cn"];
 }
 

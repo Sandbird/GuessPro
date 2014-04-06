@@ -72,11 +72,11 @@
         
         CGRect infoFrame;
         if ([GPNavBar isiPad]) {
-            infoFrame = CGRectMake(0, 150, winSize.width, 600);
+            infoFrame = CGRectMake(0, 130, winSize.width, 720);
         } else if ([GPNavBar isiPhone5]) {
-            infoFrame = CGRectMake(0, 38, winSize.width, 400);
+            infoFrame = CGRectMake(0, 60, winSize.width, 420);
         } else {
-            infoFrame = CGRectMake(0, 38, winSize.width, 350);
+            infoFrame = CGRectMake(0, 60, winSize.width, 330);
         }
         
         _infoTextView = [[UITextView alloc] initWithFrame:infoFrame];

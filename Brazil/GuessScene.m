@@ -112,6 +112,8 @@ typedef enum {
 
 @property (assign)ALint successSoundInt;
 
+@property (nonatomic, retain) GADBannerView *adView;
+
 @end
 
 @implementation GuessScene
@@ -127,6 +129,10 @@ static GuessScene *instanceOfGuessScene;
     [self.wordArray release];
     [self.blankArray release];
     [self.picSequenceArray release];
+    
+    [_adView release];
+    [_controller.view removeFromSuperview];
+    [_controller release];
     
     //    [GuessScene unloadEffectMusic];
     
@@ -154,6 +160,8 @@ static GuessScene *instanceOfGuessScene;
 - (id)initWithPuzzleNum:(int)levelNum GPSceneType:(GPSceneType)GPSceneType {
     if (self = [super init]) {
         instanceOfGuessScene = self;
+        
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
         
         self.isTouchEnabled = YES;
         
@@ -227,6 +235,14 @@ static GuessScene *instanceOfGuessScene;
         
         //监听程序中断
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+        
+        
+        //加一个UIViewController
+        _controller = [[RootViewController alloc] init];
+        _controller.view.frame = CGRectMake(0,0,winSize.width,winSize.height);
+        [[[CCDirector sharedDirector] openGLView]addSubview : _controller.view];
+        
+        [self addAdMob];
     }
     
     return self;
@@ -720,7 +736,7 @@ static GuessScene *instanceOfGuessScene;
         
         [GPNavBar playBtnPressedEffect];
         //显示Alert
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看提示道具" message:@"您愿意消耗50枚金币查看本关的提示么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看提示道具" message:@"您愿意消耗40枚金币查看本关的线索么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
         [alertView show];
         alertView.tag = TAG_ALERT_ITEM_TIPS;
         [alertView release];
@@ -758,7 +774,7 @@ static GuessScene *instanceOfGuessScene;
         
         [GPNavBar playBtnPressedEffect];
         //显示Alert
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看答案道具" message:@"您愿意消耗100枚金币查看本关的答案么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看答案道具" message:@"您愿意消耗80枚金币查看本关的答案么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
         [alertView show];
         alertView.tag = TAG_ALERT_ITEM_ANSWER;
         [alertView release];
@@ -1208,6 +1224,12 @@ static GuessScene *instanceOfGuessScene;
         //开启音效
         self.successSoundInt = [GPNavBar playSuccessEffect];
         
+        //显示ad
+        if (_adView) {
+            [_adView setHidden:NO];
+        }
+        
+        
     } else {
         sLayer = (SuccessLayer *)[self getChildByTag:CCLayerSuccessLayerTag];
         [sLayer removeFromParentAndCleanup:YES];
@@ -1218,6 +1240,11 @@ static GuessScene *instanceOfGuessScene;
         
         //暂停音效
         [GPNavBar stopSuccessEffectBy:self.successSoundInt];
+        
+        //隐藏ad
+        if (_adView) {
+            [_adView setHidden:YES];
+        }
     }
 }
 
@@ -1340,11 +1367,47 @@ static GuessScene *instanceOfGuessScene;
     self.isNeedRestoreScene = YES;
 }
 
+//图片是放在数据库中的，从数据库中读取图片
+/*
 - (void)resetPictrue {
+    
+    GPDatabase *gpdb = [[GPDatabase alloc] init];
+    
+    [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
+    NSString *picNamePrefix = [self.currPuzzle.picName stringByDeletingPathExtension];
+    NSData *picData = [gpdb LoadPictrueDataByName:picNamePrefix];
+    [gpdb close];
+    [gpdb release];
+    
+    UIImage *img = [UIImage imageWithData:picData];
+    
     //如果有图片，先把图片从内存中清除
     if (_picSprite) {
         CCTexture2D *texture = _picSprite.texture;
-//        [_picSprite removeFromParentAndCleanup:YES];
+        CCTextureCache *textureCache = [CCTextureCache sharedTextureCache];
+        [textureCache removeTexture:texture];
+        
+        CCSprite *newPic = [GPDatabase convertImageToSprite:img];
+        _picSprite.texture = newPic.texture;
+    } else {
+        _picSprite = [GPDatabase convertImageToSprite:img];
+        [self addChild:_picSprite z:ZORDER_PICTRUE];
+        _picSprite.anchorPoint = ccp(0.5, 0.5);
+        _picSprite.scale = PICTURE_WIDTH / _picSprite.boundingBox.size.height;
+        _picSprite.position = _FPSet.pictrue;
+    }
+    
+}
+*/
+
+/*
+//传统方式，图片直接放在Bundle中
+- (void)resetPictrue {
+    
+    //如果有图片，先把图片从内存中清除
+    if (_picSprite) {
+        CCTexture2D *texture = _picSprite.texture;
+        //        [_picSprite removeFromParentAndCleanup:YES];
         CCTextureCache *textureCache = [CCTextureCache sharedTextureCache];
         [textureCache removeTexture:texture];
         
@@ -1358,29 +1421,34 @@ static GuessScene *instanceOfGuessScene;
         _picSprite.position = _FPSet.pictrue;
     }
     
-    
-    
 }
+ */
 
-/*
+//解密图片
 - (void)resetPictrue {
+    
+    
+    UIImage *img = [UIImage imageWithData:[GPNavBar func_decodeFile:self.currPuzzle.picName]];
+    
     //如果有图片，先把图片从内存中清除
     if (_picSprite) {
         CCTexture2D *texture = _picSprite.texture;
-        [_picSprite removeFromParentAndCleanup:YES];
+        //        [_picSprite removeFromParentAndCleanup:YES];
         CCTextureCache *textureCache = [CCTextureCache sharedTextureCache];
         [textureCache removeTexture:texture];
+        
+        CCSprite *newPic = [GPDatabase convertImageToSprite:img];
+        _picSprite.texture = newPic.texture;
+    } else {
+        _picSprite = [GPDatabase convertImageToSprite:img];
+        [self addChild:_picSprite z:ZORDER_PICTRUE];
+        _picSprite.anchorPoint = ccp(0.5, 0.5);
+        _picSprite.scale = PICTURE_WIDTH / _picSprite.boundingBox.size.height;
+        _picSprite.position = _FPSet.pictrue;
     }
     
-    _picSprite = [CCSprite spriteWithFile:self.currPuzzle.picName];
-    [self addChild:_picSprite z:ZORDER_PICTRUE];
-    _picSprite.anchorPoint = ccp(0.5, 0.5);
-    
-    _picSprite.scale = PICTURE_WIDTH / _picSprite.boundingBox.size.height;
-    _picSprite.position = _FPSet.pictrue;
-    
 }
- */
+
 
 - (void)resetWordBlankArray {
     
@@ -1671,6 +1739,62 @@ static GuessScene *instanceOfGuessScene;
     [super onExit];
     
     [[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
+}
+
+#pragma mark-
+#pragma mark admob
+- (void)addAdMob {
+    
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
+    //    //判断网络状态
+    //	NetworkStatus NetStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    //    //没有网的情况
+    //	if (NetStatus == NotReachable) return;
+    
+    //有网络的情况下加载广告条
+    if ([GPNavBar isiPad]) {
+        _adView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+    } else {
+        _adView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    }
+    
+    _adView.rootViewController = _controller;
+    //    _adView.delegate = self;
+    _adView.adUnitID = ADMOB_ID;
+    
+    //设置广告条的位置
+    CGPoint point = CGPointMake(winSize.width / 2, winSize.height - _adView.frame.size.height / 2);
+    _adView.center = point;
+    
+    [_adView loadRequest:[GADRequest request]];
+    
+    [_controller.view addSubview:_adView];
+    [_adView setHidden:YES];
+    
+    
+    
+    //在广告条没有加载出来之前，显示自己的广告条
+//    UIImageView *imgView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"OfflineAds01.png"]] autorelease];
+//    CGRect imgFrame = imgView.frame;
+//    imgFrame.origin = CGPointMake(0, self.mainTableView.frame.origin.y + self.mainTableView.frame.size.height + height);
+//    [imgView setFrame:imgFrame];
+//    [self.view insertSubview:imgView belowSubview:self.mainTableView];
+//    imgView.tag = TAG_OFFLINE_ADBANNER;
+    
+    
+    
+}
+
+- (void)adViewDidReceiveAd:(GADBannerView *)view {
+    [view setHidden:YES];
+    //先删除本地广告条
+    //    UIImageView *imgView = (UIImageView *)[self.view viewWithTag:TAG_OFFLINE_ADBANNER];
+    //    if (imgView) {
+    //        [imgView removeFromSuperview];
+    //    }
+    //
+    //    [self.view insertSubview:view belowSubview:self.mainTableView];
 }
 
 @end
