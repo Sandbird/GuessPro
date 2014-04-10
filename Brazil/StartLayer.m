@@ -82,6 +82,20 @@ typedef struct StartPostion {
             //这个版本是否需要评价
             [GPNavBar setIsNeedRate:YES];
             
+            
+            //计算目前一共有多少关，是否这个版本有新加入的关卡
+            NSInteger currentNum = [GPNavBar numOfPuzzlesAtCurrentVersion];
+            NSInteger lastNum = [GPNavBar numOfPuzzlesAtLastVersion];
+            
+            if (currentNum > lastNum) {//有新加入的关卡
+                //先更新用户目录下的GameData.plist
+                [GPNavBar mergePuzzlesFromCurrentToLast];
+                
+                //更新lastPuzzlesNum
+                [GPNavBar setNumOfPuzzlesAtLastVersion:currentNum];
+                
+            }
+            
         }
         
         //touch event
@@ -116,9 +130,15 @@ typedef struct StartPostion {
         //开始
         NSString *spriteName = nil;
         NSString *spriteNameHL = nil;
-        if ([GPNavBar continueLevel] > 0 || [GPNavBar isNeedRestoreScene]) {
+        NSInteger numOfPuzzles = [GPNavBar numOfPuzzlesAtCurrentVersion];
+        NSInteger currContinueLevel = [GPNavBar continueLevel];
+        if (currContinueLevel < numOfPuzzles && (currContinueLevel > 0 || [GPNavBar isNeedRestoreScene])) {
             spriteName = @"ContinueBtn.png";
             spriteNameHL = @"ContinueBtn_HL.png";
+        } else if (currContinueLevel >= numOfPuzzles){
+            、、、
+            spriteName = @"WaitingUpdateBtn.png";
+            spriteNameHL = @"WaitingUpdate_HL.png";
         } else {
             spriteName = @"StartBtn.png";
             spriteNameHL = @"StartBtn_HL.png";
@@ -227,6 +247,8 @@ typedef struct StartPostion {
             
             [GPNavBar setTimesByUsingShare:0];
             [GPNavBar setTimesByUsingSOS:0];
+            
+            
         }
         
         [StartLayer cancelLocalNotification];
@@ -291,7 +313,14 @@ typedef struct StartPostion {
 - (void)startBtnPressed {
     [GPNavBar playBtnPressedEffect];
     NSInteger continueLevelNum = [GPNavBar continueLevel];
-    [[GameManager sharedGameManager] loadLevelWithIndex:(int)continueLevelNum GPSceneType:GPSceneTypeContinueLayer];
+    NSInteger numOfPuzzles = [GPNavBar numOfPuzzlesAtCurrentVersion];
+    if (continueLevelNum >= numOfPuzzles) {
+        //本版本已经通关，跳出成就界面
+        、、、
+    } else {
+        [[GameManager sharedGameManager] loadLevelWithIndex:(int)continueLevelNum GPSceneType:GPSceneTypeContinueLayer];
+    }
+    
 }
 
 - (void)selectBtnPressed {

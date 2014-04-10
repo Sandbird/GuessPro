@@ -142,6 +142,10 @@
         
         //第一次装应用，送100金币
         [GPNavBar giveScoreForFirstTimeInstallApp];
+        
+        //第一次安装，记录关卡数目
+        NSInteger num = [GPNavBar numOfPuzzlesAtCurrentVersion];
+        [GPNavBar setNumOfPuzzlesAtLastVersion:num];
     }
     
     if ([GPNavBar isEnabledSoundEffect]) {

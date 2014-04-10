@@ -301,7 +301,17 @@
 
 - (void)nextPicture {
     [GPNavBar playBtnPressedEffect];
-    [[GuessScene sharedGuessScene] changeToNextPuzzle];
+    
+    NSInteger nextLevelNum = [[GuessScene sharedGuessScene] nextPuzzleIndex];
+    NSInteger numOfPuzzles = [GPNavBar numOfPuzzlesAtCurrentVersion];
+    if (nextLevelNum >= numOfPuzzles) {
+        //本版本已经通关，跳出成就界面，并且记录下continueLevel
+        [GPNavBar setContinueLevel:nextLevelNum isNeedRestoreScene:NO];
+        、、、
+    } else {
+        [[GuessScene sharedGuessScene] changeToNextPuzzle];
+    }
+    
 }
 
 

@@ -272,7 +272,7 @@
     }
     
     CCSequence *seqs = [CCSequence actionsWithArray:actions];
-    CCSequence *seq2 = [CCSequence actionOne:[CCDelayTime actionWithDuration:1.0] two:seqs];
+    CCSequence *seq2 = [CCSequence actionOne:[CCDelayTime actionWithDuration:DELAY_OF_EXTRA_SCORE] two:seqs];
     seq2.tag = ACTION_UP_SCORE_TAG;
     [_totalScoreLabel runAction:seq2];
     
@@ -790,5 +790,48 @@
     
 //    [dataDecode writeToFile:filePath atomically:YES];
 }
+
++ (NSInteger)numOfPuzzlesAtCurrentVersion {
+    NSString *path = [ZZAcquirePath getBundleDirectoryWithFileName:@"GameData.plist"];
+    NSMutableArray *puzzleArray = [NSMutableArray arrayWithContentsOfFile:path];
+    
+    return puzzleArray.count;
+}
+
+#define kNumOfPuzzlesAtLastVersion @"kNumOfPuzzlesAtLastVersion"
++ (NSInteger)numOfPuzzlesAtLastVersion {
+    NSInteger numOfPuzzles = [[NSUserDefaults standardUserDefaults] integerForKey:kNumOfPuzzlesAtLastVersion];
+    return numOfPuzzles;
+}
+
++ (void)setNumOfPuzzlesAtLastVersion:(NSInteger)num {
+    [[NSUserDefaults standardUserDefaults] setInteger:num forKey:kNumOfPuzzlesAtLastVersion];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+//将新老puzzle数据融合到用户目录下
++ (void)mergePuzzlesFromCurrentToLast {
+    NSString *lastUserPath = [ZZAcquirePath getDocDirectoryWithFileName:@"GameData.plist"];
+    NSMutableArray *lastPuzzleArray = [NSMutableArray arrayWithContentsOfFile:lastUserPath];
+    
+    if (lastPuzzleArray.count == 0 || lastPuzzleArray == nil) {
+        return;
+    }
+    
+    NSString *currUserPath = [ZZAcquirePath getBundleDirectoryWithFileName:@"GameData.plist"];
+    NSMutableArray *currPuzzleArray = [NSMutableArray arrayWithContentsOfFile:currUserPath];
+    
+    NSRange range;
+    range.location = 0;
+    range.length = lastPuzzleArray.count;
+    
+    [currPuzzleArray removeObjectsInRange:range];
+    [lastPuzzleArray addObjectsFromArray:currPuzzleArray];
+    
+    [lastPuzzleArray writeToFile:lastUserPath atomically:YES];
+}
+
+
 
 @end

@@ -17,6 +17,8 @@
 
 #define ACTION_UP_SCORE_TAG 999
 
+#define DELAY_OF_EXTRA_SCORE 2.0
+
 typedef enum {
     GPSceneTypeStartLayer,//从选关界面进入的Guess界面
     GPSceneTypeContinueLayer,//从开始按钮进入的Guess界面
@@ -112,5 +114,11 @@ typedef enum {
 
 //解密获取data
 +(NSData *)func_decodeFile:(NSString *)picName;
+
+//当前关卡的数量
++ (NSInteger)numOfPuzzlesAtCurrentVersion;
++ (NSInteger)numOfPuzzlesAtLastVersion;
++ (void)setNumOfPuzzlesAtLastVersion:(NSInteger)num;
++ (void)mergePuzzlesFromCurrentToLast;
 
 @end

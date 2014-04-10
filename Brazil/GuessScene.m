@@ -83,8 +83,8 @@ typedef enum {
     
     FixedPostionSet _FPSet;
     
-    CCSpriteBatchNode *_blockBatch;
-    CCSpriteBatchNode *_wordBatch;
+//    CCSpriteBatchNode *_blockBatch;
+//    CCSpriteBatchNode *_wordBatch;
     
 }
 @property (nonatomic, retain)NSMutableArray *blockArray;
@@ -182,7 +182,8 @@ static GuessScene *instanceOfGuessScene;
         _wordArray = [[NSMutableArray alloc] init];
         _blankArray = [[NSMutableArray alloc] init];
         
-        /*稍后修改
+#if 0
+//        稍后修改
         CCSpriteFrame *blockFrame = [framCache spriteFrameByName:@"Block.png"];
         _blockBatch = [CCSpriteBatchNode batchNodeWithTexture:blockFrame.texture];
         [self addChild:_blockBatch z:ZORDER_BLOCK];
@@ -190,7 +191,8 @@ static GuessScene *instanceOfGuessScene;
         CCSpriteFrame *wordFrame = [framCache spriteFrameByName:@"WordBlank.png"];
         _wordBatch = [CCSpriteBatchNode batchNodeWithTexture:wordFrame.texture];
         [self addChild:_wordBatch z:ZORDER_WORD_HOME];
-         */
+        
+#endif
         
         self.isNeedRestoreScene = YES;
         
@@ -1203,7 +1205,7 @@ static GuessScene *instanceOfGuessScene;
         CCScaleTo *scaleToNone = [CCScaleTo actionWithDuration:time scale:0];
         CCSpawn *moveAndScale = [CCSpawn actionOne:bt two:scaleToNone];
         
-        CCDelayTime *delay = [CCDelayTime actionWithDuration:1];
+        CCDelayTime *delay = [CCDelayTime actionWithDuration:DELAY_OF_EXTRA_SCORE];
         CCSequence *seq = [CCSequence actionOne:delay two:moveAndScale];
         seq.tag = CCActionBlockDisappearEffectTag;
         [block blockSpriteRunAction:seq];
@@ -1255,6 +1257,10 @@ static GuessScene *instanceOfGuessScene;
             [_adView setHidden:YES];
         }
     }
+}
+
+- (NSInteger)nextPuzzleIndex {
+    return self.currPuzzleIndex;
 }
 
 - (void)changeToNextPuzzle {

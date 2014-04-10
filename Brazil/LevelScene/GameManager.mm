@@ -79,7 +79,7 @@
 //    if([level objectForKey:@"Tilemap"] == nil || [[level objectForKey:@"Tilemap"] isEqualToString:@""]) {
 //        return;
 //    }
-    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+//    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     
     self.currentActiveLevelIndex = index;
 
