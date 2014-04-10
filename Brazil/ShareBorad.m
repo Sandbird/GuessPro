@@ -264,9 +264,9 @@ typedef struct ItemSharePostion {
 
 - (void)shareToPYQ {
     if (self.SBStype == ShareTypeSOS) {
-        [self shareWithShareType:ShareTypeWeixiSession mediaType:SSPublishContentMediaTypeImage];
+        [self shareWithShareType:ShareTypeWeixiTimeline mediaType:SSPublishContentMediaTypeImage];
     } else {
-        [self shareWithShareType:ShareTypeWeixiSession mediaType:SSPublishContentMediaTypeApp];
+        [self shareWithShareType:ShareTypeWeixiTimeline mediaType:SSPublishContentMediaTypeApp];
     }
 }
 
@@ -292,14 +292,14 @@ typedef struct ItemSharePostion {
     
     if (self.SBStype == ShareTypeSOS) {
         imagePath = [ZZAcquirePath getDocDirectoryWithFileName:@"sharePic.png"];
-        content = @"我正在玩电影猜猜猜，遇到了一个难猜的海报，快来帮我看看是什么电影啊。";
+        content = [NSString stringWithFormat:@"我正在玩电影猜猜猜，遇到了一个难猜的海报，快来帮我看看是什么电影啊。https://itunes.apple.com/app/id%@", APP_ID];
         title = @"电影猜猜猜";
         url = nil;
         
         
     } else if (self.SBStype == ShareTypeShare) {
         imagePath = [ZZAcquirePath getBundleDirectoryWithFileName:@"Icon-76.png"];
-        content = @"影迷必玩游戏“电影猜猜猜”现已登陆苹果App Store，快来下载吧。";
+        content = [NSString stringWithFormat:@"影迷必玩游戏“电影猜猜猜”现已登陆苹果App Store，快来下载吧。https://itunes.apple.com/app/id%@", APP_ID];
         title = @"电影猜猜猜";
         url = [NSString stringWithFormat:@"itunes.apple.com/app/id%@", APP_ID];
 //        url = @"itunes.apple.com/cn/app/n1-grammar-exercise-book/id794426921?ls=1&mt=8";
@@ -333,6 +333,13 @@ typedef struct ItemSharePostion {
                                              GPNavBar *navBar = (GPNavBar *)[self parent];
                                              [navBar changeTotalScore:NUM_OF_ADD_COIN_USING_SOS];
                                              [navBar refreshTotalScore];
+                                             
+                                             
+                                             NSString *msg = [NSString stringWithFormat:@"恭喜获得%d枚金币", NUM_OF_ADD_COIN_USING_SOS];
+                                             
+                                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+                                             [alert show];
+                                             [alert release];
                                          }
                                          
                                          
@@ -364,6 +371,12 @@ typedef struct ItemSharePostion {
                                              GPNavBar *navBar = (GPNavBar *)[self parent];
                                              [navBar changeTotalScore:NUM_OF_ADD_COIN_USING_SHARE];
                                              [navBar refreshTotalScore];
+                                             
+                                             NSString *msg = [NSString stringWithFormat:@"恭喜获得%d枚金币", NUM_OF_ADD_COIN_USING_SHARE];
+                                             
+                                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+                                             [alert show];
+                                             [alert release];
                                          }
                                      }
                                      else if (state == SSPublishContentStateFail)

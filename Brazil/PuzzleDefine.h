@@ -24,8 +24,10 @@
 
 #define HEIGHT_OF_CLOSE_ITEM ([GPNavBar isiPad] ? 130 : 70)
 
-#define NUM_OF_ADD_COIN_USING_SOS   5
-#define NUM_OF_ADD_COIN_USING_SHARE 10
+#define NUM_OF_ADD_COIN_USING_SOS   10
+#define NUM_OF_ADD_COIN_USING_SHARE 50
+
+#define NUM_OF_FIRST_TIME_INSTALL_APP 100
 
 
 #define ZORDER_BLANK            0
@@ -42,6 +44,8 @@
 #define ZORDER_ITEM_FLY         4
 
 #define IS_KAYAC                NO
+
+#define NAME_OF_DATABASE    @"PuzzleDatabase(Encrypt).sqlite"
 
 #define PS_TOTAL_SCORE      @"totalScore"
 #define PS_CONTINUE_LEVEL   @"continueLevel"

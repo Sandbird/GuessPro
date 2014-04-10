@@ -27,6 +27,8 @@
     CCLabelTTF *_posLabel;
     
     CCMenu *_menu;
+    
+    ccColor4B _layerColor;
 }
 
 //@property (nonatomic, retain) GADBannerView *adView;
@@ -50,11 +52,9 @@
 - (id)init {
     self = [super init];
     if (self) {
-//        _isBeginTouched = NO;
-        
-//        self.isTouchEnabled = YES;
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
+        
         
         CCSprite *shareSprite = [CCSprite spriteWithSpriteFrameName:@"shareBtn.png"];
         CCSprite *shareHLSprite = [CCSprite spriteWithSpriteFrameName:@"shareBtn_HL.png"];
@@ -107,6 +107,71 @@
     [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:INT_MIN swallowsTouches:YES];
 }
 
+- (void)showScoreDetailWithSingle:(int)singleP withDouble:(int)doubleP {
+    
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
+    ccColor3B LabelColor = ccc3(255 - _layerColor.r, 255 - _layerColor.g, 255 - _layerColor.b);
+    
+    
+    //显示分数详情
+    CCSprite *singlePoint = [CCSprite spriteWithSpriteFrameName:@"Block.png"];
+    CCLabelTTF *singleLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"x%d=%d", singleP, singleP] fontName:FONTNAME_OF_TEXT fontSize:[GPNavBar isiPad] ? 30 : 15];
+    singleLabel.color = LabelColor;
+    singleLabel.anchorPoint = ccp(0, 0.5);
+    
+    CCSprite *doublePoint = [CCSprite spriteWithSpriteFrameName:@"Block_HL0.png"];
+    CCLabelTTF *doubleLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"x%d=%d", doubleP, 2*doubleP] fontName:FONTNAME_OF_TEXT fontSize:[GPNavBar isiPad] ? 30 : 15];
+    doubleLabel.color = LabelColor;
+    doubleLabel.anchorPoint = ccp(0, 0.5);
+    
+    CGPoint singlePPos, singleLPos, doublePPos, doubleLPos;
+    CGFloat centerX = winSize.width / 2;
+    CGFloat heightY;
+    if ([GPNavBar isiPad]) {
+        heightY = winSize.height - 110;
+        singlePPos = ccp(centerX - 110, heightY);
+        singleLPos = ccp(centerX - 89, heightY);
+        doublePPos = ccp(centerX + 40, heightY);
+        doubleLPos = ccp(centerX + 62, heightY);
+        
+        singlePoint.scale = 0.3;
+        doublePoint.scale = 0.3;
+        
+    } else if ([GPNavBar isiPhone5]) {
+        heightY = winSize.height - 68;
+        singlePPos = ccp(centerX - 60, heightY);
+        singleLPos = ccp(centerX - 46, heightY);
+        doublePPos = ccp(centerX + 20, heightY);
+        doubleLPos = ccp(centerX + 34, heightY);
+        
+        singlePoint.scale = 0.4;
+        doublePoint.scale = 0.4;
+    } else {
+        heightY = winSize.height - 58;
+        singlePPos = ccp(centerX - 60, heightY);
+        singleLPos = ccp(centerX - 46, heightY);
+        doublePPos = ccp(centerX + 20, heightY);
+        doubleLPos = ccp(centerX + 34, heightY);
+        
+        singlePoint.scale = 0.4;
+        doublePoint.scale = 0.4;
+    }
+    
+    
+    singlePoint.position = singlePPos;
+    singleLabel.position = singleLPos;
+    [self addChild:singlePoint z:ZORDER_SUCCESS_LAYER+1];
+    [self addChild:singleLabel z:ZORDER_SUCCESS_LAYER+1];
+    
+    
+    doublePoint.position = doublePPos;
+    doubleLabel.position = doubleLPos;
+    [self addChild:doublePoint z:ZORDER_SUCCESS_LAYER+1];
+    [self addChild:doubleLabel z:ZORDER_SUCCESS_LAYER+1];
+    
+}
+
 - (void)setPositionLabel:(NSString *)posString {
     [_posLabel setString:posString];
 }
@@ -125,12 +190,14 @@
     
     //方法二：解密图片
     NSData *data = [GPNavBar func_decodeFile:imgName];
-    UIImage *img = [UIImage imageWithData:data];
+//    UIImage *img = [UIImage imageWithData:data];
+    UIImage *img = [[UIImage alloc] initWithData:data];
+    
     
     //方法三：计算图片颜色，从数据库中取得
     /*
     GPDatabase *gpdb = [[GPDatabase alloc] init];
-    [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
+    [gpdb openBundleDatabaseWithName:NAME_OF_DATABASE];
     NSString *picNamePrefix = [imgName stringByDeletingPathExtension];
     NSData *picData = [gpdb LoadPictrueDataByName:picNamePrefix];
     [gpdb close];
@@ -139,14 +206,12 @@
     */
     
     ccColor4B color = [img mostColor];
-//    [img release];
-    
-//    ccColor4B color = ccc4(255, 255, 255, 255);
-    
-//    [_successColor setColor:color];
+    _layerColor = color;
+    [img release];
     
     CCLayerColor *successColor = [CCLayerColor layerWithColor:color];
     successColor.opacity = 0.0f;
+    
     
     [self addChild:successColor z:ZORDER_SUCCESS_LAYER];
     

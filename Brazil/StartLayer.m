@@ -12,6 +12,7 @@
 #import "MapScene.h"
 #import "GameManager.h"
 #import "RootViewController.h"
+#import "MoreLayer.h"
 
 //所有的位置坐标
 typedef struct StartPostion {
@@ -215,6 +216,15 @@ typedef struct StartPostion {
             [_navBar changeTotalScore:numOfCoin];
             [_navBar refreshTotalScore];
             
+            if (numOfCoin > 0) {
+                NSString *msg = [NSString stringWithFormat:@"欢迎光临，送你%d枚金币。", numOfCoin];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"欢迎光临" message:msg delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+                [alert show];
+                [alert release];
+            }
+            
+            
             [GPNavBar setTimesByUsingShare:0];
             [GPNavBar setTimesByUsingSOS:0];
         }
@@ -395,6 +405,15 @@ typedef struct StartPostion {
     
     [GPNavBar playBtnPressedEffect];
     
+    MoreLayer *moreLayer = [MoreLayer node];
+    [self addChild:moreLayer z:ZORDER_NAV_BAR + 1];
+    
+    moreLayer.scale = 0;
+    CCScaleTo *scaleToBig = [CCScaleTo actionWithDuration:0.2 scale:1];
+    CCSequence *smallToBig = [CCSequence actions:scaleToBig, nil];
+    [moreLayer runAction:smallToBig];
+    
+    
 }
 
 
@@ -425,7 +444,7 @@ typedef struct StartPostion {
         int hour = 10;
         int min = 0;
         
-        NSString *tomorrow = [[NSDate dateWithTimeIntervalSinceNow:24*60*60] description];
+        NSString *tomorrow = [[NSDate dateWithTimeIntervalSinceNow:24*60*60*2] description];
         
         NSArray *dateArray = [tomorrow componentsSeparatedByString:@" "];
         NSString *tomorrowStr = [dateArray objectAtIndex:0];

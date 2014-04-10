@@ -279,6 +279,15 @@
 //    [self changeTotalScore:extraScore];
 }
 
++ (void)giveScoreForFirstTimeInstallApp {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:[NSNumber numberWithInteger:NUM_OF_FIRST_TIME_INSTALL_APP] forKey:PS_TOTAL_SCORE];
+    if (![userDefaults synchronize]) {
+        CCLOG(@"error saveGameState");
+    }
+}
+
 - (void)savePlayerStatusTotalScore {
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -503,7 +512,7 @@
 + (BOOL)isTodayCanAddCoinWithShare {
     NSInteger times = [[[NSUserDefaults standardUserDefaults] objectForKey:ADD_COIN_TIMES_SHARE_TODAY] integerValue];
     times++;
-    if (times >= 5) {
+    if (times >= 1) {
         return NO;
     } else {
         [GPNavBar setTimesByUsingShare:times];

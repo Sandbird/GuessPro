@@ -21,12 +21,12 @@ typedef struct ItemPostion {
 }ItemPostionSet;
 
 typedef enum {
-    ProductPrice6,
-    ProductPrice12,
-    ProductPrice18,
-    ProductPrice30,
-    ProductPrice88,
-    ProductPriceMAX,
+    ProductPrice50      = 50,
+    ProductPrice150     = 150,
+    ProductPrice250     = 250,
+    ProductPrice450     = 450,
+    ProductPrice1500    = 1500,
+    ProductPriceMAX     = 10000,
 }ProductPriceTags;
 
 @interface CoinStore() {
@@ -82,21 +82,32 @@ typedef enum {
         CGFloat posY;
         CGSize wordSize;
         CGFloat fontSize;
+        NSArray *tierArray = [NSArray arrayWithObjects:@"        50枚售6.00元", @"        150枚售12.00元", @"        300枚售18.00元", @"        600枚售30.00元", @"        2200枚售88.00元", nil];
+        CGFloat deltaY;
         if ([GPNavBar isiPad]) {
             posY = winSize.height - 88.0f;
             wordSize = CGSizeMake(600, 200);
-            fontSize = 37;
+            fontSize = 35;
+            
+//            tierArray = [NSArray arrayWithObjects:@"        50枚售6.00元", @"        150枚售12.00元", @"        300枚售18.00元", @"        600枚售30.00元", @"        2500枚售88.00元", nil];
+            deltaY = 2;
         } else if ([GPNavBar isiPhone5]) {
             posY = winSize.height - 44.0f;
             wordSize = CGSizeMake(250, 100);
-            fontSize = 18;
+            fontSize = 17;
+            
+//            tierArray = [NSArray arrayWithObjects:@"        50枚售6.00元", @"        150枚售12.00元", @"        300枚售18.00元", @"        600枚售30.00元", @"        2500枚售88.00元", nil];
+            deltaY = 1.5;
         } else {
             posY = winSize.height - 44.0f;
             wordSize = CGSizeMake(250, 100);
-            fontSize = 18;
+            fontSize = 17;
+            
+//            tierArray = [NSArray arrayWithObjects:@"        50枚售6.00元", @"        150枚售12.00元", @"        300枚售18.00元", @"        600枚售30.00元", @"        2500枚售88.00元", nil];
+            deltaY = 1.5;
         }
         
-        NSString *title = @"大卖场";
+        NSString *title = @"金币卖场";
         
         CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
         labelTitle.color = ccWHITE;
@@ -104,7 +115,7 @@ typedef enum {
         labelTitle.position = ccp(winSize.width / 2, posY);
         [self addChild:labelTitle];
         
-        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:@"        欢迎来到大卖场！购买任意数量金币，即可去除广告条。" dimensions:wordSize alignment:NSTextAlignmentLeft vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
+        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:@"欢迎光临!" dimensions:wordSize alignment:NSTextAlignmentCenter vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
         labelWords.color = ccWHITE;
         labelWords.anchorPoint = ccp(0.5, 1);
         labelWords.position = ccp(winSize.width / 2,  posY - labelTitle.boundingBox.size.height);
@@ -127,20 +138,20 @@ typedef enum {
         CCArray *storeBannerArray = [CCArray array];
         CCArray *storeBannerHLArray = [CCArray array];
         
-        NSArray *tierArray = [NSArray arrayWithObjects:@"          50枚 = 6.00元", @"          150枚 = 12.00元", @"          300枚 = 18.00元", @"          600枚 = 30.00元", @"          2500枚 = 88.00元", nil];
+//        NSArray *tierArray = [NSArray arrayWithObjects:@"          50枚仅售6.00元", @"          150枚仅售12.00元", @"          300枚仅售18.00元", @"          600枚售卖30.00元", @"          2500枚售卖88.00元", nil];
         
         for (int i = 0; i < 5; i++) {
             CCSprite *storeBanner = [CCSprite spriteWithSpriteFrame:[framCache spriteFrameByName:@"StoreBanner.png"]];
-            CCLabelTTF *label = [CCLabelTTF labelWithString:[tierArray objectAtIndex:i] dimensions:CGSizeMake(storeBanner.boundingBox.size.width, storeBanner.boundingBox.size.height) alignment:NSTextAlignmentLeft vertAlignment:CCVerticalAlignmentCenter lineBreakMode:NSLineBreakByCharWrapping fontName:@"STHeitiTC-Medium" fontSize:fontSize];
+            CCLabelTTF *label = [CCLabelTTF labelWithString:[tierArray objectAtIndex:i] dimensions:CGSizeMake(storeBanner.boundingBox.size.width, storeBanner.boundingBox.size.height) alignment:NSTextAlignmentLeft vertAlignment:CCVerticalAlignmentCenter lineBreakMode:NSLineBreakByCharWrapping fontName:@"HiraKakuProN-W3" fontSize:fontSize];
             label.color = ccBLACK;
-            label.position = ccp(storeBanner.boundingBox.size.width / 2, storeBanner.boundingBox.size.height / 2);
+            label.position = ccp(storeBanner.boundingBox.size.width / 2, storeBanner.boundingBox.size.height / 2 + deltaY);
             [storeBanner addChild:label];
             [storeBannerArray addObject:storeBanner];
 //            [storeBannerBatch addChild:storeBanner];
             
             CCSprite *storeBannerHL = [CCSprite spriteWithSpriteFrame:[framCache spriteFrameByName:@"StoreBanner_HL.png"]];
-            CCLabelTTF *labelHL = [CCLabelTTF labelWithString:[tierArray objectAtIndex:i] dimensions:CGSizeMake(storeBannerHL.boundingBox.size.width, storeBannerHL.boundingBox.size.height) alignment:NSTextAlignmentLeft vertAlignment:CCVerticalAlignmentCenter lineBreakMode:NSLineBreakByCharWrapping fontName:@"STHeitiTC-Medium" fontSize:fontSize];
-            labelHL.position = ccp(storeBannerHL.boundingBox.size.width / 2, storeBannerHL.boundingBox.size.height / 2);
+            CCLabelTTF *labelHL = [CCLabelTTF labelWithString:[tierArray objectAtIndex:i] dimensions:CGSizeMake(storeBannerHL.boundingBox.size.width, storeBannerHL.boundingBox.size.height) alignment:NSTextAlignmentLeft vertAlignment:CCVerticalAlignmentCenter lineBreakMode:NSLineBreakByCharWrapping fontName:@"HiraKakuProN-W3" fontSize:fontSize];
+            labelHL.position = ccp(storeBannerHL.boundingBox.size.width / 2, storeBannerHL.boundingBox.size.height / 2 + deltaY);
             labelHL.color = ccGRAY;
             [storeBannerHL addChild:labelHL];
             [storeBannerHLArray addObject:storeBannerHL];
@@ -251,7 +262,7 @@ typedef enum {
 
 - (void)buyTier0 {
     [GPNavBar playBtnPressedEffect];
-    self.ppTag = ProductPrice6;
+//    self.ppTag = ProductPrice50;
     [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.50"];
     
     [self setIndicatorShow];
@@ -259,7 +270,7 @@ typedef enum {
 
 - (void)buyTier1 {
     [GPNavBar playBtnPressedEffect];
-    self.ppTag = ProductPrice12;
+//    self.ppTag = ProductPrice150;
     [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.150"];
     
     [self setIndicatorShow];
@@ -267,7 +278,7 @@ typedef enum {
 
 - (void)buyTier2 {
     [GPNavBar playBtnPressedEffect];
-    self.ppTag = ProductPrice18;
+//    self.ppTag = ProductPrice250;
     [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.250"];
     
     [self setIndicatorShow];
@@ -275,7 +286,7 @@ typedef enum {
 
 - (void)buyTier3 {
     [GPNavBar playBtnPressedEffect];
-    self.ppTag = ProductPrice30;
+//    self.ppTag = ProductPrice450;
     [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.450"];
     
     [self setIndicatorShow];
@@ -283,7 +294,7 @@ typedef enum {
 
 - (void)buyTier4 {
     [GPNavBar playBtnPressedEffect];
-    self.ppTag = ProductPrice88;
+//    self.ppTag = ProductPrice1500;
     [self buyWhichProduct:@"IAP.VOCEE.GuessProMovie.Coin.1500"];
     
     [self setIndicatorShow];
@@ -323,44 +334,50 @@ typedef enum {
 -(void)provideContent:(NSString *)productName{
 //        NSLog(@"购买成功，给100金币");
     
-    CCLOG(@"成功购买%d", [productName intValue]);
+    
+    int numOfCoin = 0;
+    switch (productName.intValue) {
+        case ProductPrice50:
+            numOfCoin = 50;
+            break;
+            
+        case ProductPrice150:
+            numOfCoin = 150;
+            break;
+            
+        case ProductPrice250:
+            numOfCoin = 300;
+            break;
+            
+        case ProductPrice450:
+            numOfCoin = 600;
+            break;
+            
+        case ProductPrice1500:
+            numOfCoin = 2200;
+            break;
+            
+        case ProductPriceMAX:
+            numOfCoin = 0;
+            break;
+            
+        default:
+            break;
+    }
     
     GPNavBar *navBar = (GPNavBar *)[self parent];
-    [navBar changeTotalScore:productName.intValue];
+    [navBar changeTotalScore:numOfCoin];
     [navBar refreshTotalScore];
     
-//    switch (self.ppTag) {
-//        case ProductPrice6:
-//            <#statements#>
-//            break;
-//            
-//        case ProductPrice12:
-//            <#statements#>
-//            break;
-//            
-//        case ProductPrice18:
-//            <#statements#>
-//            break;
-//            
-//        case ProductPrice30:
-//            <#statements#>
-//            break;
-//            
-//        case ProductPrice88:
-//            <#statements#>
-//            break;
-//            
-//        case ProductPriceMAX:
-//            <#statements#>
-//            break;
-//            
-//        case ProductPrice6:
-//            <#statements#>
-//            break;
-//            
-//        default:
-//            break;
-//    }
+    CCLOG(@"成功购买%d", numOfCoin);
+    
+    NSString *msg = [NSString stringWithFormat:@"您已成功购买%d枚金币，感谢支持！", numOfCoin];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"感谢" message:msg delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil];
+    
+    [alert show];
+    [alert release];
+    
+    
 
 }
 
@@ -423,10 +440,10 @@ typedef enum {
                 [self setIndicatorOff];
                 
                 //                NSLog(@"-----交易完成 --------");
-                UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"STORE_ALERT_CON", nil) message:NSLocalizedString(@"STORE_ALERT_CON_MSG", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"STORE_ALERT_CON_OK", nil) otherButtonTitles:nil];
-                
-                [alerView show];
-                [alerView release];
+//                UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"STORE_ALERT_CON", nil) message:NSLocalizedString(@"STORE_ALERT_CON_MSG", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"STORE_ALERT_CON_OK", nil) otherButtonTitles:nil];
+//                
+//                [alerView show];
+//                [alerView release];
                 
                 break;
             case SKPaymentTransactionStatePurchasing:

@@ -9,6 +9,8 @@
 #import "GPDatabase.h"
 #include <sqlite3.h>
 #import "ZZAcquirePath.h"
+#import "GTMDefines.h"
+#import "GTMBase64_New.h"
 
 @interface GPDatabase() {
     sqlite3 *_database;
@@ -88,6 +90,7 @@
     
     NSString *picName = nil;
     NSString *answerCN = nil;
+    NSString *answerDecryptStr = nil;
     NSString *answerJA = nil;
     NSString *answerEN = nil;
     int wordNum = 0;
@@ -104,12 +107,15 @@
         
         answerCN = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, 1)];
         
+        NSData *answerData = [GTMBase64_New decodeString:answerCN];
+        answerDecryptStr = [[[NSString alloc] initWithData:answerData encoding:NSUTF8StringEncoding] autorelease];
+        
 //        answerJA = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, 2)];
 //        
 //        answerEN = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, 3)];
         
 //        wordNum = sqlite3_column_int(stmt, 4);
-        wordNum = [answerCN length];
+        wordNum = [answerDecryptStr length];
         
         char *cGroupName = (char *)sqlite3_column_text(stmt, 5);
         if (cGroupName != NULL) {
@@ -122,6 +128,7 @@
         char *cTips = (char *)sqlite3_column_text(stmt, 6);
         if (cTips != NULL) {
             tips = [NSString stringWithUTF8String:cTips];
+//            tips = [[NSString alloc] initWithUTF8String:cTips];
         } else {
             tips = @"等待添加提示信息...";
         }
@@ -130,14 +137,28 @@
         char *cInfo = (char *)sqlite3_column_text(stmt, 7);
         if (cInfo != NULL) {
             information = [NSString stringWithUTF8String:cInfo];
+//            information = [[NSString alloc] initWithUTF8String:cInfo];
         } else {
             information = @"等待添加Information...";
         }
         
+/*
+ 解密Answer和Tips
+ */
+#if 1
         
-        pc = [PuzzleClass puzzleWithIdKey:index picName:picName answerCN:answerCN JA:answerJA EN:answerEN groupName:groupName wordNum:wordNum];
         
-        pc.tips = tips;
+        
+        NSData *tipsData = [GTMBase64_New decodeString:tips];
+        NSString *tipsDecryptStr = [[[NSString alloc] initWithData:tipsData encoding:NSUTF8StringEncoding] autorelease];
+        
+        
+        
+#endif
+        
+        pc = [PuzzleClass puzzleWithIdKey:index picName:picName answerCN:answerDecryptStr JA:answerJA EN:answerEN groupName:groupName wordNum:wordNum];
+        
+        pc.tips = tipsDecryptStr;
         pc.isBuiedTips = NO;
         pc.isBuiedAnswer = NO;
         pc.information = information;
@@ -169,17 +190,19 @@
         
         
         NSString *tempCN = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt_random, 0)];
+        NSData *tempCNData = [GTMBase64_New decodeString:tempCN];
+        NSString *tempCNDecryptStr = [[[NSString alloc] initWithData:tempCNData encoding:NSUTF8StringEncoding] autorelease];
         
         //查重复字
-        int length = [tempCN length];
+        int length = [tempCNDecryptStr length];
         for (int i = 0; i < length; i++) {
             NSRange range = NSMakeRange(i, 1);
-            NSString *aWord = [tempCN substringWithRange:range];
-            NSRange wordRange = [answerCN rangeOfString:aWord];
+            NSString *aWord = [tempCNDecryptStr substringWithRange:range];
+            NSRange wordRange = [answerDecryptStr rangeOfString:aWord];
             if (wordRange.location == NSNotFound) {
-                answerCN = [answerCN stringByAppendingString:aWord];
+                answerDecryptStr = [answerDecryptStr stringByAppendingString:aWord];
                 
-                if ([answerCN length] >= NUM_OF_WORD_SELECTED) {
+                if ([answerDecryptStr length] >= NUM_OF_WORD_SELECTED) {
                     break;
                 }
             }
@@ -191,7 +214,7 @@
     }
     sqlite3_finalize(stmt_random);
     
-    pc.wordMixes = [GPDatabase wordMixedWithString:answerCN];
+    pc.wordMixes = [GPDatabase wordMixedWithString:answerDecryptStr];
     return pc;
 }
 

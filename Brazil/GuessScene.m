@@ -283,7 +283,7 @@ static GuessScene *instanceOfGuessScene;
     
     //获得PuzzleClass
     GPDatabase *gpdb = [[GPDatabase alloc] init];
-    [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
+    [gpdb openBundleDatabaseWithName:NAME_OF_DATABASE];
     _picSequenceArray = [gpdb PuzzleSequenceIsOutOfOrder:NO groupName:PuzzleGroupALL];
     [gpdb close];
     [gpdb release];
@@ -358,6 +358,8 @@ static GuessScene *instanceOfGuessScene;
     [playerState setObject:self.currPuzzle.groupName forKey:PS_GROUP_NAME];
     [playerState setObject:[NSNumber numberWithInt:self.currPuzzle.wordNum] forKey:PS_WORD_NUM];
     [playerState setObject:self.currPuzzle.wordMixes forKey:PS_WORD_MIXES];
+//    CCLOG(@"%@", self.currPuzzle.tips);
+    
     [playerState setObject:self.currPuzzle.tips forKey:PS_TIP];
     [playerState setObject:[NSNumber numberWithBool:self.currPuzzle.isBuiedTips] forKey:PS_IS_BUY_TIP];
     [playerState setObject:self.currPuzzle.information forKey:PS_INFORMATION];
@@ -411,7 +413,7 @@ static GuessScene *instanceOfGuessScene;
     
     //获得PuzzleClass
     GPDatabase *gpdb = [[GPDatabase alloc] init];
-    [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
+    [gpdb openBundleDatabaseWithName:NAME_OF_DATABASE];
     _picSequenceArray = [gpdb PuzzleSequenceIsOutOfOrder:NO groupName:PuzzleGroupALL];
     self.currPuzzleIndex = levelNum;
     int indexOfPic = [[self.picSequenceArray objectAtIndex:self.currPuzzleIndex] integerValue];
@@ -736,7 +738,7 @@ static GuessScene *instanceOfGuessScene;
         
         [GPNavBar playBtnPressedEffect];
         //显示Alert
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看提示道具" message:@"您愿意消耗40枚金币查看本关的线索么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看线索" message:@"你希望消耗40枚金币查看本关的线索么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
         [alertView show];
         alertView.tag = TAG_ALERT_ITEM_TIPS;
         [alertView release];
@@ -774,7 +776,7 @@ static GuessScene *instanceOfGuessScene;
         
         [GPNavBar playBtnPressedEffect];
         //显示Alert
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看答案道具" message:@"您愿意消耗80枚金币查看本关的答案么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看答案" message:@"你希望消耗80枚金币查看本关的答案么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
         [alertView show];
         alertView.tag = TAG_ALERT_ITEM_ANSWER;
         [alertView release];
@@ -1148,13 +1150,20 @@ static GuessScene *instanceOfGuessScene;
 }
 
 - (void)calculateScore {
+    int single = 0, bouns = 0;
     for (iBlock *block in self.blockArray) {
         if ([block isBlockNormal]) {
             self.currPuzzleScore++;
+            single++;
         } else if ([block isBlockBouns]) {
             self.currPuzzleScore += 2;
+            bouns++;
         }
     }
+    
+    //显示详细分数
+    SuccessLayer *sLayer = (SuccessLayer *)[self getChildByTag:CCLayerSuccessLayerTag];
+    [sLayer showScoreDetailWithSingle:single withDouble:bouns];
     
     //只有大于零才播放积分动画
     if (self.currPuzzleScore > 0) {
@@ -1265,15 +1274,23 @@ static GuessScene *instanceOfGuessScene;
         
         NSString *picName = [playerState objectForKey:PS_PIC_NAME];
         NSString *answerCN = [playerState objectForKey:PS_ANSWER];
+        BOOL isBuiedAnswer = [[playerState objectForKey:PS_IS_BUIED_ANSWER] boolValue];
         NSString *groupName = [playerState objectForKey:PS_GROUP_NAME];
         NSInteger wordNum = [[playerState objectForKey:PS_WORD_NUM] integerValue];
         NSString *wordMixes = [playerState objectForKey:PS_WORD_MIXES];
+        NSString *tips = [playerState objectForKey:PS_TIP];
+        BOOL isBuiedTips = [[playerState objectForKey:PS_IS_BUY_TIP] boolValue];
+        NSString *information = [playerState objectForKey:PS_INFORMATION];
         
         
         //获得PuzzleClass
         int indexOfPic = [[self.picSequenceArray objectAtIndex:self.currPuzzleIndex] integerValue];
         PuzzleClass * pc = [PuzzleClass puzzleWithIdKey:indexOfPic picName:picName answerCN:answerCN JA:nil EN:nil groupName:groupName wordNum:wordNum];
         pc.wordMixes = wordMixes;
+        pc.isBuiedAnswer = isBuiedAnswer;
+        pc.tips = tips;
+        pc.isBuiedTips = isBuiedTips;
+        pc.information = information;
         self.currPuzzle = pc;
         
         //Reset BlockArray
@@ -1312,7 +1329,7 @@ static GuessScene *instanceOfGuessScene;
         //获得下一个PuzzleClass
         GPDatabase *gpdb = [[GPDatabase alloc] init];
         
-        [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
+        [gpdb openBundleDatabaseWithName:NAME_OF_DATABASE];
         int indexOfPic = [[self.picSequenceArray objectAtIndex:self.currPuzzleIndex] integerValue];
         self.currPuzzle = [gpdb puzzlesWithGroup:PuzzleGroupMovies indexOfPic:indexOfPic];
         [gpdb close];
@@ -1373,7 +1390,7 @@ static GuessScene *instanceOfGuessScene;
     
     GPDatabase *gpdb = [[GPDatabase alloc] init];
     
-    [gpdb openBundleDatabaseWithName:@"PuzzleDatabase.sqlite"];
+    [gpdb openBundleDatabaseWithName:NAME_OF_DATABASE];
     NSString *picNamePrefix = [self.currPuzzle.picName stringByDeletingPathExtension];
     NSData *picData = [gpdb LoadPictrueDataByName:picNamePrefix];
     [gpdb close];

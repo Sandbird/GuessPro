@@ -57,6 +57,7 @@ typedef enum {
 - (void)playScoreAnimationNoPlusExtraScore:(int)extraScore;
 
 - (void)savePlayerStatusTotalScore;
++ (void)giveScoreForFirstTimeInstallApp;
 
 + (BOOL)isiPad;
 

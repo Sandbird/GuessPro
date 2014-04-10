@@ -139,6 +139,9 @@
     if ([GPNavBar isFirstTimeInstallApplication]) {
         [GPNavBar setIsEnabledSoundEffect:YES];
         CCLOG(@"默认开启音频");
+        
+        //第一次装应用，送100金币
+        [GPNavBar giveScoreForFirstTimeInstallApp];
     }
     
     if ([GPNavBar isEnabledSoundEffect]) {
@@ -169,9 +172,9 @@
      连接新浪微博开放平台应用以使用相关功能，此应用需要引用SinaWeiboConnection.framework
      http://open.weibo.com上注册新浪微博开放平台应用，并将相关信息填写到以下字段
      **/
-    [ShareSDK connectSinaWeiboWithAppKey:@"568898243"
-                               appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
-                             redirectUri:@"http://www.sharesdk.cn"];
+    [ShareSDK connectSinaWeiboWithAppKey:@"2548419608"
+                               appSecret:@"d38f8cfea142e5f4e6ef8c4a2cca7493"
+                             redirectUri:@"https://itunes.apple.com/app/id832491981"];
     
     /**
      连接腾讯微博开放平台应用以使用相关功能，此应用需要引用TencentWeiboConnection.framework
@@ -179,9 +182,9 @@
      
      如果需要实现SSO，需要导入libWeiboSDK.a，并引入WBApi.h，将WBApi类型传入接口
      **/
-    [ShareSDK connectTencentWeiboWithAppKey:@"801307650"
-                                  appSecret:@"ae36f4ee3946e1cbb98d6965b0b2ff5c"
-                                redirectUri:@"http://www.sharesdk.cn"
+    [ShareSDK connectTencentWeiboWithAppKey:@"801494477"
+                                  appSecret:@"7e1b4c01734886876125d96dc4c0f71b"
+                                redirectUri:@"https://itunes.apple.com/app/id832491981"
                                    wbApiCls:[WeiboApi class]];
     
     //连接短信分享
@@ -220,9 +223,9 @@
      连接人人网应用以使用相关功能，此应用需要引用RenRenConnection.framework
      http://dev.renren.com上注册人人网开放平台应用，并将相关信息填写到以下字段
      **/
-    [ShareSDK connectRenRenWithAppId:@"226427"
-                              appKey:@"fc5b8aed373c4c27a05b712acba0f8c3"
-                           appSecret:@"f29df781abdd4f49beca5a2194676ca4"
+    [ShareSDK connectRenRenWithAppId:@"266607"
+                              appKey:@"c8b7e01a21054d1b933f2c416310ec79"
+                           appSecret:@"ec1e8d14b4734cfe9e0f21ab741cfd87"
                    renrenClientClass:[RennClient class]];
     
     
@@ -236,7 +239,7 @@
      **/
     [ShareSDK connectDoubanWithAppKey:@"092f51152be112561b8df33f83a33702"
                             appSecret:@"fb3ae0d2c8ae52c2"
-                          redirectUri:@"http://www.sharesdk.cn"];
+                          redirectUri:@"https://itunes.apple.com/app/id832491981"];
 }
 
 

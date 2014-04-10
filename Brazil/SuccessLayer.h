@@ -21,5 +21,6 @@
 - (void)setPositionLabel:(NSString *)posString;
 
 - (void)setCurrentPuzzleInfo:(NSString *)info;
+- (void)showScoreDetailWithSingle:(int)singleP withDouble:(int)doubleP;
 
 @end

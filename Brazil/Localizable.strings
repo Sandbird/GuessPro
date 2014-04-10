@@ -26,6 +26,7 @@
 "CHECK_INTERNET"                = "请检查您的网络设置";
 "BAD_NETWORK"                   = "网络貌似不太好哦";
 "NO_INTERNET"                   = "当前未联网";
+"PLEASE_WAIT"                   = "请稍后...";
 
 /******Store的翻译********/
 "STORE_ALERT_TITLE"             = "提示";

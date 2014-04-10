@@ -12,7 +12,7 @@
 
 @property (assign)int idKey;
 @property (nonatomic, retain)NSString *picName;
-@property (nonatomic, retain)NSString *answerCN;
+//@property (nonatomic, retain)NSString *answerCN;
 @property (nonatomic, retain)NSString *answerJA;
 @property (nonatomic, retain)NSString *answerEN;
 @property (nonatomic, retain)NSString *groupName;
