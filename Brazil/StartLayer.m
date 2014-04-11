@@ -13,6 +13,7 @@
 #import "GameManager.h"
 #import "RootViewController.h"
 #import "MoreLayer.h"
+#import "TrophyLayer.h"
 
 //所有的位置坐标
 typedef struct StartPostion {
@@ -136,9 +137,8 @@ typedef struct StartPostion {
             spriteName = @"ContinueBtn.png";
             spriteNameHL = @"ContinueBtn_HL.png";
         } else if (currContinueLevel >= numOfPuzzles){
-            、、、
             spriteName = @"WaitingUpdateBtn.png";
-            spriteNameHL = @"WaitingUpdate_HL.png";
+            spriteNameHL = @"WaitingUpdateBtn_HL.png";
         } else {
             spriteName = @"StartBtn.png";
             spriteNameHL = @"StartBtn_HL.png";
@@ -316,7 +316,8 @@ typedef struct StartPostion {
     NSInteger numOfPuzzles = [GPNavBar numOfPuzzlesAtCurrentVersion];
     if (continueLevelNum >= numOfPuzzles) {
         //本版本已经通关，跳出成就界面
-        、、、
+        [[CCDirector sharedDirector] replaceScene:
+         [CCTransitionFade transitionWithDuration:0.5f scene:[TrophyLayer scene]]];
     } else {
         [[GameManager sharedGameManager] loadLevelWithIndex:(int)continueLevelNum GPSceneType:GPSceneTypeContinueLayer];
     }

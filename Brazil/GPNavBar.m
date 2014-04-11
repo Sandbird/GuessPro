@@ -500,7 +500,7 @@
 + (BOOL)isTodayCanAddCoinWithSOS {
     NSInteger times = [[[NSUserDefaults standardUserDefaults] objectForKey:ADD_COIN_TIMES_SOS_TODAY] integerValue];
     times++;
-    if (times >= 5) {
+    if (times > 5) {
         return NO;
     } else {
         [GPNavBar setTimesByUsingSOS:times];
@@ -512,7 +512,7 @@
 + (BOOL)isTodayCanAddCoinWithShare {
     NSInteger times = [[[NSUserDefaults standardUserDefaults] objectForKey:ADD_COIN_TIMES_SHARE_TODAY] integerValue];
     times++;
-    if (times >= 1) {
+    if (times > 1) {
         return NO;
     } else {
         [GPNavBar setTimesByUsingShare:times];
@@ -793,7 +793,9 @@
 
 + (NSInteger)numOfPuzzlesAtCurrentVersion {
     NSString *path = [ZZAcquirePath getBundleDirectoryWithFileName:@"GameData.plist"];
-    NSMutableArray *puzzleArray = [NSMutableArray arrayWithContentsOfFile:path];
+    
+    NSMutableDictionary *gameData = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    NSMutableArray *puzzleArray = [gameData objectForKey:@"Levels"];
     
     return puzzleArray.count;
 }
@@ -813,14 +815,16 @@
 //将新老puzzle数据融合到用户目录下
 + (void)mergePuzzlesFromCurrentToLast {
     NSString *lastUserPath = [ZZAcquirePath getDocDirectoryWithFileName:@"GameData.plist"];
-    NSMutableArray *lastPuzzleArray = [NSMutableArray arrayWithContentsOfFile:lastUserPath];
+    NSMutableDictionary *lastGameData = [NSMutableDictionary dictionaryWithContentsOfFile:lastUserPath];
+    NSMutableArray *lastPuzzleArray = [lastGameData objectForKey:@"Levels"];
     
     if (lastPuzzleArray.count == 0 || lastPuzzleArray == nil) {
         return;
     }
     
     NSString *currUserPath = [ZZAcquirePath getBundleDirectoryWithFileName:@"GameData.plist"];
-    NSMutableArray *currPuzzleArray = [NSMutableArray arrayWithContentsOfFile:currUserPath];
+    NSMutableDictionary *currGameData = [NSMutableDictionary dictionaryWithContentsOfFile:currUserPath];
+    NSMutableArray *currPuzzleArray = [currGameData objectForKey:@"Levels"];
     
     NSRange range;
     range.location = 0;

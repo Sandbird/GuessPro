@@ -85,13 +85,15 @@ typedef struct ItemSharePostion {
         
         NSString *title = @"";
         NSString *text = @"";
-        
+        NSTextAlignment TA;
         if (self.SBStype == ShareTypeSOS) {
             title = @"求助";
-            text = @"        成功向朋友求助的话，将获得10枚金币的奖励，每天最多可获得50枚金币。微信平台分享成功后请选择“返回”选项。";
+            text = @"        成功向朋友求助的话，将获10枚金币的奖励，每天最多可获50枚金币。微信平台分享成功后请选择“返回”选项。";
+            TA = NSTextAlignmentLeft;
         } else if (self.SBStype == ShareTypeShare) {
             title = @"分享";
-            text = @"        成功分享到任意平台，将获得20枚金币的奖励，每天最多可获得40枚金币。微信平台分享成功后请选择“返回”选项。";
+            text = @"每日首次分享将获50枚金币奖励。";
+            TA = NSTextAlignmentCenter;
         }
         
         CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
@@ -100,7 +102,7 @@ typedef struct ItemSharePostion {
         labelTitle.position = ccp(winSize.width / 2, posY);
         [self addChild:labelTitle];
         
-        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:text dimensions:wordSize alignment:NSTextAlignmentLeft vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
+        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:text dimensions:wordSize alignment:TA vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
         labelWords.color = ccWHITE;
         labelWords.anchorPoint = ccp(0.5, 1);
         labelWords.position = ccp(winSize.width / 2,  posY - labelTitle.boundingBox.size.height);

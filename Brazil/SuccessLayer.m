@@ -15,6 +15,7 @@
 #import "InformationBorad.h"
 
 #import "GPDatabase.h"
+#import "TrophyLayer.h"
 
 @interface SuccessLayer() {
 
@@ -307,7 +308,8 @@
     if (nextLevelNum >= numOfPuzzles) {
         //本版本已经通关，跳出成就界面，并且记录下continueLevel
         [GPNavBar setContinueLevel:nextLevelNum isNeedRestoreScene:NO];
-        、、、
+        [[CCDirector sharedDirector] replaceScene:
+         [CCTransitionFade transitionWithDuration:0.5f scene:[TrophyLayer scene]]];
     } else {
         [[GuessScene sharedGuessScene] changeToNextPuzzle];
     }

@@ -187,6 +187,27 @@
 		006B217316637631008ED362 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 006B217216637631008ED362 /* blocks.png */; };
 		006B219D166495D9008ED362 /* CCAnimationHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 006B217C166495D8008ED362 /* CCAnimationHelper.mm */; };
 		006B21BE16649600008ED362 /* ZZNavBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 006B21BC16649600008ED362 /* ZZNavBar.mm */; };
+		0070946D18F8028C00CCCFB7 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070945F18F8028C00CCCFB7 /* Icon-40.png */; };
+		0070946E18F8028C00CCCFB7 /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946018F8028C00CCCFB7 /* Icon-40@2x.png */; };
+		0070946F18F8028C00CCCFB7 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946118F8028C00CCCFB7 /* Icon-60.png */; };
+		0070947018F8028C00CCCFB7 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946218F8028C00CCCFB7 /* Icon-60@2x.png */; };
+		0070947118F8028C00CCCFB7 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946318F8028C00CCCFB7 /* Icon-72.png */; };
+		0070947218F8028C00CCCFB7 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946418F8028C00CCCFB7 /* Icon-72@2x.png */; };
+		0070947318F8028C00CCCFB7 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946518F8028C00CCCFB7 /* Icon-76.png */; };
+		0070947418F8028C00CCCFB7 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946618F8028C00CCCFB7 /* Icon-76@2x.png */; };
+		0070947518F8028C00CCCFB7 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946718F8028C00CCCFB7 /* Icon-Small-50.png */; };
+		0070947618F8028C00CCCFB7 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946818F8028C00CCCFB7 /* Icon-Small-50@2x.png */; };
+		0070947718F8028C00CCCFB7 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946918F8028C00CCCFB7 /* Icon-Small.png */; };
+		0070947818F8028C00CCCFB7 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946A18F8028C00CCCFB7 /* Icon-Small@2x.png */; };
+		0070947918F8028C00CCCFB7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946B18F8028C00CCCFB7 /* Icon.png */; };
+		0070947A18F8028C00CCCFB7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070946C18F8028C00CCCFB7 /* Icon@2x.png */; };
+		0070947C18F819DB00CCCFB7 /* Trophy-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070947B18F819DB00CCCFB7 /* Trophy-hd.png */; };
+		0070947E18F819E300CCCFB7 /* Trophy-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070947D18F819E300CCCFB7 /* Trophy-ipadhd.png */; };
+		0070948118F81A1500CCCFB7 /* TrophyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0070948018F81A1500CCCFB7 /* TrophyLayer.m */; };
+		0070948618F832DF00CCCFB7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070948218F832DF00CCCFB7 /* Default@2x.png */; };
+		0070948718F832DF00CCCFB7 /* Default-Portrait@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070948318F832DF00CCCFB7 /* Default-Portrait@2x~iPad.png */; };
+		0070948818F832DF00CCCFB7 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070948418F832DF00CCCFB7 /* Default-Portrait.png */; };
+		0070948918F832DF00CCCFB7 /* Default@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070948518F832DF00CCCFB7 /* Default@2x-568h.png */; };
 		0071006718DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0071006518DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.bundle */; };
 		0071006818DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0071006618DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.framework */; };
 		0071006D18DF333000A44568 /* ShareSDKiPhoneAppRecommendShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0071006918DF333000A44568 /* ShareSDKiPhoneAppRecommendShareViewUI.framework */; };
@@ -480,8 +501,6 @@
 		00E860E618C44B7E00EBC9DF /* Visitor40.GlyphProject in Resources */ = {isa = PBXBuildFile; fileRef = 00E8602F18C44B7D00EBC9DF /* Visitor40.GlyphProject */; };
 		00E860E718C44B7E00EBC9DF /* Visitor40.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E8603018C44B7D00EBC9DF /* Visitor40.png */; };
 		00E860E818C44B7E00EBC9DF /* goEffect.caf in Resources */ = {isa = PBXBuildFile; fileRef = 00E8603118C44B7D00EBC9DF /* goEffect.caf */; };
-		00E8614D18C44B7E00EBC9DF /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E8609818C44B7E00EBC9DF /* Default-Portrait.png */; };
-		00E8615118C44B7E00EBC9DF /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E8609C18C44B7E00EBC9DF /* Icon-76.png */; };
 		7B22C2FD168AE2ED002BD484 /* CCDirectorExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B22C2FC168AE2EC002BD484 /* CCDirectorExtension.m */; };
 /* End PBXBuildFile section */
 
@@ -836,6 +855,28 @@
 		006B217C166495D8008ED362 /* CCAnimationHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCAnimationHelper.mm; sourceTree = "<group>"; };
 		006B21BB16649600008ED362 /* ZZNavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZNavBar.h; sourceTree = "<group>"; };
 		006B21BC16649600008ED362 /* ZZNavBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZZNavBar.mm; sourceTree = "<group>"; };
+		0070945F18F8028C00CCCFB7 /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
+		0070946018F8028C00CCCFB7 /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
+		0070946118F8028C00CCCFB7 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
+		0070946218F8028C00CCCFB7 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		0070946318F8028C00CCCFB7 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		0070946418F8028C00CCCFB7 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		0070946518F8028C00CCCFB7 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
+		0070946618F8028C00CCCFB7 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
+		0070946718F8028C00CCCFB7 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		0070946818F8028C00CCCFB7 /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50@2x.png"; sourceTree = "<group>"; };
+		0070946918F8028C00CCCFB7 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		0070946A18F8028C00CCCFB7 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		0070946B18F8028C00CCCFB7 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		0070946C18F8028C00CCCFB7 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		0070947B18F819DB00CCCFB7 /* Trophy-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Trophy-hd.png"; sourceTree = "<group>"; };
+		0070947D18F819E300CCCFB7 /* Trophy-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Trophy-ipadhd.png"; sourceTree = "<group>"; };
+		0070947F18F81A1500CCCFB7 /* TrophyLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrophyLayer.h; sourceTree = "<group>"; };
+		0070948018F81A1500CCCFB7 /* TrophyLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrophyLayer.m; sourceTree = "<group>"; };
+		0070948218F832DF00CCCFB7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		0070948318F832DF00CCCFB7 /* Default-Portrait@2x~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~iPad.png"; sourceTree = "<group>"; };
+		0070948418F832DF00CCCFB7 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
+		0070948518F832DF00CCCFB7 /* Default@2x-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x-568h.png"; sourceTree = "<group>"; };
 		0071006518DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKiPhoneDefaultShareViewUI.bundle; sourceTree = "<group>"; };
 		0071006618DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneDefaultShareViewUI.framework; sourceTree = "<group>"; };
 		0071006918DF333000A44568 /* ShareSDKiPhoneAppRecommendShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneAppRecommendShareViewUI.framework; sourceTree = "<group>"; };
@@ -1169,8 +1210,6 @@
 		00E8602F18C44B7D00EBC9DF /* Visitor40.GlyphProject */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Visitor40.GlyphProject; sourceTree = "<group>"; };
 		00E8603018C44B7D00EBC9DF /* Visitor40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Visitor40.png; sourceTree = "<group>"; };
 		00E8603118C44B7D00EBC9DF /* goEffect.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = goEffect.caf; path = Resources/goEffect.caf; sourceTree = "<group>"; };
-		00E8609818C44B7E00EBC9DF /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
-		00E8609C18C44B7E00EBC9DF /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
 		7B22C2FB168AE2EC002BD484 /* CCDirectorExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDirectorExtension.h; sourceTree = "<group>"; };
 		7B22C2FC168AE2EC002BD484 /* CCDirectorExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDirectorExtension.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1234,6 +1273,7 @@
 		0011575818E9A71B0079C5FF /* UI-ipadhd */ = {
 			isa = PBXGroup;
 			children = (
+				0070947D18F819E300CCCFB7 /* Trophy-ipadhd.png */,
 				00087C4D18EAA7C300E511E3 /* Share-ipadhd.plist */,
 				00087C4E18EAA7C300E511E3 /* Share-ipadhd.png */,
 				0011577518E9AF9D0079C5FF /* GuessPro-ipadhd.plist */,
@@ -1293,6 +1333,8 @@
 				005BCE101828C218006A8CDB /* StartLayer.m */,
 				001C328318F2E6DB00719423 /* MoreLayer.h */,
 				001C328418F2E6DB00719423 /* MoreLayer.m */,
+				0070947F18F81A1500CCCFB7 /* TrophyLayer.h */,
+				0070948018F81A1500CCCFB7 /* TrophyLayer.m */,
 			);
 			name = Start;
 			sourceTree = "<group>";
@@ -1380,6 +1422,7 @@
 		006B1F921663762D008ED362 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0070945E18F8028C00CCCFB7 /* icon */,
 				00CE0ECF18F649E10011530F /* PuzzleDatabase(Encrypt).sqlite */,
 				00CE0D9E18F63BEB0011530F /* Pic(Encpyted78[+]) */,
 				00E04D0918E31ECE00AC5CCB /* SoundEffects */,
@@ -1827,6 +1870,32 @@
 				006B216316637631008ED362 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0070945E18F8028C00CCCFB7 /* icon */ = {
+			isa = PBXGroup;
+			children = (
+				0070948218F832DF00CCCFB7 /* Default@2x.png */,
+				0070948318F832DF00CCCFB7 /* Default-Portrait@2x~iPad.png */,
+				0070948418F832DF00CCCFB7 /* Default-Portrait.png */,
+				0070948518F832DF00CCCFB7 /* Default@2x-568h.png */,
+				0070945F18F8028C00CCCFB7 /* Icon-40.png */,
+				0070946018F8028C00CCCFB7 /* Icon-40@2x.png */,
+				0070946118F8028C00CCCFB7 /* Icon-60.png */,
+				0070946218F8028C00CCCFB7 /* Icon-60@2x.png */,
+				0070946318F8028C00CCCFB7 /* Icon-72.png */,
+				0070946418F8028C00CCCFB7 /* Icon-72@2x.png */,
+				0070946518F8028C00CCCFB7 /* Icon-76.png */,
+				0070946618F8028C00CCCFB7 /* Icon-76@2x.png */,
+				0070946718F8028C00CCCFB7 /* Icon-Small-50.png */,
+				0070946818F8028C00CCCFB7 /* Icon-Small-50@2x.png */,
+				0070946918F8028C00CCCFB7 /* Icon-Small.png */,
+				0070946A18F8028C00CCCFB7 /* Icon-Small@2x.png */,
+				0070946B18F8028C00CCCFB7 /* Icon.png */,
+				0070946C18F8028C00CCCFB7 /* Icon@2x.png */,
+			);
+			name = icon;
+			path = "../../../Dropbox/我的项目资料/GuessPro/Movie/UI/icon";
 			sourceTree = "<group>";
 		};
 		0071006418DF32EC00A44568 /* UI */ = {
@@ -2277,6 +2346,7 @@
 		00E8608B18C44B7E00EBC9DF /* UI-hd */ = {
 			isa = PBXGroup;
 			children = (
+				0070947B18F819DB00CCCFB7 /* Trophy-hd.png */,
 				00087C5118EAA7CB00E511E3 /* Share-hd.plist */,
 				00087C5218EAA7CB00E511E3 /* Share-hd.png */,
 				0011577918E9AFB30079C5FF /* GuessPro-hd.plist */,
@@ -2287,8 +2357,6 @@
 				00B1400118D82E400085C5EF /* cc_levelmenu-hd.png */,
 				0096225818D324A90051ED04 /* GPNavBar-hd.plist */,
 				0096225918D324A90051ED04 /* GPNavBar-hd.png */,
-				00E8609818C44B7E00EBC9DF /* Default-Portrait.png */,
-				00E8609C18C44B7E00EBC9DF /* Icon-76.png */,
 				0008045D18D5E9E5005F4AF2 /* Store-hd.plist */,
 				0008045E18D5E9E5005F4AF2 /* Store-hd.png */,
 			);
@@ -2379,6 +2447,7 @@
 				00E860E618C44B7E00EBC9DF /* Visitor40.GlyphProject in Resources */,
 				00CE0E5C18F63BEB0011530F /* 1063.jpg in Resources */,
 				006B217316637631008ED362 /* blocks.png in Resources */,
+				0070947A18F8028C00CCCFB7 /* Icon@2x.png in Resources */,
 				00E860DA18C44B7E00EBC9DF /* Visitor25-ipadhd.GlyphProject in Resources */,
 				00CE0E8F18F63BEB0011530F /* 1133.jpg in Resources */,
 				0011577018E9A71B0079C5FF /* Store-ipadhd.png in Resources */,
@@ -2399,6 +2468,7 @@
 				00E860BD18C44B7E00EBC9DF /* BadaBoom20.png in Resources */,
 				00CE0E3918F63BEB0011530F /* 1006.jpg in Resources */,
 				00D325EB18E717D10017AA07 /* Success.mp3 in Resources */,
+				0070948618F832DF00CCCFB7 /* Default@2x.png in Resources */,
 				00E860C418C44B7E00EBC9DF /* BadaBoom40-hd.fnt in Resources */,
 				00CE0E7C18F63BEB0011530F /* 1109.jpg in Resources */,
 				00E860C618C44B7E00EBC9DF /* BadaBoom40-hd.png in Resources */,
@@ -2406,15 +2476,19 @@
 				00CE0EB718F63BEC0011530F /* 1182.jpg in Resources */,
 				00CE0E8818F63BEB0011530F /* 1125.jpg in Resources */,
 				0071006718DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
+				0070947C18F819DB00CCCFB7 /* Trophy-hd.png in Resources */,
 				00CE0EC218F63BEC0011530F /* 1193.jpg in Resources */,
 				00E860CA18C44B7E00EBC9DF /* BadaBoom40.fnt in Resources */,
 				00CE0EA318F63BEC0011530F /* 1159.jpg in Resources */,
 				00CE0E9618F63BEB0011530F /* 1144.jpg in Resources */,
 				00617E7018DD95840005A0F6 /* StartPage-hd.plist in Resources */,
+				0070947018F8028C00CCCFB7 /* Icon-60@2x.png in Resources */,
 				00E860C818C44B7E00EBC9DF /* BadaBoom40-ipadhd.GlyphProject in Resources */,
 				00CE0E7F18F63BEB0011530F /* 1112.jpg in Resources */,
 				00CE0E9218F63BEB0011530F /* 1139.jpg in Resources */,
 				00CE0E9918F63BEC0011530F /* 1147.jpg in Resources */,
+				0070946E18F8028C00CCCFB7 /* Icon-40@2x.png in Resources */,
+				0070947118F8028C00CCCFB7 /* Icon-72.png in Resources */,
 				00E04D0D18E31EDE00AC5CCB /* BlockBreak.caf in Resources */,
 				00CE0E8318F63BEB0011530F /* 1118.jpg in Resources */,
 				00CE0EC518F63BEC0011530F /* 1196.jpg in Resources */,
@@ -2439,9 +2513,9 @@
 				00CE0EA618F63BEC0011530F /* 1162.jpg in Resources */,
 				00E860A418C44B7E00EBC9DF /* background-dawn-ipadhd.png in Resources */,
 				00CE0EB518F63BEC0011530F /* 1180.jpg in Resources */,
+				0070947218F8028C00CCCFB7 /* Icon-72@2x.png in Resources */,
 				00D325ED18E721060017AA07 /* FlyItemSoundEffect.mp3 in Resources */,
 				0011576F18E9A71B0079C5FF /* Store-ipadhd.plist in Resources */,
-				00E8614D18C44B7E00EBC9DF /* Default-Portrait.png in Resources */,
 				00CE0EC318F63BEC0011530F /* 1194.jpg in Resources */,
 				00CE0E4E18F63BEB0011530F /* 1046.jpg in Resources */,
 				00E860BA18C44B7E00EBC9DF /* BadaBoom20-hd.png in Resources */,
@@ -2454,7 +2528,6 @@
 				00CE0E9118F63BEB0011530F /* 1138.jpg in Resources */,
 				00CE0E7618F63BEB0011530F /* 1103.jpg in Resources */,
 				007A101F18BB60ED00A6CCE2 /* GameData.plist in Resources */,
-				00E8615118C44B7E00EBC9DF /* Icon-76.png in Resources */,
 				00CE0EB818F63BEC0011530F /* 1183.jpg in Resources */,
 				009689DE18BF871B00CF0A70 /* PlayerState.plist in Resources */,
 				00831EE018CC71020023E713 /* ShareSDKLocalizable.strings in Resources */,
@@ -2465,6 +2538,7 @@
 				00CE0E6D18F63BEB0011530F /* 1094.jpg in Resources */,
 				00CE0E4C18F63BEB0011530F /* 1040.jpg in Resources */,
 				00CE0E4218F63BEB0011530F /* 1021.jpg in Resources */,
+				0070948718F832DF00CCCFB7 /* Default-Portrait@2x~iPad.png in Resources */,
 				00CE0E7718F63BEB0011530F /* 1104.jpg in Resources */,
 				00CE0E6218F63BEB0011530F /* 1073.jpg in Resources */,
 				00CE0E6018F63BEB0011530F /* 1071.jpg in Resources */,
@@ -2489,9 +2563,11 @@
 				00E860E218C44B7E00EBC9DF /* Visitor40-ipadhd.fnt in Resources */,
 				00087C4F18EAA7C300E511E3 /* Share-ipadhd.plist in Resources */,
 				009B25DA18E56CD40039ECA8 /* WordBackEffect.caf in Resources */,
+				0070947818F8028C00CCCFB7 /* Icon-Small@2x.png in Resources */,
 				00CE0E9518F63BEB0011530F /* 1143.jpg in Resources */,
 				00CE0E4A18F63BEB0011530F /* 1036.jpg in Resources */,
 				00CE0ECA18F63BEC0011530F /* 1201.jpg in Resources */,
+				0070947618F8028C00CCCFB7 /* Icon-Small-50@2x.png in Resources */,
 				0011576D18E9A71B0079C5FF /* StartPage-ipadhd.plist in Resources */,
 				00CE0EB418F63BEC0011530F /* 1179.jpg in Resources */,
 				00E860B418C44B7E00EBC9DF /* Anime8-hd.png in Resources */,
@@ -2506,7 +2582,9 @@
 				00CE0EA518F63BEC0011530F /* 1161.jpg in Resources */,
 				00CE0E6818F63BEB0011530F /* 1082.jpg in Resources */,
 				00CE0E5A18F63BEB0011530F /* 1060.jpg in Resources */,
+				0070947418F8028C00CCCFB7 /* Icon-76@2x.png in Resources */,
 				00CE0EAF18F63BEC0011530F /* 1174.jpg in Resources */,
+				0070947918F8028C00CCCFB7 /* Icon.png in Resources */,
 				00CE0EB018F63BEC0011530F /* 1175.jpg in Resources */,
 				00E04CF618E075B500AC5CCB /* TouchEffect-ipadhd.plist in Resources */,
 				00E860BF18C44B7E00EBC9DF /* BadaBoom26-hd.GlyphProject in Resources */,
@@ -2516,6 +2594,7 @@
 				00CE0EA918F63BEC0011530F /* 1165.jpg in Resources */,
 				00CE0EC418F63BEC0011530F /* 1195.jpg in Resources */,
 				00E860DE18C44B7E00EBC9DF /* Visitor25.png in Resources */,
+				0070946D18F8028C00CCCFB7 /* Icon-40.png in Resources */,
 				0071007318DF338000A44568 /* ShareSDKFlatShareViewUI.bundle in Resources */,
 				00E860D818C44B7E00EBC9DF /* Visitor25-hd.png in Resources */,
 				00E860C018C44B7E00EBC9DF /* BadaBoom26-hd.png in Resources */,
@@ -2530,6 +2609,7 @@
 				00617E7118DD95840005A0F6 /* StartPage-hd.png in Resources */,
 				00831F1D18CCB6A20023E713 /* README.txt in Resources */,
 				00CE0E5618F63BEB0011530F /* 1055.jpg in Resources */,
+				0070947E18F819E300CCCFB7 /* Trophy-ipadhd.png in Resources */,
 				00CE0E7318F63BEB0011530F /* 1100.jpg in Resources */,
 				00CE0E5F18F63BEB0011530F /* 1070.jpg in Resources */,
 				00E860E718C44B7E00EBC9DF /* Visitor40.png in Resources */,
@@ -2544,6 +2624,7 @@
 				00E860CB18C44B7E00EBC9DF /* BadaBoom40.GlyphProject in Resources */,
 				0011576718E9A71B0079C5FF /* GPNavBar-ipadhd.plist in Resources */,
 				00E04D0818E0833500AC5CCB /* TouchEffect-ipad.plist in Resources */,
+				0070947318F8028C00CCCFB7 /* Icon-76.png in Resources */,
 				00CE0E6618F63BEB0011530F /* 1080.jpg in Resources */,
 				00CE0EBF18F63BEC0011530F /* 1190.jpg in Resources */,
 				00CE0E3518F63BEB0011530F /* 1001.jpg in Resources */,
@@ -2563,6 +2644,7 @@
 				00CE0E7518F63BEB0011530F /* 1102.jpg in Resources */,
 				00E860AC18C44B7E00EBC9DF /* background-night-ipadhd.png in Resources */,
 				00CE0E8018F63BEB0011530F /* 1113.jpg in Resources */,
+				0070947518F8028C00CCCFB7 /* Icon-Small-50.png in Resources */,
 				00E860D418C44B7E00EBC9DF /* Visitor18.GlyphProject in Resources */,
 				00CE0E5418F63BEB0011530F /* 1053.jpg in Resources */,
 				00E860D118C44B7E00EBC9DF /* Visitor18-ipadhd.GlyphProject in Resources */,
@@ -2585,6 +2667,8 @@
 				00CE0E5718F63BEB0011530F /* 1057.jpg in Resources */,
 				00CE0E7918F63BEB0011530F /* 1106.jpg in Resources */,
 				00E860B318C44B7E00EBC9DF /* Anime8-hd.GlyphProject in Resources */,
+				0070946F18F8028C00CCCFB7 /* Icon-60.png in Resources */,
+				0070948918F832DF00CCCFB7 /* Default@2x-568h.png in Resources */,
 				00E860E518C44B7E00EBC9DF /* Visitor40.fnt in Resources */,
 				00CE0E9318F63BEB0011530F /* 1141.jpg in Resources */,
 				0011576618E9A71B0079C5FF /* cc_levelmenu-ipadhd.png in Resources */,
@@ -2593,6 +2677,8 @@
 				00CE0EA218F63BEC0011530F /* 1158.jpg in Resources */,
 				00E860C218C44B7E00EBC9DF /* BadaBoom26.GlyphProject in Resources */,
 				00E860D318C44B7E00EBC9DF /* Visitor18.fnt in Resources */,
+				0070947718F8028C00CCCFB7 /* Icon-Small.png in Resources */,
+				0070948818F832DF00CCCFB7 /* Default-Portrait.png in Resources */,
 				00E860B518C44B7E00EBC9DF /* Anime8.fnt in Resources */,
 				00E860B118C44B7E00EBC9DF /* background-noon.png in Resources */,
 				00CE0E7418F63BEB0011530F /* 1101.jpg in Resources */,
@@ -2784,6 +2870,7 @@
 				006B213F16637630008ED362 /* b2FrictionJoint.cpp in Sources */,
 				006B214216637630008ED362 /* b2GearJoint.cpp in Sources */,
 				006B214516637631008ED362 /* b2Joint.cpp in Sources */,
+				0070948118F81A1500CCCFB7 /* TrophyLayer.m in Sources */,
 				006B214816637631008ED362 /* b2MouseJoint.cpp in Sources */,
 				006B214B16637631008ED362 /* b2PrismaticJoint.cpp in Sources */,
 				006B214E16637631008ED362 /* b2PulleyJoint.cpp in Sources */,
