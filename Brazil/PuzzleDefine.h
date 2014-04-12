@@ -4,14 +4,16 @@
 //
 //  Created by zhaozilong on 13-10-31.
 //
-//
+//只有影迷才敢玩的游戏，专为影迷创作的猜电影游戏。最创新的猜图类型游戏，掀砖块猜电影，精心制作的上百款电影海报，从无声电影到3D电影，从黑白电影到彩色电影。全方位无死角测试你是不是真影迷。
+//https://itunes.apple.com/app/id832491981
+
+
 
 #ifndef Brazil_PuzzleDefine_h
 #define Brazil_PuzzleDefine_h
 
-#define ADMOB_ID @"a152d1f7e98daee"
+#define ADMOB_ID @"a153493444e0a43"
 #define APP_ID @"832491981"
-//#define APP_ID @"794426921"
 
 #define IOS_NEWER_OR_EQUAL_TO_7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 

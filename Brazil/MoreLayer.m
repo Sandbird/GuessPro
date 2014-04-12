@@ -43,22 +43,22 @@
         CGFloat textFontSize;
         if ([GPNavBar isiPad]) {
             posY = winSize.height - 88.0f;
-            wordSize = CGSizeMake(600, 800);
+            wordSize = CGSizeMake(700, 800);
             deltaY = 200;
-            textFontSize = 30;
+            textFontSize = 35;
         } else if ([GPNavBar isiPhone5]) {
             posY = winSize.height - 38.0f;
-            wordSize = CGSizeMake(280, 400);
-            deltaY = 120;
-            textFontSize = 20;
+            wordSize = CGSizeMake(280, 350);
+            deltaY = 140;
+            textFontSize = 15;
         } else {
             posY = winSize.height - 38.0f;
-            wordSize = CGSizeMake(250, 350);
-            deltaY = 80;
-            textFontSize = 20;
+            wordSize = CGSizeMake(280, 350);
+            deltaY = 120;
+            textFontSize = 15;
         }
         
-        NSString *title = @"应用信息";
+        NSString *title = @"更多信息";
         
         CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
         labelTitle.color = ccWHITE;
@@ -66,7 +66,7 @@
         labelTitle.position = ccp(winSize.width / 2, posY);
         [self addChild:labelTitle];
         
-        NSString *words = [NSString stringWithFormat:@"本游戏中的电影名称依照中国大陆翻译版本为准。\n\n开发、美术、音效、数据：赵子龙\n\n版本：%@", [GPNavBar applicationVersion]];
+        NSString *words = [NSString stringWithFormat:@"● 游戏中的电影名以大陆翻译版本为准\n\n\n● VOCEE GAMES 为你开发幸福游戏\n\n\n● 游戏版本：%@", [GPNavBar applicationVersion]];
         
         CCLabelTTF *labelWords = [CCLabelTTF labelWithString:words dimensions:wordSize alignment:NSTextAlignmentLeft vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:textFontSize];
         labelWords.color = ccWHITE;

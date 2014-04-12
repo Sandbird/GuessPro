@@ -26,7 +26,9 @@
 #import "WXApi.h"
 #import <RennSDK/RennClient.h>
 
-#define FLURRY_ID @"RDG83D7D7YVPFWXBF3TG"
+#import "Flurry/Flurry.h"
+
+#define FLURRY_ID @"VH6PVWTVZQ6X3BZNZBKQ"
 #define SHARESDK_APPID @"15337169bd28"
 
 @implementation AppDelegate
@@ -168,6 +170,15 @@
     //设置ShareSDK
     [ShareSDK registerApp:SHARESDK_APPID];
     [self initializePlat];
+    
+    //FlurryAnalytics:begin receiving basic metric data
+	NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+	[Flurry startSession:FLURRY_ID];
+}
+
+//Flurry捕获异常
+void uncaughtExceptionHandler(NSException *exception) {
+	[Flurry logError:@"Uncaught" message:@"Crash!" exception:exception];
 }
 
 - (void)initializePlat
@@ -241,8 +252,8 @@
      连接豆瓣应用以使用相关功能，此应用需要引用DouBanConnection.framework
      http://developers.douban.com上注册豆瓣社区应用，并将相关信息填写到以下字段
      **/
-    [ShareSDK connectDoubanWithAppKey:@"092f51152be112561b8df33f83a33702"
-                            appSecret:@"fb3ae0d2c8ae52c2"
+    [ShareSDK connectDoubanWithAppKey:@"05cff85093f254c6116fe8f1bbd6fe52"
+                            appSecret:@"49e3c438b4c5f8bf"
                           redirectUri:@"https://itunes.apple.com/app/id832491981"];
 }
 

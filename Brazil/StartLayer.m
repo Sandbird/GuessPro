@@ -378,7 +378,7 @@ typedef struct StartPostion {
     NSString *appVersion = [GPNavBar applicationVersion];
     NSString *systemVersion = [GPNavBar systemVersion];
     NSString *deviceName = [GPNavBar platformString];
-    NSString *emailBody = [NSString stringWithFormat:@"\n\n\n\n\n-----------------------\n%@:%@\n%@:%@\n%@:%@\n%@:%@\n-----------------------", NSLocalizedString(@"APP_NAME", @"名称"), appName, NSLocalizedString(@"APP_VERSION", @"软件版本"), appVersion, NSLocalizedString(@"SYSTEM_VERSION", @"系统版本"), systemVersion, NSLocalizedString(@"DEVICE_NAME", @"设备"), deviceName];
+    NSString *emailBody = [NSString stringWithFormat:@"(请您把对本游戏的反馈写在下面，感谢您对我们的支持！)\n\n\n\n\n-----------------------\n%@:%@\n%@:%@\n%@:%@\n%@:%@\n-----------------------", NSLocalizedString(@"APP_NAME", @"名称"), appName, NSLocalizedString(@"APP_VERSION", @"软件版本"), appVersion, NSLocalizedString(@"SYSTEM_VERSION", @"系统版本"), systemVersion, NSLocalizedString(@"DEVICE_NAME", @"设备"), deviceName];
 	[picker setMessageBody:emailBody isHTML:NO];
 	
 	// Present the mail composition interface.

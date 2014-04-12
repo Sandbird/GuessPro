@@ -664,8 +664,8 @@
 + (NSString *)applicationDisplayName {
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     CFShow(infoDictionary);
-    //    NSString *appName = [infoDictionary objectForKey:@"CFBundleDisplayName"];
-    NSString *appName = NSLocalizedStringFromTable(@"CFBundleDisplayName", @"InfoPlist", @"应用名称");
+    NSString *appName = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+//    NSString *appName = NSLocalizedStringFromTable(@"Bundle name", @"InfoPlist", @"应用名称");
     
     return appName;
 }

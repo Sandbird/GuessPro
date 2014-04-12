@@ -207,7 +207,8 @@
 		0070948618F832DF00CCCFB7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070948218F832DF00CCCFB7 /* Default@2x.png */; };
 		0070948718F832DF00CCCFB7 /* Default-Portrait@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070948318F832DF00CCCFB7 /* Default-Portrait@2x~iPad.png */; };
 		0070948818F832DF00CCCFB7 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070948418F832DF00CCCFB7 /* Default-Portrait.png */; };
-		0070948918F832DF00CCCFB7 /* Default@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070948518F832DF00CCCFB7 /* Default@2x-568h.png */; };
+		0070948918F832DF00CCCFB7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070948518F832DF00CCCFB7 /* Default-568h@2x.png */; };
+		0070948D18F96FA900CCCFB7 /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0070948C18F96FA900CCCFB7 /* libFlurry_4.3.2.a */; };
 		0071006718DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0071006518DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.bundle */; };
 		0071006818DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0071006618DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.framework */; };
 		0071006D18DF333000A44568 /* ShareSDKiPhoneAppRecommendShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0071006918DF333000A44568 /* ShareSDKiPhoneAppRecommendShareViewUI.framework */; };
@@ -415,7 +416,6 @@
 		00CE0ECA18F63BEC0011530F /* 1201.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00CE0E3418F63BEB0011530F /* 1201.jpg */; };
 		00CE0ED018F649E10011530F /* PuzzleDatabase(Encrypt).sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 00CE0ECF18F649E10011530F /* PuzzleDatabase(Encrypt).sqlite */; };
 		00D1540718C71A8300ABBE74 /* CoinStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D1540618C71A8300ABBE74 /* CoinStore.m */; };
-		00D1540918C7717C00ABBE74 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D1540818C7717C00ABBE74 /* Default-568h@2x.png */; };
 		00D325EB18E717D10017AA07 /* Success.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 00D325EA18E717D10017AA07 /* Success.mp3 */; };
 		00D325ED18E721060017AA07 /* FlyItemSoundEffect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 00D325EC18E721060017AA07 /* FlyItemSoundEffect.mp3 */; };
 		00E04CF618E075B500AC5CCB /* TouchEffect-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00E04CF318E075B500AC5CCB /* TouchEffect-ipadhd.plist */; };
@@ -876,7 +876,9 @@
 		0070948218F832DF00CCCFB7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		0070948318F832DF00CCCFB7 /* Default-Portrait@2x~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~iPad.png"; sourceTree = "<group>"; };
 		0070948418F832DF00CCCFB7 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
-		0070948518F832DF00CCCFB7 /* Default@2x-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x-568h.png"; sourceTree = "<group>"; };
+		0070948518F832DF00CCCFB7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		0070948B18F96FA900CCCFB7 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		0070948C18F96FA900CCCFB7 /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.2.a; sourceTree = "<group>"; };
 		0071006518DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKiPhoneDefaultShareViewUI.bundle; sourceTree = "<group>"; };
 		0071006618DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneDefaultShareViewUI.framework; sourceTree = "<group>"; };
 		0071006918DF333000A44568 /* ShareSDKiPhoneAppRecommendShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneAppRecommendShareViewUI.framework; sourceTree = "<group>"; };
@@ -1119,7 +1121,6 @@
 		00CE0ECF18F649E10011530F /* PuzzleDatabase(Encrypt).sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PuzzleDatabase(Encrypt).sqlite"; path = "../../../Dropbox/我的项目资料/GuessPro/Movie/PuzzleDatabase(Encrypt).sqlite"; sourceTree = "<group>"; };
 		00D1540518C71A8300ABBE74 /* CoinStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoinStore.h; sourceTree = "<group>"; };
 		00D1540618C71A8300ABBE74 /* CoinStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoinStore.m; sourceTree = "<group>"; };
-		00D1540818C7717C00ABBE74 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		00D325EA18E717D10017AA07 /* Success.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Success.mp3; sourceTree = "<group>"; };
 		00D325EC18E721060017AA07 /* FlyItemSoundEffect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FlyItemSoundEffect.mp3; sourceTree = "<group>"; };
 		00E04CF318E075B500AC5CCB /* TouchEffect-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TouchEffect-ipadhd.plist"; sourceTree = "<group>"; };
@@ -1237,6 +1238,7 @@
 				00E7AD681821E39C003973A8 /* libsqlite3.0.dylib in Frameworks */,
 				00087C4718EA9DAF00E511E3 /* RenRenConnection.framework in Frameworks */,
 				00831EDC18CC71020023E713 /* WeChatConnection.framework in Frameworks */,
+				0070948D18F96FA900CCCFB7 /* libFlurry_4.3.2.a in Frameworks */,
 				006B1F821663762D008ED362 /* QuartzCore.framework in Frameworks */,
 				00831ED818CC71020023E713 /* TencentWeiboConnection.framework in Frameworks */,
 				006B1F841663762D008ED362 /* OpenGLES.framework in Frameworks */,
@@ -1351,7 +1353,6 @@
 		006B1F721663762D008ED362 = {
 			isa = PBXGroup;
 			children = (
-				00D1540818C7717C00ABBE74 /* Default-568h@2x.png */,
 				006B1F911663762D008ED362 /* Brazil */,
 				006B1F921663762D008ED362 /* Resources */,
 				006B1F801663762D008ED362 /* Frameworks */,
@@ -1445,6 +1446,7 @@
 		006B1FAA1663762D008ED362 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				0070948A18F96FA900CCCFB7 /* Flurry */,
 				00C6E2A118F04F1C0038AD29 /* GTMBase64 */,
 				00831F1018CCB6A20023E713 /* GoogleAdMobAdsSdkiOS-6.8.0 */,
 				00831E6C18CC71010023E713 /* ShareSDK */,
@@ -1878,7 +1880,7 @@
 				0070948218F832DF00CCCFB7 /* Default@2x.png */,
 				0070948318F832DF00CCCFB7 /* Default-Portrait@2x~iPad.png */,
 				0070948418F832DF00CCCFB7 /* Default-Portrait.png */,
-				0070948518F832DF00CCCFB7 /* Default@2x-568h.png */,
+				0070948518F832DF00CCCFB7 /* Default-568h@2x.png */,
 				0070945F18F8028C00CCCFB7 /* Icon-40.png */,
 				0070946018F8028C00CCCFB7 /* Icon-40@2x.png */,
 				0070946118F8028C00CCCFB7 /* Icon-60.png */,
@@ -1896,6 +1898,15 @@
 			);
 			name = icon;
 			path = "../../../Dropbox/我的项目资料/GuessPro/Movie/UI/icon";
+			sourceTree = "<group>";
+		};
+		0070948A18F96FA900CCCFB7 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				0070948B18F96FA900CCCFB7 /* Flurry.h */,
+				0070948C18F96FA900CCCFB7 /* libFlurry_4.3.2.a */,
+			);
+			path = Flurry;
 			sourceTree = "<group>";
 		};
 		0071006418DF32EC00A44568 /* UI */ = {
@@ -2668,7 +2679,7 @@
 				00CE0E7918F63BEB0011530F /* 1106.jpg in Resources */,
 				00E860B318C44B7E00EBC9DF /* Anime8-hd.GlyphProject in Resources */,
 				0070946F18F8028C00CCCFB7 /* Icon-60.png in Resources */,
-				0070948918F832DF00CCCFB7 /* Default@2x-568h.png in Resources */,
+				0070948918F832DF00CCCFB7 /* Default-568h@2x.png in Resources */,
 				00E860E518C44B7E00EBC9DF /* Visitor40.fnt in Resources */,
 				00CE0E9318F63BEB0011530F /* 1141.jpg in Resources */,
 				0011576618E9A71B0079C5FF /* cc_levelmenu-ipadhd.png in Resources */,
@@ -2705,7 +2716,6 @@
 				0008045F18D5E9E5005F4AF2 /* Store-hd.plist in Resources */,
 				0011576518E9A71B0079C5FF /* cc_levelmenu-ipadhd.plist in Resources */,
 				00E860A918C44B7E00EBC9DF /* background-evening.png in Resources */,
-				00D1540918C7717C00ABBE74 /* Default-568h@2x.png in Resources */,
 				0011577818E9AF9D0079C5FF /* GuessPro-ipadhd.png in Resources */,
 				00CE0E6118F63BEB0011530F /* 1072.jpg in Resources */,
 				00CE0EC718F63BEC0011530F /* 1198.jpg in Resources */,
@@ -2979,6 +2989,7 @@
 					/Users/zhaozilong/GitHub/GuessPro/Brazil/ShareSDK/Extend/TencentWeiboSDK,
 					/Users/zhaozilong/GitHub/GuessPro/Brazil/ShareSDK/Extend/WeChatSDK,
 					"/Users/zhaozilong/GitHub/GuessPro/Brazil/GoogleAdMobAdsSdkiOS-6.8.0",
+					"$(PROJECT_DIR)/Brazil/Flurry",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -3030,6 +3041,7 @@
 					/Users/zhaozilong/GitHub/GuessPro/Brazil/ShareSDK/Extend/TencentWeiboSDK,
 					/Users/zhaozilong/GitHub/GuessPro/Brazil/ShareSDK/Extend/WeChatSDK,
 					"/Users/zhaozilong/GitHub/GuessPro/Brazil/GoogleAdMobAdsSdkiOS-6.8.0",
+					"$(PROJECT_DIR)/Brazil/Flurry",
 				);
 				OTHER_LDFLAGS = (
 					"-lz",

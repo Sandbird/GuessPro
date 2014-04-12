@@ -1237,7 +1237,7 @@ static GuessScene *instanceOfGuessScene;
         
         //显示ad
         if (_adView) {
-            [_adView setHidden:NO];
+            [_adView setHidden:NO]; 
         }
         
         
