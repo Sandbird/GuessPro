@@ -62,7 +62,7 @@
             fontSize = 18;
         }
         
-        NSString *title = @"花絮";
+        NSString *title = NSLocalizedString(@"TITLE_BACK_OF_PIC", @"花絮");
         
         CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
         labelTitle.color = ccWHITE;

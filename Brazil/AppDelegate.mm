@@ -148,6 +148,10 @@
         //第一次安装，记录关卡数目
         NSInteger num = [GPNavBar numOfPuzzlesAtCurrentVersion];
         [GPNavBar setNumOfPuzzlesAtLastVersion:num];
+        
+        //是否显示帮助
+        [GPNavBar setIsShowHelpItem:YES];
+        [GPNavBar setIsShowHelpBouns:YES];
     }
     
     if ([GPNavBar isEnabledSoundEffect]) {
@@ -190,6 +194,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     [ShareSDK connectSinaWeiboWithAppKey:@"2548419608"
                                appSecret:@"d38f8cfea142e5f4e6ef8c4a2cca7493"
                              redirectUri:@"https://itunes.apple.com/app/id832491981"];
+//    http://open.weibo.com/apps/2548419608/info/advanced
     
     /**
      连接腾讯微博开放平台应用以使用相关功能，此应用需要引用TencentWeiboConnection.framework
@@ -220,7 +225,7 @@ void uncaughtExceptionHandler(NSException *exception) {
      连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
      http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
      **/
-    [ShareSDK connectWeChatWithAppId:@"wx253392da3cf9a6c1" wechatCls:[WXApi class]];
+    [ShareSDK connectWeChatWithAppId:@"wx78893a993c07ff5b" wechatCls:[WXApi class]];
     
     /**
      连接QQ应用以使用相关功能，此应用需要引用QQConnection.framework和QQApi.framework库

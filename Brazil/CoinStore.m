@@ -82,32 +82,34 @@ typedef enum {
         CGFloat posY;
         CGSize wordSize;
         CGFloat fontSize;
-        NSArray *tierArray = [NSArray arrayWithObjects:@"        50枚售6.00元", @"        150枚售12.00元", @"        300枚售18.00元", @"        600枚售30.00元", @"        2200枚售88.00元", nil];
+        NSString *coin50 = NSLocalizedString(@"COIN_50", @"50枚售6.00元");
+        NSString *coin150 = NSLocalizedString(@"COIN_150", @"150枚售12.00元元");
+        NSString *coin300 = NSLocalizedString(@"COIN_300", @"300枚售18.00元");
+        NSString *coin600 = NSLocalizedString(@"COIN_600", @"600枚售30.00元");
+        NSString *coin2200 = NSLocalizedString(@"COIN_2200", @"2200枚售88.00元");
+        NSArray *tierArray = [NSArray arrayWithObjects:coin50, coin150, coin300, coin600, coin2200, nil];
         CGFloat deltaY;
         if ([GPNavBar isiPad]) {
             posY = winSize.height - 88.0f;
             wordSize = CGSizeMake(600, 200);
             fontSize = 35;
             
-//            tierArray = [NSArray arrayWithObjects:@"        50枚售6.00元", @"        150枚售12.00元", @"        300枚售18.00元", @"        600枚售30.00元", @"        2500枚售88.00元", nil];
             deltaY = 2;
         } else if ([GPNavBar isiPhone5]) {
             posY = winSize.height - 44.0f;
             wordSize = CGSizeMake(250, 100);
             fontSize = 17;
             
-//            tierArray = [NSArray arrayWithObjects:@"        50枚售6.00元", @"        150枚售12.00元", @"        300枚售18.00元", @"        600枚售30.00元", @"        2500枚售88.00元", nil];
             deltaY = 1.5;
         } else {
             posY = winSize.height - 44.0f;
             wordSize = CGSizeMake(250, 100);
             fontSize = 17;
             
-//            tierArray = [NSArray arrayWithObjects:@"        50枚售6.00元", @"        150枚售12.00元", @"        300枚售18.00元", @"        600枚售30.00元", @"        2500枚售88.00元", nil];
             deltaY = 1.5;
         }
         
-        NSString *title = @"金币卖场";
+        NSString *title = NSLocalizedString(@"TITLE_COIN_STORE", @"金币卖场");
         
         CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
         labelTitle.color = ccWHITE;
@@ -115,7 +117,7 @@ typedef enum {
         labelTitle.position = ccp(winSize.width / 2, posY);
         [self addChild:labelTitle];
         
-        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:@"欢迎光临!" dimensions:wordSize alignment:NSTextAlignmentCenter vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
+        CCLabelTTF *labelWords = [CCLabelTTF labelWithString:NSLocalizedString(@"TITLE_WELCOME", nil) dimensions:wordSize alignment:NSTextAlignmentCenter vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TEXT];
         labelWords.color = ccWHITE;
         labelWords.anchorPoint = ccp(0.5, 1);
         labelWords.position = ccp(winSize.width / 2,  posY - labelTitle.boundingBox.size.height);

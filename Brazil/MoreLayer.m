@@ -58,7 +58,7 @@
             textFontSize = 15;
         }
         
-        NSString *title = @"更多信息";
+        NSString *title = NSLocalizedString(@"TITLE_MORE_INFO", @"更多信息");
         
         CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:FONTSIZE_OF_BORAD_TITLE];
         labelTitle.color = ccWHITE;
@@ -66,7 +66,12 @@
         labelTitle.position = ccp(winSize.width / 2, posY);
         [self addChild:labelTitle];
         
-        NSString *words = [NSString stringWithFormat:@"● 游戏中的电影名以大陆翻译版本为准\n\n\n● VOCEE GAMES 为你开发幸福游戏\n\n\n● 游戏版本：%@", [GPNavBar applicationVersion]];
+        NSString *intro0 = NSLocalizedString(@"INTRO_0", @"● 游戏中的电影名以大陆翻译版本为准");
+        NSString *intro1 = NSLocalizedString(@"INTRO_1", @"● VOCEE GAMES 为你开发幸福游戏");
+        NSString *intro2 = [NSString stringWithFormat:@"%@%@", NSLocalizedString(@"INTRO_2", @"● 游戏版本："), [GPNavBar applicationVersion]];
+        
+        
+        NSString *words = [NSString stringWithFormat:@"%@\n\n\n%@\n\n\n%@", intro0, intro1, intro2];
         
         CCLabelTTF *labelWords = [CCLabelTTF labelWithString:words dimensions:wordSize alignment:NSTextAlignmentLeft vertAlignment:CCVerticalAlignmentTop lineBreakMode:NSLineBreakByCharWrapping fontName:FONTNAME_OF_TEXT fontSize:textFontSize];
         labelWords.color = ccWHITE;

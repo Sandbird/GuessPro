@@ -121,4 +121,13 @@ typedef enum {
 + (void)setNumOfPuzzlesAtLastVersion:(NSInteger)num;
 + (void)mergePuzzlesFromCurrentToLast;
 
++ (void)setIsShowHelpItem:(BOOL)isShow;
++ (BOOL)isShowHelpItem;
++ (void)setIsShowHelpBouns:(BOOL)isShow;
++ (BOOL)isShowHelpBouns;
+
++ (BOOL)isShowSmallIntro;
++ (BOOL)isShowBombIntro;
++ (BOOL)isShowFlyIntro;
+
 @end

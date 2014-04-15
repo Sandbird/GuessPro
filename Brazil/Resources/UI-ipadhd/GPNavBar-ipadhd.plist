@@ -22,9 +22,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{158, 260}, {154, 156}}</string>
+			<string>{{102, 158}, {156, 154}}</string>
 			<key>textureRotated</key>
-			<false/>
+			<true/>
 		</dict>
 		
 		<key>Back_HL.png</key>
@@ -44,9 +44,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{158, 102}, {154, 156}}</string>
+			<string>{{260, 158}, {156, 154}}</string>
 			<key>textureRotated</key>
-			<false/>
+			<true/>
 		</dict>
 		
 		<key>Coin.png</key>
@@ -66,7 +66,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 260}, {156, 156}}</string>
+			<string>{{260, 0}, {156, 156}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -88,7 +88,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 102}, {156, 156}}</string>
+			<string>{{102, 0}, {156, 156}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -110,7 +110,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{403, 0}, {100, 401}}</string>
+			<string>{{0, 0}, {100, 401}}</string>
 			<key>textureRotated</key>
 			<true/>
 		</dict>
@@ -132,7 +132,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 0}, {401, 100}}</string>
+			<string>{{0, 403}, {401, 100}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>

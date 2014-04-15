@@ -65,12 +65,12 @@
         NSTextAlignment TA;
         CCVerticalAlignment VA;
         if (WBType == WordBoradTypeTips) {
-            title = @"线索";
+            title = NSLocalizedString(@"TITLE_TIPS", @"线索");
             TA = NSTextAlignmentCenter;
             VA = CCVerticalAlignmentTop;
             
         } else if (WBType == WordBoradTypeAnswer) {
-            title = @"答案";
+            title = NSLocalizedString(@"TITLE_ANSWER", @"答案");
             TA = NSTextAlignmentCenter;
             VA = CCVerticalAlignmentTop;
             words = [NSString stringWithFormat:@"《%@》", words];

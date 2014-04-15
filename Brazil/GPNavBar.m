@@ -248,7 +248,7 @@
     }
     
     CCSequence *seqs = [CCSequence actionsWithArray:actions];
-    CCSequence *seq2 = [CCSequence actionOne:[CCDelayTime actionWithDuration:1.0] two:seqs];
+    CCSequence *seq2 = [CCSequence actionOne:[CCDelayTime actionWithDuration:DELAY_OF_EXTRA_SCORE] two:seqs];
     seq2.tag = ACTION_UP_SCORE_TAG;
     [_totalScoreLabel runAction:seq2];
     
@@ -834,6 +834,65 @@
     [lastPuzzleArray addObjectsFromArray:currPuzzleArray];
     
     [lastPuzzleArray writeToFile:lastUserPath atomically:YES];
+}
+
+#pragma mark - help
+#define kIsShowHelpItem @"kIsShowHelpItem"
+#define kIsShowHelpBouns @"kIsShowHelpBouns"
++ (void)setIsShowHelpItem:(BOOL)isShow {
+    [[NSUserDefaults standardUserDefaults] setBool:isShow forKey:kIsShowHelpItem];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL)isShowHelpItem {
+    BOOL isShow = [[NSUserDefaults standardUserDefaults] boolForKey:kIsShowHelpItem];
+    return isShow;
+}
+
++ (void)setIsShowHelpBouns:(BOOL)isShow {
+    [[NSUserDefaults standardUserDefaults] setBool:isShow forKey:kIsShowHelpBouns];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL)isShowHelpBouns {
+    BOOL isShow = [[NSUserDefaults standardUserDefaults] boolForKey:kIsShowHelpBouns];
+    return isShow;
+}
+
+#define kIsShowSmallIntro @"kIsShowSmallIntro"
+#define kIsShowBombIntro @"kIsShowBombIntro"
+#define kIsShowFlyIntro @"kIsShowFlyIntro"
++ (BOOL)isShowSmallIntro {
+    BOOL  hasRunBefore = [[NSUserDefaults standardUserDefaults] boolForKey:kIsShowSmallIntro];
+    if (!hasRunBefore) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsShowSmallIntro];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)isShowBombIntro {
+    BOOL  hasRunBefore = [[NSUserDefaults standardUserDefaults] boolForKey:kIsShowBombIntro];
+    if (!hasRunBefore) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsShowBombIntro];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)isShowFlyIntro {
+    BOOL  hasRunBefore = [[NSUserDefaults standardUserDefaults] boolForKey:kIsShowFlyIntro];
+    if (!hasRunBefore) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsShowFlyIntro];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return YES;
+    }
+    
+    return NO;
 }
 
 

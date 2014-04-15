@@ -24,6 +24,11 @@ typedef struct ItemSharePostion {
     CGPoint ItemShareRenRen;
     CGPoint ItemShareDouban;
     
+    CGPoint ItemLabelWeixin;
+    CGPoint ItemLabelPYQ;
+    CGPoint ItemLabelSinaWeiBo;
+    CGPoint ItemLabelQQWeiBo;
+    
     CGPoint ItemClose;
     CGPoint ItemBackground;
 }ItemSharePostionSet;
@@ -72,27 +77,31 @@ typedef struct ItemSharePostion {
         
         CGFloat posY;
         CGSize wordSize;
+        CGFloat labelFontSize;
         if ([GPNavBar isiPad]) {
             posY = winSize.height - 88.0f;
             wordSize = CGSizeMake(600, 200);
+            labelFontSize = 30;
         } else if ([GPNavBar isiPhone5]) {
             posY = winSize.height - 38.0f;
             wordSize = CGSizeMake(250, 100);
+            labelFontSize = 13;
         } else {
             posY = winSize.height - 38.0f;
             wordSize = CGSizeMake(250, 100);
+            labelFontSize = 13;
         }
         
         NSString *title = @"";
         NSString *text = @"";
         NSTextAlignment TA;
         if (self.SBStype == ShareTypeSOS) {
-            title = @"求助";
-            text = @"        成功向朋友求助的话，将获10枚金币的奖励，每天最多可获50枚金币。微信平台分享成功后请选择“返回”选项。";
+            title = NSLocalizedString(@"TITLE_HELP", @"求助");
+            text = NSLocalizedString(@"HELP_INTRO", @"求助内容");
             TA = NSTextAlignmentLeft;
         } else if (self.SBStype == ShareTypeShare) {
-            title = @"分享";
-            text = @"每日首次分享将获50枚金币奖励。";
+            title = NSLocalizedString(@"TITLE_SHARE", @"分享");
+            text = NSLocalizedString(@"SHARE_INTRO", @"分享内容");
             TA = NSTextAlignmentCenter;
         }
         
@@ -114,11 +123,11 @@ typedef struct ItemSharePostion {
         closeItem.anchorPoint = ccp(0.5, 0.5);
         closeItem.position = ccp(winSize.width / 2, HEIGHT_OF_CLOSE_ITEM);
         
-        NSArray *selectorNameArray = [NSArray arrayWithObjects:/*@"shareToQQ", @"shareToQQZone",*/ @"shareToQQWeibo", @"shareToWeiXin", @"shareToPYQ", @"shareToRenRen", @"shareToSinaWeiBo", @"shareToDouban", nil];
+        NSArray *selectorNameArray = [NSArray arrayWithObjects:/*@"shareToQQ", @"shareToQQZone",*/ @"shareToQQWeibo", @"shareToWeiXin", @"shareToPYQ", /*@"shareToRenRen",*/ @"shareToSinaWeiBo", /*@"shareToDouban",*/ nil];
         
-        NSArray *frameNameArray = [NSArray arrayWithObjects:/*@"share_qq", @"share_qqzone",*/ @"share_qqweibo", @"share_weixin", @"share_pyq", @"share_renren", @"share_weibo", @"share_douban", nil];
+        NSArray *frameNameArray = [NSArray arrayWithObjects:/*@"share_qq", @"share_qqzone",*/ @"share_qqweibo", @"share_weixin", @"share_pyq", /*@"share_renren",*/ @"share_weibo", /*@"share_douban",*/ nil];
         
-        NSArray *pointArray = [NSArray arrayWithObjects:/*[NSValue valueWithCGPoint:_ISPSet.ItemShareQQ], [NSValue valueWithCGPoint:_ISPSet.ItemShareQQZone], */[NSValue valueWithCGPoint:_ISPSet.ItemShareQQWeiBo], [NSValue valueWithCGPoint:_ISPSet.ItemShareWeixin], [NSValue valueWithCGPoint:_ISPSet.ItemSharePYQ], [NSValue valueWithCGPoint:_ISPSet.ItemShareRenRen], [NSValue valueWithCGPoint:_ISPSet.ItemShareSinaWeiBo], [NSValue valueWithCGPoint:_ISPSet.ItemShareDouban], nil];
+        NSArray *pointArray = [NSArray arrayWithObjects:/*[NSValue valueWithCGPoint:_ISPSet.ItemShareQQ], [NSValue valueWithCGPoint:_ISPSet.ItemShareQQZone], */[NSValue valueWithCGPoint:_ISPSet.ItemShareQQWeiBo], [NSValue valueWithCGPoint:_ISPSet.ItemShareWeixin], [NSValue valueWithCGPoint:_ISPSet.ItemSharePYQ], /*[NSValue valueWithCGPoint:_ISPSet.ItemShareRenRen],*/ [NSValue valueWithCGPoint:_ISPSet.ItemShareSinaWeiBo], /*[NSValue valueWithCGPoint:_ISPSet.ItemShareDouban],*/ nil];
         
         CCArray *menuArray = [CCArray array];
         
@@ -145,70 +154,111 @@ typedef struct ItemSharePostion {
             
         }
         
-        _menu = [CCMenu menuWithItems:[menuArray objectAtIndex:0], [menuArray objectAtIndex:1], [menuArray objectAtIndex:2], [menuArray objectAtIndex:3], [menuArray objectAtIndex:4], [menuArray objectAtIndex:5], /*[menuArray objectAtIndex:6], [menuArray objectAtIndex:7], */closeItem, nil];
+        _menu = [CCMenu menuWithItems:[menuArray objectAtIndex:0], [menuArray objectAtIndex:1], [menuArray objectAtIndex:2], [menuArray objectAtIndex:3], /*[menuArray objectAtIndex:4], [menuArray objectAtIndex:5], [menuArray objectAtIndex:6], [menuArray objectAtIndex:7], */closeItem, nil];
         _menu.position = ccp(0, 0);
         [self addChild:_menu];
+        
+        NSArray *labelNameArray = [NSArray arrayWithObjects:@"朋友圈", @"微信好友", @"新浪微博", @"腾讯微博", nil];
+        
+        NSArray *labelPointArray = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:_ISPSet.ItemLabelPYQ], [NSValue valueWithCGPoint:_ISPSet.ItemLabelWeixin], [NSValue valueWithCGPoint:_ISPSet.ItemLabelSinaWeiBo], [NSValue valueWithCGPoint:_ISPSet.ItemLabelQQWeiBo], nil];
+        
+        int labelCount = [labelNameArray count];
+        for (int i = 0; i < labelCount; i++) {
+            NSString *labelName = [labelNameArray objectAtIndex:i];
+            
+            CCLabelTTF *label = [CCLabelTTF labelWithString:labelName fontName:FONTNAME_OF_TEXT fontSize:labelFontSize];
+            
+            NSValue *positionValue = [labelPointArray objectAtIndex:i];
+            CGPoint point = [positionValue CGPointValue];
+            label.position = point;
+            label.anchorPoint = ccp(0, 1);
+            
+            [self addChild:label];
+            
+        }
         
     }
     return self;
 }
 
 - (void)setItemInitalPostion {
-    CGFloat spaceX, spaceY, width, posX, posY;
+    CGFloat spaceX, spaceY, width, posX, posY, deltaY, deltaX;
     if ([GPNavBar isiPad]) {
         spaceX = 80.0f;
         spaceY = 80.0f;
         width = 80.0f;
-        posX = 105;
-        posY = 350;
+        posX = 25;
+        posY = 270;
+        deltaY = -90.0f;
+        deltaX = -20.0f;
+        
         
         _ISPSet.ItemSharePYQ        = ccp(posX + spaceX,               spaceY*2 + width*2 + posY);
         _ISPSet.ItemShareWeixin     = ccp(posX + spaceX*2 + width,     spaceY*2 + width*2 + posY);
         _ISPSet.ItemShareSinaWeiBo  = ccp(posX + spaceX*3 + width*2,   spaceY*2 + width*2 + posY);
-//        _ISPSet.ItemShareQQ         = ccp(posX + spaceX*4 + width*3,   spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareQQWeiBo    = ccp(posX + spaceX*4 + width*3,   spaceY*2 + width*2 + posY);
         
+//        _ISPSet.ItemShareQQ         = ccp(posX + spaceX*4 + width*3,   spaceY*2 + width*2 + posY);
 //        _ISPSet.ItemShareQQZone     = ccp(posX + spaceX,               width+spaceY + posY);
-        _ISPSet.ItemShareQQWeiBo    = ccp(posX + spaceX,                width+spaceY + posY);
-        _ISPSet.ItemShareRenRen     = ccp(posX + spaceX*2 + width,      width+spaceY + posY);
-        _ISPSet.ItemShareDouban     = ccp(posX + spaceX*3 + width*2,    width+spaceY + posY);
+//        _ISPSet.ItemShareRenRen     = ccp(posX + spaceX*2 + width,      width+spaceY + posY);
+//        _ISPSet.ItemShareDouban     = ccp(posX + spaceX*3 + width*2,    width+spaceY + posY);
 //        posX + spaceX*4 + width*3
+        
+        _ISPSet.ItemLabelPYQ = ccp(_ISPSet.ItemSharePYQ.x+deltaX+13, _ISPSet.ItemSharePYQ.y+deltaY);
+        _ISPSet.ItemLabelWeixin = ccp(_ISPSet.ItemShareWeixin.x+deltaX, _ISPSet.ItemShareWeixin.y+deltaY);
+        _ISPSet.ItemLabelSinaWeiBo = ccp(_ISPSet.ItemShareSinaWeiBo.x+deltaX, _ISPSet.ItemShareSinaWeiBo.y+deltaY);
+        _ISPSet.ItemLabelQQWeiBo = ccp(_ISPSet.ItemShareQQWeiBo.x+deltaX, _ISPSet.ItemShareQQWeiBo.y+deltaY);
         
         _ISPSet.ItemClose           = ccp(0, 0);
     } else if ([GPNavBar isiPhone5]) {
-        spaceX = 20.0f;
-        spaceY = 40.0f;
+        spaceX = 30.0f;
+        spaceY = 25.0f;
         width = 40.0f;
-        posX = 60;
+        posX = 5;
         posY = 200;
+        deltaY = -50.0f;
+        deltaX = -8.0f;
         
         _ISPSet.ItemSharePYQ        = ccp(posX + spaceX,               spaceY*2 + width*2 + posY);
         _ISPSet.ItemShareWeixin     = ccp(posX + spaceX*2 + width,     spaceY*2 + width*2 + posY);
         _ISPSet.ItemShareSinaWeiBo  = ccp(posX + spaceX*3 + width*2,   spaceY*2 + width*2 + posY);
-//        _ISPSet.ItemShareQQ         = ccp(posX + spaceX*4 + width*3,   spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareQQWeiBo    = ccp(posX + spaceX*4 + width*3,   spaceY*2 + width*2 + posY);
         
+//        _ISPSet.ItemShareQQ         = ccp(posX + spaceX*4 + width*3,   spaceY*2 + width*2 + posY);
 //        _ISPSet.ItemShareQQZone     = ccp(posX + spaceX,               width+spaceY + posY);
-        _ISPSet.ItemShareQQWeiBo    = ccp(posX + spaceX,                width+spaceY + posY);
-        _ISPSet.ItemShareRenRen     = ccp(posX + spaceX*2 + width,      width+spaceY + posY);
-        _ISPSet.ItemShareDouban     = ccp(posX + spaceX*3 + width*2,    width+spaceY + posY);
+//        _ISPSet.ItemShareRenRen     = ccp(posX + spaceX*2 + width,      width+spaceY + posY);
+//        _ISPSet.ItemShareDouban     = ccp(posX + spaceX*3 + width*2,    width+spaceY + posY);
 //        posX + spaceX*4 + width*3
+        
+        _ISPSet.ItemLabelPYQ = ccp(_ISPSet.ItemSharePYQ.x, _ISPSet.ItemSharePYQ.y+deltaY);
+        _ISPSet.ItemLabelWeixin = ccp(_ISPSet.ItemShareWeixin.x+deltaX, _ISPSet.ItemShareWeixin.y+deltaY);
+        _ISPSet.ItemLabelSinaWeiBo = ccp(_ISPSet.ItemShareSinaWeiBo.x+deltaX, _ISPSet.ItemShareSinaWeiBo.y+deltaY);
+        _ISPSet.ItemLabelQQWeiBo = ccp(_ISPSet.ItemShareQQWeiBo.x+deltaX, _ISPSet.ItemShareQQWeiBo.y+deltaY);
         
         _ISPSet.ItemClose           = ccp(0, 0);
     } else {
-        spaceX = 20.0f;
+        spaceX = 30.0f;
         spaceY = 30.0f;
         width = 40.0f;
-        posX = 60;
-        posY = 130;
+        posX = 5;
+        posY = 110;
+        deltaY = -50.0f;
+        deltaX = -8.0f;
         
         _ISPSet.ItemSharePYQ        = ccp(posX + spaceX,               spaceY*2 + width*2 + posY);
         _ISPSet.ItemShareWeixin     = ccp(posX + spaceX*2 + width,     spaceY*2 + width*2 + posY);
         _ISPSet.ItemShareSinaWeiBo  = ccp(posX + spaceX*3 + width*2,   spaceY*2 + width*2 + posY);
-//        _ISPSet.ItemShareQQ         = ccp(posX + spaceX*4 + width*3,   spaceY*2 + width*2 + posY);
+        _ISPSet.ItemShareQQWeiBo    = ccp(posX + spaceX*4 + width*3,   spaceY*2 + width*2 + posY);
         
+        _ISPSet.ItemLabelPYQ = ccp(_ISPSet.ItemSharePYQ.x, _ISPSet.ItemSharePYQ.y+deltaY);
+        _ISPSet.ItemLabelWeixin = ccp(_ISPSet.ItemShareWeixin.x+deltaX, _ISPSet.ItemShareWeixin.y+deltaY);
+        _ISPSet.ItemLabelSinaWeiBo = ccp(_ISPSet.ItemShareSinaWeiBo.x+deltaX, _ISPSet.ItemShareSinaWeiBo.y+deltaY);
+        _ISPSet.ItemLabelQQWeiBo = ccp(_ISPSet.ItemShareQQWeiBo.x+deltaX, _ISPSet.ItemShareQQWeiBo.y+deltaY);
+        
+//        _ISPSet.ItemShareQQ         = ccp(posX + spaceX*4 + width*3,   spaceY*2 + width*2 + posY);
 //        _ISPSet.ItemShareQQZone     = ccp(posX + spaceX,               width+spaceY + posY);
-        _ISPSet.ItemShareQQWeiBo    = ccp(posX + spaceX,                width+spaceY + posY);
-        _ISPSet.ItemShareRenRen     = ccp(posX + spaceX*2 + width,      width+spaceY + posY);
-        _ISPSet.ItemShareDouban     = ccp(posX + spaceX*3 + width*2,    width+spaceY + posY);
+//        _ISPSet.ItemShareRenRen     = ccp(posX + spaceX*2 + width,      width+spaceY + posY);
+//        _ISPSet.ItemShareDouban     = ccp(posX + spaceX*3 + width*2,    width+spaceY + posY);
 //        posX + spaceX*4 + width*3
         
         _ISPSet.ItemClose           = ccp(0, 0);
@@ -289,22 +339,17 @@ typedef struct ItemSharePostion {
     
     NSString *imagePath = nil;
     NSString *content = nil;
-    NSString *title = nil;
-    NSString *url = nil;
+    NSString *title = NSLocalizedString(@"TITLE_APP_NAME", nil);
+    NSString *url = [NSString stringWithFormat:@"itunes.apple.com/app/id%@", APP_ID];
     
     if (self.SBStype == ShareTypeSOS) {
         imagePath = [ZZAcquirePath getDocDirectoryWithFileName:@"sharePic.png"];
-        content = [NSString stringWithFormat:@"我正在玩电影猜猜猜，遇到了一个难猜的海报，快来帮我看看是什么电影啊。https://itunes.apple.com/app/id%@", APP_ID];
-        title = @"电影猜猜猜";
-        url = nil;
-        
+        content = [NSString stringWithFormat:@"%@%@", NSLocalizedString(@"HELP_CONTENT", nil), url];
         
     } else if (self.SBStype == ShareTypeShare) {
-        imagePath = [ZZAcquirePath getBundleDirectoryWithFileName:@"Icon-76.png"];
-        content = [NSString stringWithFormat:@"影迷必玩游戏“电影猜猜猜”现已登陆苹果App Store，快来下载吧。https://itunes.apple.com/app/id%@", APP_ID];
-        title = @"电影猜猜猜";
-        url = [NSString stringWithFormat:@"itunes.apple.com/app/id%@", APP_ID];
-//        url = @"itunes.apple.com/cn/app/n1-grammar-exercise-book/id794426921?ls=1&mt=8";
+        imagePath = [ZZAcquirePath getBundleDirectoryWithFileName:@"Icon@2x.png"];
+        content = [NSString stringWithFormat:@"%@%@", NSLocalizedString(@"SHARE_CONTENT", nil), url];
+
 
     }
     

@@ -14,6 +14,8 @@
 #import "SuccessLayer.h"
 #import "WordBorad.h"
 
+#import "HelpLayer.h"
+
 //#import <AGCommon/UINavigationBar+Common.h>
 //#import <AGCommon/UIImage+Common.h>
 //#import <AGCommon/UIColor+Common.h>
@@ -245,6 +247,14 @@ static GuessScene *instanceOfGuessScene;
         [[[CCDirector sharedDirector] openGLView]addSubview : _controller.view];
         
         [self addAdMob];
+        
+        
+        //是否显示帮助界面
+        if ([GPNavBar isShowHelpItem]) {
+            HelpLayer *help = [[[HelpLayer alloc] initWithHelpType:HelpTypeItemIntro] autorelease];
+            [self addChild:help z:ZORDER_NAV_BAR+1];
+        }
+        
     }
     
     return self;
@@ -582,6 +592,35 @@ static GuessScene *instanceOfGuessScene;
     
 }
 
+- (void)setShowItemIntroAlertByNum:(NSInteger)itemNum {
+    
+    NSString *intro = nil;
+    NSString *title = nil;
+    switch (itemNum) {
+        case 1:
+            title = @"变小道具";
+            intro = @"点击任意闪烁的方块可使其变小，变小的方块会和普通方块一样获得金币奖励。巧用道具可使金币奖励增加哦！";
+            break;
+            
+        case 2:
+            title = @"透明道具";
+            intro = @"点击任意闪烁的方块可使其变透明，透明的方块会和普通方块一样获得金币奖励。巧用道具可使金币奖励增加哦！";
+            break;
+            
+        case 3:
+            title = @"一闪道具";
+            intro = @"点击任意闪烁的方块可使全部方块消失一秒钟，就是让你偷瞄一眼图片啦。巧用道具可使金币奖励增加哦！";
+            break;
+            
+        default:
+            break;
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:intro delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
+
 - (void)smallItemPressed {
     
     //把剩余block变回正常
@@ -613,6 +652,11 @@ static GuessScene *instanceOfGuessScene;
         
     } else {
         _isSmallReady = YES;
+        
+        //显示说明
+        if ([GPNavBar isShowSmallIntro]) {
+            [self setShowItemIntroAlertByNum:1];
+        }
         
         CCMoveTo *MoveOut = [CCMoveTo actionWithDuration:0.1 position:_FPSet.readyItemSmall];
         [smallItem runAction:MoveOut];
@@ -665,6 +709,11 @@ static GuessScene *instanceOfGuessScene;
     } else {
         _isBombReady = YES;
         
+        //显示说明
+        if ([GPNavBar isShowBombIntro]) {
+            [self setShowItemIntroAlertByNum:2];
+        }
+        
         CCMoveTo *MoveOut = [CCMoveTo actionWithDuration:0.1 position:_FPSet.readyItemBomb];
         [bombItem runAction:MoveOut];
         
@@ -711,6 +760,11 @@ static GuessScene *instanceOfGuessScene;
         
     } else {
         _isFlyReady = YES;
+        
+        //显示说明
+        if ([GPNavBar isShowFlyIntro]) {
+            [self setShowItemIntroAlertByNum:3];
+        }
         
         CCMoveTo *MoveOut = [CCMoveTo actionWithDuration:0.1 position:_FPSet.readyItemFlying];
         [flyItem runAction:MoveOut];
@@ -852,6 +906,8 @@ static GuessScene *instanceOfGuessScene;
     } else if (alertView.tag == TAG_ALERT_SHOW_ANSWER) {
         
     } else if (alertView.tag == TAG_ALERT_ITEM_SHARE) {
+        
+    } else {
         
     }
 }
@@ -1716,33 +1772,18 @@ static GuessScene *instanceOfGuessScene;
         
         
         if ([customAnswer isEqualToString:self.answerStr]) {
-            NSLog(@"Win");
+            CCLOG(@"Win");
             
-            //过关之后，保存本关的状态
-            [[GameManager sharedGameManager] setCompletedForCurrentActiveLevel:self.currPuzzleIndex];
-            [[GameManager sharedGameManager] setPassMarkForCurrentActiveLevel:YES];
-            
-            //下一关的序号
-            self.currPuzzleIndex++;
-            self.isNeedRestoreScene = NO;
-            
-            [self makeSelectedBlockNormal];
-            
-            //显示成功板
-            [self successLayerIsAppear:YES];
-            
-            //播放bounsBlock的动画
-            [self playBounsAnimation];
-            
-            //统计分数
-            [self calculateScore];
-            
-            //播放分数统计动画
-            [self blocksFlyToScoreAndDisappear];
-            
+            //检查是否需要显示帮助
+            if ([GPNavBar isShowHelpBouns]) {
+                HelpLayer *helpBouns = [[[HelpLayer alloc] initWithHelpType:HelpTypeBounsIntro] autorelease];
+                [self addChild:helpBouns z:ZORDER_NAV_BAR+1];
+            } else {
+                [self alreadyWin];
+            }
             
         } else if (self.isCouldLose) {
-            NSLog(@"Lose");
+            CCLOG(@"Lose");
             
             self.isCouldLose = NO;
             
@@ -1756,6 +1797,31 @@ static GuessScene *instanceOfGuessScene;
       
 //        _wordTouchLocked = NO;
     }
+}
+
+- (void)alreadyWin {
+    //过关之后，保存本关的状态
+    [[GameManager sharedGameManager] setCompletedForCurrentActiveLevel:self.currPuzzleIndex];
+    [[GameManager sharedGameManager] setPassMarkForCurrentActiveLevel:YES];
+    
+    //下一关的序号
+    self.currPuzzleIndex++;
+    self.isNeedRestoreScene = NO;
+    
+    [self makeSelectedBlockNormal];
+    
+    //显示成功板
+    [self successLayerIsAppear:YES];
+    
+    //播放bounsBlock的动画
+    [self playBounsAnimation];
+    
+    //统计分数
+    [self calculateScore];
+    
+    //播放分数统计动画
+    [self blocksFlyToScoreAndDisappear];
+
 }
 
 - (void)onExit {

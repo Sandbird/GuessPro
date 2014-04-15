@@ -193,7 +193,7 @@ typedef struct StartPostion {
             dialogue.position = _SPSet.dialogueSprite;
             [self addChild:dialogue];
             
-            CCLabelTTF *label = [CCLabelTTF labelWithString:@"求评价~" fontName:FONTNAME_OF_TEXT fontSize:[GPNavBar isiPad] ? 30 : 15];
+            CCLabelTTF *label = [CCLabelTTF labelWithString:NSLocalizedString(@"RATE", nil) fontName:FONTNAME_OF_TEXT fontSize:[GPNavBar isiPad] ? 30 : 15];
             [dialogue addChild:label];
             label.color = ccc3(40, 40, 40);
             label.position = ccp(dialogue.boundingBox.size.width / 2, dialogue.boundingBox.size.height / 2);
@@ -237,9 +237,9 @@ typedef struct StartPostion {
             [_navBar refreshTotalScore];
             
             if (numOfCoin > 0) {
-                NSString *msg = [NSString stringWithFormat:@"欢迎光临，送你%d枚金币。", numOfCoin];
+                NSString *msg = [NSString stringWithFormat:@"%@%d%@", NSLocalizedString(@"TITLE_WELCOME_GIVE_YOU", nil), numOfCoin, NSLocalizedString(@"TITLE_WELCOME_COIN", nil)];
                 
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"欢迎光临" message:msg delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"TITLE_WELCOME", nil) message:msg delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
                 [alert show];
                 [alert release];
             }
@@ -366,7 +366,7 @@ typedef struct StartPostion {
 	UINavigationBar *bar = picker.navigationBar;
 	picker.mailComposeDelegate = self;
 	
-	[picker setSubject:@"问题反馈"];
+	[picker setSubject:NSLocalizedString(@"PLAYER_FEEDBACK", nil)];
 //	[picker addAttachmentData:data mimeType:@"image/jpg" fileName:@"wallpaper.jpg"];
 	
 	// Set up the recipients.
@@ -385,7 +385,7 @@ typedef struct StartPostion {
     [_controller presentViewController:picker animated:YES completion:^{}];
 //	[_controller presentModalViewController:picker animated:YES];
 	
-	bar.topItem.title = @"Email Wallpaper";
+//	bar.topItem.title = @"Email Wallpaper";
 	
 	[picker release]; // Can safely release the controller now.
 }
@@ -414,6 +414,8 @@ typedef struct StartPostion {
 
 }
 
+#define URL_RATE_IOS7 @"itms-apps://itunes.apple.com/app/id"
+#define URL_RATE_IOS6 @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id="
 - (void)rateThisApp {
     
     [GPNavBar playBtnPressedEffect];
@@ -421,12 +423,8 @@ typedef struct StartPostion {
     //评论之后，不需要再次闪现评论dialogue
     [GPNavBar setIsNeedRate:NO];
     
-    NSString *rateMe = nil;
-    if (IOS_NEWER_OR_EQUAL_TO_7) {
-        rateMe = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", APP_ID];
-    } else {
-        rateMe = [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", APP_ID];
-    }
+    NSString *rateMe = [NSString stringWithFormat:@"%@%@", (IOS_NEWER_OR_EQUAL_TO_7 ? URL_RATE_IOS7 : URL_RATE_IOS6), APP_ID];
+    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:rateMe]];
     
 }
@@ -506,28 +504,29 @@ typedef struct StartPostion {
         
         //本地化一下子
         NSString *pushStr = nil;
+        NSInteger numOfCoin;
         
         switch (arc4random() % 3) {
             case 0://大椰
-                pushStr = NSLocalizedString(@"今天之内来玩，就送50枚金币！", @"alertBody");
-                [GPNavBar setNumOfCoinAdded:50];
+                numOfCoin = 50;
                 break;
                 
             case 1://小桃
-                pushStr = NSLocalizedString(@"今天之内来玩，就送30枚金币！", @"alertBody");
-                [GPNavBar setNumOfCoinAdded:30];
+                numOfCoin = 20;
                 break;
                 
             case 2:
-                pushStr = NSLocalizedString(@"今天之内来玩，就送20枚金币！", @"alertBody");
-                [GPNavBar setNumOfCoinAdded:20];
+                numOfCoin = 30;
                 break;
                 
             default:
-                pushStr = NSLocalizedString(@"今天之内来玩，就送50枚金币！", @"alertBody");
-                [GPNavBar setNumOfCoinAdded:50];
+                numOfCoin = 50;
                 break;
         }
+        pushStr = [NSString stringWithFormat:@"%@%d%@",NSLocalizedString(@"TODAY_COME_TO_PLAY", @"今天之内来玩，就送"), numOfCoin, NSLocalizedString(@"TODAY_COME_GIVE_COIN", @"枚金币！")];
+        
+        [GPNavBar setNumOfCoinAdded:numOfCoin];
+        
         localNotif.alertBody = pushStr;
         localNotif.alertAction = NSLocalizedString(@"来玩就送金币", @"alertAction");
         

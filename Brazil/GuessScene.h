@@ -38,6 +38,8 @@
 
 - (void)checkWinOrLose;
 
+- (void)alreadyWin;
+
 
 //返回下一个将要执行的问题序号
 - (NSInteger)nextPuzzleIndex;

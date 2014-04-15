@@ -69,7 +69,7 @@
             deltaY = 290;
         }
         
-        NSString *title = @"更多关卡 即将发布";
+        NSString *title = NSLocalizedString(@"TITLE_CONTINUE", @"更多关卡 即将发布");
         
         CCLabelTTF *labelTitle = [CCLabelTTF labelWithString:title fontName:FONTNAME_OF_TEXT fontSize:textFontSize];
         labelTitle.color = ccWHITE;

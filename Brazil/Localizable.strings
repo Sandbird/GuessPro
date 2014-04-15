@@ -13,7 +13,7 @@
 "APP_VERSION"                   = "软件版本";
 "SYSTEM_VERSION"                = "系统版本";
 "DEVICE_NAME"                   = "设备";
-"RATE"                          = "去App Store给应用打分";
+"RATE"                          = "求评价~";
 
 //通用
 "OK"                            = "好";
@@ -41,3 +41,36 @@
 "INDICATOR_NET_ERROR"           = "网络链接错误";
 "INDICATOR_NET_NOT_CONNECT"     = "网络链接错误";
 "SEND"                          = "发送";
+
+/***********************************/
+"TITLE_WELCOME_GIVE_YOU" = "欢迎光临，送你";
+"TITLE_WELCOME_COIN" = "枚金币。";
+"TITLE_WELCOME" = "欢迎光临";
+"PLAYER_FEEDBACK" = "玩家反馈";
+"TODAY_COME_TO_PLAY" = "今天之内来玩猜猜猜，就送";
+"TODAY_COME_GIVE_COIN" = "枚金币！";
+"INTRO_0" = "● 游戏中的电影名以大陆翻译版本为准";
+"INTRO_1" = "● VOCEE GAMES 为你开发幸福游戏";
+"INTRO_2" = "● 游戏版本：";
+"COIN_50"   = "        50枚售6.00元";
+"COIN_150"  = "        150枚售12.00元";
+"COIN_300"  = "        300枚售18.00元";
+"COIN_600"  = "        600枚售30.00元";
+"COIN_2200" = "        2200枚售88.00元";
+"HELP_INTRO" = "        成功向朋友求助的话，将获10枚金币的奖励，每天最多可获50枚金币。微信平台分享成功后请选择“返回”选项。";
+"SHARE_INTRO" = "每日首次分享将获50枚金币奖励。";
+
+"HELP_CONTENT" = "我正在玩电影猜猜猜，快来帮我看看这张海报是什么电影啊。App下载地址：";
+"SHARE_CONTENT" = "影迷必玩游戏“电影猜猜猜”现已登陆苹果App Store，来试试你能猜中几个？";
+
+
+/*******TITLE***********/
+"TITLE_MORE_INFO" = "更多信息";
+"TITLE_CONTINUE" = "更多关卡 即将发布";
+"TITLE_COIN_STORE" = "金币卖场";
+"TITLE_HELP" = "求助";
+"TITLE_SHARE" = "分享";
+"TITLE_APP_NAME" = "电影猜猜猜";
+"TITLE_BACK_OF_PIC" = "花絮";
+"TITLE_TIPS" = "线索";
+"TITLE_ANSWER" = "答案";
