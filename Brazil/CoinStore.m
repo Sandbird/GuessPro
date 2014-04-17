@@ -374,7 +374,7 @@ typedef enum {
     CCLOG(@"成功购买%d", numOfCoin);
     
     NSString *msg = [NSString stringWithFormat:@"您已成功购买%d枚金币，感谢支持！", numOfCoin];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"感谢" message:msg delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"购买成功" message:msg delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil];
     
     [alert show];
     [alert release];
