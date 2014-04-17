@@ -31,7 +31,7 @@
         if ([GPNavBar isiPad]) {
             blankY = blankWidth * 3.5 + 20.0;
         } else if ([GPNavBar isiPhone5]) {
-            blankY = blankWidth * 3.5 + 75.0;
+            blankY = blankWidth * 3.5 + 60.0;
         } else {
             blankY = blankWidth * 3.5 + 20.0;
         }

@@ -17,7 +17,7 @@
 
 #define IOS_NEWER_OR_EQUAL_TO_7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
-#define NUM_OF_WORD_SELECTED ([GPNavBar isiPhone5] ? 32 : 24)
+#define NUM_OF_WORD_SELECTED ([GPNavBar isiPhone5] ? 24 : 24)
 
 #define PICTURE_WIDTH ([GPNavBar isiPad] ? 450.0 : 200.0)
 #define FONTSIZE_OF_BORAD_TITLE ([GPNavBar isiPad] ? 60 : 40)

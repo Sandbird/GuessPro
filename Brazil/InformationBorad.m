@@ -85,7 +85,11 @@
         
         [_infoTextView setBackgroundColor:[UIColor clearColor]];
         [_infoTextView setEditable:NO];
-        [_infoTextView setSelectable:NO];
+        if (IOS_NEWER_OR_EQUAL_TO_7) {
+            [_infoTextView setSelectable:NO];
+        } else {
+//            [_infoTextView setEditable:<#(BOOL)#>]
+        }
         [_infoTextView setShowsVerticalScrollIndicator:NO];
         
         [_infoTextView setText:info];

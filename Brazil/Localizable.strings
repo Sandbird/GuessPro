@@ -21,6 +21,9 @@
 "SORRY"                         = "抱歉";
 "EDIT"                          = "编辑";
 "DONE"                          = "完成";
+"KOWN"                          = "知道了";
+"USE"                           = "使用";
+"DONT_USE"                      = "不使用";
 
 //网络连接情况
 "CHECK_INTERNET"                = "请检查您的网络设置";
@@ -62,6 +65,11 @@
 
 "HELP_CONTENT" = "我正在玩电影猜猜猜，快来帮我看看这张海报是什么电影啊。App下载地址：";
 "SHARE_CONTENT" = "影迷必玩游戏“电影猜猜猜”现已登陆苹果App Store，来试试你能猜中几个？";
+"CONTENT_SMALL" = "点击任意闪烁的方块可使其变小，变小的方块会和普通方块一样获得金币奖励。巧用道具可使金币奖励增加哦！";
+"CONTENT_BOMB" = "点击任意闪烁的方块可使其变透明，透明的方块会和普通方块一样获得金币奖励。巧用道具可使金币奖励增加哦！";
+"CONTENT_FLY" = "点击任意闪烁的方块可使全部方块消失一秒钟，就是让你偷瞄一眼图片啦。巧用道具可使金币奖励增加哦！";
+"CONTENT_TIPS" = "你希望消耗40枚金币查看本关的线索么？";
+"CONTENT_ANSWER" = "你希望消耗80枚金币查看本关的答案么？";
 
 
 /*******TITLE***********/
@@ -74,3 +82,9 @@
 "TITLE_BACK_OF_PIC" = "花絮";
 "TITLE_TIPS" = "线索";
 "TITLE_ANSWER" = "答案";
+"TITLE_ALERT_SMALL" = "变小道具";
+"TITLE_ALERT_BOMB" = "透明道具";
+"TITLE_ALERT_FLY" = "一闪道具";
+"TITLE_ALERT_TIPS" = "查看线索";
+"TITLE_ALERT_ANSWER" = "查看答案";
+

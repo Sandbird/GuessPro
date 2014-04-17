@@ -94,19 +94,19 @@ typedef enum {
             wordSize = CGSizeMake(600, 200);
             fontSize = 35;
             
-            deltaY = 2;
+            deltaY = (IOS_NEWER_OR_EQUAL_TO_7 ? 2 : -6);
         } else if ([GPNavBar isiPhone5]) {
             posY = winSize.height - 44.0f;
             wordSize = CGSizeMake(250, 100);
             fontSize = 17;
             
-            deltaY = 1.5;
+            deltaY = (IOS_NEWER_OR_EQUAL_TO_7 ? 1.5 : -2);
         } else {
             posY = winSize.height - 44.0f;
             wordSize = CGSizeMake(250, 100);
             fontSize = 17;
             
-            deltaY = 1.5;
+            deltaY = (IOS_NEWER_OR_EQUAL_TO_7 ? 1.5 : -2);
         }
         
         NSString *title = NSLocalizedString(@"TITLE_COIN_STORE", @"金币卖场");
@@ -206,7 +206,7 @@ typedef enum {
         heightOfBanner = 36;
         spaceBetweenBanner = 20;
     } else {
-        heightToBottom = 120;
+        heightToBottom = 130;
         heightOfBanner = 36;
         spaceBetweenBanner = 15;
     }

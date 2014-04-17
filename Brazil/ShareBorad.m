@@ -241,7 +241,7 @@ typedef struct ItemSharePostion {
         spaceY = 30.0f;
         width = 40.0f;
         posX = 5;
-        posY = 110;
+        posY = 130;
         deltaY = -50.0f;
         deltaX = -8.0f;
         
@@ -340,7 +340,8 @@ typedef struct ItemSharePostion {
     NSString *imagePath = nil;
     NSString *content = nil;
     NSString *title = NSLocalizedString(@"TITLE_APP_NAME", nil);
-    NSString *url = [NSString stringWithFormat:@"itunes.apple.com/app/id%@", APP_ID];
+    NSString *url = [NSString stringWithFormat:@"http://itunes.apple.com/app/id%@", APP_ID];
+    NSString *urlStore = [NSString stringWithFormat:@"itunes.apple.com/app/id%@", APP_ID];
     
     if (self.SBStype == ShareTypeSOS) {
         imagePath = [ZZAcquirePath getDocDirectoryWithFileName:@"sharePic.png"];
@@ -357,7 +358,7 @@ typedef struct ItemSharePostion {
                         defaultContent:@""
                                  image:[ShareSDK imageWithPath:imagePath]
                                  title:title
-                                   url:url
+                                   url:urlStore
                            description:nil
                              mediaType:mediaType];
     

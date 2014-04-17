@@ -598,25 +598,26 @@ static GuessScene *instanceOfGuessScene;
     NSString *title = nil;
     switch (itemNum) {
         case 1:
-            title = @"变小道具";
-            intro = @"点击任意闪烁的方块可使其变小，变小的方块会和普通方块一样获得金币奖励。巧用道具可使金币奖励增加哦！";
+            
+            title = NSLocalizedString(@"TITLE_ALERT_SMALL", nil);
+            intro = NSLocalizedString(@"CONTENT_SMALL", nil);
             break;
             
         case 2:
-            title = @"透明道具";
-            intro = @"点击任意闪烁的方块可使其变透明，透明的方块会和普通方块一样获得金币奖励。巧用道具可使金币奖励增加哦！";
+            title = NSLocalizedString(@"TITLE_ALERT_BOMB", nil);
+            intro = NSLocalizedString(@"CONTENT_BOMB", nil);
             break;
             
         case 3:
-            title = @"一闪道具";
-            intro = @"点击任意闪烁的方块可使全部方块消失一秒钟，就是让你偷瞄一眼图片啦。巧用道具可使金币奖励增加哦！";
+            title = NSLocalizedString(@"TITLE_ALERT_FLY", nil);
+            intro = NSLocalizedString(@"CONTENT_FLY", nil);
             break;
             
         default:
             break;
     }
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:intro delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:intro delegate:nil cancelButtonTitle:NSLocalizedString(@"KOWN", nil) otherButtonTitles:nil];
     [alert show];
     [alert release];
 }
@@ -794,7 +795,7 @@ static GuessScene *instanceOfGuessScene;
         
         [GPNavBar playBtnPressedEffect];
         //显示Alert
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看线索" message:@"你希望消耗40枚金币查看本关的线索么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"TITLE_ALERT_TIPS", nil) message:NSLocalizedString(@"CONTENT_TIPS", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"DONT_USE", nil) otherButtonTitles:NSLocalizedString(@"USE", nil), nil];
         [alertView show];
         alertView.tag = TAG_ALERT_ITEM_TIPS;
         [alertView release];
@@ -832,7 +833,7 @@ static GuessScene *instanceOfGuessScene;
         
         [GPNavBar playBtnPressedEffect];
         //显示Alert
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"查看答案" message:@"你希望消耗80枚金币查看本关的答案么？" delegate:self cancelButtonTitle:@"不使用" otherButtonTitles:@"使用", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"TITLE_ALERT_ANSWER", nil) message:NSLocalizedString(@"CONTENT_ANSWER", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"DONT_USE", nil) otherButtonTitles:NSLocalizedString(@"USE", nil), nil];
         [alertView show];
         alertView.tag = TAG_ALERT_ITEM_ANSWER;
         [alertView release];
