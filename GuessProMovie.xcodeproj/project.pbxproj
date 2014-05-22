@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		0008045F18D5E9E5005F4AF2 /* Store-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0008045D18D5E9E5005F4AF2 /* Store-hd.plist */; };
 		0008046018D5E9E5005F4AF2 /* Store-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0008045E18D5E9E5005F4AF2 /* Store-hd.png */; };
-		00087C4718EA9DAF00E511E3 /* RenRenConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00087C4618EA9DAF00E511E3 /* RenRenConnection.framework */; };
-		00087C4B18EA9DBB00E511E3 /* RennSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 00087C4918EA9DBB00E511E3 /* RennSDK.bundle */; };
-		00087C4C18EA9DBB00E511E3 /* RennSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00087C4A18EA9DBB00E511E3 /* RennSDK.framework */; };
 		0011574B18E93C330079C5FF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0011574A18E93C330079C5FF /* Localizable.strings */; };
 		0011576518E9A71B0079C5FF /* cc_levelmenu-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0011575918E9A71B0079C5FF /* cc_levelmenu-ipadhd.plist */; };
 		0011576618E9A71B0079C5FF /* cc_levelmenu-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0011575A18E9A71B0079C5FF /* cc_levelmenu-ipadhd.png */; };
@@ -228,7 +225,6 @@
 		00831DD518CC3F9F0023E713 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 00831DD418CC3F9F0023E713 /* libstdc++.dylib */; };
 		00831DD718CC3FCD0023E713 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00831DD618CC3FCD0023E713 /* Security.framework */; };
 		00831DD918CC3FE20023E713 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00831DD818CC3FE20023E713 /* MessageUI.framework */; };
-		00831EC118CC71010023E713 /* DouBanConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00831E6F18CC71010023E713 /* DouBanConnection.framework */; };
 		00831ED318CC71020023E713 /* SinaWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00831E8118CC71010023E713 /* SinaWeiboConnection.framework */; };
 		00831ED818CC71020023E713 /* TencentWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00831E8618CC71010023E713 /* TencentWeiboConnection.framework */; };
 		00831EDC18CC71020023E713 /* WeChatConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00831E8A18CC71010023E713 /* WeChatConnection.framework */; };
@@ -516,9 +512,6 @@
 /* Begin PBXFileReference section */
 		0008045D18D5E9E5005F4AF2 /* Store-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Store-hd.plist"; sourceTree = "<group>"; };
 		0008045E18D5E9E5005F4AF2 /* Store-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Store-hd.png"; sourceTree = "<group>"; };
-		00087C4618EA9DAF00E511E3 /* RenRenConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RenRenConnection.framework; sourceTree = "<group>"; };
-		00087C4918EA9DBB00E511E3 /* RennSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RennSDK.bundle; sourceTree = "<group>"; };
-		00087C4A18EA9DBB00E511E3 /* RennSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RennSDK.framework; sourceTree = "<group>"; };
 		0011574A18E93C330079C5FF /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		0011575918E9A71B0079C5FF /* cc_levelmenu-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "cc_levelmenu-ipadhd.plist"; sourceTree = "<group>"; };
 		0011575A18E9A71B0079C5FF /* cc_levelmenu-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cc_levelmenu-ipadhd.png"; sourceTree = "<group>"; };
@@ -918,7 +911,6 @@
 		00831DD418CC3F9F0023E713 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		00831DD618CC3FCD0023E713 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		00831DD818CC3FE20023E713 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		00831E6F18CC71010023E713 /* DouBanConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DouBanConnection.framework; sourceTree = "<group>"; };
 		00831E8118CC71010023E713 /* SinaWeiboConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SinaWeiboConnection.framework; sourceTree = "<group>"; };
 		00831E8618CC71010023E713 /* TencentWeiboConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentWeiboConnection.framework; sourceTree = "<group>"; };
 		00831E8A18CC71010023E713 /* WeChatConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WeChatConnection.framework; sourceTree = "<group>"; };
@@ -1255,7 +1247,6 @@
 				00831EEE18CC71020023E713 /* libTCWeiboSDK.a in Frameworks */,
 				00E7900218C8C327006224E1 /* StoreKit.framework in Frameworks */,
 				00E7AD681821E39C003973A8 /* libsqlite3.0.dylib in Frameworks */,
-				00087C4718EA9DAF00E511E3 /* RenRenConnection.framework in Frameworks */,
 				00831EDC18CC71020023E713 /* WeChatConnection.framework in Frameworks */,
 				0070948D18F96FA900CCCFB7 /* libFlurry_4.3.2.a in Frameworks */,
 				006B1F821663762D008ED362 /* QuartzCore.framework in Frameworks */,
@@ -1263,14 +1254,12 @@
 				006B1F841663762D008ED362 /* OpenGLES.framework in Frameworks */,
 				00831F1C18CCB6A20023E713 /* libGoogleAdMobAds.a in Frameworks */,
 				006B1F861663762D008ED362 /* OpenAL.framework in Frameworks */,
-				00831EC118CC71010023E713 /* DouBanConnection.framework in Frameworks */,
 				006B1F881663762D008ED362 /* AudioToolbox.framework in Frameworks */,
 				0071006818DF32EC00A44568 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */,
 				0071007418DF338000A44568 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
 				00831EEF18CC71020023E713 /* libWeChatSDK.a in Frameworks */,
 				006B1F8A1663762D008ED362 /* AVFoundation.framework in Frameworks */,
 				00831EE218CC71020023E713 /* ShareSDKCoreService.framework in Frameworks */,
-				00087C4C18EA9DBB00E511E3 /* RennSDK.framework in Frameworks */,
 				006B1F8C1663762D008ED362 /* UIKit.framework in Frameworks */,
 				006B1F8E1663762D008ED362 /* Foundation.framework in Frameworks */,
 				00831ED318CC71020023E713 /* SinaWeiboConnection.framework in Frameworks */,
@@ -1282,15 +1271,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00087C4818EA9DBB00E511E3 /* RenRenSDK */ = {
-			isa = PBXGroup;
-			children = (
-				00087C4918EA9DBB00E511E3 /* RennSDK.bundle */,
-				00087C4A18EA9DBB00E511E3 /* RennSDK.framework */,
-			);
-			path = RenRenSDK;
-			sourceTree = "<group>";
-		};
 		0011575818E9A71B0079C5FF /* UI-ipadhd */ = {
 			isa = PBXGroup;
 			children = (
@@ -2012,8 +1992,6 @@
 		00831E6D18CC71010023E713 /* Connection */ = {
 			isa = PBXGroup;
 			children = (
-				00087C4618EA9DAF00E511E3 /* RenRenConnection.framework */,
-				00831E6F18CC71010023E713 /* DouBanConnection.framework */,
 				00831E8118CC71010023E713 /* SinaWeiboConnection.framework */,
 				00831E8618CC71010023E713 /* TencentWeiboConnection.framework */,
 				00831E8A18CC71010023E713 /* WeChatConnection.framework */,
@@ -2035,7 +2013,6 @@
 		00831E9418CC71010023E713 /* Extend */ = {
 			isa = PBXGroup;
 			children = (
-				00087C4818EA9DBB00E511E3 /* RenRenSDK */,
 				00831EA318CC71010023E713 /* SinaWeiboSDK */,
 				00831EA718CC71010023E713 /* TencentWeiboSDK */,
 				00831EAA18CC71010023E713 /* WeChatSDK */,
@@ -2548,7 +2525,6 @@
 				00CE0E8918F63BEB0011530F /* 1126.jpg in Resources */,
 				00E860A618C44B7E00EBC9DF /* background-evening-hd.png in Resources */,
 				00E860D018C44B7E00EBC9DF /* Visitor18-ipadhd.fnt in Resources */,
-				00087C4B18EA9DBB00E511E3 /* RennSDK.bundle in Resources */,
 				00E860D518C44B7E00EBC9DF /* Visitor18.png in Resources */,
 				0083698218FC2EDC005B7C6F /* Help-568h.png in Resources */,
 				00CE0E7E18F63BEB0011530F /* 1111.jpg in Resources */,

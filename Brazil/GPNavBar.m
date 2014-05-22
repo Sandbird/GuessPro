@@ -500,7 +500,7 @@
 + (BOOL)isTodayCanAddCoinWithSOS {
     NSInteger times = [[[NSUserDefaults standardUserDefaults] objectForKey:ADD_COIN_TIMES_SOS_TODAY] integerValue];
     times++;
-    if (times > 5) {
+    if (times > 3) {
         return NO;
     } else {
         [GPNavBar setTimesByUsingSOS:times];

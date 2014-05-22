@@ -24,7 +24,7 @@
 //#import <TencentOpenAPI/QQApiInterface.h>
 //#import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
-#import <RennSDK/RennClient.h>
+//#import <RennSDK/RennClient.h>
 
 #import "Flurry/Flurry.h"
 
@@ -243,10 +243,10 @@ void uncaughtExceptionHandler(NSException *exception) {
      连接人人网应用以使用相关功能，此应用需要引用RenRenConnection.framework
      http://dev.renren.com上注册人人网开放平台应用，并将相关信息填写到以下字段
      **/
-    [ShareSDK connectRenRenWithAppId:@"266607"
-                              appKey:@"c8b7e01a21054d1b933f2c416310ec79"
-                           appSecret:@"ec1e8d14b4734cfe9e0f21ab741cfd87"
-                   renrenClientClass:[RennClient class]];
+//    [ShareSDK connectRenRenWithAppId:@"266607"
+//                              appKey:@"c8b7e01a21054d1b933f2c416310ec79"
+//                           appSecret:@"ec1e8d14b4734cfe9e0f21ab741cfd87"
+//                   renrenClientClass:[RennClient class]];
     
     
     //连接邮件
@@ -257,9 +257,9 @@ void uncaughtExceptionHandler(NSException *exception) {
      连接豆瓣应用以使用相关功能，此应用需要引用DouBanConnection.framework
      http://developers.douban.com上注册豆瓣社区应用，并将相关信息填写到以下字段
      **/
-    [ShareSDK connectDoubanWithAppKey:@"05cff85093f254c6116fe8f1bbd6fe52"
-                            appSecret:@"49e3c438b4c5f8bf"
-                          redirectUri:@"https://itunes.apple.com/app/id832491981"];
+//    [ShareSDK connectDoubanWithAppKey:@"05cff85093f254c6116fe8f1bbd6fe52"
+//                            appSecret:@"49e3c438b4c5f8bf"
+//                          redirectUri:@"https://itunes.apple.com/app/id832491981"];
 }
 
 

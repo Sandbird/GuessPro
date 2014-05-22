@@ -363,7 +363,7 @@ typedef struct StartPostion {
 	// Start up mail picker
 	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 	
-	UINavigationBar *bar = picker.navigationBar;
+//	UINavigationBar *bar = picker.navigationBar;
 	picker.mailComposeDelegate = self;
 	
 	[picker setSubject:NSLocalizedString(@"PLAYER_FEEDBACK", nil)];
