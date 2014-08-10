@@ -107,8 +107,13 @@
         
         answerCN = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, 1)];
         
-        NSData *answerData = [GTMBase64_New decodeString:answerCN];
-        answerDecryptStr = [[[NSString alloc] initWithData:answerData encoding:NSUTF8StringEncoding] autorelease];
+        
+        if (IS_DECRYPT_ANSWER) {
+            NSData *answerData = [GTMBase64_New decodeString:answerCN];
+            answerDecryptStr = [[[NSString alloc] initWithData:answerData encoding:NSUTF8StringEncoding] autorelease];
+        } else {
+            answerDecryptStr = answerCN;
+        }
         
 //        answerJA = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, 2)];
 //        
@@ -147,13 +152,15 @@
  */
 #if 1
         
+        NSString *tipsDecryptStr = nil;
         
-        
-        NSData *tipsData = [GTMBase64_New decodeString:tips];
-        NSString *tipsDecryptStr = [[[NSString alloc] initWithData:tipsData encoding:NSUTF8StringEncoding] autorelease];
-        
-        
-        
+        if (IS_DECRYPT_ANSWER) {
+            NSData *tipsData = [GTMBase64_New decodeString:tips];
+            tipsDecryptStr = [[[NSString alloc] initWithData:tipsData encoding:NSUTF8StringEncoding] autorelease];
+        } else {
+            tipsDecryptStr = tips;
+        }
+
 #endif
         
         pc = [PuzzleClass puzzleWithIdKey:index picName:picName answerCN:answerDecryptStr JA:answerJA EN:answerEN groupName:groupName wordNum:wordNum];
@@ -190,8 +197,14 @@
         
         
         NSString *tempCN = [NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt_random, 0)];
-        NSData *tempCNData = [GTMBase64_New decodeString:tempCN];
-        NSString *tempCNDecryptStr = [[[NSString alloc] initWithData:tempCNData encoding:NSUTF8StringEncoding] autorelease];
+        NSString *tempCNDecryptStr = nil;
+        
+        if (IS_DECRYPT_ANSWER) {
+            NSData *tempCNData = [GTMBase64_New decodeString:tempCN];
+            tempCNDecryptStr = [[[NSString alloc] initWithData:tempCNData encoding:NSUTF8StringEncoding] autorelease];
+        } else {
+            tempCNDecryptStr = tempCN;
+        }
         
         //查重复字
         int length = [tempCNDecryptStr length];

@@ -190,9 +190,16 @@
      */
     
     //方法二：解密图片
-    NSData *data = [GPNavBar func_decodeFile:imgName];
-//    UIImage *img = [UIImage imageWithData:data];
-    UIImage *img = [[UIImage alloc] initWithData:data];
+    UIImage *img = nil;
+    
+    
+    if (IS_DECRYPT_PICTRUE) {
+        NSData *data = [GPNavBar func_decodeFile:imgName];
+        //    UIImage *img = [UIImage imageWithData:data];
+        img = [[UIImage alloc] initWithData:data];
+    } else {
+        img = [UIImage imageNamed:imgName];
+    }
     
     
     //方法三：计算图片颜色，从数据库中取得

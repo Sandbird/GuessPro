@@ -896,5 +896,88 @@
 }
 
 
+#pragma mark - GameDiff
+
++ (GPContentType)contentType {
+    GPContentType cType = GPContentNone;
+    switch (CONTENT_TYPE) {
+        case 1001:
+            cType = GPContentMovie;
+            break;
+            
+        case 1002:
+            cType = GPContentCat;
+            break;
+            
+        default:
+            break;
+    }
+    
+    return cType;
+}
+
++ (NSString *)applicationID {
+    GPContentType cType = [GPNavBar contentType];
+    NSString *appID = nil;
+    switch (cType) {
+        case GPContentMovie:
+            appID = @"832491981";
+            break;
+            
+        case GPContentCat:
+            appID = nil;
+            break;
+            
+        default:
+            break;
+    }
+    
+    NSAssert(appID != nil, @"没有ApplicationID");
+    
+    return appID;
+}
+
++ (NSString *)admobID {
+    GPContentType cType = [GPNavBar contentType];
+    NSString *admobID = nil;
+    switch (cType) {
+        case GPContentMovie:
+            admobID = @"a153493444e0a43";
+            break;
+            
+        case GPContentCat:
+            admobID = nil;
+            break;
+            
+        default:
+            break;
+    }
+    
+    NSAssert(admobID != nil, @"没有AdmobID");
+    
+    return admobID;
+}
+
++ (NSString *)databaseName {
+    GPContentType cType = [GPNavBar contentType];
+    NSString *dbName = nil;
+    switch (cType) {
+        case GPContentMovie:
+            dbName = @"PuzzleDatabase(Encrypt).sqlite";
+            break;
+            
+        case GPContentCat:
+            dbName = @"PuzzleDatabase(Encrypt).sqlite";;
+            break;
+            
+        default:
+            break;
+    }
+    
+    NSAssert(dbName != nil, @"没有数据库名称");
+    
+    return dbName;
+}
+
 
 @end

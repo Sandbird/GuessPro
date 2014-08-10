@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "006B1F7C1663762D008ED362"
-               BuildableName = "GuessProMovie.app"
-               BlueprintName = "GuessProMovie"
-               ReferencedContainer = "container:GuessProMovie.xcodeproj">
+               BuildableName = "GuessProCat.app"
+               BlueprintName = "GuessProCat"
+               ReferencedContainer = "container:GuessProCat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "006B1F7C1663762D008ED362"
-            BuildableName = "GuessProMovie.app"
-            BlueprintName = "GuessProMovie"
-            ReferencedContainer = "container:GuessProMovie.xcodeproj">
+            BuildableName = "GuessProCat.app"
+            BlueprintName = "GuessProCat"
+            ReferencedContainer = "container:GuessProCat.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "006B1F7C1663762D008ED362"
-            BuildableName = "GuessProMovie.app"
-            BlueprintName = "GuessProMovie"
-            ReferencedContainer = "container:GuessProMovie.xcodeproj">
+            BuildableName = "GuessProCat.app"
+            BlueprintName = "GuessProCat"
+            ReferencedContainer = "container:GuessProCat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "006B1F7C1663762D008ED362"
-            BuildableName = "GuessProMovie.app"
-            BlueprintName = "GuessProMovie"
-            ReferencedContainer = "container:GuessProMovie.xcodeproj">
+            BuildableName = "GuessProCat.app"
+            BlueprintName = "GuessProCat"
+            ReferencedContainer = "container:GuessProCat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

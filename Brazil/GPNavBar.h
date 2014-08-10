@@ -27,6 +27,13 @@ typedef enum {
     GPSceneTypeNone,
 }GPSceneType;
 
+typedef enum {
+    GPContentMovie = 1001,
+    GPContentCat = 1002,
+    GPContentNone,
+    
+}GPContentType;
+
 @interface GPNavBar : CCLayer {
    
     //    CCMenuItem *homeItem;
@@ -129,5 +136,11 @@ typedef enum {
 + (BOOL)isShowSmallIntro;
 + (BOOL)isShowBombIntro;
 + (BOOL)isShowFlyIntro;
+
+
++ (GPContentType)contentType;
++ (NSString *)applicationID;
++ (NSString *)admobID;
++ (NSString *)databaseName;
 
 @end

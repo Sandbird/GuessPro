@@ -12,8 +12,8 @@
 #ifndef Brazil_PuzzleDefine_h
 #define Brazil_PuzzleDefine_h
 
-#define ADMOB_ID @"a153493444e0a43"
-#define APP_ID @"832491981"
+//#define ADMOB_ID @"a153493444e0a43"
+//#define APP_ID @"832491981"
 
 #define IOS_NEWER_OR_EQUAL_TO_7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
@@ -47,7 +47,7 @@
 
 #define IS_KAYAC                NO
 
-#define NAME_OF_DATABASE    @"PuzzleDatabase(Encrypt).sqlite"
+//#define NAME_OF_DATABASE    @"PuzzleDatabase(Encrypt).sqlite"
 
 #define PS_TOTAL_SCORE      @"totalScore"
 #define PS_CONTINUE_LEVEL   @"continueLevel"

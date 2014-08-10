@@ -15,6 +15,7 @@
 #import "PuzzleDefine.h"
 #import "ZZNavBar.h"
 #import "GPNavBar.h"
+#import "GameDiff.h"
 
 //#import <AGCommon/CoreDefinition.h>
 //#import <AGCommon/AGCommon.h>

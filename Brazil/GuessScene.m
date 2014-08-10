@@ -156,6 +156,7 @@ static GuessScene *instanceOfGuessScene;
     
     [scene addChild:layer];
     
+    
     return scene;
 }
 
@@ -1508,7 +1509,15 @@ static GuessScene *instanceOfGuessScene;
 - (void)resetPictrue {
     
     
-    UIImage *img = [UIImage imageWithData:[GPNavBar func_decodeFile:self.currPuzzle.picName]];
+    UIImage *img = nil;
+    
+    if (IS_DECRYPT_PICTRUE) {
+        img = [UIImage imageWithData:[GPNavBar func_decodeFile:self.currPuzzle.picName]];
+    } else {
+        img = [UIImage imageNamed:self.currPuzzle.picName];
+    }
+    
+    
     
     //如果有图片，先把图片从内存中清除
     if (_picSprite) {

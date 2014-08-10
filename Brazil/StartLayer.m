@@ -72,6 +72,7 @@ typedef struct StartPostion {
     [scene addChild:layer];
     
     return scene;
+    
 }
 
 - (id)init {
